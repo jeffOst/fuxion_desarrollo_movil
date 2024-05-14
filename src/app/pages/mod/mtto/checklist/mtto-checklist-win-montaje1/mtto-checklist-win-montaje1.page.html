@@ -1,0 +1,223 @@
+
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-item>
+    <ion-title text-capitalize>
+      <ion-label>VERIFICACION DE ESTATOR
+        <p>CONTROL DE MOTOR ELECTRICO</p>
+      </ion-label>
+      </ion-title>
+
+      <form [formGroup]="FormCheckListPaso1" #f="ngForm">
+      <ion-toggle justify="end" mode="ios"
+      formControlName="checklist_paso1_apli"
+      (ionChange)="SaveCheckNoAplicaPaso($event)" >Aplica Paso?
+      </ion-toggle>
+      </form>
+
+      </ion-item>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form [formGroup]="FormCheckListPaso1" #f="ngForm">
+  <ion-list mode="ios" class="ion-no-padding">
+
+    <ion-item-divider>
+        <ion-toggle mode="ios" (ionChange)="toggle1($event)"  style="width: 50%;"
+        formControlName="aisla_tierra_apl"
+        >
+          AISLAMIENTO A TIERRA
+            </ion-toggle>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-label>
+        <p>PRUEBA DE AISLAMIENTO(MΩ)</p>
+        <ion-input type="text" maxlength="80"
+        formControlName="aisla_tierra_cmc"
+
+        ></ion-input>
+      </ion-label>
+
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating">
+        OBSERVACIONES
+      </ion-label>
+        <ion-textarea [autofocus]="true" mode="ios" [autoGrow]="true"
+        formControlName="aisla_tierra_obs_cmc"
+
+        ></ion-textarea>
+    </ion-item>
+    <ion-item-divider>
+      <ion-toggle formControlName="aisla_entre_fases_apl"
+      mode="ios" (ionChange)="toggle2($event)"  style="width: 50%;">
+        AISLAMIENTO ENTRE FASES
+      </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>PRUEBA DE AISLAMIENTO(MΩ)</p>
+        <ion-input type="text" maxlength="80"
+        formControlName="aisla_entre_fases_cmc"
+
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        OBSERVACIONES
+      </ion-label>
+        <ion-textarea [autofocus]="true" mode="ios" [autoGrow]="true"
+        formControlName="aisla_entre_fases_obs_cmc"
+
+        ></ion-textarea>
+
+    </ion-item>
+
+    <ion-item-divider>
+      <ion-toggle formControlName="repara_chapa_apl"
+       mode="ios" (ionChange)="toggle3($event)"  style="width: 50%;">
+        REPARACION DE CHAPAS
+      </ion-toggle>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-label>
+
+        <ion-segment mode="ios" formControlName="repara_chapa_cmc"
+        (ionChange)="onTouched($event)"
+        >
+          <ion-segment-button value="1">
+            <ion-label>NO APLICA</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>SOLICITADO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>REPARACION OK</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+      <!-- [(ngModel)]="NamesForm.reclamo_icmd1" value="{{NamesForm.reclamo_icmd1}}"
+        (ionChange)="segmentChanged($event)" -->
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        OBSERVACIONES
+      </ion-label>
+        <ion-textarea style="width:100%;height: 30px;"  formControlName="repara_chapa_obs_cmc"
+
+        ></ion-textarea>
+    </ion-item>
+
+    <ion-item-divider>
+      <ion-toggle formControlName="montaje_estator_apl"
+      mode="ios" (ionChange)="toggle4($event)"  style="width: 50%;">
+      MONTAJE DE ESTATOR EN CUBIERTA DE ESTATOR
+      </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>ESTADO DEL MOTOR</p>
+        <ion-segment mode="ios" formControlName="montaje_estator_cubi_cmc">
+          <ion-segment-button value="1">
+            <ion-label>REBOBINADO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>RECUPERADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>CODIGO DE ESTATOR</p>
+        <ion-input type="text" formControlName="montaje_estator_cubi_codigo_cmc"
+
+
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+
+    <ion-item-divider>
+      SUPERVISOR RESPONSABLE
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>OBSERVACIONES:</p>
+        <ion-textarea [disabled]="disableButtonPaso1" style="width:100%;height: 30px;"  formControlName="revision_responsable_obs_cmc"
+
+        ></ion-textarea>
+      </ion-label>
+    </ion-item>
+<ion-item >
+
+
+
+</ion-item>
+  </ion-list>
+
+
+
+</form>
+</ion-content>
+
+<ion-footer  >
+  <form [formGroup]="FormCheckListPaso1" #f="ngForm">
+  <ion-grid >
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col style="text-align: center">
+
+
+        <ion-segment style="width: 110%;" class="ion_segment_3d" mode="ios" formControlName="idestado_revision_paso1_cmc" >
+
+          <ion-segment-button (click)="SaveFormBorradorPaso1()" value="1" layout="icon-end">
+            <ion-icon name="close" color="danger"></ion-icon>
+            <ion-label color="danger">BORRADOR</ion-label>
+          </ion-segment-button>
+          <ion-segment-button (click)="SaveFormTerminadoPaso1()" value="2" layout="icon-end">
+            <ion-icon color="success" name="checkmark"></ion-icon>
+            <ion-label color="success">TERMINADO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button (click)="SaveFormTerminadoPaso1()" value="3" layout="icon-end" [disabled]="disableButtonPaso1">
+            <ion-icon name="star"></ion-icon>
+            <ion-label color="secondary">VERIFICADO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button (click)="SaveFormTerminadoPaso1()" value="4" layout="icon-end" [disabled]="disableButtonPaso1">
+            <ion-icon color="warning" name="alert"></ion-icon>
+            <ion-label color="warning" >RECHAZADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+
+
+        <!-- <ion-buttons>
+          <ion-button
+            (click)="SaveFormBorradorPaso1()"
+            [disabled]="disableButton"
+            color="danger"
+          >
+            <ion-icon name="close-outline"></ion-icon>&nbsp;BORRADOR
+          </ion-button>
+
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <ion-button
+            (click)="SaveFormTerminadoPaso1()"
+            [disabled]="disableButton"
+            color="secondary"
+          >
+            <ion-icon name="save-outline"></ion-icon>&nbsp;
+            <strong>TERMINADO</strong>
+          </ion-button>
+        </ion-buttons> -->
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</form>
+</ion-footer>

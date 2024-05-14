@@ -1,0 +1,505 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title text-capitalize>Formulario Servicio</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="prod-list-acti-programada"
+        [text]="Cancelar"
+        [disabled]="disableButton"
+      >
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [style.--background]="scanActive ? '#00000000':'#fff'">
+  <ion-list
+    *ngFor="let item2 of ArrayItemsSelectedDesti;let i = index"
+  >
+    <ion-item [hidden]="scanActive">
+      <ion-grid >
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> OF/OT* &nbsp;:</ion-col>
+          <ion-col size="9">
+            <ion-segment
+              mode="ios"
+              (ionChange)="segmento_cambiado($event,0,i,0)"
+              debounce="500"
+              [(ngModel)]="item2.actividad"
+            >
+              <ion-segment-button value="1">
+                <ion-label>Servicios</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="3">
+                <ion-label>Repuestos</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="2">
+                <!--(ionChange)="segmentChanged($event)"-->
+                <ion-label>Bomba</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="4">
+                <ion-label>Taller</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col>
+            <ion-grid>
+              <ion-row
+                *ngIf="hide_div_equipo[i]"
+                class="ion-align-items-center"
+              >
+                <ion-col size="3" class="ion-text-end"> Código Q.R.: </ion-col>
+                <ion-col size="7">
+                  <ion-input
+                    [(ngModel)]="item2.codigo_qr"
+                    [attr.disabled]="readonly_qr"
+                    (click)="FOpenPopUpQrByOf(i)"
+                    placeholder="Ingresar Código"
+                    class="{{ClassNotiPieza}}"
+                  >
+                  </ion-input>
+                  <div class="{{ClassNotiPieza}}"></div>
+                </ion-col>
+                <ion-col size="2">
+                  <ion-button
+                  [hidden]="scanActive"
+                  color="light"
+                  (click)="FOpenPopUpQrByOf(i)"
+                >
+                <ion-text color="primary">Abrir</ion-text>
+                <ion-icon name="open-outline"></ion-icon>
+                </ion-button>
+                </ion-col>
+
+              </ion-row>
+              <ion-row
+                *ngIf="hide_div_equipo[i]"
+                class="ion-align-items-center"
+              >
+                <ion-col size="3" class="ion-text-end ion-no-padding">
+                  <ion-label
+                    class="ion-no-padding ion-text-end"
+                    style="max-width: 350px !important"
+                    >Pieza P.T.
+                    <p>
+                      <font style="font-size: 11px; color: red"
+                        >(referencial):</font
+                      >
+                    </p>
+                  </ion-label>
+                </ion-col>
+                <ion-col size="9">
+                  <ion-input
+                    type="text"
+                    mode="ios"
+                    disabled
+                    [(ngModel)]="item2.nomclase_pt"
+                    value="{{item2.nomclase_pt}}"
+                  >
+                  </ion-input>
+
+                  <!--<ion-input [(ngModel)]="item2.idclase" type="hidden"></ion-input> -->
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="hide_div_reproceso" class="ion-align-items-center">
+                <ion-col size="12" >
+                  <ion-row>
+                    <ion-col size="3" class="ion-text-right">Actividad:</ion-col>
+                    <ion-col size="3" class="ion-text-left">
+                      <div class="{{CssReproceso}}">por Reproceso</div>
+                    </ion-col>
+                    <ion-col size="3" class="ion-text-right">
+                      F. Revision:
+                    </ion-col>
+                    <ion-col size="3" class="ion-text-left">
+                      <div class="{{CssReproceso}}">{{ item2.fecha_reproceso }}</div>
+
+                    </ion-col>
+                  </ion-row>
+
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="hide_div_pt[i]" class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end">Clase: </ion-col>
+                <ion-col size="9">
+                  <ion-item>
+                    <ion-searchbar
+                      (click)="FOpenPopUpClaseByPieza(i)"
+                      type="text"
+                      placeholder="Buscar Clase"
+                      mode="ios"
+                      readonly
+                      [(ngModel)]="item2.nomsubfam"
+                      value="{{item2.nomsubfam}}"
+                    >
+                    </ion-searchbar>
+                  </ion-item>
+                  <div class="{{CssNotiPieza}}"></div>
+                  <!--<ion-input [(ngModel)]="item2.idclase" type="hidden"></ion-input> -->
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="hide_div_serv[i]" class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end"
+                  >Pieza Servicio:
+                </ion-col>
+                <ion-col size="7">
+                  <ion-item>
+                    <ion-searchbar
+                      (click)="FOpenModalPieza(i)"
+                      type="text"
+                      placeholder="Buscar Pieza"
+                      mode="ios"
+                      readonly
+                      [(ngModel)]="item2.nomclase"
+                      value="{{item2.nomclase}}"
+                    >
+                    </ion-searchbar>
+                  </ion-item>
+                  <div class="{{CssNotiPieza}}"></div>
+                  <!--<ion-input [(ngModel)]="item2.idclase" type="hidden"></ion-input> -->
+                </ion-col>
+
+                <ion-col size="2">
+                  <ion-button
+                  [hidden]="scanActive"
+                  color="light"
+                  (click)="limpiar_cbo_pieza(i)"
+                >
+                <ion-text color="primary">Limpiar</ion-text>
+                <ion-icon name="close-circle-outline"></ion-icon>
+                </ion-button>
+                </ion-col>
+
+              </ion-row>
+
+
+
+              <ion-row *ngIf="hide_div_pt[i]" class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end">
+                  Orden de Fabricación:
+                </ion-col>
+                <ion-col size="9">
+                  <ion-item>
+                    <ion-searchbar
+                      (click)="FOpenPopUpOfByClase(i)"
+                      type="text"
+                      placeholder="Ingresar O.F."
+                      mode="ios"
+                      readonly
+                      [(ngModel)]="item2.correorden"
+                      value="{{item2.correorden}}"
+                    ></ion-searchbar>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="hide_div_pt[i]" class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end">
+                  Descripción de Versión:
+                </ion-col>
+                <ion-col size="9">
+                  <ion-input
+                    type="text"
+                    placeholder=""
+                    readonly
+                    [(ngModel)]="item2.descripcion_pt"
+                    value="{{item2.descripcion_pt}}"
+                  ></ion-input>
+                </ion-col>
+              </ion-row>
+              <ion-row
+                *ngIf="hide_div_equipo[i]"
+                class="ion-align-items-center"
+              >
+                <ion-col size="3" class="ion-text-end">
+                  Codigo de Bomba:
+                </ion-col>
+                <ion-col size="9">
+                  <ion-input
+                    type="text"
+                    placeholder="Ingresar Codigo"
+                    color="primary"
+                    readonly
+                    [(ngModel)]="item2.codsmg"
+                    value="{{item2.codsmg}}"
+                    (click)="open_popup_equipos()"
+                  ></ion-input>
+                </ion-col>
+              </ion-row>
+
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end"> Material: </ion-col>
+                <ion-col size="9">
+                  <ion-select
+                    cancelText="Cancelar"
+                    (ionChange)="select_change_material($event,i)"
+                    [selectedText]="item2.material"
+                    placeholder="Seleccionar material"
+                    color="primary"
+                    [(ngModel)]="item2.idmaterial"
+                    interface="action-sheet"
+                    mode="ios"
+                  >
+                    <ion-select-option
+                      *ngFor="let tipo of rest_material"
+                      [value]="tipo['codigo']"
+                      >{{tipo['nombre']}}
+                    </ion-select-option>
+                  </ion-select>
+                  <div class="{{CssNotiMaterial}}"></div>
+                </ion-col>
+              </ion-row>
+
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end"> Tecnico: </ion-col>
+                <ion-col size="9">
+                  <ion-item>
+                    <ion-searchbar
+                      (click)="FOpenModalTecnico(i)"
+                      type="text"
+                      placeholder="Buscar Tecnico"
+                      mode="ios"
+                      readonly
+                      [(ngModel)]="item2.nombres_tecnico"
+                      value="{{item2.nombres_tecnico}}"
+                    >
+                    </ion-searchbar>
+                  </ion-item>
+                  <div class="{{CssNotiTenico}}"></div>
+                </ion-col>
+              </ion-row>
+
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end ion-align-items-baseline"
+                  >Maquina:</ion-col
+                >
+                <ion-col size="9">
+                  <ion-select
+                    cancelText="Cancelar"
+                    (ionChange)="select_change_maquina($event,i)"
+                    [selectedText]="item2.maquina"
+                    placeholder="Seleccionar Maquina"
+                    color="primary"
+                    [(ngModel)]="item2.idmaquina"
+                    interface="action-sheet"
+                    mode="ios"
+                  >
+                    <ion-select-option
+                      *ngFor="let tipo of rest_maquina"
+                      [value]="tipo['codigo']"
+                      >{{tipo['nombre']}}
+                    </ion-select-option>
+                  </ion-select>
+                  <div class="{{CssNotiMaquina}}"></div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">Servicio: </ion-col>
+          <ion-col size="9" class="ion-text-start">
+            <ion-item>
+              <ion-searchbar
+                (click)="open_popup_servicios(i)"
+                type="text"
+                placeholder=""
+                mode="ios"
+                readonly
+                [(ngModel)]="item2.Y04002"
+                value="{{item2.Y04002}}"
+              >
+              </ion-searchbar>
+            </ion-item>
+            <div class="{{CssNotiServicio}}"></div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="hide_div_proceso[i]" class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">Tipo Proceso: </ion-col>
+          <ion-col size="9" class="ion-text-start">
+            <ion-select
+              cancelText="Cancelar"
+              okText="Ok!"
+              (ionChange)="select_change_proceso($event,i)"
+              [selectedText]="item2.proceso"
+              placeholder="Seleccionar Proceso"
+              color="primary"
+              [(ngModel)]="item2.idproceso"
+              interface="action-sheet"
+              mode="ios"
+            >
+              <ion-select-option
+                *ngFor="let tipo of rest_subprocesos"
+                [value]="tipo['idsubprocesosxservicio']"
+                >{{tipo['nombre_proceso']}}
+              </ion-select-option>
+            </ion-select>
+            <div class="{{CssNotiProceso}}"></div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="hide_div_metalizado[i]" class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">Tipo Proceso *: </ion-col>
+          <ion-col size="9" class="ion-text-start">
+            <ion-select
+              cancelText="Cancelar"
+              (ionChange)="select_change_proceso_metalizado($event,i)"
+              [selectedText]="item2.proceso_metalizado"
+              placeholder="Seleccionar Proceso"
+              color="primary"
+              [(ngModel)]="item2.idproceso_metalizado_ofd"
+              interface="action-sheet"
+              mode="ios"
+            >
+              <ion-select-option
+                *ngFor="let tipo of rest_proceso_metalizado"
+                [value]="tipo['codigo']"
+              >
+                {{tipo['nombre']}}
+              </ion-select-option>
+            </ion-select>
+            <div class="{{CssNotiProcesoMetalizado}}"></div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="hide_div_metalizado[i]" class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">Servicio Metalizado: </ion-col>
+          <ion-col size="9" class="ion-text-start">
+            <ion-select
+              cancelText="Cancelar"
+              (ionChange)="select_change_servicio_metalizado($event,i)"
+              [selectedText]="item2.servicio_metalizado"
+              placeholder="Seleccionar Servicio"
+              color="primary"
+              [(ngModel)]="item2.idservicio_metalizado_ofd"
+              interface="action-sheet"
+              mode="ios"
+            >
+              <ion-select-option
+                *ngFor="let tipo of rest_servicio_metalizado"
+                [value]="tipo['SEQMASERV']"
+              >
+                {{tipo['Y04002']}}
+              </ion-select-option>
+            </ion-select>
+            <div class="{{CssNotiServicioMetalizado}}"></div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="hide_div_metalizado[i]" class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"
+            >N. Metalizados Observados:
+          </ion-col>
+          <ion-col size="9" class="ion-text-start">
+
+            <ion-item >
+
+            <ion-input
+                      type="number"
+                      [(ngModel)]="item2.cnt_metalizado_obs"
+                    ></ion-input>
+            </ion-item>
+
+
+
+            <!-- <app-input-with-button
+              [(ngModel)]="item2.cnt_metalizado_obs"
+              ngDefaultControl
+            ></app-input-with-button> -->
+
+            <div class="{{CssNotiServicioObservados}}"></div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="hide_div_metalizado[i]" class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"
+            >MRTACERAM 29012 Peso Inicial(g):
+          </ion-col>
+          <ion-col size="9" class="ion-text-start">
+            <!-- <app-input-with-button
+              [(ngModel)]="item2.cnt_29012_peso_ini"
+              ngDefaultControl
+            ></app-input-with-button> -->
+            <ion-item >
+            <ion-input
+                      type="number"
+                      [(ngModel)]="item2.cnt_29012_peso_ini"
+                    ></ion-input>
+            </ion-item>
+            <div class="{{CssNotiServicioPesoIni}}"></div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="hide_div_metalizado[i]" class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"
+            >ULTRABON 50000 Peso Inicial(g):
+          </ion-col>
+          <ion-col size="9" class="ion-text-start">
+            <ion-item>
+            <ion-input
+                      type="number"
+
+                      [(ngModel)]="item2.cnt_50000_peso_ini"
+                    ></ion-input>
+            <!-- <app-input-with-button
+              [(ngModel)]="item2.cnt_50000_peso_ini"
+              ngDefaultControl
+            ></app-input-with-button> -->
+            </ion-item>
+            <div class="{{CssNotiServicio500PesoInicial}}"></div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row hidden class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Cantidad: </ion-col>
+          <ion-col size="9">
+            <ion-item>
+            <ion-input
+              required="true"
+              color="primary"
+              type="number"
+              mode="ios"
+              [(ngModel)]="item2.cantidad"
+              value="{{item2.cantidad}}"
+            ></ion-input>
+          </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-input [(ngModel)]="item2.id_personal" type="hidden"></ion-input>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-grid [hidden]="scanActive">
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col style="text-align: center">
+        <ion-buttons>
+          <ion-button
+            (click)="cancelar_ejecucion()"
+            [disabled]="disableButton"
+            color="danger"
+          >
+            <ion-icon name="close-outline"></ion-icon>&nbsp; Cancelar
+          </ion-button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <ion-button
+            (click)="guardar_selected()"
+            [disabled]="disableButton"
+            color="primary"
+          >
+            <ion-icon name="save-outline"></ion-icon>&nbsp; Iniciar
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

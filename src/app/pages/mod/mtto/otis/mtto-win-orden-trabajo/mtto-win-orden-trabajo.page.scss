@@ -1,0 +1,91 @@
+
+// .tab-has-icon {
+
+// }
+// tab-has-icon-only
+// tab-layout-icon-top
+// ion-activatable {
+//   background-color: red; /* Cambiar el color de fondo */
+//   color: white; /* Cambiar el color del texto */
+
+// // }
+
+
+// :host(.ion-color) ::slotted(.tab-selected)
+/* Cambiar estilo de un tab seleccionado en color primario */
+
+ion-tab-button {
+  ion-icon {
+  width: 70%;
+  height: 60%;
+  }
+  }
+
+//   ion-tab-button:focus {
+//   ion-icon {
+//   color: var(–ion-color-danger) !important;
+//   –ion-color-base: var(–ion-color-danger) !important;
+//   }
+//   }
+
+ion-tab-button.tab-selected ion-icon {
+  color: white;// #F47B38;
+}
+ion-tab-button.tab-selected  {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  background-color:#0c60ee;// #F47B38;
+
+  //border-bottom: 4px solid;
+  //border-top: 1px;
+  border-image: linear-gradient(to top, #0a4acd, #3880ff);
+  border-image-slice: 1;
+  //border: #0a4acd;
+  border-style: solid;
+//  border-width : 2px;
+  border-radius : 6px;
+  //box-shadow: rgba(10, 74, 205, 0.4) 0px 5px, rgba(10, 74, 205, 0.3) 0px 10px, rgba(10, 74, 205, 0.2) 0px 15px, rgba(10, 74, 205, 0.1) 0px 20px, rgba(10, 74, 205, 0.05) 0px 25px;
+
+  box-shadow: rgba(10, 74, 205, 0.4) 0px 2px 4px, rgba(10, 74, 205, 0.3) 0px 7px 13px -3px, rgba(10, 74, 205, 0.2) 0px -3px 0px inset;
+
+}
+
+.gradient-border {
+  border: 3px solid;
+  border-image: linear-gradient(to right, #0a4acd, white);
+  border-image-slice: 1;
+}
+
+
+ion-tab-button  {
+  padding: 0;
+color: #d7d8da;
+  border-right: white;
+border-right-style: solid;
+border-right-width : 2px;
+
+border-left: white;
+border-left-style: solid;
+border-left-width : 2px;
+border-radius : 6px;
+}
+
+
+//   ion-tab-button[aria-selected=true] {
+//     background-color: red;
+//     color: red;
+//  }
+
+//  ion-tab-button.favorites-button {
+//   --color-selected: red;
+//   --color:red;
+//   --ion-focusable:red;
+//   --ion-selectable:red;
+//   --color-focusable:red;
+//   --color-selectable:red;
+// }
+
+
+
+

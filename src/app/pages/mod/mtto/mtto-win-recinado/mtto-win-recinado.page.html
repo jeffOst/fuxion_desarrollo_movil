@@ -1,0 +1,1682 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title text-capitalize>Resinado de Cable</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancelar_ejecucion()" color="danger">
+        <ion-icon name="close"></ion-icon>
+        Cancelar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="FormRecinado" #f="ngForm">
+
+    <ion-list>
+
+      <ion-item-group>
+        <ion-item-divider color="primary">
+          <ion-label>General</ion-label>
+        </ion-item-divider>
+
+        <ion-toolbar class="ion-no-border ion-text-center">
+          <img src="assets/imgs/cable_resinado_mtto.png" width="60%" />
+        </ion-toolbar>
+
+        <ion-item>
+          <ion-input mode="ios" label="Correlativo:" label-placement="fixed" readonly [(ngModel)]="correlativo"
+            formControlName="correlativo"></ion-input>
+          <div style="display: none;">
+            <ion-input hidden [(ngModel)]="idrecinadocablecab" formControlName="idrecinadocablecab"></ion-input>
+          </div>
+        </ion-item>
+        <ion-item>
+          <ion-label>F.Registro:</ion-label>
+          <ion-datetime-button label="F.Registro:" locale="es-ES" datetime="datetime"></ion-datetime-button>
+          <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
+            <ng-template>
+              <ion-datetime locale="es-ES" id="datetime" mode="ios" displayFormat="YYYY-MM-DD" presentation="date"
+                [preferWheel]="true" [showDefaultButtons]="true" [(ngModel)]="fchregistro"
+                formControlName="fchregistro">
+              </ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+        <ion-item>
+          <ion-input label="Equipo:" label-placement="fixed" readonly formControlName="codsmg" [(ngModel)]="codsmg1"
+            [ngClass]="{'is-invalid':FormRecinado.get('codsmg').touched && FormRecinado.get('codsmg').invalid}">
+          </ion-input>
+          <ion-button slot="end" color="primary" (click)="open_popup_equipos()">
+            <ion-icon name="search-outline"></ion-icon>
+          </ion-button>
+
+        </ion-item>
+        <ion-item>
+          <ion-input label="Nro O.T.:" label-placement="fixed" type="text" readonly formControlName="nroot"
+            [(ngModel)]="nroot"
+            [ngClass]="{'is-invalid':FormRecinado.get('nroot').touched && FormRecinado.get('nroot').invalid}"></ion-input>
+        </ion-item>
+        <ion-item>
+                   
+          <ion-select label="Estado:" placeholder="Seleccionar uno" value="{{idestadoinspeccion}}" formControlName="idestadoinspeccion" mode="ios"
+            interface="action-sheet">
+            <ion-select-option value="1">Borrador</ion-select-option>
+            <ion-select-option value="2">Terminado</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-input label="F.Reg.O.T:" label-placement="fixed" readonly formControlName="fch_reg_ot_rcc"
+            [(ngModel)]="fch_reg_ot_rcc"></ion-input>
+        </ion-item>
+      </ion-item-group>
+
+
+      <ion-button (click)="showGroup(1)" [color]="buttonColor(1)">Cable 1</ion-button>
+      <ion-button (click)="showGroup(2)" [color]="buttonColor(2)">Cable 2</ion-button>
+
+      <ion-item-group *ngIf="showGroup1">
+
+        <!-- Contenido del primer grupo - cable 1 -->
+        <ion-item-divider color="primary">
+          <ion-label>Cable 1</ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-select label="Tipo Cable.:" formControlName="tipo_cable1" mode="ios"
+            (ionChange)="select_change_estado($event)" [selectedText]="selectedTextTCable1(0)"
+            placeholder="Seleccionar Tipo" interface="action-sheet"
+            [ngClass]="{'is-invalid':FormRecinado.get('tipo_cable1').touched && FormRecinado.get('tipo_cable1').invalid}">
+            <ion-select-option *ngFor="let potencia of rest_tipo_cables" [value]="potencia['codigo']">
+              {{potencia['nombre']}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-input label="Metraje Inspeccion:" label-placement="floating" type="number" class="form-control"
+            formControlName="metraje_inspeccion1"
+            [ngClass]="{'is-invalid':FormRecinado.get('metraje_inspeccion1').touched && FormRecinado.get('metraje_inspeccion1').invalid}"
+            required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input label="Metraje Final:" label-placement="floating" type="number" formControlName="ca1_mts_pp1"
+            [ngClass]="{'is-invalid':FormRecinado.get('ca1_mts_pp1').touched && FormRecinado.get('ca1_mts_pp1').invalid}"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input label="Aislamiento:" label-placement="floating" type="number" formControlName="aislamiento1"
+            [ngClass]="{'is-invalid':FormRecinado.get('aislamiento1').touched && FormRecinado.get('aislamiento1').invalid}"></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label>Thermistor M:
+            <ion-segment value="{{termistor_m1}}" (ionChange)="segmentChanged($event, '1')" mode="ios">
+              <ion-segment-button value="1">
+                <ion-label>SI</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="2">
+                <ion-label>NO</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Thermistor T:
+              <ion-segment value="{{termistor_t1}}" (ionChange)="segmentChanged($event, '2')" mode="ios">
+              <ion-segment-button value="1">
+                <ion-label>SI</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="2">
+                <ion-label>NO</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-select label="Estado Cable:" formControlName="idestadocable_rcd1"
+            (ionChange)="select_change_estado($event)" [selectedText]="selectedTextTCable3(0)"
+            placeholder="Seleccionar estado" mode="ios" interface="action-sheet"
+            [ngClass]="{'is-invalid':FormRecinado.get('idestadocable_rcd1').touched && FormRecinado.get('idestadocable_rcd1').invalid}">
+            <ion-select-option *ngFor="let potencia of rest_estados" [value]="potencia['codigo']">
+              {{potencia['nombre']}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-select label="Diagnostico:" formControlName="diagnostico1" (ionChange)="select_change_estado($event)"
+            [selectedText]="selectedTextDiagnostico1(0)" placeholder="Seleccionar diagnostico" mode="ios"
+            interface="action-sheet"
+            [ngClass]="{'is-invalid':FormRecinado.get('diagnostico1').touched && FormRecinado.get('diagnostico1').invalid}">
+            <ion-select-option *ngFor="let potencia of rest_diagnosticos" [value]="potencia['codigo']">
+              {{potencia['nombre']}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            Reclamo:
+            <ion-segment value="{{reclamo_rcd1}}" (ionChange)="segmentChanged($event, '3')" mode="ios">
+              <ion-segment-button value="1">
+                <ion-label>SI</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="2">
+                <ion-label>NO</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-input label="Codigo:" label-placement="floating" type="text" formControlName="ca1_codigo_rcc"
+            [ngClass]="{'is-invalid':FormRecinado.get('ca1_codigo_rcc').touched && FormRecinado.get('ca1_codigo_rcc').invalid}"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-textarea label="Observaciones Cable 1:" labelPlacement="floating" fill="solid" [autoGrow]="true"
+            formControlName="detalle_rcd1"></ion-textarea>
+        </ion-item>
+
+
+
+        <!--VERIFICACION CABLE CORTADO-->
+        <ion-item-group>
+
+          <ion-item-group>
+
+            <ion-item-divider color="primary">
+              <ion-label>VERIFICACION CABLE CORTADO</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider color="medium">
+              <ion-label>Puntas libres lado de conexion</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider color="medium">
+              <ion-label>Corto Lado de Entrada de cable 3F+P+G</ion-label>
+            </ion-item-divider>
+
+          </ion-item-group>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F1/F2</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle1===1" (ionChange)="funtion_toogle($event, 1)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F1/F3</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle2===1" (ionChange)="funtion_toogle($event, 2)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F1/P</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle3===1" (ionChange)="funtion_toogle($event, 3)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F1/G</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle4===1" (ionChange)="funtion_toogle($event, 4)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F2/F3</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle5===1" (ionChange)="funtion_toogle($event, 5)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F2/P</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle6===1" (ionChange)="funtion_toogle($event, 6)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F2/G</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle7===1" (ionChange)="funtion_toogle($event, 7)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F3/P</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle8===1" (ionChange)="funtion_toogle($event, 8)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F3/G</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle9===1" (ionChange)="funtion_toogle($event, 9)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja P/G</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle10===1" (ionChange)="funtion_toogle($event, 10)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Resultado Cable Cortado</ion-label>
+
+            <ion-label slot="end">No Conforme</ion-label>
+
+            <ion-toggle [checked]="toogle11===1" (ionChange)="funtion_toogle($event, 11)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Conforme</ion-label>
+
+
+
+          </ion-item>
+
+        </ion-item-group>
+
+
+
+        <!--SECCION VERIFICACION CABLE CORTOCIRCUITADO-->
+        <ion-item-group>
+
+          <ion-item-group>
+
+            <ion-item-divider color="primary">
+              <ion-label>VERIFICACION CABLE CORTOCIRCUITADO</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider color="medium">
+              <ion-label>Puntas libres lado de conexion</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider color="medium">
+              <ion-label>Corto Lado de Entrada de cable</ion-label>
+            </ion-item-divider>
+
+          </ion-item-group>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F1/F2</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle12===1" (ionChange)="funtion_toogle($event, 12)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F1/F3</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle13===1" (ionChange)="funtion_toogle($event, 13)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F1/P</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle14===1" (ionChange)="funtion_toogle($event, 14)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F1/G</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle15===1" (ionChange)="funtion_toogle($event, 15)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F2/F3</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle16===1" (ionChange)="funtion_toogle($event, 16)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F2/P</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle17===1" (ionChange)="funtion_toogle($event, 17)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F2/G</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle18===1" (ionChange)="funtion_toogle($event, 18)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F3/P</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle19===1" (ionChange)="funtion_toogle($event, 19)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F3/G</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle20===1" (ionChange)="funtion_toogle($event, 20)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja P/G</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle21===1" (ionChange)="funtion_toogle($event, 21)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Resultado Cable Cortocircuitado</ion-label>
+
+            <ion-label slot="end">No Conforme</ion-label>
+
+            <ion-toggle [checked]="toogle22===1" (ionChange)="funtion_toogle($event, 22)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Conforme</ion-label>
+
+          </ion-item>
+
+        </ion-item-group>
+
+
+        <!--AISLAMIENTO ENTRE CONDUCTORES ACTIVOS - CABLE 1-->
+        <ion-item-group>
+
+          <ion-item-group>
+
+            <ion-item-divider color="primary">
+              <ion-label>AISLAMIENTO ENTRE CONDUCTORES ACTIVOS</ion-label>
+            </ion-item-divider>
+
+          </ion-item-group>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F1/F2</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_f1_f2_acac"></ion-input>
+
+            <!--<ion-textarea label="Observaciones Cable 1:" labelPlacement="floating" fill="solid" [autoGrow]="true" formControlName="detalle_rcd1"></ion-textarea>-->
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F1/F3</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_f1_f3_acac"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F1/P</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_f1_p_acac"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F1/G</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_f1_g_acac"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F2/F3</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_f2_f3_acac"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F2/P</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_f2_p_acac"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F2/G</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_f2_g_acac"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F3/P</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_f3_p_acac"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F3/G</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_f3_g_acac"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja P/G</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_p_g_acac"></ion-input>
+
+          </ion-item>
+
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Resultado Aislam entre conductores activos</ion-label>
+
+            <ion-label slot="end">No Conforme</ion-label>
+
+            <ion-toggle [checked]="toogle23===1" (ionChange)="funtion_toogle($event, 23)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Cumple aislamiento minimo</ion-label>
+
+          </ion-item>
+
+        </ion-item-group>
+
+
+        <!--AISLAMIENTO ENTRE CONDUCTORES Y ARMADURA-->
+        <ion-item-group>
+
+          <ion-item-group>
+
+            <ion-item-divider color="primary">
+              <ion-label>AISLAMIENTO ENTRE CONDUCTORES Y ARMADURA</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider color="medium">
+              <ion-label>Puntas libres lado de conexion</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider color="medium">
+              <ion-label>Corto Lado de entrada de cable</ion-label>
+            </ion-item-divider>
+
+          </ion-item-group>
+
+          <ion-item>
+
+            <ion-label slot="start">F1/Armadura</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              formControlName="f1_armadura_acar"
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">F2/Armadura</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              formControlName="f2_armadura_acar"
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">F3/Armadura</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              formControlName="f3_armadura_acar"
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">P/Armadura</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              formControlName="p_armadura_acar"
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">G/Armadura</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              formControlName="g_armadura_acar"
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"></ion-input>
+
+          </ion-item>
+
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Resultado Aislam entre conductores y Armadura</ion-label>
+
+            <ion-label slot="end">No Conforme</ion-label>
+
+            <ion-toggle [checked]="toogle24===1" (ionChange)="funtion_toogle($event, 24)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Cumple aislamiento minimo</ion-label>
+
+          </ion-item>
+
+        </ion-item-group>
+
+
+        <!--AISLAMIENTO ENTRE CONDUCTORES Y PILOTO-->
+        <ion-item-group>
+
+          <ion-item-group>
+
+            <ion-item-divider color="primary">
+              <ion-label>AISLAMIENTO ENTRE CONDUCTORES Y PILOTO</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider color="medium">
+              <ion-label>Puntas libres lado de conexion</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider color="medium">
+              <ion-label>Corto Lado de entrada de cable 3F+P+G</ion-label>
+            </ion-item-divider>
+
+          </ion-item-group>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F1/P</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..." formControlName="f1_p_acp"
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F2/P</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..." formControlName="f2_p_acp"
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F3/P</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..." formControlName="f3_p_acp"
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja G/P</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..." formControlName="g_p_acp"
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"></ion-input>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Resultado Aislam entre conductores y piloto</ion-label>
+
+            <ion-label slot="end">No Conforme</ion-label>
+
+            <ion-toggle [checked]="toogle25===1" (ionChange)="funtion_toogle($event, 25)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Cumple aislamiento minimo</ion-label>
+
+          </ion-item>
+
+        </ion-item-group>
+
+
+
+        <!--DIAGNOSTICO FINAL-->
+        <ion-item-group>
+
+          <ion-item-group>
+
+            <ion-item-divider color="primary">
+              <ion-label>DIAGNOSTICO FINAL</ion-label>
+            </ion-item-divider>
+
+          </ion-item-group>
+
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Mantener en Operacion</ion-label>
+
+            <ion-label slot="end">No</ion-label>
+
+            <ion-toggle [checked]="toogle26===1" (ionChange)="funtion_toogle($event, 26)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Si</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Realizar nueva prueba en 15 dias</ion-label>
+
+            <ion-label slot="end">No</ion-label>
+
+            <ion-toggle [checked]="toogle27===1" (ionChange)="funtion_toogle($event, 27)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Si</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Cambiar Cable</ion-label>
+
+            <ion-label slot="end">No</ion-label>
+
+            <ion-toggle [checked]="toogle28===1" (ionChange)="funtion_toogle($event, 28)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Si</ion-label>
+
+          </ion-item>
+
+        </ion-item-group>
+
+
+      </ion-item-group>
+
+      <ion-item-group *ngIf="showGroup2">
+
+        <ion-item-divider color="primary">
+          <ion-label>Cable 2</ion-label>
+        </ion-item-divider>
+
+        <ion-item>
+          <ion-select label="Tipo Cable:" formControlName="tipo_cable2" mode="ios"
+            (ionChange)="select_change_estado($event)" [selectedText]="selectedTextTCable2(0)"
+            placeholder="Seleccionar Tipo" interface="action-sheet">
+            <ion-select-option *ngFor="let potencia of rest_tipo_cables" [value]="potencia['codigo']">
+              {{potencia['nombre']}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-input label="Metraje Inspeccion:" label-placement="floating" type="number"
+            formControlName="metraje_inspeccion2"></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-input label="Metraje Final:" label-placement="floating" type="number"
+            formControlName="ca1_mts_pp2"></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-input label="Aislamiento:" label-placement="floating" type="number"
+            formControlName="aislamiento2"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            Thermistor M:
+              <ion-segment value="{{termistor_m2}}" (ionChange)="segmentChanged($event, '4')" mode="ios">
+              <ion-segment-button value="1">
+                <ion-label>SI</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="2">
+                <ion-label>NO</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            Thermistor T:
+              <ion-segment value="{{termistor_t2}}" (ionChange)="segmentChanged($event, '5')" mode="ios">
+              <ion-segment-button value="1">
+                <ion-label>SI</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="2">
+                <ion-label>NO</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-select label="Estado Cable:" formControlName="idestadocable_rcd2"
+            (ionChange)="select_change_estado($event)" [selectedText]="" placeholder="Seleccionar estado" mode="ios"
+            interface="action-sheet">
+            <ion-select-option *ngFor="let potencia of rest_estados" [value]="potencia['codigo']">
+              {{potencia['nombre']}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-select label="Diagnostico:" formControlName="diagnostico2" (ionChange)="select_change_estado($event)"
+            [selectedText]="selectedTextDiagnostico2(0)" placeholder="Seleccionar diagnostico" mode="ios"
+            interface="action-sheet">
+            <ion-select-option *ngFor="let potencia of rest_diagnosticos" [value]="potencia['codigo']">
+              {{potencia['nombre']}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            Reclamo:
+              <ion-segment value="{{reclamo_rcd2}}" (ionChange)="segmentChanged($event, '6')" mode="ios">
+              <ion-segment-button value="1">
+                <ion-label>SI</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="2">
+                <ion-label>NO</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-input label="Codigo:" label-placement="floating" type="text" formControlName="ca2_codigo_rcc"
+            [ngClass]="{'is-invalid':FormRecinado.get('ca2_codigo_rcc').touched && FormRecinado.get('ca2_codigo_rcc').invalid}"></ion-input>
+
+        </ion-item>
+
+        <ion-item>
+          <ion-textarea label="Observaciones Cable 2:" labelPlacement="floating" fill="solid" [autoGrow]="true"
+            formControlName="detalle_rcd2"></ion-textarea>
+        </ion-item>
+
+
+
+
+        <!--VERIFICACION CABLE CORTADO - CABLE 2-->
+        <ion-item-group>
+
+          <ion-item-group>
+
+            <ion-item-divider color="primary">
+              <ion-label>VERIFICACION CABLE CORTADO</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider color="medium">
+              <ion-label>Puntas libres lado de conexion</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider color="medium">
+              <ion-label>Corto Lado de Entrada de cable 3F+P+G</ion-label>
+            </ion-item-divider>
+
+          </ion-item-group>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F1/F2</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle29===1" (ionChange)="funtion_toogle($event, 29)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F1/F3</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle30===1" (ionChange)="funtion_toogle($event, 30)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F1/P</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle31===1" (ionChange)="funtion_toogle($event, 31)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F1/G</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle32===1" (ionChange)="funtion_toogle($event, 32)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F2/F3</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle33===1" (ionChange)="funtion_toogle($event, 33)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F2/P</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle34===1" (ionChange)="funtion_toogle($event, 34)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F2/G</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle35===1" (ionChange)="funtion_toogle($event, 35)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F3/P</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle36===1" (ionChange)="funtion_toogle($event, 36)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F3/G</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle37===1" (ionChange)="funtion_toogle($event, 37)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja P/G</ion-label>
+
+            <ion-label slot="end">Cero</ion-label>
+
+            <ion-toggle [checked]="toogle38===1" (ionChange)="funtion_toogle($event, 38)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Infinito (∞)</ion-label>
+
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Resultado Cable Cortado</ion-label>
+
+            <ion-label slot="end">No Conforme</ion-label>
+
+            <ion-toggle [checked]="toogle39===1" (ionChange)="funtion_toogle($event, 39)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Conforme</ion-label>
+
+
+
+          </ion-item>
+
+        </ion-item-group>
+
+
+
+        <!--SECCION VERIFICACION CABLE CORTOCIRCUITADO-->
+        <ion-item-group>
+
+          <ion-item-group>
+
+            <ion-item-divider color="primary">
+              <ion-label>VERIFICACION CABLE CORTOCIRCUITADO</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider color="medium">
+              <ion-label>Puntas libres lado de conexion</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider color="medium">
+              <ion-label>Corto Lado de Entrada de cable</ion-label>
+            </ion-item-divider>
+
+          </ion-item-group>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F1/F2</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle40===1" (ionChange)="funtion_toogle($event, 40)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F1/F3</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle41===1" (ionChange)="funtion_toogle($event, 41)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F1/P</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle42===1" (ionChange)="funtion_toogle($event, 42)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F1/G</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle43===1" (ionChange)="funtion_toogle($event, 43)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F2/F3</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle44===1" (ionChange)="funtion_toogle($event, 44)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F2/P</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle45===1" (ionChange)="funtion_toogle($event, 45)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F2/G</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle46===1" (ionChange)="funtion_toogle($event, 46)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F3/P</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle47===1" (ionChange)="funtion_toogle($event, 47)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja F3/G</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle48===1" (ionChange)="funtion_toogle($event, 48)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Pareja P/G</ion-label>
+
+            <ion-label slot="end">Infinito (∞)</ion-label>
+
+            <ion-toggle [checked]="toogle49===1" (ionChange)="funtion_toogle($event, 49)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Omega (Ω)</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Resultado Cable Cortocircuitado</ion-label>
+
+            <ion-label slot="end">No Conforme</ion-label>
+
+            <ion-toggle [checked]="toogle50===1" (ionChange)="funtion_toogle($event, 50)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Conforme</ion-label>
+
+          </ion-item>
+
+        </ion-item-group>
+
+
+        <!--AISLAMIENTO ENTRE CONDUCTORES ACTIVOS - CABLE 2-->
+        <ion-item-group>
+
+          <ion-item-group>
+
+            <ion-item-divider color="primary">
+              <ion-label>AISLAMIENTO ENTRE CONDUCTORES ACTIVOS</ion-label>
+            </ion-item-divider>
+
+          </ion-item-group>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F1/F2</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_f1_f2_acac2"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F1/F3</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_f1_f3_acac2"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F1/P</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_f1_p_acac2"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F1/G</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_f1_g_acac2"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F2/F3</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_f2_f3_acac2"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F2/P</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_f2_p_acac2"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F2/G</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_f2_g_acac2"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F3/P</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_f3_p_acac2"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F3/G</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_f3_g_acac2"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja P/G</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"
+              formControlName="pareja_p_g_acac2"></ion-input>
+
+          </ion-item>
+
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Resultado Aislam entre conductores activos</ion-label>
+
+            <ion-label slot="end">No Conforme</ion-label>
+
+            <ion-toggle [checked]="toogle51===1" (ionChange)="funtion_toogle($event, 51)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Cumple aislamiento minimo</ion-label>
+
+          </ion-item>
+
+        </ion-item-group>
+
+
+        <!--AISLAMIENTO ENTRE CONDUCTORES Y ARMADURA - CABLE 2-->
+        <ion-item-group>
+
+          <ion-item-group>
+
+            <ion-item-divider color="primary">
+              <ion-label>AISLAMIENTO ENTRE CONDUCTORES Y ARMADURA</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider color="medium">
+              <ion-label>Puntas libres lado de conexion</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider color="medium">
+              <ion-label>Corto Lado de entrada de cable</ion-label>
+            </ion-item-divider>
+
+          </ion-item-group>
+
+          <ion-item>
+
+            <ion-label slot="start">F1/Armadura</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              formControlName="f1_armadura_acar2"
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">F2/Armadura</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              formControlName="f2_armadura_acar2"
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">F3/Armadura</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              formControlName="f3_armadura_acar2"
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">P/Armadura</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              formControlName="p_armadura_acar2"
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">G/Armadura</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..."
+              formControlName="g_armadura_acar2"
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"></ion-input>
+
+          </ion-item>
+
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Resultado Aislam entre conductores y Armadura</ion-label>
+
+            <ion-label slot="end">No Conforme</ion-label>
+
+            <ion-toggle [checked]="toogle52===1" (ionChange)="funtion_toogle($event, 52)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Cumple aislamiento minimo</ion-label>
+
+          </ion-item>
+
+        </ion-item-group>
+
+
+        <!--AISLAMIENTO ENTRE CONDUCTORES Y PILOTO - CABLE 2 -->
+        <ion-item-group>
+
+          <ion-item-group>
+
+            <ion-item-divider color="primary">
+              <ion-label>AISLAMIENTO ENTRE CONDUCTORES Y PILOTO</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider color="medium">
+              <ion-label>Puntas libres lado de conexion</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider color="medium">
+              <ion-label>Corto Lado de entrada de cable 3F+P+G</ion-label>
+            </ion-item-divider>
+
+          </ion-item-group>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F1/P</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..." formControlName="f1_p_acp2"
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F2/P</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..." formControlName="f2_p_acp2"
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja F3/P</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..." formControlName="f3_p_acp2"
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"></ion-input>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label slot="start">Pareja G/P</ion-label>
+
+            <ion-input slot="end" type="textbox" placeholder="Presione aqui para escribir..." formControlName="g_p_acp2"
+              style="text-align: end; height: 35px !important;width: 7%;border-color: black; border: 1px;"></ion-input>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Resultado Aislam entre conductores y piloto</ion-label>
+
+            <ion-label slot="end">No Conforme</ion-label>
+
+            <ion-toggle [checked]="toogle53===1" (ionChange)="funtion_toogle($event, 53)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Cumple aislamiento minimo</ion-label>
+
+          </ion-item>
+
+        </ion-item-group>
+
+
+
+        <!--DIAGNOSTICO FINAL-->
+        <ion-item-group>
+
+          <ion-item-group>
+
+            <ion-item-divider color="primary">
+              <ion-label>DIAGNOSTICO FINAL</ion-label>
+            </ion-item-divider>
+
+          </ion-item-group>
+
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Mantener en Operacion</ion-label>
+
+            <ion-label slot="end">No</ion-label>
+
+            <ion-toggle [checked]="toogle54===1" (ionChange)="funtion_toogle($event, 54)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Si</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Realizar nueva prueba en 15 dias</ion-label>
+
+            <ion-label slot="end">No</ion-label>
+
+            <ion-toggle [checked]="toogle55===1" (ionChange)="funtion_toogle($event, 55)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Si</ion-label>
+
+          </ion-item>
+
+          <ion-item style="border-style: hidden">
+
+            <ion-label slot="start">Cambiar Cable</ion-label>
+
+            <ion-label slot="end">No</ion-label>
+
+            <ion-toggle [checked]="toogle56===1" (ionChange)="funtion_toogle($event, 56)" slot="end" mode="ios"
+              style="width: 80px;"></ion-toggle>
+
+            <ion-label slot="end" style="margin-right: 5%;">Si</ion-label>
+
+          </ion-item>
+
+        </ion-item-group>
+
+
+
+
+      </ion-item-group>
+
+    </ion-list>
+
+
+    <ion-item-divider color="primary">VISUALIZAR FOTOS</ion-item-divider>
+
+    <ion-item expand="block">Fotos:
+      <ion-fab-button slot="end" (click)="selectImageSource()">
+        <ion-icon name="camera"></ion-icon>
+      </ion-fab-button>
+    </ion-item>
+
+    <ion-list>
+      <ion-item *ngFor="let img of images;index as pos">
+        <ion-thumbnail slot="start">
+          <ion-img [src]="DirectorioFotos+img.idnomadjunto"></ion-img>
+        </ion-thumbnail>
+        <ion-img [src]="img.webviewPath"></ion-img>
+        <ion-label>{{img.name}}</ion-label>
+
+        <ion-button slot="end" fill="clear" (click)="deleteImage(img.idadjunto,pos)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-button type="button" (click)="SaveFormInsp()" expand="block">Guardar Formulario</ion-button>
+</ion-footer>

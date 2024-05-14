@@ -1,0 +1,50 @@
+
+.back_button_geo {
+    --background-hover: transparent;
+        --background-hover-opacity: 1;
+        --background-focused: currentColor;
+        --background-focused-opacity: 0.1;
+        --border-radius: 4px;
+        --color: var(--ion-color-primary, #3880ff);
+        --icon-margin-end: -5px;
+        --icon-margin-start: -4px;
+        --icon-font-size: 1.85em;
+        --min-height: 32px;
+        font-size: 17px;
+    
+        --background: transparent;
+        --color-focused: currentColor;
+        --color-hover: currentColor;
+        --icon-margin-top: 0;
+        --icon-margin-bottom: 0;
+        --icon-padding-top: 0;
+        --icon-padding-end: 0;
+        --icon-padding-bottom: 0;
+        --icon-padding-start: 0;
+        --margin-top: 0;
+        --margin-end: 0;
+        --margin-bottom: 0;
+        --margin-start: 0;
+        --min-width: auto;
+        --min-height: auto;
+        --padding-top: 0;
+        --padding-end: 0;
+        --padding-bottom: 0;
+        --padding-start: 0;
+        --opacity: 1;
+        --ripple-color: currentColor;
+        --transition: background-color, opacity 100ms linear;
+        display: none;
+        min-width: var(--min-width);
+        min-height: var(--min-height);
+        color: var(--color);
+        font-family: var(--ion-font-family, inherit);
+        text-align: center;
+        text-decoration: none;
+        text-overflow: ellipsis;
+        text-transform: none;
+        white-space: nowrap;
+        user-select: none;
+        font-kerning: none;
+    }
+    

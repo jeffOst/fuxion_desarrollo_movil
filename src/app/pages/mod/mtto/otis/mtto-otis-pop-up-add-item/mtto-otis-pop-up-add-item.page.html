@@ -1,0 +1,156 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title>{{tituloVentana}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancelar_listaequipos(0,0,0)" color="danger">
+        <ion-icon name="close"></ion-icon>
+        Cancelar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-item nopadding>
+    <ion-label slot="start">
+      <p>Pieza Seleccionada:</p>
+    </ion-label>
+    <ion-input
+      type="text"
+      maxlength="80"
+      [(ngModel)]="FormModel.pieza"
+    ></ion-input>
+
+    <ion-toggle
+      style="font-size:x-small"
+      slot="end"
+      mode="ios"
+      labelPlacement="start"
+      [checked]="true"
+      [(ngModel)]="FormModel.toggle"
+    >
+      Aplicar al Filtro de busqueda:
+    </ion-toggle>
+  </ion-item>
+  <ion-item nopadding>
+    <ion-label>
+      <p>Cantidad a Solicitar:</p>
+    </ion-label>
+    <ion-input
+      type="text"
+      maxlength="80"
+      [(ngModel)]="FormModel.cantidad"
+    ></ion-input>
+
+    <ion-toggle
+      style="font-size:x-small"
+      slot="end"
+      mode="ios"
+      labelPlacement="start"
+      [checked]="true"
+      [(ngModel)]="FormModel.window"
+    >
+      Agregar items sin cerrar ventana:
+    </ion-toggle>
+  </ion-item>
+  <ion-item nopadding>
+    <ion-label>
+      <p>Observasiones <ion-text color="warning">(Adicional)</ion-text>:</p>
+    </ion-label>
+    <ion-textarea [autoGrow]="true"
+    [autofocus]="true" mode="ios" [autoGrow]="true"
+    [(ngModel)]="FormModel.otd_detalle"></ion-textarea>
+  </ion-item>
+  <ion-item nopadding>
+    <ion-label>
+      <p>Motivo <ion-text color="warning">(Adicional)</ion-text>:</p>
+    </ion-label>
+    
+    <ion-select
+            cancelText="Cancelar"
+            (ionChange)="FSelectChangeTipoMotivo($event)"            
+            placeholder="Seleccionar Motivo"
+            color="primary"
+            interface="action-sheet"
+            mode="ios"
+            [(ngModel)]="FormModel.motivo_adicional_otd"
+          >
+            <ion-select-option
+              *ngFor="let tipo of DsTipoMotivo"
+              [value]="tipo['codigo']"
+              >{{tipo['nombre']}}
+            </ion-select-option>
+          </ion-select>
+    
+  </ion-item>
+
+  <ion-item nopadding>
+    <ion-searchbar
+      show-clear-button="focus"
+      animated="true"
+      #idinputsearch_equipo
+      mode="ios"
+      debounce="1700"
+      cancelButtonText="Cancelar"
+      enterkeyhint="done"
+      placeholder="Buscar items..."
+      [(ngModel)]="search_term_equipo"
+      (ionInput)="lista_equipos($event)"
+      color="secondary"
+    >
+    </ion-searchbar>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+
+    <ion-grid class="header-grid">
+      <ion-row >
+        <ion-col class="header" size="2">Codigo</ion-col>
+        <ion-col class="header" size="6">Descripción</ion-col>
+        <ion-col class="header" size="1" *ngIf="FormModel.rs==='1'">Stock Alm.General</ion-col>
+        <ion-col class="header" size="1">Unidad Medida</ion-col>
+        <ion-col class="header" size="2">Pieza</ion-col>
+        <!-- <ion-col class="header" size="1">Agregar</ion-col> -->
+      </ion-row>
+    </ion-grid>
+
+    <!--
+  </ion-item> -->
+  <!-- <ion-list
+    *ngFor="let item_equipo of results_equipos; let i=index let isOdd=odd; let isEven=even"
+    [class.odd]="isOdd"
+    [class.even]="isEven"
+    lines="full"
+    inset="true"
+  >
+    <ion-item
+      button
+      (click)="SeleccionarEquipo(item_equipo.codsmg,item_equipo.id_orden_trab_fis_cab,item_equipo.fch_inicio_ot)"
+    >
+     <ion-row [class.selected]="selectedRow === 1" (click)="openWindow(1)">
+
+       -->
+       <ion-grid class="content-grid">
+        <ion-row  *ngFor="let item_equipo of results_equipos; let i=index let isOdd=odd; let isEven=even" [class.selected]="selectedRow === 1" (click)="SeleccionarEquipo(item_equipo)" >
+          <ion-col class="detail" size="2">{{item_equipo.Y04001}}</ion-col>
+          <ion-col class="detail" size="6">{{item_equipo.Y04002}}</ion-col>
+          <ion-col class="detail" size="1" *ngIf="FormModel.rs==='1'">{{item_equipo.Y08056}}</ion-col>
+          <ion-col class="detail" size="1">{{item_equipo.ma00_descrip}}</ion-col>
+          <ion-col class="detail" size="2">
+            <!-- <ion-icon size="large" name="caret-forward-outline"></ion-icon>  -->
+
+
+            <ion-chip>
+              <ion-icon  name="add-outline"></ion-icon>
+              <ion-label style="font-size: smaller;">{{item_equipo.nomclase}}</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-chip>
+
+          </ion-col>
+          <!-- <ion-col class="detail" size="1">
+            <ion-icon name="caret-forward-outline"></ion-icon>
+          </ion-col> -->
+        </ion-row>
+      </ion-grid>
+
+  <!-- </ion-list> -->
+</ion-content>

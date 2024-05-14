@@ -1,0 +1,81 @@
+<ion-toolbar class="ion-no-border">
+
+  <ion-grid>
+    <ion-row class="ion-justify-content-start">
+      <ion-col class="ion-align-self-start" size="10">
+        <app-header titulo="Resumen Diario Horas"></app-header>
+      </ion-col>
+      <ion-col class="ion-align-self-end" size="2">
+        <ion-label position="fixed" class="label-nameusuario" color="secondary"></ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-item>
+    <ion-searchbar style="width: 98%" #idinputsearch_resumen mode="ios" debounce="2500" cancelButtonText="Cancelar"
+      enterkeyhint="done" placeholder="Filtrar Parametros" [(ngModel)]="search_term_equipo"
+      (ionChange)="lista_equipos_resumen()">
+    </ion-searchbar>
+    <ion-icon slot="end" name="sync-outline" (click)="lista_equipos_resumen()" #idIconButtonSync></ion-icon>
+  </ion-item>
+
+  <ion-item>
+    <h1 id="titulo">{{NombresUsuarioLocal}}  | Porcentaje de Registro: {{porcentaje}} % | Total Horas: {{total_horas}} | Horas Asignadas: {{horas_asignadas}} | Equipo Asignado: {{equipo_asignado}}</h1>
+  </ion-item>
+
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="headgrid" size-sm="2" size-md="2" size-xl="2"><ion-label style="color: black;">Servicio</ion-label></ion-col>
+        <ion-col class="headgrid" size="1"><ion-label style="color: black;">Fuente</ion-label></ion-col>
+        <ion-col class="headgrid" size="1"><ion-label style="color: black;">Tiempo Estandar</ion-label></ion-col>
+        <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1"><ion-label style="color: black;">Maquina</ion-label></ion-col>
+        <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1"><ion-label style="color: black;">Equipo</ion-label></ion-col>
+        <ion-col class="headgrid" size-sm="2" size-md="2" size-xl="3"><ion-label style="color: black;">F.Inicio</ion-label></ion-col>
+        <ion-col class="headgrid" size-sm="2" size-md="2" size-xl="2"><ion-label style="color: black;">F.Fin</ion-label></ion-col>
+        <ion-col class="headgrid" size="1"><ion-label style="color: black;">Agregado</ion-label></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+</ion-toolbar>
+
+
+
+<ion-content>
+
+  <ion-list *ngFor="let item_equipo of results_lista_ot; let i=index let isOdd=odd; let isEven=even" [class.odd]="isOdd"
+    [class.even]="isEven" (click)="FSelectedItem(item_equipo)">
+    <!-- -->
+    <ion-item-sliding>
+      <ion-item button>
+        <ion-grid>
+          <ion-row>
+            <ion-col size-sm="2" size-md="2" size-xl="2"><ion-label>{{item_equipo.Y04002}}</ion-label></ion-col>
+            <ion-col size="1">{{item_equipo.avatar}}</ion-col>
+            <ion-col size="1">{{item_equipo.tiempo_estandar}}</ion-col>
+            <ion-col size-sm="1" size-md="1" size-xl="1">{{item_equipo.maquina}}</ion-col>
+            <ion-col size-sm="1" size-md="1" size-xl="1">{{item_equipo.codsmg}}</ion-col>
+            <ion-col size-sm="2" size-md="2" size-xl="3">{{item_equipo.fecha_inicio}}</ion-col>
+            <ion-col size-sm="2" size-md="2" size-xl="2">{{item_equipo.fecha_fin}}</ion-col>
+            <ion-col size="1">{{item_equipo.flag_agregado}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item-options side="end"
+        (ionSwipe)="mostrarConfirmacion(item_equipo)">
+        <ion-item-option color="primary" expandable> Clonar Registro</ion-item-option>
+      </ion-item-options>
+
+    </ion-item-sliding>
+
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button title="Nueva Actividad" (click)="FNuevaActvividad()">
+      <ion-icon name="grid-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
+

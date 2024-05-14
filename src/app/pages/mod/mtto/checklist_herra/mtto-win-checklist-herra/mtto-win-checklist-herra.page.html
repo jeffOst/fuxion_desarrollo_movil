@@ -1,0 +1,145 @@
+<ion-header [translucent]="true">
+  <ion-toolbar
+    mode="ios"
+    [color]="networkStatus && networkStatus.connected? 'primary':'danger'"
+  >
+    <ion-title text-capitalize>{{tituloTollBar}}
+
+    </ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="mtto-list-checklist-herra"
+        [text]="Cancelar"
+        [disabled]="disableButton"
+      >
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- <form [formGroup]="FormCheckListPaso1" #f="ngForm"> -->
+    <form [formGroup]="FormCheckListPaso1" #f="ngForm">
+    <ion-list mode="ios" class="ion-no-padding">
+      <!-- <ion-item>
+        <ion-label>
+          <p>Tecnico</p>
+          <ion-select
+          cancelText="Cancelar"
+          (ionChange)="FSelectChangTecnico($event,0)"
+          [selectedText]="TecnicoPivotSelectedText"
+          placeholder="Seleccionar tecnico"
+          color="primary"
+          formControlName="idusuario" 
+          interface="action-sheet"
+          mode="ios"> 
+          <ion-select-option
+            *ngFor="let tipo of DsTecnico"
+            [value]="tipo['id_personal']"
+            >{{tipo['tecnico_cl']}}
+          </ion-select-option>
+        </ion-select>
+        </ion-label>
+      </ion-item> -->
+      <ion-item>
+        <ion-searchbar
+        (click)="open_popup_tecni()"
+        type="text"
+        placeholder="Seleccionar Tecnico"
+        mode="ios"
+        readonly
+        formControlName="nomusuario"> 
+        Tecnico:&nbsp;   </ion-searchbar
+        >
+        <!-- correlativo_mtto -->
+      
+    </ion-item>
+      <ion-item>
+        <ion-label>
+          <p>Mesa de Trabajo</p>
+          <ion-select  placeholder="Busqueda de mesa" >
+          </ion-select>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <p>Isla</p>
+          <ion-select
+          cancelText="Cancelar"
+          (ionChange)="FSelectChangeIsla($event,0)"
+          [selectedText]="IslaPivotSelectedText"
+          placeholder="Seleccionar Isla"
+          color="primary"
+          interface="action-sheet"
+          mode="ios"> 
+        <!-- formControlName="idfrecuencia_ot" -->
+          <ion-select-option
+            *ngFor="let tipo of DsIsla"
+            >{{tipo['nombre']}}
+          </ion-select-option>
+        </ion-select>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>F. de Inspeccion:</ion-label>
+          <ion-datetime-button label="F.Registro Guia:" locale="es-PE" datetime="datetime" [disabled]="true"></ion-datetime-button>
+          <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
+            <ng-template>
+              <ion-datetime locale="es-PE" id="datetime" mode="ios" displayFormat="YYYY-MM-DD HH:mm"  presentation="date-time"
+                [preferWheel]="true" [showDefaultButtons]="true"  pickerFormat="YYYY-MM-DD HH:mm"
+              >
+              <!-- [(ngModel)]="ng_fch_ini_inf" [ngModelOptions]="{standalone: true}" -->
+              </ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+        <ion-item-divider color="primary">
+          <ion-label ></ion-label>
+        </ion-item-divider>
+        <ion-item style="padding: 0px;border:0px">
+        <ion-chip slot="end" mode="ios" color="primary" (click)="open_popup_herra()" >
+          <ion-label>Agregar</ion-label>
+          <ion-icon name="add"></ion-icon>
+        </ion-chip>
+        <ion-chip slot="end" color="primary" (click)="FLoadmot()">
+          <ion-icon name="refresh-outline"></ion-icon>
+          <ion-label>Actualizar</ion-label>
+        </ion-chip>
+      </ion-item>
+    </ion-list>
+    
+    <ion-list>
+      <ion-item *ngFor="let Row of DataSetGrid">
+        <ion-badge slot="start" color="medium" no-padding>{{Row.fila}}.-</ion-badge>
+        <ion-label style="display: flex; justify-content: space-between;">
+          <div style="display: flex; flex-direction: column;">
+            <p style="margin-right: 10px;">{{Row.Y04002}}</p>
+            <p>{{'Serie: '+Row.serie_hd}}</p>
+          </div>
+          <div style="display: flex;">
+            <ion-toggle mode="ios" [checked]="Row.icchecktog_hd" (ionChange)="onToggle($event)"></ion-toggle>
+            <ion-segment mode="ios" style="width: 200px;" formControlName="idestado_hd">
+              <ion-segment-button value="1" style="font-size: 12px; padding: 5px;">
+                <ion-label>Bueno</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="2" style="font-size: 12px; padding: 5px;">
+                <ion-label>Regular</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="3" style="font-size: 12px; padding: 5px;">
+                <ion-label>Malo</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </div>
+        </ion-label>
+        <div style="width: 80px;">
+          <label></label>
+        </div>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+<ion-footer>
+  <!-- <ion-button (click)="mostrarConfirmacion()"  expand="full" [disabled]="globalVal.ot_estado_general>'2'" color="primary">Terminado</ion-button> -->
+  <ion-button expand="full" color="primary">Terminado</ion-button>
+</ion-footer>

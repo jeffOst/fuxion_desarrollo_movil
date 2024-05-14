@@ -1,0 +1,268 @@
+<ion-header [translucent]="true">
+  <ion-toolbar
+    mode="ios"
+    [color]="networkStatus && networkStatus.connected? 'primary':'danger'"
+  >
+    <ion-title text-capitalize>{{tituloTollBar}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="prod-list-acti-programada"
+        [text]="Cancelar"
+        [disabled]="disableButton"
+      >
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-toolbar class="ion-no-border">
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <h1>{{FormHtmlJs.codsmg}}</h1>
+        <p>{{FormHtmlJs.modelo}}</p>
+      </ion-label>
+      <ion-label class="ion-text-center labelcenter">
+        <h1>N°:{{FormHtmlJs.corre_fisico}}</h1></ion-label>
+      <ion-label slot="end" class="ion-text-end text-small">
+        <!-- <h3>OT:{{FormHtmlJs.id_orden_trab_fis_cab}}</h3> -->
+        <H3>{{NombresUsuarioLocal}}</H3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-toolbar>
+
+<ion-content>
+  <ion-tabs    #myTabs>
+    <ion-tab-bar
+      slot="top"
+      color="primary"
+      translucent="true"
+style="border-radius: 5px;"
+    >
+      <ion-tab-button
+        tab="page1"
+        value="1"
+        (click)="mySelect(1,$event)"
+        selected="true"
+
+      >
+      <ion-icon name="settings-sharp"></ion-icon>
+      GENERAL
+        <!-- <ion-grid fixed class="ion-no-padding" style="width: 85%; height: 50%">
+          <ion-row class="ion-no-padding">
+            <ion-col>
+              <ion-row size="2">
+                <ion-col
+                  ><ion-badge color="primary"
+                    >{{FormHtmlJs.avance1}}%</ion-badge></ion-col>
+              </ion-row>
+              <ion-row size="2">
+                <ion-col class="ion-no-padding" style="height: 30px"
+                  ><ion-label>General</ion-label></ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col>
+              <ion-col
+                ><ion-icon
+                  name="flash"
+                  style="
+                    height: 25px !important;
+                    width: 25px !important;
+                    display: inline !important;
+                  "
+                ></ion-icon
+              ></ion-col>
+            </ion-col>
+          </ion-row>
+        </ion-grid> -->
+
+      </ion-tab-button>
+      <ion-tab-button  tab="page2" value="2" (click)="mySelect(2,$event)"
+
+      >
+        <ion-icon name="flash-sharp"></ion-icon>
+        ELECTRICA
+        <!-- <ion-grid fixed class="ion-no-padding" style="width: 85%; height: 50%">
+          <ion-row class="ion-no-padding">
+            <ion-col>
+              <ion-row size="2">
+                <ion-col
+                  ><ion-badge color="primary"
+                    >{{FormHtmlJs.avance2}}%</ion-badge
+                  ></ion-col
+                >
+              </ion-row>
+              <ion-row size="2">
+                <ion-col><ion-label>ELECTRICA</ion-label></ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col>
+              <ion-col
+                ><ion-icon
+                  name="skull"
+                  style="
+                    height: 25px !important;
+                    width: 25px !important;
+                    display: inline !important;
+                  "
+                ></ion-icon
+              ></ion-col>
+            </ion-col>
+          </ion-row>
+        </ion-grid> -->
+      </ion-tab-button>
+
+      <ion-tab-button
+        class="ion-no-padding"
+        tab="page3"
+        value="3"
+        (click)="mySelect(3,$event)"
+
+      >
+      <ion-icon name="construct-sharp"></ion-icon>
+      <ion-label>MEC. y ESTANQ.</ion-label>
+        <!-- <ion-grid fixed class="ion-no-padding" style="width: 85%; height: 50%">
+          <ion-row class="ion-no-padding">
+            <ion-col>
+              <ion-row size="2">
+                <ion-col
+                  ><ion-badge color="primary"
+                    >{{FormHtmlJs.avance3}}%</ion-badge
+                  ></ion-col
+                >
+              </ion-row>
+              <ion-row size="2">
+                <ion-col class="ion-no-padding" style="height: 30px"
+                  ><ion-label>MECANICA Y ESTANQUEIDAD</ion-label></ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col>
+              <ion-col
+                ><ion-icon
+                  name="checkmark"
+                  style="
+                    height: 25px !important;
+                    width: 25px !important;
+                    display: inline !important;
+                  "
+                ></ion-icon
+              ></ion-col>
+            </ion-col>
+          </ion-row>
+        </ion-grid> -->
+
+      </ion-tab-button>
+
+      <ion-tab-button tab="page4"
+      class="favorites-button"
+
+       (click)="mySelect(4,$event)" color="light">
+        <ion-icon name="water-sharp"></ion-icon>
+        <ion-label>HIDRAULICA</ion-label>
+        <!-- <ion-grid fixed class="ion-no-padding" style="width: 85%; height: 50%">
+          <ion-row class="ion-no-padding">
+            <ion-col>
+              <ion-row size="2">
+                <ion-col
+                  ><ion-badge color="primary"
+                    >{{FormHtmlJs.avance4}}%</ion-badge
+                  ></ion-col
+                >
+              </ion-row>
+              <ion-row size="2">
+                <ion-col class="ion-no-padding" style="height: 30px"
+                  ><ion-label>HIDRAULICA</ion-label></ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col>
+              <ion-col
+                ><ion-icon
+                  name="server"
+                  style="
+                    height: 25px !important;
+                    width: 25px !important;
+                    display: inline !important;
+                  "
+                ></ion-icon
+              ></ion-col>
+            </ion-col>
+          </ion-row>
+        </ion-grid> -->
+
+      </ion-tab-button>
+
+      <ion-tab-button tab="page5"  (click)="mySelect(5,$event)">
+        <ion-icon name="pulse-sharp"></ion-icon>
+        <ion-label>ANTES del DESMONT.</ion-label>
+
+        <!-- <ion-grid fixed class="ion-no-padding" style="width: 85%; height: 50%">
+          <ion-row class="ion-no-padding">
+            <ion-col>
+              <ion-row size="2">
+                <ion-col
+                  ><ion-badge color="primary"
+                    >{{FormHtmlJs.avance5}}%</ion-badge
+                  ></ion-col
+                >
+              </ion-row>
+              <ion-row size="2">
+                <ion-col class="ion-no-padding" style="height: 30px"
+                  ><ion-label>ANTES DEL DESMONTAJE</ion-label></ion-col
+                >
+              </ion-row>
+            </ion-col>
+            <ion-col>
+              <ion-col
+                ><ion-icon
+                  name="bug"
+                  style="
+                    height: 25px !important;
+                    width: 25px !important;
+                    display: inline !important;
+                  "
+                ></ion-icon
+              ></ion-col>
+            </ion-col>
+          </ion-row>
+        </ion-grid> -->
+
+      </ion-tab-button>
+
+      <ion-tab-button tab="page6"  (click)="mySelect(6,$event)">
+        <ion-icon name="eye-sharp"></ion-icon>
+        <ion-label>ANAL. del PROBL.</ion-label>
+        <!-- <ion-grid fixed class="ion-no-padding" style="width: 85%; height: 50%">
+          <ion-row class="ion-no-padding">
+            <ion-col>
+              <ion-row size="2">
+                <ion-col
+                  ><ion-badge color="primary"
+                    >{{FormHtmlJs.avance6}}%</ion-badge
+                  ></ion-col
+                >
+              </ion-row>
+              <ion-row size="2">
+                <ion-col class="ion-no-padding" style="height: 30px"
+                  ><ion-label>ANALISIS DEL PROBLEMA</ion-label></ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col>
+              <ion-col
+                ><ion-icon
+                  name="thermometer"
+                  style="
+                    height: 25px !important;
+                    width: 25px !important;
+                    display: inline !important;
+                  "
+                ></ion-icon
+              ></ion-col>
+            </ion-col>
+          </ion-row>
+        </ion-grid> -->
+
+
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

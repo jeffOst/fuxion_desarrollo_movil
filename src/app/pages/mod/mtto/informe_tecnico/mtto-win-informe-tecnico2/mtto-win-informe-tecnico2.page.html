@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-item>
+      <ion-title text-capitalize>
+        <ion-label>ELECTRICA
+          <p></p>
+        </ion-label>
+      </ion-title>
+
+
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+<!-- <ion-accordion-group [multiple]="true" (ionChange)="accordionGroupChange($event)"  > -->
+  <!-- <ion-accordion *ngFor="let Opcion2 of EditDataRest"  value="{{Opcion2.idclase}}" >
+    <ion-item slot="header" color="light">
+      <ion-label>{{Opcion2.nomclase}}</ion-label>
+    </ion-item>
+     <div class="ion-padding" slot="content">
+     <ion-item *ngFor="let row of DsServiciosxPieza[Opcion2.idclase]">
+        <ion-toggle mode="ios" labelPlacement="end" (ionChange)="FasignaServicio($event,row.seqmaserv_is,row.corre_inf_cab_is,row.idinformeservicio,Opcion2.idclase)"  style="width: 99%;">
+        {{row.Y04002}}
+        </ion-toggle>
+    </ion-item>
+  </div>
+  </ion-accordion> -->
+
+  <ion-list>
+    <ion-item-group *ngFor="let Opcion2 of EditDataRest" >
+      <ion-item-divider button="true" class="divider" (click)="accordionGroupChange(Opcion2.idclase)">
+        <ion-label>&nbsp;<strong>{{Opcion2.nomclase}}</strong></ion-label>
+        <ion-icon name="refresh-circle-outline" slot="end"></ion-icon>
+      </ion-item-divider>
+
+      <ion-item *ngFor="let row of DsServiciosxPieza[Opcion2.idclase]">
+
+        <ion-toggle mode="ios" [checked]="row.idestado_is === '1'" labelPlacement="start" (ionChange)="FasignaServicio($event,row.seqmaserv_is,globalVal.corre_inf_cab,row.idinformeservicio,Opcion2.idclase)"  style="width: 80%;">
+          <ion-label style="font-size: small;">{{row.Y04002}}</ion-label>
+          </ion-toggle>
+
+      </ion-item>
+
+    </ion-item-group>
+
+    </ion-list>
+
+
+<!-- </ion-accordion-group> -->
+</ion-content>
+<ion-footer>
+
+</ion-footer>

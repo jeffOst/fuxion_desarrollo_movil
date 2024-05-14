@@ -1,0 +1,381 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-item>
+    <ion-title text-capitalize
+      ><ion-label>INSTALACION DE RODAMIENTOS
+        <p>CONTROL DE RODAMIENTOS</p>
+      </ion-label></ion-title>
+
+      <form [formGroup]="FormCheckListPaso3" #f="ngForm">
+        <ion-toggle justify="end" mode="ios"
+        formControlName="checklist_paso3_apli"
+        (ionChange)="SaveCheckNoAplicaPaso($event)" >Aplica Paso?
+        </ion-toggle>
+        </form>
+
+  </ion-item>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form [formGroup]="FormCheckListPaso3" #f="ngForm">
+  <ion-list mode="ios" class="ion-no-padding">
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle1($event)"  style="width: 50%;"
+        formControlName="rod_sup_apl">
+        RODAMIENTO SUPERIOR
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>CODIGO</p>
+        <ion-input type="text" maxlength="80"
+        formControlName="rod_sup_codigo_cp3"
+
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>CONDICION</p>
+        <ion-segment mode="ios" formControlName="rod_sup_condic_cp3">
+          <ion-segment-button value="1">
+            <ion-label>NUEVO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>USADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>ENGRASADO DE RODAJE</p>
+        <ion-segment mode="ios" formControlName="rod_sup_eng_rod_cp3">
+          <ion-segment-button value="1">
+            <ion-label>REALIZADO EN TALLER</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>REALIZADO EN FABRICA</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>ESTATUS</p>
+        <ion-segment mode="ios" formControlName="rod_sup_estatu_cp3">
+          <ion-segment-button value="1">
+            <ion-label>INSTALADO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>EN PROCESO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>CONFORME AL PART LIST</p>
+        <ion-segment mode="ios" formControlName="rod_sup_conf_part_cp3">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating"> OBSERVACIONES </ion-label>
+      <ion-textarea
+        [autofocus]="true"
+        mode="ios"
+        [autoGrow]="true"
+        formControlName="rod_sup_observ_cp3"
+
+      ></ion-textarea>
+    </ion-item>
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle2($event)"  style="width: 50%;"
+        formControlName="rod_inf_apl">
+        RODAMIENTOS INFERIORES UNO
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>CODIGO</p>
+        <ion-input type="text" maxlength="80"
+        formControlName="rod_inf_codigo_cp3"
+
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>CONDICION</p>
+        <ion-segment mode="ios" formControlName="rod_inf_condici_cp3">
+          <ion-segment-button value="1">
+            <ion-label>NUEVO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>USADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>ENGRASADO DE RODAJE</p>
+        <ion-segment mode="ios" formControlName="rod_inf_eng_rod_cp3">
+          <ion-segment-button value="1">
+            <ion-label>REALIZADO EN TALLER</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>REALIZADO EN FABRICA</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>ESTATUS</p>
+        <ion-segment mode="ios" formControlName="rod_inf_estatu_cp3">
+          <ion-segment-button value="1">
+            <ion-label>INSTALADO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>EN PROCESO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>CONFORME AL PART LIST</p>
+        <ion-segment mode="ios" formControlName="rod_inf_conf_part_cp3">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating"> OBSERVACIONES </ion-label>
+      <ion-textarea
+        [autofocus]="true"
+        mode="ios"
+        [autoGrow]="true"
+        formControlName="rod_inf_observ_cp3"
+
+      ></ion-textarea>
+    </ion-item>
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle3($event)"  style="width: 50%;"
+        formControlName="rod_inf2_apl">
+        RODAMIENTOS INFERIORES DOS
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>CODIGO</p>
+        <ion-input type="text" maxlength="80"
+        formControlName="rod_inf2_codigo_cp3"
+
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>CONDICION</p>
+        <ion-segment mode="ios" formControlName="rod_inf2_condici_cp3">
+          <ion-segment-button value="1">
+            <ion-label>NUEVO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>USADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>ENGRASADO DE RODAJE</p>
+        <ion-segment mode="ios" formControlName="rod_inf2_eng_rod_cp3">
+          <ion-segment-button value="1">
+            <ion-label>REALIZADO EN TALLER</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>REALIZADO EN FABRICA</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>ESTATUS</p>
+        <ion-segment mode="ios" formControlName="rod_inf2_estatu_cp3">
+          <ion-segment-button value="1">
+            <ion-label>INSTALADO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>EN PROCESO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>CONFORME AL PART LIST</p>
+        <ion-segment mode="ios" formControlName="rod_inf2_conf_part_cp3">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating"> OBSERVACIONES </ion-label>
+      <ion-textarea
+        [autofocus]="true"
+        mode="ios"
+        [autoGrow]="true"
+        formControlName="rod_inf2_observ_cp3"
+
+      ></ion-textarea>
+    </ion-item>
+<!-- -------------------------------INICIO CONTROL-------------------------------- -->
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle4($event)"  style="width: 50%;"
+        formControlName="mon_caj_rod_apl">
+        MONTAJE DE CAJA DE RODAJES
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>EJECUTADO</p>
+        <ion-segment mode="ios" formControlName="mon_caj_rod_ejec_cp3">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>FECHA EJECUCION</p>
+        <ion-label>{{FormCheckListPaso3.value.mon_caj_rod_fch_cp3}}</ion-label>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle5($event)"  style="width: 50%;"
+        formControlName="mon_sop_rod_apl">
+        MONTAJE DE SOPORTE DE RODAJE
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>EJECUTADO</p>
+        <ion-segment mode="ios" formControlName="mon_sop_rod_ejec_cp3">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>FECHA EJECUCION</p>
+        <ion-label>{{FormCheckListPaso3.value.mon_sop_rod_fch_cp3}}</ion-label>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle6($event)"  style="width: 50%;"
+        formControlName="mon_sop_cub_apl">
+        MONTAJE DE SOPORTE DE CUBIERTA PRINCIPAL
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>EJECUTADO</p>
+        <ion-segment mode="ios" formControlName="mon_sop_cub_ejec_cp3">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>FECHA EJECUCION:</p>
+        <ion-label>{{FormCheckListPaso3.value.mon_sop_cub_fch_cp3}}</ion-label>
+      </ion-label>
+    </ion-item>
+<!-- --------------------------------FIN CONTROL------------------------------------------ -->
+<ion-item-divider>
+  SUPERVISOR RESPONSABLE
+</ion-item-divider>
+<ion-item>
+  <ion-label>
+    <p>OBSERVACIONES:</p>
+    <ion-textarea [disabled]="disableButtonPaso1" style="width:100%;height: 30px;"  formControlName="revi_respsble_obs_cp3"
+
+    ></ion-textarea>
+  </ion-label>
+</ion-item>
+
+  </ion-list>
+</form>
+</ion-content>
+<ion-footer>
+  <form [formGroup]="FormCheckListPaso3" #f="ngForm">
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col style="text-align: center">
+        <ion-segment style="width: 110%;" class="ion_segment_3d" mode="ios" formControlName="idestado_revi_paso3_cp3" >
+
+          <ion-segment-button (click)="SaveFormBorradorPaso1()" value="1" layout="icon-end">
+            <ion-icon name="close" color="danger"></ion-icon>
+            <ion-label color="danger">BORRADOR</ion-label>
+          </ion-segment-button>
+          <ion-segment-button (click)="SaveFormTerminadoPaso1()" value="2" layout="icon-end">
+            <ion-icon color="success" name="checkmark"></ion-icon>
+            <ion-label color="success">TERMINADO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button (click)="SaveFormTerminadoPaso1()" value="3" layout="icon-end" [disabled]="disableButtonPaso1">
+            <ion-icon name="star"></ion-icon>
+            <ion-label color="secondary">VERIFICADO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button (click)="SaveFormTerminadoPaso1()" value="4" layout="icon-end" [disabled]="disableButtonPaso1">
+            <ion-icon color="warning" name="alert"></ion-icon>
+            <ion-label color="warning" >RECHAZADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</form>
+</ion-footer>

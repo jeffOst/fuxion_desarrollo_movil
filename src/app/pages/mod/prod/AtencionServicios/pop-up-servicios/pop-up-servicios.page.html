@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title>Lista de Servicios</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancelar_listaservicios(0,0,0,0,0)" class="">
+        <ion-icon part="icon" aria-hidden="true" role="img" class="md hydrated" name="chevron-back-outline"></ion-icon>
+        Cancelar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+  <ion-searchbar style="width: 98%;" #IdHtmlInputSearch mode="ios" cancelButtonText="Cancelar"
+  enterkeyhint="done" placeholder="Filtrar Servicios" [(ngModel)]="NgModInputSearch" >
+</ion-searchbar>
+<ion-icon
+slot="end"
+name="sync-outline"
+(click)="FFindRows()"
+#idIconButtonSync
+></ion-icon>
+</ion-item>
+<ion-list *ngFor="let Row of DataSetGrid; let i=index let isOdd=odd; let isEven=even" [class.odd]="isOdd" [class.even]="isEven" lines="full" inset=true>
+  <ion-item button (click)="FSelectedItem(Row.Y04002,Row.Y04001,Row.SEQMASERV,Row.es_con_procesos_ms,Row.flag_serv_eje_ms)">
+
+    <ion-label>
+      <strong>{{Row.Y04002}}</strong>
+      <p>{{Row.Y04001}}</p>
+      <p>{{Row.nomclase}}</p>
+    </ion-label>
+  </ion-item>
+</ion-list>
+</ion-content>

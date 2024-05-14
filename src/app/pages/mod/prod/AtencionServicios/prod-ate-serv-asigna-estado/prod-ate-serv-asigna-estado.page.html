@@ -1,0 +1,212 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title text-capitalize>Asignar Estado</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="prod-list-acti-programada"
+        [text]="Cancelar"
+
+      >
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+
+      <ion-label>
+
+        <p>Maquina</p>
+        <h1>{{FormHtmlJs.maquina}}</h1>
+
+      </ion-label>
+
+      <ion-button
+              expand="block"
+              color="white"
+              size="small"
+              slot="end"
+              (click)="FIniciarActvividad()"
+              title="Iniciar Actividad"
+            >
+            <ion-text color="danger">&nbsp;Iniciar Actividad &nbsp;</ion-text>
+            <ion-icon
+            [hidden]="scanActive"
+            expand="block"
+            color="dark"
+            size="small"
+            name="play-forward"
+          ></ion-icon>
+          </ion-button>
+
+    </ion-item>
+<ion-item *ngIf="hide_div_reproceso" >
+  <ion-row style="width:100%;" class="ion-text-left">
+    <ion-col size="3" class="ion-text-right">Actividad:</ion-col>
+    <ion-col size="3" class="ion-text-left">
+      <div class="{{CssReproceso}}">por Reproceso</div>
+    </ion-col>
+    <ion-col size="3" class="ion-text-right">
+      F. Revision:
+    </ion-col>
+    <ion-col size="3" class="ion-text-left">
+      <div class="{{CssReproceso}}">{{ FormHtmlJs.fecha_reproceso }}</div>
+
+    </ion-col>
+  </ion-row>
+</ion-item>
+
+
+    <ion-item>
+      <ion-label>
+        <p>Centro de Costos</p>
+        <h1>{{FormHtmlJs.EQUIPOID}}</h1>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>F. Asignado</p>
+        <h1>{{FormHtmlJs.fasignado}}</h1>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>Nro. {{FormHtmlJs.avatar}}</p>
+        <h1>{{FormHtmlJs.correorden}}</h1>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      
+      <ion-label>
+        <p>Cod. P.T.</p>
+        <input value="{{FormHtmlJs.Y04001}}" />
+        <ion-button (click)="visualizar_pdf(FormHtmlJs.plano_diseno)" size="default">
+          <ion-icon slot="start" name="star"></ion-icon>
+            Ver Plano
+        </ion-button>
+      </ion-label>
+
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>Pieza</p>
+        <h1>{{FormHtmlJs.nomclase}}</h1>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>Nom. P.T.</p>
+        <h1>{{FormHtmlJs.Y04002}}</h1>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>Total Piezas</p>
+        <h1>{{FormHtmlJs.cantidad}}</h1>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-card>
+        <p>Estado</p>
+
+        <ion-input style="width: 100%">
+          <ion-icon
+            color="warning"
+            size="small"
+            name="ellipse"
+            *ngIf=" IdCboEstadoActual == '1'"
+          ></ion-icon>
+          <ion-icon
+            color="success"
+            size="small"
+            name="ellipse"
+            *ngIf=" IdCboEstadoActual == '2'"
+          ></ion-icon>
+          <ion-select
+            style="width: 100%"
+            value="{{FormHtmlJs.idestado}}"
+            okText="Terminado"
+            cancelText="Limpiar"
+            (ionChange)="CboEstadoChange($event)"
+            (ionCancel)="CboEstadoCancel($event)"
+            (ionBlur)="CboEstadoBlur($event)"
+          >
+            <ion-select-option value="1" (ionSelect)="cboEstadoSelect()"
+              >Asignado</ion-select-option
+            >
+            <ion-select-option value="2" (ionSelect)="cboEstadoSelect()"
+              >Completo</ion-select-option
+            >
+          </ion-select>
+        </ion-input>
+      </ion-card>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>F. Cierre</p>
+        <h1>{{FormHtmlJs.fch_cierre_servicios_opt}}</h1>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="FlagCCalidad" >
+      <ion-label
+        ><p>Calidad</p>
+
+        <ion-row>
+          <ion-col size="10">
+            <ion-button
+              expand="full"
+              color="white"
+              style="background-color: transparent !important"
+              (click)="FDejarCalidad()"
+              title="Dejar en Calidad"
+            >
+              <ion-text color="dark"> Dejar piezas en calidad </ion-text>
+            </ion-button>
+          </ion-col>
+          <ion-col size="2"
+            ><ion-icon color="dark" size="small" name="cart"></ion-icon
+          ></ion-col>
+        </ion-row>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="FlagCCalidad">
+      <ion-label>
+        Historial Engregas Calidad
+
+        <ion-chip>
+          <ion-label color="secondary">
+            {{CantEntregasCalidad}}
+          </ion-label>
+        </ion-chip>
+
+      </ion-label>
+
+
+      </ion-item>
+    <ion-item *ngIf="FlagCCalidad">
+      <ion-grid>
+      <ion-row>
+        <ion-col class="headgrid" size-sm="4" size-md="4" size-xl="4">Fecha </ion-col>
+        <ion-col class="headgrid" size-sm="5" size-md="5" size-xl="5">Responsable Registro</ion-col>
+        <ion-col class="headgrid" size-sm="3" size-md="3" size-xl="3">Cantidad</ion-col>
+      </ion-row>
+      <ion-row  *ngFor="let Row of DsGridSolicitudQc">
+        <ion-item mode="ios" button style="width: 100% !important;"
+        (click)="showDetailCalidad(Row)"
+        >
+        <ion-col  size-sm="4" size-md="4" size-xl="4">{{Row.fch_solicitud_scc}} </ion-col>
+        <ion-col  size-sm="5" size-md="5" size-xl="5">{{Row.nombres_tecnico}}</ion-col>
+        <ion-col  size-sm="3" size-md="3" size-xl="3">{{Row.cantidad_scc}}</ion-col>
+
+      </ion-item>
+      </ion-row>
+    </ion-grid>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

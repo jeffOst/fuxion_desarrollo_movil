@@ -1,0 +1,76 @@
+<ion-header
+  ><!-- ultimoooo-->
+  <ion-toolbar mode="ios">
+    <ion-title text-capitalize>Detalle de OC</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="FCloseWin()" class="">
+        <ion-icon
+          part="icon"
+          aria-hidden="true"
+          role="img"
+          class="md hydrated"
+          name="chevron-back-outline"
+        ></ion-icon>
+        Cancelar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <!-- <ion-slides pager="true" [options]="slideOpts" > -->
+    <ion-card *ngFor="let Row of FormHtmlJs.detalle">
+
+      <ion-list class="ion-text-justify">
+        <ion-item class="ion-text-justify">
+          <ion-label class="ion-text-justify">
+            <p>Codigo</p>
+            <h1 style="font-size:9px" class="ion-text-justify">{{Row.Y20001}}</h1>
+          </ion-label>
+        </ion-item>
+        <ion-item class="ion-text-justify">
+          <ion-label class="ion-text-justify">
+            <p>Descripcion</p>
+            <h2 class="ion-text-justify">{{Row.Y20002}}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>Cantidad</p>
+            <h1>{{Row.Y20084}}</h1>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>Unidad</p>
+            <h1>{{Row.Y20033}}</h1>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <p>Cant.Atendido</p>
+            <h1>{{Row.cant_atendido}}</h1>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <p>Familia</p>
+            <h1>{{Row.familia}}</h1>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <p>Ubicacion</p>
+            <h1>{{Row.ubicacion}}</h1>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+    </ion-card>
+  <!-- </ion-slides> -->
+
+</ion-content>
+<ion-footer>
+</ion-footer>

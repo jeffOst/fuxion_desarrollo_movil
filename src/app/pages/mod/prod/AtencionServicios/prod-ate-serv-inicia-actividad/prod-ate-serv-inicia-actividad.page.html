@@ -1,0 +1,382 @@
+<ion-header
+  ><!-- ultimoooo-->
+  <ion-toolbar mode="ios">
+    <ion-title text-capitalize>Iniciar Servicio</ion-title>
+    <!--<ion-title color="primary" style="font-size: 6px;">{{NomUsuario}}</ion-title>-->
+    <ion-buttons slot="start">
+      <ion-button (click)="FCloseWin(DsIniciaActividad.EQUIPOID)" class="">
+        <ion-icon
+          part="icon"
+          aria-hidden="true"
+          role="img"
+          class="md hydrated"
+          name="chevron-back-outline"
+        ></ion-icon>
+        Cancelar <!--aqui-->
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+<!--
+  <pdf-viewer [src]="pdfSrc"
+                [render-text]="true"
+                [original-size]="false"
+                style="width: 400px; height: 500px"
+    ></pdf-viewer>
+-->
+
+
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <p>OF/OT</p>
+        <h1>{{DsIniciaActividad.EQUIPOID}}</h1>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>Nro. OF/OT</p>
+        <h2>{{DsIniciaActividad.correorden}}</h2>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="hideItemByTipoSer">
+      <ion-label>
+        <p>Código Q.R.</p>
+        <h1>{{DsIniciaActividad.codigo_qr}}</h1>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>Pieza Servicio</p>
+        <h1>{{DsIniciaActividad.nomclase}}</h1>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="hideItemByTipoRep">
+      <ion-label>
+        <p>Código Producto Terminado</p>
+        <input value="{{DsIniciaActividad.codigo_pt}}" />
+        <ion-button (click)="visualizar_pdf(DsIniciaActividad.plano_diseno)" size="default">
+          <ion-icon slot="start" name="star"></ion-icon>
+            Ver Plano
+        </ion-button>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="hideItemByTipoRep">
+      <ion-label>
+        <p>Clase</p>
+        <h1>{{DsIniciaActividad.nomsubfam}}</h1>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="hideItemByTipoRep">
+      <ion-label>
+        <p>Descripción Versión</p>
+        <h1>{{DsIniciaActividad.descripcion_pt}}</h1>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="hideItemByTipoSer">
+      <ion-label>
+        <p>Codigo de Bomba</p>
+        <h1>{{DsIniciaActividad.codsmg}}</h1>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>Material</p>
+        <h1>{{DsIniciaActividad.material}}</h1>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>Técnico</p>
+        <h1>{{DsIniciaActividad.nombres_tecnico}}</h1>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>Maquina</p>
+        <h1>{{DsIniciaActividad.maquina}}</h1>
+      </ion-label>
+    </ion-item>
+    <!-- <ion-item>
+      <ion-label>
+        <p> P.Terminado</p>
+        <h1>{{DsIniciaActividad.resumen_Y04002}}</h1>
+      </ion-label>
+    </ion-item> -->
+    <ion-item>
+      <ion-label>
+        <p>Servicio</p>
+        <h1>{{DsIniciaActividad.Y04002}}</h1>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="hideItemByRevisionEje">
+      <ion-label>
+        <p>Servicio Asignado (Ejes)*</p>
+        <ion-select
+          cancelText="Cancelar"
+          (ionChange)="select_change_eje($event)"
+          [selectedText]="DsIniciaActividad.servicio_eje"
+          placeholder="Seleccionar servicio"
+          color="primary"
+          [(ngModel)]="DsIniciaActividad.idservicio_x_eje_ofd"
+          interface="action-sheet"
+          mode="ios"
+        >
+          <ion-select-option
+            *ngFor="let tipo of rest_serv_eje"
+            [value]="tipo['SEQMASERV']"
+            >{{tipo['Y04002']}}
+          </ion-select-option>
+        </ion-select>
+      </ion-label>
+    </ion-item>
+
+    <!-- metalizado inicia -->
+    <ion-item *ngIf="hideItemByMetalizado">
+      <ion-label>
+        <p>Tipo Proceso Metalizado:</p>
+        <h1>{{DsIniciaActividad.proceso_metalizado}}</h1>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="hideItemByMetalizado">
+      <ion-label>
+        <p>Servicio Metalizado</p>
+        <h1>{{DsIniciaActividad.servicio_metalizado}}</h1>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="hideItemByMetalizado">
+      <ion-label>
+        <p>N. Metalizados Observados</p>
+        <h1>{{DsIniciaActividad.cnt_metalizado_obs}}</h1>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="hideItemByMetalizado">
+      <ion-label>
+        <p>MRTACERAM 29012 Peso Inicial(g)</p>
+        <h1>{{DsIniciaActividad.cnt_29012_peso_ini}}</h1>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="hideItemByMetalizado">
+      <ion-label>
+        <p>ULTRABON 50000 Peso Inicial(g)</p>
+        <h1>{{DsIniciaActividad.cnt_50000_peso_ini}}</h1>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>Estado</p>
+        <h1 *ngIf="hideNomEstado">{{DsIniciaActividad.estado}}</h1>
+        <ion-item lines="none" style="padding: 0px !important">
+          <ion-button
+            *ngIf="hideBtnInicio"
+            style="width: 50% !important"
+            expand="full"
+            size="large"
+            color="light"
+            (click)="FEstadoActividad(2)"
+            >PAUSAR</ion-button
+          >
+          <ion-button
+            *ngIf="hideBtnInicio"
+            style="width: 50% !important"
+            expand="full"
+            size="large"
+            color="light"
+            (click)="FEstadoActividad(3)"
+            >FINALIZAR</ion-button
+          >
+
+          <ion-button
+            *ngIf="hideBtnReanuda"
+            style="width: 99% !important"
+            expand="full"
+            size="large"
+            color="light"
+            (click)="FEstadoActividad(4)"
+            >REANUDAR</ion-button
+          >
+        </ion-item>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="hideItemByProceso">
+      <ion-label>
+        <p>Tipo Proceso</p>
+        <h1>{{DsIniciaActividad.proceso}}</h1>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>F.Inicio</p>
+        <h1>{{DsIniciaActividad.fecha_inicio}}</h1>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>F.Finaliza</p>
+        <h1 *ngIf="hideNomEstado">{{DsIniciaActividad.fecha_fin}}</h1>
+      </ion-label>
+    </ion-item>
+
+
+
+    <ion-item>
+      <ion-col size="4" *ngIf="hideBtnModificaFecha" class="ion-text-end">Fecha y Hora de Inicio:</ion-col>
+      <ion-datetime-button locale="es-ES" datetime="datetime1"></ion-datetime-button>
+      <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true"
+        mode="ios">
+        <ng-template>
+          <ion-datetime *ngIf="hideBtnModificaFecha" locale="es-ES" id="datetime1" mode="ios" displayFormat="YYYY-MM-DD HH:mm"
+            presentation="date-time" [preferWheel]="true" [showDefaultButtons]="true"
+            pickerFormat="YYYY-MM-DD HH:mm" [(ngModel)]="fechainicio_prod" (ionChange)="onFechaInicioChange($event, DsIniciaActividad.pk_idservicio, DsIniciaActividad.avatar)"
+            [ngModelOptions]="{standalone: true}">
+          </ion-datetime>
+        </ng-template>
+
+      </ion-popover>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-col size="4" *ngIf="hideBtnModificaFecha" class="ion-text-end">Fecha y Hora de Finalizacion:</ion-col>
+      <ion-datetime-button locale="es-ES" datetime="datetime2"></ion-datetime-button>
+      <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true"
+        mode="ios">
+        <ng-template>
+          <ion-datetime *ngIf="hideBtnModificaFecha" locale="es-ES" id="datetime2" mode="ios" displayFormat="YYYY-MM-DD HH:mm"
+            presentation="date-time" [preferWheel]="true" [showDefaultButtons]="true"
+            [(ngModel)]="fechafin_prod" (ionChange)="onFechaFinChange($event, DsIniciaActividad.pk_idservicio, DsIniciaActividad.avatar)"
+            pickerFormat="YYYY-MM-DD HH:mm">
+          </ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+
+    
+    <ion-item *ngIf="hideItemByMetalizado">
+      <ion-label>
+        <p>MRTACERAM 29012 Peso Final(g):</p>
+        <app-input-with-button
+          [(ngModel)]="DsIniciaActividad.cnt_29012_peso_fin"
+          ngDefaultControl
+          (call_click_padre)="unCheckFocus(1)"
+        ></app-input-with-button>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="hideItemByMetalizado">
+      <ion-label>
+        <p>ULTRABON 50000 Peso Final(g):</p>
+
+        <app-input-with-button
+          [(ngModel)]="DsIniciaActividad.cnt_50000_peso_fin"
+          ngDefaultControl
+          (call_click_padre)="unCheckFocus(2)"
+        ></app-input-with-button>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating"> <p>Observación</p> </ion-label>
+
+      <ion-textarea
+        mode="ios"
+        [(ngModel)]="DsIniciaActividad.observacion"
+        maxlength="800"
+        spellcheck="true"
+        (ionBlur)="unCheckFocus(3)"
+      ></ion-textarea>
+    </ion-item>
+    <ion-item>
+
+
+        <!-- <app-input-with-button
+          [(ngModel)]="DsIniciaActividad.cantidad"
+          ngDefaultControl
+          (call_click_padre)="unCheckFocus(2)"
+        ></app-input-with-button> -->
+
+        <ion-input type="number"   label="Cantidad:" labelPlacement="floating" [clearInput]="true"
+        [(ngModel)]="DsIniciaActividad.cantidad" (ionBlur)="unCheckFocus(2)" ></ion-input>
+
+
+
+
+
+
+      <!-- <ion-label>
+        <p>Cantidad</p>
+       <ion-card
+          style="
+            border: 1px solid #989aa2 !important;
+            padding: 0px !important;
+            width: 35% !important;
+            height: 48px !important;
+          "
+        >
+          <ion-row>
+            <ion-col size="8" style="padding: 0px !important">
+              <ion-item style="align-items: baseline !important">
+                <input
+                  type="number"
+                  style="width: 100%; height: 90%; border-width: 0px"
+                  [(ngModel)]="DsIniciaActividad.cantidad"
+                />
+              </ion-item>
+            </ion-col>
+            <ion-col size="4">
+              <ion-item style="align-items: baseline !important">
+
+                <ion-button
+                  color="danger"
+                  name="remove-outline"
+                  expand="full"
+                  (click)="minus()"
+                >
+                  &nbsp; - &nbsp;</ion-button
+                >
+                <ion-button
+                  color="success"
+                  name="add-outline"
+                  expand="full"
+                  (click)="plus()"
+                  >&nbsp;+++0&nbsp;</ion-button>
+
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-label> -->
+
+      <!--<ion-input
+          type="number"
+          required="true"
+          color="primary"
+          type="number"
+          step="1"
+          inputmode="number"
+          mode="ios"
+          [(ngModel)]="DsIniciaActividad.cantidad"
+          value="{{DsIniciaActividad.cantidad}}"
+        ></ion-input>
+          -->
+    </ion-item>
+
+    <ion-input
+      [(ngModel)]="DsIniciaActividad.id_personal"
+      type="hidden"
+    ></ion-input>
+  </ion-list>
+</ion-content>
+<ion-footer> </ion-footer>

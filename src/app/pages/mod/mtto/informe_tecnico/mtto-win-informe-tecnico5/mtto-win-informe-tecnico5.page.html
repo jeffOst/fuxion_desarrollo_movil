@@ -1,0 +1,426 @@
+<ion-header>
+  <ion-toolbar mode="ios" class="ion-no-padding">
+
+      <ion-title text-capitalize>
+        <ion-label>ANTES DEL DESMONTAJE
+        </ion-label>
+      </ion-title>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="FormInformeTecPaso2" #f="ngForm">
+    <ion-list mode="ios" class="ion-no-padding">
+
+      <ion-item-group >
+        <ion-item-divider button="true" class="divider">
+          <ion-label>&nbsp;<strong>PRINCIPAL</strong></ion-label>
+          <!-- <ion-icon name="refresh-circle-outline" slot="end"></ion-icon> -->
+        </ion-item-divider>
+        <ion-item>
+          <ion-label class="ion-color-disabled">LONGITUD:</ion-label>
+          <ion-input
+          [clearInput]="true"
+          type="text"
+
+              formControlName="cable_prin_m"
+            ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="ion-color-disabled">
+            AISLAMIENTO:</ion-label>
+            <ion-input
+              type="text"
+              [clearInput]="true"
+              formControlName="cable_prin_c"
+            ></ion-input>
+
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <p>MΩ / TIPO:</p>
+            <ion-select
+              cancelText="Cancelar"
+              (ionChange)="FSelectChangeTipoCable($event,0)"
+              [selectedText]="TipoCblePivotSelectedText"
+              placeholder="Seleccionar Tipo Cable"
+              color="primary"
+              interface="action-sheet"
+              mode="ios"
+            >
+              <ion-select-option
+                *ngFor="let tipo of DsTipoCable"
+                [value]="tipo['codigo']"
+                >{{tipo['nombre']}}
+              </ion-select-option>
+            </ion-select>
+
+            <!-- <ion-input type="text" maxlength="80"
+          formControlName="aisla_tierra_cmc"></ion-input> -->
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-toggle formControlName="cable_prin_ope" mode="ios" [checked]="" labelPlacement="start"   style="width: 60%;">
+           <label style="color: #92949c;">Operativo:</label>
+            </ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-toggle formControlName="cable_prin_cambio" mode="ios" [checked]="" labelPlacement="start"   style="width: 60%;">
+           <label style="color: #92949c;">Inoperativo:</label>
+            </ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-toggle formControlName="cable_prin_seccionado" mode="ios" [checked]="" labelPlacement="start"   style="width: 60%;">
+           <label style="color: #92949c;">Seccionado:</label>
+            </ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">
+            Reparación/Detallar
+          </ion-label>
+            <ion-textarea  mode="ios" [autoGrow]="true"
+            formControlName="cable_prin_repara_det"
+            ></ion-textarea>
+
+        </ion-item>
+      </ion-item-group>
+
+      <ion-item-group>
+        <ion-item-divider button="true" class="divider">
+          <ion-label>&nbsp;<strong>SEGUNDA TERNA</strong></ion-label>
+        </ion-item-divider>
+
+        <ion-item>
+          <ion-label class="ion-color-disabled">LONGITUD:</ion-label>
+
+            <ion-input
+              type="text"
+              formControlName="cable_2da_m"
+            ></ion-input>
+
+        </ion-item>
+        <ion-item>
+          <ion-label class="ion-color-disabled">AISLAMIENTO:</ion-label>
+
+            <ion-input
+              type="text"
+              formControlName="cable_2da_c"
+            ></ion-input>
+
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <p>MΩ / TIPO:</p>
+            <ion-select
+              cancelText="Cancelar"
+              (ionChange)="FSelectChangeTipoCable2($event,0)"
+              [selectedText]="TipoCble2PivotSelectedText"
+              placeholder="Seleccionar Tipo Cable"
+              color="primary"
+              interface="action-sheet"
+              mode="ios"
+            >
+              <ion-select-option
+                *ngFor="let tipo of DsTipoCable"
+                [value]="tipo['codigo']"
+                >{{tipo['nombre']}}
+              </ion-select-option>
+            </ion-select>
+
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-toggle formControlName="cable_2da_ope" mode="ios" [checked]="" labelPlacement="start"   style="width: 60%;">
+           <label style="color: #92949c;">Operativo:</label>
+            </ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-toggle formControlName="cable_2da_cambio" mode="ios" [checked]="" labelPlacement="start"   style="width: 60%;">
+           <label style="color: #92949c;">Inoperativo:</label>
+            </ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-toggle formControlName="cable_2da_seccionado" mode="ios" [checked]="" labelPlacement="start"   style="width: 60%;">
+           <label style="color: #92949c;">Seccionado:</label>
+            </ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">
+            Reparación/Detallar
+          </ion-label>
+            <ion-textarea  mode="ios" [autoGrow]="true"
+            formControlName="cable_2da_repara_det"
+            ></ion-textarea>
+        </ion-item>
+      </ion-item-group>
+
+      <ion-item-group>
+        <ion-item-divider button="true" class="divider">
+          <ion-label>&nbsp;<strong>AUXILIAR</strong></ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-label class="ion-color-disabled">LONGITUD:</ion-label>
+
+            <ion-input
+              type="text"
+              formControlName="cable_aux_m"
+            ></ion-input>
+
+        </ion-item>
+        <ion-item>
+          <ion-label class="ion-color-disabled">AISLAMIENTO:</ion-label>
+
+
+            <ion-input
+              type="text"
+              formControlName="cable_aux_c"
+            ></ion-input>
+
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="ion-color-disabled">MΩ / TIPO:</ion-label>
+
+            <ion-input
+              type="text"
+              formControlName="cable_aux_tipo"
+            ></ion-input>
+
+        </ion-item>
+
+        <ion-item>
+          <ion-toggle formControlName="cable_aux_ope" mode="ios" [checked]="" labelPlacement="start"   style="width: 60%;">
+           <label style="color: #92949c;">Operativo:</label>
+            </ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-toggle formControlName="cable_aux_cambio" mode="ios" [checked]="" labelPlacement="start"   style="width: 60%;">
+           <label style="color: #92949c;">Inoperativo:</label>
+            </ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-toggle formControlName="cable_aux_seccionado" mode="ios" [checked]="" labelPlacement="start"   style="width: 60%;">
+           <label style="color: #92949c;">Seccionado:</label>
+            </ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">
+            Reparación/Detallar
+          </ion-label>
+            <ion-textarea  mode="ios" [autoGrow]="true"
+            formControlName="cable_aux_repara_det"
+            ></ion-textarea>
+        </ion-item>
+      </ion-item-group>
+
+      <ion-item-group>
+        <ion-item-divider button="true" class="divider">
+          <ion-label>&nbsp;<strong>LLEGO CON DESCARGA(CAMPANA)</strong></ion-label>
+        </ion-item-divider>
+
+        <ion-item>
+          <ion-label>
+            <p>Seleccion:</p>
+            <ion-segment mode="ios" formControlName="b_con_descarga">
+              <ion-segment-button value="1">
+                <ion-label>SI</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="0">
+                <ion-label>NO</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <p>Tipo de Campana:</p>
+            <ion-select
+              cancelText="Cancelar"
+              (ionChange)="FSelectChangeTipoCampana($event,0)"
+              [selectedText]="TipoCampanaPivotSelectedText"
+              placeholder="Seleccionar Tipo Campana"
+              color="primary"
+              interface="action-sheet"
+              mode="ios"
+            >
+              <ion-select-option
+                *ngFor="let tipo of DsTipoCampana"
+                [value]="tipo['codigo']"
+                >{{tipo['nombre']}}
+              </ion-select-option>
+            </ion-select>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>Tipo de Diametro:</p>
+            <ion-select
+              cancelText="Cancelar"
+              (ionChange)="FSelectChangeDiametroCampana($event,0)"
+              [selectedText]="DiametroCampanaPivotSelectedText"
+              placeholder="Seleccionar Tipo Diametro"
+              color="primary"
+              interface="action-sheet"
+              mode="ios"
+            >
+              <ion-select-option
+                *ngFor="let tipo of DsDiametroCampana"
+                [value]="tipo['codigo']"
+                >{{tipo['nombre']}}
+              </ion-select-option>
+            </ion-select>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <p>Estado de Campana:</p>
+            <ion-select
+              cancelText="Cancelar"
+              (ionChange)="FSelectChangeEstadoCampana($event,0)"
+              [selectedText]="EstadoCampanaPivotSelectedText"
+              placeholder="Seleccionar Estado"
+              color="primary"
+              interface="action-sheet"
+              mode="ios"
+            >
+              <ion-select-option
+                *ngFor="let tipo of DsEstadoCampana"
+                [value]="tipo['codigo']"
+                >{{tipo['nombre']}}
+              </ion-select-option>
+            </ion-select>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <p>Reclamo:</p>
+            <ion-segment mode="ios" formControlName="b_con_reclamo_it">
+              <ion-segment-button value="1">
+                <ion-label>SI</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="0">
+                <ion-label>NO</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </ion-label>
+        </ion-item>
+        <!-- <ion-item>
+          <ion-label>
+            Diametro: </ion-label>
+            <ion-input
+              type="text"
+              formControlName="b_con_des_diametro"
+            ></ion-input>
+        </ion-item> -->
+
+        <!-- <ion-item>
+          <ion-label>
+            <p>Tipo:</p></ion-label>
+            <ion-input
+              type="text"
+              formControlName="b_con_des_tipo"
+            ></ion-input>
+
+        </ion-item> -->
+
+      </ion-item-group>
+
+      <ion-item-group>
+        <ion-item-divider button="true" class="divider">
+          <ion-label>&nbsp;<strong>DAÑO FISICO EXTERNO</strong></ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-label>
+            <p>Seleccion:</p>
+            <ion-segment mode="ios" formControlName="b_dano_fisico_ext">
+              <ion-segment-button value="1">
+                <ion-label>SI</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="0">
+                <ion-label>NO</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </ion-label>
+        </ion-item>
+
+        <!-- <ion-item>
+          <ion-label>
+            Diametro:</ion-label>
+            <ion-input
+              type="text"
+              formControlName="b_dano_fisico_ext_det"
+            ></ion-input>
+
+        </ion-item> -->
+      </ion-item-group>
+
+      <ion-item-group>
+        <ion-item-divider button="true" class="divider">
+          <ion-label>&nbsp;<strong>PARTES FALTANTES</strong></ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-label>
+            <p>Seleccion:</p>
+            <ion-segment mode="ios" formControlName="b_parte_faltante_ext">
+              <ion-segment-button value="1">
+                <ion-label>SI</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="0">
+                <ion-label>NO</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            Nota:</ion-label>
+            <ion-input
+              type="text"
+              formControlName="b_partes_faltante"
+            ></ion-input>
+
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-item-divider button="true" class="divider">
+          <ion-label>&nbsp;<strong>OTROS</strong></ion-label>
+        </ion-item-divider>
+
+        <ion-item>
+
+            <ion-textarea  mode="ios" [autoGrow]="true"
+            formControlName="b_otros"
+            ></ion-textarea>
+
+        </ion-item>
+
+        </ion-item-group>
+
+
+
+
+    </ion-list>
+  </form>
+</ion-content>
+
+<ion-footer>
+
+     <ion-button (click)="SaveFormBorradorPaso2()" expand="full">GUARDAR</ion-button>
+
+</ion-footer>

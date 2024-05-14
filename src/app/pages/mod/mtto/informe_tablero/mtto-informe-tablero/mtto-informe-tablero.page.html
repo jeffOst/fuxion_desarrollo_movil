@@ -1,0 +1,95 @@
+<ion-header [translucent]="true">
+  <ion-toolbar
+    mode="ios"
+    [color]="networkStatus && networkStatus.connected? 'primary':'danger'">
+    <ion-title text-capitalize>{{tituloTollBar}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="mtto-list-informe-tecnico"
+        [text]="Cancelar"
+        [disabled]="disableButton">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-toolbar class="ion-no-border">
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <h1>{{FormHtmlJs.codsmg}}</h1>
+        <p>{{FormHtmlJs.modelo}}</p>
+      </ion-label>
+      <ion-label class="ion-text-center labelcenter">
+        <h1>N°:{{FormHtmlJs.corre_fisico}}</h1></ion-label>
+      <ion-label slot="end" class="ion-text-end text-small">
+        <!-- <h3>OT:{{FormHtmlJs.id_orden_trab_fis_cab}}</h3> -->
+        <H3>{{NombresUsuarioLocal}}</H3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-toolbar>
+
+<ion-content>
+  <ion-tabs #myTabs>
+    <ion-tab-bar     slot="top"
+    color="primary"
+    translucent="true"
+    style="border-radius: 5px"
+    mode="ios"
+    >
+
+    <ion-tab-button 
+    class="ion-no-padding"
+    tab="page1"
+    value="1"
+    (click)="mySelect(1,$event)"
+  >
+    <ion-icon name="settings"></ion-icon>
+    <ion-label>GENERAL</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button 
+  class="ion-no-padding"
+  tab="page2"
+  value="2"
+  (click)="mySelect(2,$event)"
+>
+  <ion-icon name="eye"></ion-icon>
+  <ion-label>VISUAL</ion-label>
+</ion-tab-button>
+
+<ion-tab-button 
+class="ion-no-padding"
+tab="page3"
+value="3"
+(click)="mySelect(3,$event)"
+>
+<ion-icon name="flash"></ion-icon>
+<ion-label>Electrica</ion-label>
+</ion-tab-button>
+
+<ion-tab-button 
+class="ion-no-padding"
+tab="page5"
+value="5"
+(click)="mySelect(5,$event)"
+>
+<ion-icon name="cog"></ion-icon>
+<ion-label>Servicios</ion-label>
+</ion-tab-button>
+
+<ion-tab-button 
+class="ion-no-padding"
+tab="page4"
+value="4"
+(click)="mySelect(4,$event)"
+>
+<ion-icon name="construct"></ion-icon>
+<ion-label>Mecanica</ion-label>
+</ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>
+

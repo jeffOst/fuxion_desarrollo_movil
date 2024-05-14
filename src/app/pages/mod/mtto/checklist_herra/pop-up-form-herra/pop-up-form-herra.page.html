@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-toolbar mode="ios">
+      <ion-title>Listado de Herramientas Precargadas</ion-title>
+      <ion-buttons slot="start">
+         <ion-button (click)="cancelar_listaservicios('','','')" class="">
+          <ion-icon part="icon" aria-hidden="true" role="img" class="md hydrated" name="chevron-back-outline"></ion-icon>
+          Cancelar
+        </ion-button> 
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content >
+    <!-- <ion-item>
+    <ion-searchbar style="width: 98%;" #IdHtmlInputSearch mode="ios" cancelButtonText="Cancelar"
+      enterkeyhint="done" placeholder="Buscar Tecnico" [(ngModel)]="NgModInputSearch" >
+    </ion-searchbar>
+    <ion-icon
+    slot="end"
+    name="sync-outline"
+    (click)="FFindRows()"
+    #idIconButtonSync
+    ></ion-icon>
+    </ion-item> -->
+  
+    <ion-list *ngFor="let Row of DataSetGrid; let i=index let isOdd=odd; let isEven=even" [class.odd]="isOdd" [class.even]="isEven" lines="full" inset=true>
+      <!-- <ion-item button (click)="FSelectedItem(Row.id_personal,Row.tecnico_cl,Row.cargo)"> -->
+      <ion-item>
+        <ion-badge slot="start" color="medium" no-padding>{{Row.fila}}.-</ion-badge>
+        <ion-label>
+      <strong>{{Row.Y04002}}</strong>
+      <p>{{'Serie: '+Row.serie_ns}}</p>
+      <!-- <p>{{Row.id_personal}}</p> -->
+      <!-- <p>{{Row.id_orden_trab_cab}}</p> -->
+    </ion-label>
+  </ion-item>
+  </ion-list>
+  
+  </ion-content>

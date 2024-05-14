@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title text-capitalize>Generar O.T. No Programada</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="prod-list-acti-programada"
+        [text]="Cancelar"
+        [disabled]="disableButton"
+      >
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item [hidden]="scanActive">
+      <ion-grid [hidden]="scanActive">
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Equipo: </ion-col>
+          <ion-col size="9">
+            <ion-item>
+              <ion-searchbar
+                (click)="FOpenPopUpEquipo()"
+                type="text"
+                placeholder="Buscar Equipo"
+                mode="ios"
+                readonly
+                [(ngModel)]="DsOrdenTrabajo.codsmg"
+                value="{{DsOrdenTrabajo.codsmg}}"
+              >
+              </ion-searchbar>
+            </ion-item>
+            <div class="{{ClassNotiEquipo}}"></div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Procedencia: </ion-col>
+          <ion-col size="9">
+            <ion-select
+              cancelText="Cancelar"
+              (ionChange)="select_change_site($event)"
+              [selectedText]="DsOrdenTrabajo.Y06002"
+              placeholder="Seleccionar Site"
+              color="primary"
+              [(ngModel)]="DsOrdenTrabajo.Y06001"
+              interface="action-sheet"
+              mode="ios"
+            >
+              <ion-select-option
+                *ngFor="let tipo of rest_site"
+                [value]="tipo['Y06001']"
+                >{{tipo['Y06002']}}
+              </ion-select-option>
+            </ion-select>
+            <div class="{{CssNotiSite}}"></div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Días Operativos: </ion-col>
+          <ion-col size="9">
+            <app-input-with-button
+              [(ngModel)]="DsOrdenTrabajo.dias_trabajados_manual"
+              ngDefaultControl
+            ></app-input-with-button>
+
+            <div class="{{CssNotiDiasOpera}}"></div>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Tecnico: </ion-col>
+          <ion-col size="9">
+            <ion-item>
+              <ion-searchbar
+                (click)="FOpenModalTecnico(0)"
+                type="text"
+                placeholder="Buscar Tecnico"
+                mode="ios"
+                readonly
+                [(ngModel)]="DsOrdenTrabajo.nombres_tecnico"
+                value="{{DsOrdenTrabajo.nombres_tecnico}}"
+              >
+              </ion-searchbar>
+            </ion-item>
+            <div class="{{CssNotiTenico}}"></div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col style="text-align: center">
+        <ion-buttons>
+          <ion-button
+            (click)="FCancelarForm()"
+            [disabled]="disableButton"
+            color="danger"
+          >
+            <ion-icon name="close-outline"></ion-icon>&nbsp; Cancelar
+          </ion-button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <ion-button
+            (click)="FSaveForm(1)"
+            [disabled]="disableButton"
+            color="primary"
+          >
+            <ion-icon name="save-outline"></ion-icon>&nbsp;
+            <strong> Guardar y Asignar Servicios </strong>
+          </ion-button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <ion-button
+            (click)="FSaveForm(2)"
+            [disabled]="disableButton"
+            color="secondary"
+          >
+            <ion-icon name="save-outline"></ion-icon>&nbsp;
+            <strong> Guardar y Cerrar </strong>
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

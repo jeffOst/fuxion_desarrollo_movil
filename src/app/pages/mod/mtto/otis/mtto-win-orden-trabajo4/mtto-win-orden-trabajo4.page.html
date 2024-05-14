@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar mode="ios">
+    <ion-item>
+      <ion-title text-capitalize>
+        <ion-label>LISTA DE SOLSE
+        </ion-label>
+      </ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+
+  <ion-item mode="ios" *ngFor="let Row of DataSetGrid" >
+
+    <ion-item button mode="ios"  style="width: 100%">
+      <ion-label>
+        <strong>{{ Row.nomclase_os }}</strong>
+        <p>
+
+          Nro. SOLSE.:&nbsp;<ion-text color="danger">{{ Row.corre_otss }} &nbsp;</ion-text>
+          Cantidad:&nbsp;<ion-text color="secondary">{{ Row.cantidad_otss }} &nbsp;</ion-text>
+          F.Creacion:&nbsp;<ion-text color="success">{{ Row.fcreacion_otss }} &nbsp;</ion-text>
+
+        </p></ion-label>
+    </ion-item>
+
+</ion-item>
+</ion-content>

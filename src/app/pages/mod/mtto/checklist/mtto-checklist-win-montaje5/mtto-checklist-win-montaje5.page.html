@@ -1,0 +1,1083 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-item>
+    <ion-title text-capitalize
+      ><ion-label>MONTAJE DE CAMARA HIDRAULICA
+        <p>CONTROL DE ZONA HIDRAULICA</p>
+      </ion-label></ion-title
+    >
+
+    <form [formGroup]="FormCheckListPaso5" #f="ngForm">
+      <ion-toggle justify="end" mode="ios"
+      formControlName="checklist_paso5_apli"
+      (ionChange)="SaveCheckNoAplicaPaso($event)" >Aplica Paso?
+      </ion-toggle>
+      </form>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form [formGroup]="FormCheckListPaso5" #f="ngForm">
+  <ion-list mode="ios" class="ion-no-padding">
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle1($event)"  style="width: 50%;"
+        formControlName="dif_sup_apl">
+        DIFUSOR SUPERIOR
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>MATERIAL</p>
+        <ion-segment mode="ios"  formControlName="dif_sup_mat_cp5">
+          <ion-segment-button value="1">
+            <ion-label>INOXIDABLE</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>ACERO AL CROMO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>ALUMINIO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>VERSION</p>
+        <ion-segment mode="ios"  formControlName="dif_sup_ver_cp5">
+          <ion-segment-button value="1">
+            <ion-label>N</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>H</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>RH</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="4">
+            <ion-label>SH</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="5">
+            <ion-label>RN</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="6">
+            <ion-label>L</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>ESTADO</p>
+        <ion-segment mode="ios"  formControlName="dif_sup_est_cp5">
+          <ion-segment-button value="1">
+            <ion-label>NUEVO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>RE INYECTADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>CONFORME AL PART LIST</p>
+        <ion-segment mode="ios"  formControlName="dif_sup_par_lis_cp5">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+
+
+    <ion-item>
+      <ion-label>
+        <p>PROVEEDOR</p>
+        <ion-segment mode="ios"  formControlName="dif_sup_prov_cp5">
+          <ion-segment-button value="1">
+            <ion-label>INTERNO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>EXTERNO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating"> OBSERVACIONES </ion-label>
+      <ion-textarea
+      formControlName="dif_sup_obs_cp5"
+        [autofocus]="true"
+        mode="ios"
+        [autoGrow]="true"
+      ></ion-textarea>
+    </ion-item>
+
+
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle2($event)"  style="width: 50%;"
+        formControlName="impuls_apl">
+        IMPULSOR
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>MATERIAL</p>
+        <ion-segment mode="ios"  formControlName="impuls_mat_cp5">
+          <ion-segment-button value="1">
+            <ion-label>INOXIDABLE</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>ACERO AL CROMO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>ALUMINIO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>VERSION</p>
+        <ion-segment mode="ios"  formControlName="impuls_ver_cp5">
+          <ion-segment-button value="1">
+            <ion-label>N</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>H</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>RH</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="4">
+            <ion-label>SH</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="5">
+            <ion-label>RN</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="6">
+            <ion-label>L</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>ESTADO</p>
+        <ion-segment mode="ios"  formControlName="impuls_est_cp5">
+          <ion-segment-button value="1">
+            <ion-label>NUEVO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>RE INYECTADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>CONFORME AL PART LIST</p>
+        <ion-segment mode="ios"  formControlName="impuls_par_lis_cp5">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+
+
+    <ion-item>
+      <ion-label>
+        <p>PROVEEDOR</p>
+        <ion-segment mode="ios"  formControlName="impuls_prov_cp5">
+          <ion-segment-button value="1">
+            <ion-label>INTERNO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>EXTERNO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating"> OBSERVACIONES </ion-label>
+      <ion-textarea
+      formControlName="impuls_obs_cp5"
+        [autofocus]="true"
+        mode="ios"
+        [autoGrow]="true"
+      ></ion-textarea>
+    </ion-item>
+
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle3($event)"  style="width: 50%;"
+        formControlName="imp_2da_apl">
+        IMPULSOR 2da ETAPA
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>MATERIAL</p>
+        <ion-segment mode="ios"  formControlName="imp_2da_mat_cp5">
+          <ion-segment-button value="1">
+            <ion-label>INOXIDABLE</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>ACERO AL CROMO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>ALUMINIO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>VERSION</p>
+        <ion-segment mode="ios"  formControlName="imp_2da_ver_cp5">
+          <ion-segment-button value="1">
+            <ion-label>N</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>H</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>RH</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="4">
+            <ion-label>SH</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="5">
+            <ion-label>RN</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="6">
+            <ion-label>L</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>ESTADO</p>
+        <ion-segment mode="ios"  formControlName="imp_2da_est_cp5">
+          <ion-segment-button value="1">
+            <ion-label>NUEVO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>RE INYECTADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>CONFORME AL PART LIST</p>
+        <ion-segment mode="ios"  formControlName="imp_2da_par_lis_cp5">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>PROVEEDOR</p>
+        <ion-segment mode="ios"  formControlName="imp_2da_prov_cp5">
+          <ion-segment-button value="1">
+            <ion-label>INTERNO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>EXTERNO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating"> OBSERVACIONES </ion-label>
+      <ion-textarea
+      formControlName="imp_2da_obs_cp5"
+        [autofocus]="true"
+        mode="ios"
+        [autoGrow]="true"
+      ></ion-textarea>
+    </ion-item>
+
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle4($event)"  style="width: 50%;"
+        formControlName="cub_ext_apl">
+        CUBIERTA EXTERNA
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>MATERIAL</p>
+        <ion-segment mode="ios"  formControlName="cub_ext_mat_cp5">
+          <ion-segment-button value="1">
+            <ion-label>INOXIDABLE</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>ACERO AL CROMO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>ALUMINIO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>VERSION</p>
+        <ion-segment mode="ios"  formControlName="cub_ext_ver_cp5">
+          <ion-segment-button value="1">
+            <ion-label>N</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>H</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>RH</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="4">
+            <ion-label>SH</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="5">
+            <ion-label>RN</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="6">
+            <ion-label>L</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>ESTADO</p>
+        <ion-segment mode="ios"  formControlName="cub_ext_est_cp5">
+          <ion-segment-button value="1">
+            <ion-label>NUEVO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>RE INYECTADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>CONFORME AL PART LIST</p>
+        <ion-segment mode="ios"  formControlName="cub_ext_par_lis_cp5">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <!-- <ion-item>
+      <ion-label>
+        <p>LUZ DE REGULACION (MM)</p>
+        <ion-input type="text"  maxlength="80"
+        formControlName="cub_ext_luz_reg_cp5"
+        [(ngModel)]="cub_ext_luz_reg_cp5"></ion-input>
+      </ion-label>
+    </ion-item> -->
+
+    <ion-item>
+      <ion-label>
+        <p>PROVEEDOR</p>
+        <ion-segment mode="ios"  formControlName="cub_ext_prov_cp5">
+          <ion-segment-button value="1">
+            <ion-label>INTERNO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>EXTERNO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating"> OBSERVACIONES </ion-label>
+      <ion-textarea
+      formControlName="cub_ext_obs_cp5"
+
+        [autofocus]="true"
+        mode="ios"
+        [autoGrow]="true"
+      ></ion-textarea>
+    </ion-item>
+
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle5($event)"  style="width: 50%;"
+        formControlName="dif_inf_apl">
+        DIFUSOR INFERIOR
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>MATERIAL</p>
+        <ion-segment mode="ios"  formControlName="dif_inf_mat_cp5">
+          <ion-segment-button value="1">
+            <ion-label>INOXIDABLE</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>ACERO AL CROMO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>ALUMINIO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>VERSION</p>
+        <ion-segment mode="ios"  formControlName="dif_inf_ver_cp5">
+          <ion-segment-button value="1">
+            <ion-label>N</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>H</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>RH</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="4">
+            <ion-label>SH</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="5">
+            <ion-label>RN</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="6">
+            <ion-label>L</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>ESTADO</p>
+        <ion-segment mode="ios"  formControlName="dif_inf_est_cp5">
+          <ion-segment-button value="1">
+            <ion-label>NUEVO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>RE INYECTADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>CONFORME AL PART LIST</p>
+        <ion-segment mode="ios"  formControlName="dif_inf_par_lis_cp5">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>LUZ DE REGULACION (MM)</p>
+        <ion-input type="text"  maxlength="80"
+        formControlName="dif_inf_luz_reg_cp5"
+
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>PROVEEDOR</p>
+        <ion-segment mode="ios"  formControlName="dif_inf_prov_cp5">
+          <ion-segment-button value="1">
+            <ion-label>INTERNO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>EXTERNO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating"> OBSERVACIONES </ion-label>
+      <ion-textarea
+      formControlName="dif_inf_obs_cp5"
+        [autofocus]="true"
+        mode="ios"
+        [autoGrow]="true"
+      ></ion-textarea>
+    </ion-item>
+
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle6($event)"  style="width: 50%;"
+        formControlName="dif_suc_apl">
+        DIFUSOR DE SUCCION
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>MATERIAL</p>
+        <ion-segment mode="ios"  formControlName="dif_suc_mat_cp5">
+          <ion-segment-button value="1">
+            <ion-label>INOXIDABLE</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>ACERO AL CROMO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>ALUMINIO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>VERSION</p>
+        <ion-segment mode="ios"  formControlName="dif_suc_ver_cp5">
+          <ion-segment-button value="1">
+            <ion-label>N</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>H</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>RH</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="4">
+            <ion-label>SH</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="5">
+            <ion-label>RN</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="6">
+            <ion-label>L</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>ESTADO</p>
+        <ion-segment mode="ios"  formControlName="dif_suc_est_cp5">
+          <ion-segment-button value="1">
+            <ion-label>NUEVO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>RE INYECTADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>CONFORME AL PART LIST</p>
+        <ion-segment mode="ios"  formControlName="dif_suc_par_lis_cp5">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>LUZ DE REGULACION (MM)</p>
+        <ion-input type="text"  maxlength="80"
+        formControlName="dif_suc_luz_reg_cp5"
+
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>PROVEEDOR</p>
+        <ion-segment mode="ios"  formControlName="dif_suc_prov_cp5">
+          <ion-segment-button value="1">
+            <ion-label>INTERNO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>EXTERNO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating"> OBSERVACIONES </ion-label>
+      <ion-textarea
+      formControlName="dif_suc_obs_cp5"
+
+        [autofocus]="true"
+        mode="ios"
+        [autoGrow]="true"
+      ></ion-textarea>
+    </ion-item>
+
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle7($event)"  style="width: 50%;"
+        formControlName="ani_dif_apl">
+        ANILLO DIFUSOR( VOLUTA)
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>MATERIAL</p>
+        <ion-segment mode="ios"  formControlName="ani_dif_mat_cp5">
+          <ion-segment-button value="1">
+            <ion-label>INOXIDABLE</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>ACERO AL CROMO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>ALUMINIO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>VERSION</p>
+        <ion-segment mode="ios"  formControlName="ani_dif_ver_cp5">
+          <ion-segment-button value="1">
+            <ion-label>N</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>H</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>RH</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="4">
+            <ion-label>SH</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="5">
+            <ion-label>RN</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="6">
+            <ion-label>L</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>ESTADO</p>
+        <ion-segment mode="ios"  formControlName="ani_dif_est_cp5">
+          <ion-segment-button value="1">
+            <ion-label>NUEVO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>RE INYECTADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>CONFORME AL PART LIST</p>
+        <ion-segment mode="ios"  formControlName="ani_dif_par_lis_cp5">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>
+        <p>PROVEEDOR</p>
+        <ion-segment mode="ios"  formControlName="ani_dif_prov_cp5">
+          <ion-segment-button value="1">
+            <ion-label>INTERNO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>EXTERNO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating"> OBSERVACIONES </ion-label>
+      <ion-textarea
+      formControlName="ani_dif_obs_cp5"
+
+        [autofocus]="true"
+        mode="ios"
+        [autoGrow]="true"
+      ></ion-textarea>
+    </ion-item>
+
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle8($event)"  style="width: 50%;"
+        formControlName="col_bas_apl">
+        COLADOR Y BASE
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>MATERIAL</p>
+        <ion-segment mode="ios"  formControlName="col_bas_mat_cp5">
+          <ion-segment-button value="1">
+            <ion-label>INOXIDABLE</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>ACERO AL CROMO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>ALUMINIO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>VERSION</p>
+        <ion-segment mode="ios"  formControlName="col_bas_ver_cp5">
+          <ion-segment-button value="1">
+            <ion-label>N</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>H</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>RH</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="4">
+            <ion-label>SH</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="5">
+            <ion-label>RN</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="6">
+            <ion-label>L</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>ESTADO</p>
+        <ion-segment mode="ios"  formControlName="col_bas_est_cp5">
+          <ion-segment-button value="1">
+            <ion-label>NUEVO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>RE INYECTADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>CONFORME AL PART LIST</p>
+        <ion-segment mode="ios"  formControlName="col_bas_par_lis_cp5">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+
+
+    <ion-item>
+      <ion-label>
+        <p>PROVEEDOR</p>
+        <ion-segment mode="ios"  formControlName="col_bas_prov_cp5">
+          <ion-segment-button value="1">
+            <ion-label>INTERNO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>EXTERNO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating"> OBSERVACIONES </ion-label>
+      <ion-textarea
+      formControlName="col_bas_obs_cp5"
+
+        [autofocus]="true"
+        mode="ios"
+        [autoGrow]="true"
+      ></ion-textarea>
+    </ion-item>
+
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle9($event)"  style="width: 50%;"
+        formControlName="agitador_apl">
+        AGITADOR
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>MATERIAL</p>
+        <ion-segment mode="ios"  formControlName="agitador_mat_cp5">
+          <ion-segment-button value="1">
+            <ion-label>INOXIDABLE</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>ACERO AL CROMO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>ALUMINIO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>VERSION</p>
+        <ion-segment mode="ios"  formControlName="agitador_ver_cp5">
+          <ion-segment-button value="1">
+            <ion-label>N</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>H</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>RH</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="4">
+            <ion-label>SH</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="5">
+            <ion-label>RN</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="6">
+            <ion-label>L</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>ESTADO</p>
+        <ion-segment mode="ios"  formControlName="agitador_est_cp5">
+          <ion-segment-button value="1">
+            <ion-label>NUEVO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>RE INYECTADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>CONFORME AL PART LIST</p>
+        <ion-segment mode="ios"  formControlName="agitador_par_lis_cp5">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+
+
+    <ion-item>
+      <ion-label>
+        <p>PROVEEDOR</p>
+        <ion-segment mode="ios"  formControlName="agitador_prov_cp5">
+          <ion-segment-button value="1">
+            <ion-label>INTERNO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>EXTERNO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating"> OBSERVACIONES </ion-label>
+      <ion-textarea
+      formControlName="agitador_obs_cp5"
+
+        [autofocus]="true"
+        mode="ios"
+        [autoGrow]="true"
+      ></ion-textarea>
+    </ion-item>
+
+<!-- -------------------------------INICIO CONTROL-------------------------------- -->
+    <!-- <ion-item-divider>
+      <ion-label>PRUEBA DE HERMETICIDAD</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>EJECUTADO</p>
+        <ion-segment mode="ios"  formControlName="sel_sup_condic_cp4">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>FECHA EJECUCION</p>
+        <ion-label>2023-01-56</ion-label>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider>
+      <ion-label>PRESION  DE PRUEBA (BAR)</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>EJECUTADO</p>
+        <ion-segment mode="ios"  formControlName="sel_sup_condic_cp4">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>FECHA EJECUCION</p>
+        <ion-label>2023-01-56</ion-label>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider>
+      <ion-label>LLENADO DE CAMARA DE ACEITE</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>EJECUTADO</p>
+        <ion-segment mode="ios"  formControlName="sel_sup_condic_cp4">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>FECHA EJECUCION</p>
+        <ion-label>2023-01-56</ion-label>
+      </ion-label>
+    </ion-item> -->
+<!-- --------------------------------FIN CONTROL------------------------------------------ -->
+
+<!-- --------------------------------FIN CONTROL------------------------------------------ -->
+<ion-item-divider>
+  SUPERVISOR RESPONSABLE
+</ion-item-divider>
+<ion-item>
+  <ion-label>
+    <p>OBSERVACIONES:</p>
+    <ion-textarea [disabled]="disableButtonPaso1" style="width:100%;height: 30px;"  formControlName="revi_respsble_obs_cp5"
+
+    ></ion-textarea>
+  </ion-label>
+</ion-item>
+
+  </ion-list>
+
+
+</form>
+</ion-content>
+<ion-footer>
+  <form [formGroup]="FormCheckListPaso5" #f="ngForm">
+    <ion-grid>
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col style="text-align: center">
+          <ion-segment style="width: 110%;" class="ion_segment_3d" mode="ios" formControlName="idestado_revi_paso5_cp5" >
+
+            <ion-segment-button (click)="SaveFormBorradorPaso1()" value="1" layout="icon-end">
+              <ion-icon name="close" color="danger"></ion-icon>
+              <ion-label color="danger">BORRADOR</ion-label>
+            </ion-segment-button>
+            <ion-segment-button (click)="SaveFormTerminadoPaso1()" value="2" layout="icon-end">
+              <ion-icon color="success" name="checkmark"></ion-icon>
+              <ion-label color="success">TERMINADO</ion-label>
+            </ion-segment-button>
+            <ion-segment-button (click)="SaveFormTerminadoPaso1()" value="3" layout="icon-end" [disabled]="disableButtonPaso1">
+              <ion-icon name="star"></ion-icon>
+              <ion-label color="secondary">VERIFICADO</ion-label>
+            </ion-segment-button>
+            <ion-segment-button (click)="SaveFormTerminadoPaso1()" value="4" layout="icon-end" [disabled]="disableButtonPaso1">
+              <ion-icon color="warning" name="alert"></ion-icon>
+              <ion-label color="warning" >RECHAZADO</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-footer>

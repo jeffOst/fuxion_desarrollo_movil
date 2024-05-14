@@ -1,0 +1,107 @@
+<!-- <ion-header
+
+  <ion-toolbar mode="ios">
+    <ion-title text-capitalize>Iniciar Servicio</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="FCloseWin()" class="">
+        <ion-icon
+          part="icon"
+          aria-hidden="true"
+          role="img"
+          class="md hydrated"
+          name="chevron-back-outline"
+        ></ion-icon>
+        Cancelar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-buttons slot="end">
+    <ion-button (click)="goPrev()" >
+      <ion-icon slot="icon-only" name="arrrow-back"></ion-icon>
+    </ion-button>
+    <ion-button (click)="goNext()" >
+      <ion-icon slot="icon-only" name="arrrow-forward"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <swiper-container [loop]="true" [pagination]="true" (slidechange)="swiperSliderChanged($event)" >
+
+    <swiper-slide *ngFor="let Row of FormSolicitudQc">
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <p>Fecha</p>
+            <h1>{{Row.fch_solicitud_scc}}</h1>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>SEMANA</p>
+            <h2>{{Row.Nsemanaofmes}}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>Responsable de Registro</p>
+            <h1>{{Row.nombres_tecnico}}</h1>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>Centro de Costo</p>
+            <h1>{{Row.actividad}}</h1>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <p>Orden de Fab.</p>
+            <h1>{{Row.correorden}}</h1>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <p>Código Producto Terminado</p>
+            <h1>{{Row.codigo_pt}}</h1>
+          </ion-label>
+        </ion-item>
+
+
+
+        <ion-item>
+          <ion-label>
+            <p>Descripción del Componente</p>
+            <h1>{{Row.descripcion_pt}}</h1>
+          </ion-label>
+        </ion-item>
+
+        <ion-item >
+          <ion-label>
+            <p>Codigo de Bomba</p>
+            <h1>{{Row.codsmg}}</h1>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>Cantidad</p>
+            <h1>{{Row.cantidad_scc}}</h1>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <p>Estado                </p>
+            <h1>{{Row.estado}}</h1>
+          </ion-label>
+        </ion-item>
+
+      </ion-list>
+
+    </swiper-slide>
+  </swiper-container>
+
+</ion-content>
+<ion-footer>
+</ion-footer> -->

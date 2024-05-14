@@ -1,0 +1,84 @@
+<ion-toolbar class="ion-no-border">
+  <ion-grid>
+    <ion-row class="ion-justify-content-start">
+      <ion-col class="ion-align-self-start" size="10">
+        <app-header titulo="Lista de Informe Tecnico"></app-header>
+      </ion-col>
+      <ion-col class="ion-align-self-end" size="2">
+        <ion-label
+          position="fixed"
+          class="label-nameusuario"
+          color="secondary"
+        ></ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-item>
+    <ion-searchbar
+      #IdHtmlInputSearch
+      mode="ios"
+      debounce="1700"
+      cancelButtonText="Cancelar"
+      enterkeyhint="done"
+      placeholder="Filtrar Parametros"
+      [(ngModel)]="NgModInputSearch"
+      (ionChange)="FListaEquipos()"
+    >
+    </ion-searchbar>
+    <!-- <ion-icon
+      slot="end"
+      color="primary"
+      title="Buscar por Codigo de Barras"
+      name="qr-code-outline"
+
+    ></ion-icon> -->
+
+    <ion-icon
+      slot="end"
+      name="sync-outline"
+      (click)="FListaEquipos()"
+      #idIconButtonSync
+    ></ion-icon>
+  </ion-item>
+
+</ion-toolbar>
+<!-- <ion-button
+  color="danger"
+  expand="full"
+
+  [hidden]="!scanActive"
+>
+  &nbsp;Detener
+</ion-button> -->
+<ion-content>
+
+
+    <ion-item mode="ios" *ngFor="let Row of DataSetGrid" >
+
+          <ion-item button detail="true" detail-icon="caret-forward-outline" mode="ios" (click)="FNuevaCheckList(Row)" style="width: 100%">
+            <ion-label [hidden]="scanActive"
+              ><strong><div style="color:{{Row.color_reproceso}};">{{ Row.codsmg }}
+                <!-- <ion-badge color="{{Row.color_atendido}}">{{Row.val_atendido}}&nbsp;%</ion-badge> -->
+              </div> </strong>
+              <p>
+
+                Nro.Informe Tecnico:&nbsp;<ion-text color="danger">{{ Row.corre_fisico }} &nbsp;</ion-text>
+                Procedencia:&nbsp;<ion-text color="secondary">{{ Row.Y06002 }} &nbsp;</ion-text>
+                F.Creacion:&nbsp;<ion-text color="success">{{ Row.fech_de_registro }} &nbsp;</ion-text>
+                Modelo:&nbsp;<ion-text color="primary">{{ Row.equipo_model }}</ion-text
+                >&nbsp;
+
+              </p></ion-label>
+
+              <ion-badge slot="end" color="{{Row.color_atendido}}">{{Row.ma00estado_nombre}}</ion-badge>
+
+          </ion-item>
+
+    </ion-item>
+
+
+
+
+
+</ion-content>

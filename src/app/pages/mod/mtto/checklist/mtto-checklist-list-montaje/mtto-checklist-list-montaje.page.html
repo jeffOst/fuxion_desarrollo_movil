@@ -1,0 +1,120 @@
+<ion-toolbar class="ion-no-border">
+  <ion-grid>
+    <ion-row class="ion-justify-content-start">
+      <ion-col class="ion-align-self-start" size="10">
+        <app-header titulo="Check List de Montaje de Bomba"></app-header>
+      </ion-col>
+      <ion-col class="ion-align-self-end" size="2">
+        <ion-label
+          position="fixed"
+          class="label-nameusuario"
+          color="secondary"
+        ></ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-item>
+    <ion-searchbar
+      #IdHtmlInputSearch
+      mode="ios"
+      debounce="1700"
+      cancelButtonText="Cancelar"
+      enterkeyhint="done"
+      placeholder="Filtrar Parametros"
+      [(ngModel)]="NgModInputSearch"
+      (ionChange)="FListaEquipos()"
+    >
+    </ion-searchbar>
+    <!-- <ion-icon
+      slot="end"
+      color="primary"
+      title="Buscar por Codigo de Barras"
+      name="qr-code-outline"
+
+    ></ion-icon> -->
+
+    <ion-icon
+      slot="end"
+      name="sync-outline"
+      (click)="FListaEquipos()"
+      #idIconButtonSync
+    ></ion-icon>
+  </ion-item>
+
+</ion-toolbar>
+<!-- <ion-button
+  color="danger"
+  expand="full"
+
+  [hidden]="!scanActive"
+>
+  &nbsp;Detener
+</ion-button> -->
+<ion-content>
+
+
+    <ion-item mode="ios" *ngFor="let Row of DataSetGrid" >
+
+          <ion-item button detail="true" detail-icon="caret-forward-outline" mode="ios" (click)="FNuevaCheckList(Row)" style="width: 100%">
+            <ion-label [hidden]="scanActive"
+              ><strong><div style="color:{{Row.color_reproceso}};">{{ Row.codsmg }}
+                <ion-badge color="{{Row.color_atendido}}">{{Row.val_atendido}}&nbsp;%</ion-badge>
+              </div> </strong>
+              <p>
+
+                CheckList:&nbsp;<ion-text color="danger">{{ Row.correlativo_clc }} &nbsp;</ion-text>
+                OT:&nbsp;<ion-text color="secondary">{{ Row.id_orden_trab_fis_cab }} &nbsp;</ion-text>
+                <ion-text color="success">{{ Row.ot_fech_inicio_labor }} &nbsp;</ion-text>
+                <ion-text color="primary">{{ Row.modelo }}</ion-text
+                >&nbsp;
+
+              </p></ion-label
+            >
+          </ion-item>
+          <!-- <ion-item>
+            <ion-button
+              expand="block"
+              color="white"
+              size="small"
+              slot="end"
+              (click)="FIniciarActvividad(contact)"
+              title="Iniciar Actividad"
+            >
+              <ion-icon
+                [hidden]="scanActive"
+                expand="block"
+                color="dark"
+                size="small"
+                name="play-forward"
+              ></ion-icon>
+            </ion-button>
+          </ion-item> -->
+        <!-- </ion-item> -->
+      <!-- </ion-card> -->
+    </ion-item>
+
+
+
+
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button title="Nueva Actividad" (click)="FNuevaCheckList(Row_)">
+      <ion-icon name="grid-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+</ion-content>
+<!-- <ion-footer>
+  <ion-card mode="ios" style="align-items: center">
+    <ion-button
+      style="width: 50%"
+      fill="clear"
+      expand="block"
+      (click)="FListarActvidades()"
+    >
+      <ion-label color="primary" style="font: size 6px">
+        <ion-icon name="grid-outline"></ion-icon>
+        Tabla de actividades
+      </ion-label>
+    </ion-button>
+  </ion-card>
+</ion-footer> -->

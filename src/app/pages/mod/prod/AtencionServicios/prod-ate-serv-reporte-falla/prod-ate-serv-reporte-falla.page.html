@@ -1,0 +1,207 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title text-capitalize>Formulario Reporte de Fallas</ion-title>
+    <!--<ion-title color="primary" style="font-size: 6px;">{{NomUsuario}}</ion-title>-->
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="prod-list-acti-programada"
+        [text]="Cancelar"
+        [disabled]="disableButton"
+      >
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content >
+
+  <ion-list >
+    <ion-item>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col>
+            <ion-grid>
+
+
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end">Correlativo de Registro:
+                </ion-col>
+                <ion-col size="9">
+                  <ion-item>
+                    <ion-input
+                      type="text"
+                      mode="ios"
+                      readonly
+                      [(ngModel)]="DsFormReporteFalla.correlativo_rfc"
+                      value="{{DsFormReporteFalla.correlativo_rfc}}"
+                    >
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end">Fecha Registro: </ion-col>
+                <ion-col size="9">
+<!-- <ion-datetime displayFormat="YYYY-MM-DD H:mm"
+          #datetime
+          mode="ios"
+          [value]="dateValue" size="cover"
+          (ionChange)="dateChanged(datetime.value)"
+          showDefaultButtons="true"
+          (ionCancel)="showPicker = false;"
+        >
+        </ion-datetime> -->
+        <ion-item>
+          <ion-label>F.Registro:</ion-label>
+          <ion-datetime-button label="F.Registro:" locale="es-ES" datetime="datetime"></ion-datetime-button>
+          <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
+            <ng-template>
+              <ion-datetime locale="es-ES" id="datetime" mode="ios" displayFormat="YYYY-MM-DD" presentation="date"
+              #datetime
+              (ionChange)="dateChanged(datetime.value)"
+                [preferWheel]="true" [showDefaultButtons]="true"
+                >
+              </ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+
+                </ion-col>
+              </ion-row>
+
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end ion-align-items-baseline"
+                  >Maquina:</ion-col
+                >
+                <ion-col size="9">
+                  <ion-select
+                  cancelText="Cancelar"
+                    (ionChange)="select_change_maquina($event,0)"
+                    [selectedText]="DsFormReporteFalla.maquina"
+                    placeholder="Seleccionar Maquina"
+                    color="primary"
+                    [(ngModel)]="DsFormReporteFalla.idmaquina_rfc"
+                    interface="action-sheet"
+                    mode="ios"
+                  >
+                    <ion-select-option
+                      *ngFor="let tipo of rest_maquina"
+                      [value]="tipo['codigo']"
+                      >{{tipo['nombre']}}
+                    </ion-select-option>
+                  </ion-select>
+                  <div class="{{CssNotiMaquina}}"></div>
+                </ion-col>
+              </ion-row>
+
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end"> Tecnico: </ion-col>
+                <ion-col size="9">
+                  <ion-item>
+                    <ion-searchbar
+                      (click)="FOpenModalTecnico()"
+                      type="text"
+                      placeholder="Buscar Tecnico"
+                      mode="ios"
+                      readonly
+                      [(ngModel)]="DsFormReporteFalla.nombres_tecnico"
+                      value="{{DsFormReporteFalla.nombres_tecnico}}"
+                    >
+                    </ion-searchbar>
+                  </ion-item>
+                  <div class="{{CssNotiTenico}}"></div>
+                </ion-col>
+              </ion-row>
+
+
+
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end"> Tipo de Falla: </ion-col>
+                <ion-col size="9">
+                  <ion-select
+                  cancelText="Cancelar"
+                    (ionChange)="select_change_falla($event,0)"
+                    [selectedText]="DsFormReporteFalla.falla"
+                    placeholder="Seleccionar falla"
+                    color="primary"
+                    [(ngModel)]="DsFormReporteFalla.idtipofalla_rfc"
+                    interface="action-sheet"
+                    mode="ios"
+                  >
+                    <ion-select-option
+                      *ngFor="let tipo of rest_tipofalla"
+                      [value]="tipo['codigo']"
+                      >{{tipo['nombre']}}
+                    </ion-select-option>
+                  </ion-select>
+                   <div class="{{CssNotiTipoFalla}}"></div> <!--CssNotiTipoFalla,CssNotiTenico -->
+                </ion-col>
+              </ion-row>
+
+            </ion-grid>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Descripción de la Falla: </ion-col>
+          <ion-col size="9">
+            <ion-textarea
+              required="true"
+              color="primary"
+              type="number"
+              mode="ios"
+              [(ngModel)]="DsFormReporteFalla.descripcion_rfc"
+              value="{{DsFormReporteFalla.descripcion_rfc}}"
+            ></ion-textarea>
+            <div class="{{CssNotiDescFalla}}"></div> <!--CssNotiTipoFalla,CssNotiTenico,CssNotiDescFalla -->
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Se Solicita: </ion-col>
+          <ion-col size="9">
+            <ion-textarea
+              required="true"
+              color="primary"
+              type="number"
+              mode="ios"
+              [(ngModel)]="DsFormReporteFalla.se_solicita_rfc"
+              value="{{DsFormReporteFalla.se_solicita_rfc}}"
+            ></ion-textarea>
+            <div class="{{CssNotiSeSolicita}}"></div>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </ion-item>
+    <ion-input [(ngModel)]="DsFormReporteFalla.idtecnico_rfc" type="hidden"></ion-input>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col style="text-align: center">
+        <ion-buttons>
+          <ion-back-button
+          color="danger"
+        defaultHref="prod-list-acti-programada"
+        [text]="Cancelar"
+        [disabled]="disableButton" mode="ios"
+      >Cancelar
+      </ion-back-button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <ion-button
+            (click)="FSaveFormulario()"
+            [disabled]="disableButton"
+            color="primary"
+          >
+            <ion-icon name="save-outline"></ion-icon>&nbsp; Guardar
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

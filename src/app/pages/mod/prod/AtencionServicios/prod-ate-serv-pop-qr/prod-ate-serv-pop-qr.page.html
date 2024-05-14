@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title>{{titulo_modal}}</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-button (click)="FCloseModal()" class="">
+        <ion-icon
+          part="icon"
+          aria-hidden="true"
+          role="img"
+          class="md hydrated"
+          name="chevron-back-outline"
+        ></ion-icon>
+        Cancelar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-item [hidden]="scanActive">
+  <ion-searchbar
+    style="width: 100%"
+    #IdHtmlInputSearch
+    mode="ios"
+
+    cancelButtonText="Cancelar"
+    enterkeyhint="done"
+    placeholder="Filtrar parametros"
+    [(ngModel)]="NgModInputSearch"
+
+  >
+  </ion-searchbar>
+
+  <ion-icon
+    slot="end"
+    color="primary"
+    title="Buscar por Codigo de Barras"
+    name="qr-code-outline"
+    (click)="start_scan_qr(0)"
+    class="espacio-entre-iconos"
+  ></ion-icon>
+
+  <ion-icon
+    slot="end"
+    name="sync-outline"
+    (click)="FFindRows()"
+    #idIconButtonSync
+  ></ion-icon>
+</ion-item>
+<ion-item>
+  <ion-button
+  color="danger"
+  expand="full"
+  (click)="stopScanner()"
+  [hidden]="!scanActive"
+>
+  &nbsp;Detener
+</ion-button>
+</ion-item>
+
+<ion-content [class]="ContentCss">
+  <ion-list
+    *ngFor="let Row of DataSetGrid; let i=index let isOdd=odd; let isEven=even"
+    [class.odd]="isOdd"
+    [class.even]="isEven"
+    lines="full"
+    inset="true"
+    [hidden]="scanActive"
+  >
+    <ion-item button (click)="FSelectedItem(Row,i)" [hidden]="scanActive" >
+      <ion-label>
+        <strong>{{Row.codigo_qr}}</strong>
+        <p>
+          <ion-text color="secondary">{{Row.codsmg}}</ion-text>
+          <ion-text color="primary"> &nbsp; OT:{{Row.correorden}}</ion-text
+          ><ion-text color="secondary"
+            >&nbsp; F.Crea:{{Row.fcreacion_ofpt}}</ion-text
+          >
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <div class="scan-box" [hidden]="!scanActive"></div>
+</ion-content>

@@ -1,0 +1,89 @@
+<ion-header>
+
+  <ion-toolbar color="" >
+
+    <ion-title text-capitalize  color="danger" size="large">{{tituloTollBar}}</ion-title>
+
+    <ion-title class="" text-center>Iniciar Session</ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content padding>
+  <div class="color-change-5x"></div>
+  <form [formGroup]="user" (ngSubmit)="serviceLogin()" class="ion_content">
+
+
+      <img src="assets/imgs/logo_geo.png" class="bounce-in-top"/>
+
+      <!-- <div id="container" class="">
+<picture>
+  <source srcset="assets/imgs/logo_geo.png" media="(max-width:480px)" >
+</picture>
+      </div> -->
+
+    <ion-list class="list_2" mode="ios">
+      <ion-item mode="ios">
+        <ion-label position="floating" mode="ios" > Email</ion-label>
+        <ion-input formControlName="email" mode="ios" type="email" label-placement="floating" fill="outline"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" mode="ios"> Clave</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" mode="ios"> Site</ion-label>
+        <ion-select formControlName="siteform"  interface="action-sheet" mode="ios" >
+          <ion-select-option *ngFor="let site of sites" [value]="site.Y06001">{{site.Y06002}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label color="danger">
+          {{msjErrorBdForm}}
+        </ion-label>
+      </ion-item>
+
+
+        <ion-button expand="full" class="button_login_color" type="submit"
+        [disabled]="!user.valid" shape="round">
+          Ingresar
+        </ion-button>
+
+
+    </ion-list>
+
+
+  </form>
+
+
+
+
+</ion-content>
+<ion-footer style="" class="ion-no-padding">
+  <form [formGroup]="user" class="" style="">
+
+  <ion-grid class="ion-no-padding" >
+
+<ion-row class="ion-justify-content-end">
+  <ion-col size="9" size-md="8" size-lg="10" class="ion-no-padding">
+    <ion-label color="secondary" style="font-size: xx-small">v.1.0.10.71</ion-label>
+  </ion-col>
+  <ion-col size="3" size-md="4" size-lg="2" class="ion-no-padding" >
+
+      <ion-select formControlName="ip" style="text-align: right;color:gray;" interface="action-sheet" mode="ios" >
+        <ion-select-option value="fuxion.geohidraulica.com.pe">fuxion.geohidraulica.com.pe</ion-select-option>
+        <ion-select-option value="192.168.100.122">192.168.100.122</ion-select-option>
+        <ion-select-option value="192.168.100.22">192.168.100.22</ion-select-option>
+        <ion-select-option value="192.168.100.61/fuxion">192.168.100.61/fuxion</ion-select-option>
+        <ion-select-option value="192.168.3.90/fuxion">192.168.3.90/fuxion</ion-select-option>
+        <ion-select-option value="192.168.3.155/erp_fuxion">192.168.3.155/erp_fuxion</ion-select-option>
+      </ion-select>
+
+      <!-- <ion-input formControlName="ip" style="text-align: right;color:gray;width: 100%;" mode="ios" type="text" value="192.168.100.34" align-self="right"></ion-input> -->
+
+  </ion-col>
+</ion-row>
+</ion-grid>
+</form>
+</ion-footer>

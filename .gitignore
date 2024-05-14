@@ -1,0 +1,16 @@
+# dependencies
+node_modules/
+platforms/
+plugins/
+
+# ionic built files
+www/
+.build/
+
+# misc
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+.angular/cache

@@ -1,0 +1,457 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-item>
+    <ion-title text-capitalize
+      ><ion-label>PRUEBA EN POZA Y REVISION FINAL
+        <p>CONEXIÓN Y PRUEBA</p>
+      </ion-label></ion-title
+    >
+
+    <form [formGroup]="FormCheckListPaso6" #f="ngForm">
+      <ion-toggle justify="end" mode="ios"
+      formControlName="checklist_paso6_apli"
+      (ionChange)="SaveCheckNoAplicaPaso($event)" >Aplica Paso?
+      </ion-toggle>
+      </form>
+    </ion-item>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form [formGroup]="FormCheckListPaso6" #f="ngForm">
+  <ion-list mode="ios" class="ion-no-padding">
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle1($event)"  style="width: 50%;"
+        formControlName="ins_bor_apl">
+        INSTALACION DE BORNERA A CABLES DEL MOTOR
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item class="nested_divider">
+      <ion-label>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider color="medium" class="nested_divider">
+      <ion-label> AJUSTE DE BORNERAS </ion-label>
+    </ion-item-divider>
+    <ion-item class="nested_divider">
+      <ion-label>
+        <p>REVISION</p>
+        <ion-segment mode="ios"  formControlName="ins_bor_aj_rev_cp6">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item-divider color="medium" class="nested_divider">
+      <ion-label> MEDICION DE AISLAMIENTO ( MΩ) </ion-label>
+    </ion-item-divider>
+
+    <ion-item class="nested_divider">
+      <ion-label>
+        <p>VALOR</p>
+        <ion-input type="text"  maxlength="80"
+        formControlName="ins_bor_me_val_cp6"
+
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="nested_divider">
+      <ion-label>
+        <p>REVISION</p>
+        <ion-segment mode="ios"  formControlName="ins_bor_me_rev_cp6">
+          <ion-segment-button value="1">
+            <ion-label>CONFORME</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO CONFORME</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item class="nested_divider">
+      <ion-label>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle2($event)"  style="width: 50%;"
+        formControlName="ins_cab_apl">
+        INSTALACION DE CABLES DE FUERZA A BORNERA
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item class="nested_divider">
+      <ion-label>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider color="medium" class="nested_divider">
+      <ion-label> AJUSTE DE BORNERAS </ion-label>
+    </ion-item-divider>
+
+    <ion-item class="nested_divider">
+      <ion-label>
+        <p>REVISION</p>
+        <ion-segment mode="ios"  formControlName="ins_cab_aj_rev_cp6">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item-divider color="medium" class="nested_divider">
+      <ion-label> MEDICION DE AISLAMIENTO ( MΩ) </ion-label>
+    </ion-item-divider>
+
+    <ion-item class="nested_divider">
+      <ion-label>
+        <p>VALOR</p>
+        <ion-input type="text"  maxlength="80"
+        formControlName="ins_cab_me_val_cp6"
+
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="nested_divider">
+      <ion-label>
+        <p>REVISION</p>
+        <ion-segment mode="ios"  formControlName="ins_cab_me_rev_cp6">
+          <ion-segment-button value="1">
+            <ion-label>CONFORME</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO CONFORME</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item class="nested_divider">
+      <ion-label>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider>
+      <ion-label>AJUSTE DE ENTRADAS DE CABLE 1</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider color="medium" class="nested_divider">
+      <ion-label>VERIFICACION DE AJUSTE</ion-label>
+    </ion-item-divider>
+
+    <ion-item class="nested_divider">
+      <ion-label>
+        <p>REVISION</p>
+        <ion-segment mode="ios"  formControlName="ins_ent_ve1_rev_cp6">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item class="nested_divider">
+      <ion-label>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider>
+      <ion-label>AJUSTE DE ENTRADAS DE CABLE 2</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider color="medium" class="nested_divider">
+      <ion-label>VERIFICACION DE AJUSTE</ion-label>
+    </ion-item-divider>
+
+    <ion-item class="nested_divider">
+      <ion-label>
+        <p>REVISION</p>
+        <ion-segment mode="ios"  formControlName="ins_ent_ve2_rev_cp6">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item-divider>
+      <ion-label>PRUEBA DE REACCION DE GIRO (VACIO)</ion-label>
+    </ion-item-divider>
+    <ion-item class="nested_divider">
+      <ion-label>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider color="medium" class="nested_divider">
+      <ion-label>GIRO ANTI HORARIO</ion-label>
+    </ion-item-divider>
+
+    <ion-item class="nested_divider">
+      <ion-label>
+        <p>REVISION</p>
+        <ion-segment mode="ios"  formControlName="pru_rea_gi_rev_cp6">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item-divider color="medium" class="nested_divider">
+      <ion-label> CONTROL </ion-label>
+    </ion-item-divider>
+
+    <ion-item class="nested_divider">
+      <ion-label>
+        <p>VALOR</p>
+        <ion-input type="text"  maxlength="80"
+        formControlName="pru_rea_co_val_cp6"
+
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="nested_divider">
+      <ion-label>
+        <p>REVISION</p>
+        <ion-input type="text"  maxlength="80"
+        formControlName="pru_rea_co_rev_cp6"
+
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="nested_divider">
+      <ion-label>
+      </ion-label>
+    </ion-item>
+
+    <ion-item-divider>
+      <ion-label>BANCO DE PRUEBA</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider color="medium" class="nested_divider">
+      <ion-label>PROTOCOLO APROBADO</ion-label>
+    </ion-item-divider>
+
+    <ion-item class="nested_divider">
+      <ion-label>
+        <p>REVISION</p>
+        <ion-segment mode="ios"  formControlName="ban_pru_pr_rev_cp6">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item class="nested_divider">
+      <ion-label>
+      </ion-label>
+    </ion-item>
+
+
+    <ion-item-divider>
+      <ion-label> REVISION FINAL</ion-label>
+    </ion-item-divider>
+    <ion-item class="nested_divider">
+      <ion-label>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider color="medium" class="nested_divider">
+      <ion-label> REVISION DE GIRO LIBRE (ARRANQUE EN VACIO) </ion-label>
+    </ion-item-divider>
+
+    <ion-item class="nested_divider">
+      <ion-label>
+        <p>REVISION</p>
+        <ion-segment mode="ios"  formControlName="rev_fin_rev_rev_cp6">
+          <ion-segment-button value="1">
+            <ion-label>GIRA LIBRE</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>TRABADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item-divider color="medium" class="nested_divider">
+      <ion-label>MEDICION DE CORRIENTE (AMP)</ion-label>
+    </ion-item-divider>
+
+    <ion-item class="nested_divider">
+      <ion-label>
+        <p>VALOR</p>
+        <ion-input type="text"  maxlength="80"
+        formControlName="rev_fin_med_val_cp6"
+
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="nested_divider">
+      <ion-label>
+        <p>REVISION</p>
+        <ion-segment mode="ios"  formControlName="rev_fin_med_rev_cp6">
+          <ion-segment-button value="1">
+            <ion-label>CONFORME</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO CONFORME</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item class="nested_divider">
+      <ion-label>
+      </ion-label>
+    </ion-item>
+<!-- ----------------------------------------- -->
+<ion-item class="nested_divider">
+  <ion-label>
+  </ion-label>
+</ion-item>
+<ion-item-divider color="medium" class="nested_divider">
+  <ion-label>INSPECCION DE ESTANQUEDAD DE TAPA DE BORNERA</ion-label>
+</ion-item-divider>
+
+<ion-item class="nested_divider">
+  <ion-label>
+    <p>REVISION</p>
+    <ion-segment mode="ios"  formControlName="rev_fin_ins_rev_cp6">
+      <ion-segment-button value="1">
+        <ion-label>CONFORME</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="2">
+        <ion-label>NO CONFORME</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-label>
+</ion-item>
+
+<ion-item-divider color="medium" class="nested_divider">
+  <ion-label>REVISION DE AJUSTE DE TAPAS Y CONEXIONES DE CABLES</ion-label>
+</ion-item-divider>
+
+<ion-item class="nested_divider">
+  <ion-label>
+    <p>REVISION</p>
+    <ion-segment mode="ios"  formControlName="rev_fin_revaju_rev_cp6">
+      <ion-segment-button value="1">
+        <ion-label>CONFORME</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="2">
+        <ion-label>NO CONFORME</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-label>
+</ion-item>
+<!-- ----------------------------------------- -->
+<ion-item class="nested_divider">
+<ion-label>
+</ion-label>
+</ion-item>
+<ion-item-divider color="medium" class="nested_divider">
+<ion-label>PINTURA</ion-label>
+</ion-item-divider>
+
+<ion-item class="nested_divider">
+<ion-label>
+<p>REVISION</p>
+<ion-segment mode="ios"  formControlName="rev_fin_pint_rev_cp6">
+  <ion-segment-button value="1">
+    <ion-label>CONFORME</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="2">
+    <ion-label>NO CONFORME</ion-label>
+  </ion-segment-button>
+</ion-segment>
+</ion-label>
+</ion-item>
+
+<ion-item-divider color="medium" class="nested_divider">
+<ion-label>INSTALACION DE DESCARGA</ion-label>
+</ion-item-divider>
+
+<ion-item class="nested_divider">
+<ion-label>
+<p>REVISION</p>
+<ion-segment mode="ios"  formControlName="rev_fin_inst_rev_cp6">
+  <ion-segment-button value="1">
+    <ion-label>CONFORME</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="2">
+    <ion-label>NO CONFORME</ion-label>
+  </ion-segment-button>
+</ion-segment>
+</ion-label>
+</ion-item>
+<!-- --------------------------------FIN CONTROL------------------------------------------ -->
+<ion-item-divider>
+  SUPERVISOR RESPONSABLE
+</ion-item-divider>
+<ion-item>
+  <ion-label>
+    <p>OBSERVACIONES:</p>
+    <ion-textarea [disabled]="disableButtonPaso1" style="width:100%;height: 30px;"  formControlName="revi_respsble_obs_cp6"
+
+    ></ion-textarea>
+  </ion-label>
+</ion-item>
+  </ion-list>
+</form>
+</ion-content>
+<ion-footer>
+  <form [formGroup]="FormCheckListPaso6" #f="ngForm">
+    <ion-grid>
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col style="text-align: center">
+          <ion-segment style="width: 110%;" class="ion_segment_3d" mode="ios" formControlName="idestado_revi_paso6_cp6" >
+            <ion-segment-button (click)="SaveFormBorradorPaso1()" value="1" layout="icon-end">
+              <ion-icon name="close" color="danger"></ion-icon>
+              <ion-label color="danger">BORRADOR</ion-label>
+            </ion-segment-button>
+            <ion-segment-button (click)="SaveFormTerminadoPaso1()" value="2" layout="icon-end">
+              <ion-icon color="success" name="checkmark"></ion-icon>
+              <ion-label color="success">TERMINADO</ion-label>
+            </ion-segment-button>
+            <ion-segment-button (click)="SaveFormTerminadoPaso1()" value="3" layout="icon-end" [disabled]="disableButtonPaso1">
+              <ion-icon name="star"></ion-icon>
+              <ion-label color="secondary">VERIFICADO</ion-label>
+            </ion-segment-button>
+            <ion-segment-button (click)="SaveFormTerminadoPaso1()" value="4" layout="icon-end" [disabled]="disableButtonPaso1">
+              <ion-icon color="warning" name="alert"></ion-icon>
+              <ion-label color="warning" >RECHAZADO</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-footer>

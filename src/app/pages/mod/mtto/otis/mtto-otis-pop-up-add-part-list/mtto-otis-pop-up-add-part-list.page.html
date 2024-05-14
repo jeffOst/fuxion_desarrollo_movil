@@ -1,0 +1,188 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title>{{tituloVentana}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancelar_listaequipos(0,0,0)" color="danger">
+        <ion-icon name="close"></ion-icon>
+        Cancelar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-item style="font-size: x-small;padding: 0px;min-height: 0px;">
+    <ion-label>
+<h3 style="font-size: x-small;">Caracteristicas del equipo:</h3>
+<p>
+  Modelo:<ion-text color="dark">{{FormModel.modelo}}</ion-text>, Marca:<ion-text color="dark">{{FormModel.marca}}</ion-text>, Tipo:<ion-text color="dark">{{FormModel.tipo}}</ion-text>, Potencia:<ion-text color="dark">{{FormModel.potencia}}</ion-text>
+</p>
+    </ion-label>
+  </ion-item>
+  <ion-item-group>
+    <ion-item-divider>
+      <ion-label>  Filtros: </ion-label>
+    </ion-item-divider>
+
+    <ion-item lines="none" style="font-size: x-small;padding: 0px;min-height: 0px;">
+
+      <ion-toggle
+        [enableOnOffLabels]="true"
+        slot="start"
+        style="font-size: x-small"
+        mode="ios"
+        [checked]="true"
+        [(ngModel)]="FormModel.ot"
+        (ionChange)="lista_equipos($event,1)"
+      >
+        Solo Plantillas de OTs:
+      </ion-toggle>
+
+      <ion-toggle
+        [enableOnOffLabels]="true"
+        slot="end"
+        style="font-size: x-small"
+        mode="ios"
+        [checked]="true"
+        [(ngModel)]="FormModel.pd"
+        (ionChange)="lista_equipos($event,1)"
+      >
+        Solo PartList Diseño:
+      </ion-toggle>
+
+    </ion-item>
+
+    <ion-item lines="none" style="font-size: x-small;padding: 0px;min-height: 0px;">
+      <ion-toggle
+        [enableOnOffLabels]="true"
+        slot="start"
+        style="font-size: x-small"
+        mode="ios"
+        [checked]="true"
+        [(ngModel)]="FormModel.im"
+        (ionChange)="lista_equipos($event,1)"
+      >
+        Igual al Modelo:
+      </ion-toggle>
+
+      <ion-toggle
+      [enableOnOffLabels]="true"
+      slot="end"
+      style="font-size: x-small"
+      mode="ios"
+      [checked]="true"
+      [(ngModel)]="FormModel.it"
+      (ionChange)="lista_equipos($event,1)"
+    >
+      Igual al Tipo:
+    </ion-toggle>
+
+
+    </ion-item>
+  </ion-item-group>
+
+  <ion-item style="font-size: x-small;padding: 0px;min-height: 10px !important">
+    <ion-searchbar
+      show-clear-button="focus"
+      animated="true"
+      #idinputsearch_equipo
+      mode="ios"
+
+      cancelButtonText="Cancelar"
+      enterkeyhint="done"
+      placeholder="Buscar..."
+      [(ngModel)]="search_term_equipo"
+      (ionInput)="lista_equipos($event,2)"
+      color="secondary"
+    >
+    </ion-searchbar>
+    <ion-icon
+      slot="end"
+      name="sync-outline"
+      (click)="lista_equipos($event,1)"
+      #idIconButtonSync
+    ></ion-icon>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-group
+      *ngFor="let item_equipo of results_equipos; let i=index"
+      (click)="SeleccionarEquipo(item_equipo)"
+    >
+      <ion-item-divider>
+        <ion-note slot="start">{{i+1}}</ion-note>
+        <ion-label >
+          <ion-chip color="{{item_equipo.color}}">
+            <ion-icon name="add-outline"></ion-icon>
+            <ion-label style="font-size: smaller"
+              >{{item_equipo.tipofuente}}</ion-label
+            >
+            <ion-icon name="caret-forward-outline"></ion-icon>
+
+          </ion-chip>
+<ion-chip color="danger">{{item_equipo.totitem}}&nbsp;Items</ion-chip>
+        </ion-label>
+        <!-- <ion-badge slot="end" color="warning" no-padding>{{item_equipo.totitem}}</ion-badge> -->
+        <!-- <ion-note slot="end">{{item_equipo.totitem}}</ion-note> -->
+      </ion-item-divider>
+
+      <ion-item style="font-size: x-small;padding: 0px;min-height: 0px;">
+        <ion-note slot="start">Tipo:</ion-note>
+        <ion-label>{{item_equipo.tipo}}</ion-label>
+        <ion-note slot="end">Potencia:</ion-note>
+        <ion-label slot="end">{{item_equipo.potencia}}</ion-label>
+      </ion-item>
+      <!-- <ion-item style="font-size: x-small;padding: 0px;min-height: 0px;">
+        <ion-note slot="start">Potencia:</ion-note>
+        <ion-label>{{item_equipo.potencia}}</ion-label>
+      </ion-item> -->
+      <ion-item style="font-size: x-small;padding: 0px;min-height: 0px;">
+        <ion-note slot="start">Marca:</ion-note>
+        <ion-label>{{item_equipo.marca}}</ion-label>
+
+        <ion-note slot="end">Modelo:&nbsp;</ion-note>
+        <ion-label slot="end">{{item_equipo.modelo}}</ion-label>
+
+      </ion-item>
+      <!-- <ion-item style="font-size: x-small;padding: 0px;min-height: 0px;">
+        <ion-note slot="start">Modelo:</ion-note>
+        <ion-label>{{item_equipo.modelo}}</ion-label>
+      </ion-item> -->
+      <ion-item style="font-size: x-small;padding: 0px;min-height: 0px;">
+        <ion-note slot="start">Configuracion:</ion-note>
+        <ion-label>{{item_equipo.configuracion}}</ion-label>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+
+  <!-- <ion-grid class="header-grid">
+    <ion-row>
+      <ion-col class="header" size="1">Tipo</ion-col>
+      <ion-col class="header" size="1">Potencia</ion-col>
+      <ion-col class="header" size="3">Marca</ion-col>
+      <ion-col class="header" size="4">Modelo</ion-col>
+      <ion-col class="header" size="3">Configuracion</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid class="content-grid">
+    <ion-row
+      *ngFor="let item_equipo of results_equipos; let i=index let isOdd=odd; let isEven=even"
+      [class.selected]="selectedRow === 1"
+      (click)="SeleccionarEquipo(item_equipo)"
+    >
+      <ion-col class="detail" size="1">{{item_equipo.tipo}}</ion-col>
+      <ion-col class="detail" size="1">{{item_equipo.potencia}}</ion-col>
+      <ion-col class="detail" size="3">{{item_equipo.marca}}</ion-col>
+      <ion-col class="detail" size="4">{{item_equipo.modelo}}</ion-col>
+      <ion-col class="detail" size="3">
+        <ion-chip>
+          <ion-icon name="add-outline"></ion-icon>
+          <ion-label style="font-size: smaller"
+            >{{item_equipo.configuracion}}</ion-label
+          >
+          <ion-icon name="caret-forward-outline"></ion-icon>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+</ion-content>

@@ -1,0 +1,182 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title text-capitalize>Recepcion de O.C.</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="prod-list-acti-programada"
+        [text]="Cancelar"
+
+      >
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <p>Nro. O.C.</p>
+        <h1>{{FormHtmlJs.CORRESMG}}</h1>
+      </ion-label>
+      <ion-label>
+        <p>Nro.Requision</p>
+        <h1>{{FormHtmlJs.NROREQUISION}}</h1>
+      </ion-label>
+    </ion-item>
+    <!-- <ion-item>
+      <ion-label>
+        <p>Nro.Requision</p>
+        <h1>{{FormHtmlJs.NROREQUISION}}</h1>
+      </ion-label>
+    </ion-item> -->
+    <ion-item>
+      <ion-label>
+        <p>Razon Social</p>
+        <h1>{{FormHtmlJs.Y20012}}</h1>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+
+      <ion-label>F.Registro Guia:</ion-label>
+        <ion-datetime-button label="F.Registro Guia:" locale="es-ES" datetime="datetime"></ion-datetime-button>
+        <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
+          <ng-template>
+            <ion-datetime locale="es-ES" id="datetime" mode="ios" displayFormat="YYYY-MM-DD" presentation="date"
+              [preferWheel]="true" [showDefaultButtons]="true" [(ngModel)]="FormHtmlJs.FCHMOV" name="FormHtmlJs.FCHMOV"
+              >
+            </ion-datetime>
+          </ng-template>
+        </ion-popover>
+
+      <!-- <ion-label>
+        <p>F.Registro Guia:</p>
+        <h1>
+          <ion-datetime
+          style="height: 30px"
+            doneText="Aceptar"
+            mode="ios"
+            [(ngModel)]="FormHtmlJs.FCHMOV"
+            cancelText="Cerrar"
+            name="FormHtmlJs.FCHMOV"
+            id="FormHtmlJs.FCHMOV"
+
+            displayFormat="YYYY-MM-DD H:mm"
+            display-timezone="utc"
+          ></ion-datetime>
+        </h1>
+      </ion-label> -->
+    </ion-item>
+
+    <ion-item>
+      <ion-grid fixed>
+      <ion-row style="width:100%;height: 20px;">
+        <ion-col size="12">Nro Guia:</ion-col>
+      </ion-row>
+      <ion-row style="width:100%">
+        <ion-col size="2" style="align-items: flex-end"
+          ><ion-input
+            style="width:80%; height: 30px"
+            [(ngModel)]="FormHtmlJs.SERIE"
+          ></ion-input
+        ></ion-col>
+        <ion-col size="8" style="align-items: flex-start"
+          ><ion-input
+            style="width:90%; height: 30px"
+            [(ngModel)]="FormHtmlJs.Y10077"
+          ></ion-input
+        ></ion-col>
+      </ion-row>
+    </ion-grid>
+    </ion-item>
+    <ion-item>
+      <!-- <ion-label
+        ><p>Calidad</p>
+
+        <ion-row>
+          <ion-col size="10">
+            <ion-button
+              expand="full"
+              color="white"
+              style="background-color: transparent !important"
+              (click)="ListDetalleGuia()"
+              title="Dejar en Calidad"
+            >
+              <ion-text color="dark"> Actualizar </ion-text>
+            </ion-button>
+          </ion-col>
+          <ion-col size="2"
+            ><ion-icon color="dark" size="small" name="cart"></ion-icon
+          ></ion-col>
+        </ion-row>
+      </ion-label> -->
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1">Codigo</ion-col>
+          <ion-col class="headgrid" size-sm="5" size-md="5" size-xl="5">Descripcion</ion-col>
+          <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1">Unidad</ion-col>
+          <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1">Cnt.O.C.</ion-col>
+          <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1">Cnt.Recibido</ion-col>
+          <ion-col class="headgrid" size-sm="2" size-md="2" size-xl="2">Cnt.Recepcion</ion-col>
+          <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1"></ion-col>
+        </ion-row>
+        <!-- let item_equipo of results_lista_ot; let i=index let isOdd=odd; let isEven=even (click)="showDetailCalidad(Row)"-->
+        <ion-row *ngFor="let Row of FormHtmlJs.detalle; let i=index">
+
+            <ion-col size-sm="1" size-md="1" size-xl="1" style="font-size: 9px">{{FormHtmlJs.detalle[i].Y20001}}</ion-col>
+            <ion-col size-sm="5" size-md="5" size-xl="5" style="font-size: 9px">{{FormHtmlJs.detalle[i].Y20002}}</ion-col>
+            <ion-col size-sm="1" size-md="1" size-xl="1" style="font-size: 9px">{{FormHtmlJs.detalle[i].Y20033}}</ion-col>
+            <ion-col size-sm="1" size-md="1" size-xl="1" style="font-size: 9px">{{FormHtmlJs.detalle[i].Y20084}}</ion-col>
+            <ion-col size-sm="1" size-md="1" size-xl="1" style="font-size: 9px">{{FormHtmlJs.detalle[i].cant_atendido}}</ion-col>
+            <ion-col size-sm="2" size-md="2" size-xl="2" style="font-size: 9px">
+              <ion-input
+            style="width:80%; height: 30px"
+            [(ngModel)]="FormHtmlJs.detalle[i].cant_recepcion"
+            (ionChange)="onTouched($event,i,'ionChange')"
+          ></ion-input>
+
+            </ion-col>
+            <ion-col size-sm="1" size-md="1" size-xl="1" style="font-size: 9px">
+              <ion-item
+            button
+            mode="ios"
+            style="width: 100% !important"
+            (click)="showDetailIngreso(Row)"
+          >
+          </ion-item>
+            </ion-col>
+
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col style="text-align: center">
+        <ion-buttons>
+          <ion-back-button
+          color="danger"
+
+        [text]="Cancelar"
+         mode="ios"
+      >Cancelar
+      </ion-back-button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <ion-button
+            (click)="FSaveFormulario()"
+            [disabled]="!botonHabilitado"
+            color="primary"
+          >
+            <ion-icon name="save-outline"></ion-icon>&nbsp; Guardar
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

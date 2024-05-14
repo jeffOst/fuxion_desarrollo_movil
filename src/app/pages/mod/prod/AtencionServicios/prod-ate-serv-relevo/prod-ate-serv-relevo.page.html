@@ -1,0 +1,353 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title text-capitalize>Formulario Relevo</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="prod-list-acti-programada"
+        [text]="Cancelar"
+      >
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content >
+
+  <ion-list >
+    <ion-item>
+      <ion-grid>
+
+        <!-- <ion-row class="ion-align-items-center">
+          <ion-col>
+            <ion-grid> -->
+
+
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end">Correlativo de Registro:
+                </ion-col>
+                <ion-col size="9">
+                  <ion-item>
+                    <ion-input
+                      type="text"
+                      mode="ios"
+                      readonly
+                      [(ngModel)]="DsFormRelevo.correlativo_rc"
+                      value="{{DsFormRelevo.correlativo_rc}}"
+                    >
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end">Fecha Registro: </ion-col>
+                <ion-col size="9">
+
+<!-- <ion-datetime displayFormat="YYYY-MM-DD H:mm"
+          #datetime
+          mode="ios"
+          [value]="dateValue" size="cover"
+          (ionChange)="dateChanged(datetime.value)"
+          showDefaultButtons="true"
+          (ionCancel)="showPicker = false;"
+        >
+        </ion-datetime> -->
+
+        <ion-item>
+
+          <ion-datetime-button label="F.Registro:" locale="es-ES" datetime="datetime"></ion-datetime-button>
+          <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
+            <ng-template>
+              <ion-datetime locale="es-ES" id="datetime" mode="ios" displayFormat="YYYY-MM-DD" presentation="date"
+              #datetime
+              (ionChange)="dateChanged(datetime.value)"
+                [preferWheel]="true" [showDefaultButtons]="true"
+                >
+              </ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+
+                </ion-col>
+              </ion-row>
+
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end ion-align-items-baseline"
+                  >Maquina:</ion-col
+                >
+                <ion-col size="9">
+                  <ion-select
+                  cancelText="Cancelar"
+                    (ionChange)="select_change_maquina($event,0)"
+                    [selectedText]="DsFormRelevo.maquina"
+                    placeholder="Seleccionar Maquina"
+                    color="primary"
+                    [(ngModel)]="DsFormRelevo.idmaquina_rc"
+                    interface="action-sheet"
+                    mode="ios"
+                  >
+                    <ion-select-option
+                      *ngFor="let tipo of rest_maquina"
+                      [value]="tipo['codigo']"
+                      >{{tipo['nombre']}}
+                    </ion-select-option>
+                  </ion-select>
+                  <div class="{{CssNotiMaquina}}"></div>
+                </ion-col>
+              </ion-row>
+
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end"> Tecnico realiza el relevo(Ingreso): </ion-col>
+                <ion-col size="9">
+                  <ion-item>
+                    <ion-searchbar
+                      (click)="FOpenModalTecnicoIngreso(0)"
+                      type="text"
+                      placeholder="Buscar Tecnico"
+                      mode="ios"
+                      readonly
+                      [(ngModel)]="DsFormRelevo.nombres_tecnico_ingreso"
+                      value="{{DsFormRelevo.nombres_tecnico_ingreso}}"
+                    >
+                    </ion-searchbar>
+                    <!-- [selectedText]="DsFormRelevo.nombres_tecnico_ingreso" -->
+                  </ion-item>
+                  <div class="{{CssNotiTenicoIng}}"></div>
+                </ion-col>
+              </ion-row>
+
+
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end"> Tecnico evaluado(de Salida): </ion-col>
+                <ion-col size="9">
+                  <ion-item>
+                    <ion-searchbar
+                      (click)="FOpenModalTecnicoSalida(0)"
+                      type="text"
+                      placeholder="Buscar Tecnico"
+                      mode="ios"
+                      readonly
+                      [(ngModel)]="DsFormRelevo.nombres_tecnico_salida"
+                      value="{{DsFormRelevo.nombres_tecnico_salida}}"
+                    >
+                    </ion-searchbar>
+                  </ion-item>
+                  <div class="{{CssNotiTenicoSal}}"></div>
+                </ion-col>
+              </ion-row>
+
+
+
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end"> Estado Orden y Limpieza del Área: </ion-col>
+                <ion-col size="9">
+                  <ion-segment
+                    (ionChange)="select_change_orden_limpieza($event)"
+                    [(ngModel)]="DsFormRelevo.idorden_limpieza_rc"
+                    mode="ios"
+                    debounce="800"
+                  >
+                    <ion-segment-button value="1"> <ion-label> CONFORME </ion-label></ion-segment-button>
+                    <ion-segment-button value="2"> <ion-label>NO CONFORME </ion-label></ion-segment-button>
+                  </ion-segment>
+                   <div class="{{CssNotiOrdenLimpieza}}"></div> <!--CssNotiTipoFalla,CssNotiTenico -->
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="FlagShowObsOrdenLimpieza" class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end"> Observaiones  Orden y Limpieza del Área: </ion-col>
+                <ion-col size="9">
+                  <ion-textarea
+                    required="true"
+                    color="primary"
+                    type="number"
+                    mode="ios"
+                    [(ngModel)]="DsFormRelevo.orden_limpieza_rc"
+                    value="{{DsFormRelevo.orden_limpieza_rc}}"
+                  ></ion-textarea>
+                  <div class="{{CssNotiOrdenLimpieza2}}"></div> <!--CssNotiTipoFalla,CssNotiTenico,CssNotiDescFalla -->
+                </ion-col>
+              </ion-row>
+
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end"> Estado Maquina: </ion-col>
+                <ion-col size="9">
+                  <ion-segment
+                    (ionChange)="select_change_estadomaquina($event)"
+
+                    [(ngModel)]="DsFormRelevo.idestado_maquina_rc"
+                    mode="ios"
+                    debounce="800"
+                  >
+                    <ion-segment-button value="1"> <ion-label> CONFORME </ion-label></ion-segment-button>
+                    <ion-segment-button value="2"> <ion-label>NO CONFORME </ion-label></ion-segment-button>
+                  </ion-segment>
+                   <div class="{{CssNotiEstadoMaq}}"></div> <!--CssNotiTipoFalla,CssNotiTenico -->
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="FlagShowObsEstadoMaquina" class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end"> Observaiones  Estado Maquina: </ion-col>
+                <ion-col size="9">
+                  <ion-textarea
+                    required="true"
+                    color="primary"
+                    type="number"
+                    mode="ios"
+                    [(ngModel)]="DsFormRelevo.estado_maquina_rc"
+                    value="{{DsFormRelevo.estado_maquina_rc}}"
+                  ></ion-textarea>
+                  <div class="{{CssNotiEstadoMaq2}}"></div> <!--CssNotiTipoFalla,CssNotiTenico,CssNotiDescFalla -->
+                </ion-col>
+              </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Estado Equipos de Medición: </ion-col>
+          <ion-col size="9">
+            <ion-segment
+              (ionChange)="select_change_medicion($event)"
+              [(ngModel)]="DsFormRelevo.idequipo_medicion_rc"
+              mode="ios"
+              debounce="800"
+            >
+              <ion-segment-button value="1"> <ion-label> CONFORME </ion-label></ion-segment-button>
+              <ion-segment-button value="2"> <ion-label>NO CONFORME </ion-label></ion-segment-button>
+            </ion-segment>
+             <div class="{{CssNotiMedicion}}"></div> <!--CssNotiTipoFalla,CssNotiTenico -->
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="FlagShowObsMedicion" class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Estado Equipos de Medición: </ion-col>
+          <ion-col size="9">
+            <ion-textarea
+              required="true"
+              color="primary"
+              type="number"
+              mode="ios"
+              [(ngModel)]="DsFormRelevo.equipo_medicion_rc"
+              value="{{DsFormRelevo.equipo_medicion_rc}}"
+            ></ion-textarea>
+            <div class="{{CssNotiMedicion2}}"></div> <!--CssNotiTipoFalla,CssNotiTenico,CssNotiDescFalla -->
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Estado Piezas en proceso (Si aplica): </ion-col>
+          <ion-col size="9">
+            <ion-segment
+              (ionChange)="select_change_estadopieza($event)"
+
+              [(ngModel)]="DsFormRelevo.idpieza_proceso_rc"
+              mode="ios"
+              debounce="800"
+            >
+              <ion-segment-button value="1"> <ion-label> CONFORME </ion-label></ion-segment-button>
+              <ion-segment-button value="2"> <ion-label>NO CONFORME </ion-label></ion-segment-button>
+            </ion-segment>
+             <div class="{{CssNotiEstadoPiezas}}"></div> <!--CssNotiTipoFalla,CssNotiTenico -->
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="FlagShowObsEstadoPiezas" class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Observaiones  Estado Piezas en proceso (Si aplica): </ion-col>
+          <ion-col size="9">
+            <ion-textarea
+              required="true"
+              color="primary"
+              type="number"
+              mode="ios"
+              [(ngModel)]="DsFormRelevo.pieza_proceso_rc"
+              value="{{DsFormRelevo.pieza_proceso_rc}}"
+            ></ion-textarea>
+            <div class="{{CssNotiEstadoPiezas2}}"></div> <!--CssNotiTipoFalla,CssNotiTenico,CssNotiDescFalla -->
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Estado Coordinacion Relevo: </ion-col>
+          <ion-col size="9">
+            <ion-segment
+              (ionChange)="select_change_coordina($event)"
+
+              [(ngModel)]="DsFormRelevo.idcoordinacion_relevo_rc"
+              mode="ios"
+              debounce="1200"
+            >
+              <ion-segment-button value="1"> <ion-label> CONFORME </ion-label></ion-segment-button>
+              <ion-segment-button value="2"> <ion-label>NO CONFORME </ion-label></ion-segment-button>
+            </ion-segment>
+             <div class="{{CssNotiCoordinaRele}}"></div> <!--CssNotiTipoFalla,CssNotiTenico -->
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="FlagShowObsCoordinaRelevo" class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Observaiones  Estado Coordinacion Relevo: </ion-col>
+          <ion-col size="9">
+            <ion-textarea
+              required="true"
+              color="primary"
+              type="number"
+              mode="ios"
+              [(ngModel)]="DsFormRelevo.coordinacion_relevo_rc"
+              value="{{DsFormRelevo.coordinacion_relevo_rc}}"
+            ></ion-textarea>
+            <div class="{{CssNotiCoordinaRele2}}"></div> <!--CssNotiTipoFalla,CssNotiTenico,CssNotiDescFalla -->
+          </ion-col>
+        </ion-row>
+
+      <!-- </ion-grid>
+    </ion-col>
+  </ion-row> -->
+
+
+      <!-- </ion-grid>
+    </ion-col>
+  </ion-row> -->
+
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Observaiones Final (si aplica): </ion-col>
+          <ion-col size="9">
+            <ion-textarea
+              required="true"
+              color="primary"
+              type="number"
+              mode="ios"
+              [(ngModel)]="DsFormRelevo.observacion_rc"
+              value="{{DsFormRelevo.observacion_rc}}"
+            ></ion-textarea>
+            <div class="{{CssNotiObervacionFin}}"></div> <!--CssNotiTipoFalla,CssNotiTenico,CssNotiDescFalla -->
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </ion-item>
+    <ion-input [(ngModel)]="DsFormRelevo.idtecnico_rfc" type="hidden"></ion-input>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col style="text-align: center">
+        <ion-buttons>
+          <ion-back-button
+          color="danger"
+        defaultHref="prod-list-acti-programada"
+        [text]="Cancelar"
+        [disabled]="disableButton" mode="ios"
+      >Cancelar
+      </ion-back-button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <ion-button
+            (click)="FSaveFormulario()"
+            [disabled]="disableButton"
+            color="primary"
+          >
+            <ion-icon name="save-outline"></ion-icon>&nbsp; Guardar
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

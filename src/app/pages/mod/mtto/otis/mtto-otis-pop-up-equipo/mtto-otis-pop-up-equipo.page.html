@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title>Lista de Equipos</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancelar_listaequipos(0,0,0,0)" color="danger">
+        <ion-icon name="chevron-back"></ion-icon>
+        Cancelar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-searchbar
+    #idinputsearch_equipo
+    mode="ios"
+    debounce="1700"
+    cancelButtonText="Cancelar"
+    enterkeyhint="done"
+    placeholder="Filtrar Equipos"
+    [(ngModel)]="search_term_equipo"
+    (ionInput)="FindEquipos()"
+    color="secondary"
+    search-icon="search-circle"
+  >
+  </ion-searchbar>
+
+
+    <ion-list-header class="sticky-header">
+      <ion-label>Equipo</ion-label>
+    </ion-list-header>
+
+</ion-header>
+
+<ion-content>
+
+
+    <ion-item
+      lines="full"
+      mode="ios"
+      detail="true"
+      button
+      *ngFor="let item_equipo of results_equipos; let i=index "
+      (click)="cancelar_listaequipos(item_equipo.idactivos,item_equipo.idordenfabricab,item_equipo.idtipo,item_equipo.idpotencia)"
+    >
+      <ion-badge slot="start">{{i+1}}</ion-badge>
+      <ion-label>{{item_equipo.codsmg}}</ion-label>
+    </ion-item>
+
+</ion-content>

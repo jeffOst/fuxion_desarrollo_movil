@@ -1,0 +1,54 @@
+<style>
+
+  .zoom-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .zoom-buttons ion-button {
+    flex: 1;
+    margin: 0 10px;
+    border-radius: 20px; /* Ajusta el radio de borde según tu preferencia */
+  }
+  
+  .zoom-buttons ion-button ion-icon {
+    margin-right: 8px;
+  }
+  
+  </style>
+  
+  
+  <ion-header>
+    <ion-toolbar mode="ios">
+      <ion-buttons slot="start">
+        <ion-button (click)="FCloseWin()">
+          <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+          Cancelar
+        </ion-button>
+      </ion-buttons>
+  
+      <ion-buttons slot="end">
+        
+        <ion-button (click)="zoomIn()" color="primary">
+          <ion-icon slot="icon-only" name="add"></ion-icon> Aumentar
+        </ion-button>
+        <ion-button (click)="zoomOut()" color="primary" style="margin-left: 18px;">
+          <ion-icon slot="icon-only" name="remove"></ion-icon> Reducir
+        </ion-button>
+        
+        <ion-button (click)="resetZoom()" color="primary" style="margin-left: 18px;">
+          <ion-icon slot="icon-only" name="refresh-outline"></ion-icon> Restablecer
+        </ion-button>
+
+
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content (pinch)="onPinch($event)">
+    <pdf-viewer [src]="pdfSrc" [zoom]="zoom" [original-size]="false" style="display: block; width: 99%; height: 99%"></pdf-viewer>
+  </ion-content>
+  
+  <ion-footer>
+  </ion-footer>

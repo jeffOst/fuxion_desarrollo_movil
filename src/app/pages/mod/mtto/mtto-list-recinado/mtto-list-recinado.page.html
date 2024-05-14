@@ -1,0 +1,260 @@
+<ion-toolbar class="ion-no-border">
+  <ion-grid>
+    <ion-row class="ion-justify-content-start">
+      <ion-col class="ion-align-self-start" size="10">
+        <app-header titulo="Listado de Resinado"></app-header>
+      </ion-col>
+      <ion-col class="ion-align-self-end" size="2">
+        <ion-label position="fixed" class="label-nameusuario" color="secondary"
+          >{{NomUsuario}}</ion-label
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!--<ion-list>
+     <ion-item-sliding>
+      <ion-item>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button
+              color="primary"
+              fill="outline"
+              (click)="EditarInspCable('0')"
+            >
+              Nuevo &nbsp;
+              <ion-icon ios="ios-add-circle" name="add-circle-sharp"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+
+        </ion-toolbar>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>-->
+  <ion-item>
+    <ion-searchbar
+      [(ngModel)]="inputSearchValue"
+      (ionInput)="listarInspCables()"
+      debounce="1700"
+    >
+    </ion-searchbar>
+  </ion-item>
+
+</ion-toolbar>
+<ion-content padding>
+
+
+  <ion-grid class="header-grid">
+
+
+  <!-- <ion-list>
+    <ion-item> -->
+      <!-- <ion-fab-button color="gray" slot="start">*</ion-fab-button> -->
+
+      <ion-row>
+        <ion-col
+          size="1"
+          style="
+            background: linear-gradient(#e9e7e7, #cac3c3);
+            border-width: 0.01em;
+            border-style: solid;
+            margin-bottom: 1px;
+            border-color: whitesmoke;
+          "
+        >
+            *
+        </ion-col>
+        <ion-col
+          size="1"
+          style="
+            background: linear-gradient(#e9e7e7, #cac3c3);
+            border-width: 0.01em;
+            border-style: solid;
+            margin-bottom: 1px;
+            border-color: whitesmoke;
+          "
+        >
+
+            Equipo
+        </ion-col>
+        <ion-col
+          size="1"
+          style="
+            background: linear-gradient(#e9e7e7, #cac3c3);
+            border-width: 0.01em;
+            border-style: solid;
+            margin-bottom: 1px;
+            border-color: whitesmoke;
+          "
+        >
+         Correlativo
+        </ion-col>
+        <ion-col
+          size="1"
+          style="
+            background: linear-gradient(#e9e7e7, #cac3c3);
+            border-width: 0.01em;
+            border-style: solid;
+            margin-bottom: 1px;
+            border-color: whitesmoke;
+          "
+        >
+          F.Registro
+        </ion-col>
+        <ion-col
+          size="1"
+          style="
+            background: linear-gradient(#e9e7e7, #cac3c3);
+            border-width: 0.01em;
+            border-style: solid;
+            margin-bottom: 1px;
+            border-color: whitesmoke;
+          "
+        >
+          Estado
+        </ion-col>
+        <ion-col
+          size="2"
+          style="
+            background: linear-gradient(#e9e7e7, #cac3c3);
+            border-width: 0.01em;
+            border-style: solid;
+            margin-bottom: 1px;
+            border-color: whitesmoke;
+          "
+        >
+          Usuario
+        </ion-col>
+        <ion-col
+          size="2"
+          style="
+            background: linear-gradient(#e9e7e7, #cac3c3);
+            border-width: 0.01em;
+            border-style: solid;
+            margin-bottom: 1px;
+            border-color: whitesmoke;
+          "
+        >
+          Entregado
+
+        </ion-col>
+        <ion-col
+          size="1"
+          style="
+            background: linear-gradient(#e9e7e7, #cac3c3);
+            border-width: 0.01em;
+            border-style: solid;
+            margin-bottom: 1px;
+            border-color: whitesmoke;
+          "
+        >
+          Cable1
+        </ion-col>
+        <ion-col
+          size="2"
+          style="
+            background: linear-gradient(#e9e7e7, #cac3c3);
+            border-width: 0.01em;
+            border-style: solid;
+            margin-bottom: 1px;
+            border-color: whitesmoke;
+          "
+        >
+        Cable2
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- </ion-item>
+
+    <ion-item-sliding
+      #slidingItem
+      *ngFor="let item of arrayCargado; let i=index "
+    >
+      <ion-item> -->
+
+        <!-- <ion-card>
+              <ion-card-content> -->
+                <ion-grid class="content-grid">
+        <ion-row *ngFor="let item of arrayCargado; let i=index" (click)="EditarInspCable(item.idrecinadocablecab)">
+          <ion-col size="1">
+            <!-- <ion-fab-button color="{{item.coloravatar}}" slot="start">{{item.avatar}}
+            </ion-fab-button> -->
+            <!-- <ion-icon  name="logo-ionic" size="large" color="{{item.coloravatar}}">::::</ion-icon> -->
+            <!--  -->
+            <ion-chip color="{{item.coloravatar}}">
+              <ion-label>{{item.avatar}}</ion-label>
+            </ion-chip>
+          </ion-col>
+          <ion-col size="1">
+            {{item.codsmg}}
+          </ion-col>
+          <ion-col size="1"
+            ><ion-label style="" color="primary" text-wrap
+              >{{item.correlativo_rcc}}</ion-label
+            ></ion-col
+          >
+          <ion-col size="1"
+            ><ion-label style="" color="secondary" text-wrap
+              >{{item.fchregistro_rcc}}</ion-label
+            ></ion-col
+          >
+          <ion-col size="1"
+            ><ion-label style="" color="primary"
+              >{{item.estado}}</ion-label
+            ></ion-col
+          >
+          <ion-col size="2">
+            <ion-chip color="secondary">
+            <ion-label style="" color="secondary">{{item.usuario}}</ion-label>
+          </ion-chip>
+          </ion-col>
+          <ion-col size="2"
+            ><ion-label style="" color="secondary"
+              >{{item.equipo_entregado}}</ion-label
+            ></ion-col
+          >
+          <ion-col size="1"
+            ><ion-label style="" color="secondary">
+              <ion-chip color="{{item.colorc1}}">
+
+                <ion-label>{{item.Cable1}}</ion-label>
+
+              </ion-chip>
+              </ion-label
+            ></ion-col
+          >
+          <ion-col size="2">
+            <ion-chip color="{{item.colorc2}}">
+              <ion-icon name="create"></ion-icon>
+              <ion-label>{{item.Cable2}}</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-chip>
+          </ion-col>
+        </ion-row>
+        </ion-grid>
+        <!-- </ion-card-content>
+          </ion-card> -->
+      <!-- </ion-item>
+      <ion-item-options
+        side="end"
+        (ionSwipe)="EditarInspCable(item.idrecinadocablecab)"
+      >
+        <ion-item-option color="primary" expandable>
+          Editar/Retomar</ion-item-option
+        >
+      </ion-item-options>
+      <ion-item-options
+        side="start"
+        (ionSwipe)="EntregarCable(item.idrecinadocablecab,item.idrecinadocableentrega)"
+      >
+        <ion-item-option color="success" expandable>Entregar</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list> -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" mode="ios" title="Nuevo" (click)="EditarInspCable('0')">
+      <ion-icon ios="ios-add-circle" name="add-circle-sharp"></ion-icon>
+    </ion-fab-button>
+
+  </ion-fab>
+
+</ion-content>

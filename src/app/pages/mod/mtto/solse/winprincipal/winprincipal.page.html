@@ -1,0 +1,299 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title text-capitalize>Generar Servicios</ion-title>
+    <ion-buttons slot="start">
+      <ion-button
+        (click)="cancelar_ejecucion()"
+        [disabled]="disableButton"
+        color="danger"
+      >
+        <ion-icon name="close"></ion-icon>
+        Cancelar
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <!-- <ion-button
+        (click)="guardar_selected()"
+        [disabled]="disableButton"
+        color="primary"
+      >
+        <ion-icon name="save"></ion-icon>&nbsp; Guardar Seleccionados
+      </ion-button> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #idContent [style.--background]="scanActive ? '#00000000':'#fff'"  [scrollEvents]="true">
+  <ion-item [hidden]="scanActive">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-sm="6" size-md="2" size-xl="1"
+          ><div class="text-align: right">Nro. O.T.:</div></ion-col
+        >
+        <ion-col size-sm="6" size-md="2" size-xl="2"
+          ><div class="text-align: left">
+            <strong>{{NroOtHtml}}</strong>
+          </div></ion-col
+        >
+        <ion-col size-sm="6" size-md="2" size-xl="1">Equipo: </ion-col>
+        <ion-col size-sm="6" size-md="2" size-xl="2"
+          ><strong>{{CodEquipoHtml}}</strong></ion-col
+        >
+        <ion-col size-sm="6" size-md="2" size-xl="2">F.Creacion O.T.:</ion-col>
+        <ion-col size-sm="6" size-md="2" size-xl="2"
+          ><strong>{{FchCreaOtHtml}}</strong></ion-col
+        >
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <ion-list [hidden]="scanActive">
+    <ion-list-header color="primary">
+      <ion-title
+        >Lista de Servicios Registrados
+        <ion-chip (click)="listado_solse('0')" outline="true" mode="ios"
+          >Ver Todas Solses</ion-chip
+        >
+      </ion-title>
+    </ion-list-header>
+    <ion-item
+      mode="ios"
+      button
+      *ngFor="let item_servicios of ds_ot_servicios;"
+      (click)="listado_solse(item_servicios.idotsolse_otd)"
+    >
+      <ion-label>
+        <h1>{{item_servicios.Y040022}}</h1>
+        <p>
+          <ion-chip outline="true" mode="ios"
+            >Cantidad:&nbsp;<strong
+              >{{item_servicios.cantidad2}}</strong
+            ></ion-chip
+          >
+          <ion-chip outline="true" mode="ios"
+            >Pieza:&nbsp;<strong>{{item_servicios.nompieza2}}</strong></ion-chip
+          >
+          <ion-chip outline="true" mode="ios"
+            >Codigo:&nbsp;<strong>{{item_servicios.Y040012}}</strong></ion-chip
+          >
+          <ion-chip
+            outline="true"
+            mode="ios"
+            [color]="(item_servicios.codigo_qr_os=='') ? 'danger':'primary'"
+            >QR:&nbsp;<strong>{{item_servicios.codigo_qr_os}}</strong></ion-chip
+          >
+        </p>
+      </ion-label>
+    </ion-item>
+    <!-- <ion-button
+        color="secondary"
+        expand="full"
+        (click)="listado_solse()"
+      >
+        Listar SOLSE &nbsp;
+        <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+      </ion-button> -->
+  </ion-list>
+
+  <ion-list [hidden]="scanActive">
+    <ion-list [hidden]="scanActive">
+      <ion-list-header color="primary">
+        <ion-title
+          >Lista Servicios por Registrar:
+
+          <!-- <ion-chip outline (click)="guardar_selected()"        
+        color="primary" >
+          <ion-icon name="save" color="primary"></ion-icon>
+         &nbsp; Guardar Seleccionado(s)
+          
+        </ion-chip> -->
+        </ion-title>
+      </ion-list-header>
+
+      <ion-item-sliding
+        *ngFor="let item2 of ArrayItemsSelectedDesti;let i = index"
+      >
+        <ion-item-group>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="2"> Servicio: </ion-col>
+              <ion-col size="10">
+                <!-- <ion-input
+                  type="text"
+                  placeholder=""
+                  color="primary"
+                  readonly
+                  [(ngModel)]="item2.Y04002"
+                  value="{{item2.Y04002}}"
+                ></ion-input> -->
+
+                <ion-item>
+                  <ion-searchbar
+                    (click)="open_popup_servicios(i)"
+                    type="text"
+                    placeholder="Buscar Servicio"
+                    mode="ios"
+                    readonly
+                    [(ngModel)]="item2.Y04002"
+                    value="{{item2.Y04002}}"
+                  >
+                  </ion-searchbar>
+                </ion-item>
+              </ion-col>
+              <!-- <ion-col size="2">
+                <ion-button color="primary" (click)="open_popup_servicios(i)"
+                  >Agregar
+                  <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+                </ion-button>
+              </ion-col> -->
+            </ion-row>
+            <ion-row>
+              <ion-col size="2"> Pieza: </ion-col>
+              <ion-col size="10">
+                <ion-input
+                  type="text"
+                  disabled
+                  [(ngModel)]="item2.pieza_nombre"
+                  value="{{item2.pieza_nombre}}"
+                ></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="2"> Cantidad: </ion-col>
+              <ion-col size="10">
+                <ion-input
+                  required="true"
+                  color="primary"
+                  type="number"
+                  mode="ios"
+                  [(ngModel)]="item2.cantidad"
+                  value="{{item2.cantidad}}"
+                ></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="2"> Unidad: </ion-col>
+              <ion-col size="10">
+                <ion-input
+                  required="true"
+                  color="primary"
+                  type="text"
+                  mode="ios"
+                  [(ngModel)]="item2.unidad"
+                  value="{{item2.unidad}}"
+                ></ion-input>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="2"> Codigo QR: </ion-col>
+              <ion-col size="7" style="padding: 1px">
+                <ion-input
+                  type="text"
+                  placeholder="Ingrese Codigo Q.R."
+                  [(ngModel)]="item2.codigo_qr_os"
+                  value="{{item2.codigo_qr_os}}"
+                  
+                ></ion-input>
+                
+              </ion-col>
+
+              <ion-col size="3">
+                <ion-button
+                [hidden]="scanActive"
+                color="light"
+                expand="full"
+                (click)="start_scan_qr(i)"
+              >
+              <ion-text color="primary">Scaneo Q.R.</ion-text>
+                <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+              </ion-button>
+              </ion-col>
+
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="2"> Nota: </ion-col>
+              <ion-col size="10" style="padding: 1px">
+                <ion-input
+                  type="text"
+                  placeholder="Ingrese Observacion"
+                  [(ngModel)]="item2.nota_hvot"
+                  value="{{item2.nota_hvot}}"
+                ></ion-input>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item-group>
+        <ion-item-options side="start" (ionSwipe)="quitar_vale_selected(item2)">
+          <ion-item-option color="danger" expandable>Quitar</ion-item-option>
+        </ion-item-options>
+        <!--  
+        <ion-item-divider color="primary" style="padding: 0px;">
+          <ion-label>
+          </ion-label>
+        </ion-item-divider> -->
+        <ion-button
+          color="danger"
+          expand="full"
+          (click)="eliminar_item_servicio(i)"
+          fill="outline"
+        >
+        <ion-chip outline="true" mode="ios"
+            ><strong>{{i+1}}</strong></ion-chip>
+            &nbsp;Eliminar Item &nbsp;
+          <ion-icon ios="ios-del-circle" md="md-del-circle"></ion-icon>
+        </ion-button>
+      </ion-item-sliding>
+    </ion-list>
+    <!--  buscador -->
+
+    <ion-item> </ion-item>
+
+    <ion-row align-items-start>
+      <ion-col> </ion-col>
+    </ion-row>
+  </ion-list>
+
+  <ion-button                
+  color="success"
+  expand="full"
+  (click)="stopScanner()"
+  [hidden]="!scanActive"
+>
+   &nbsp;Detener
+</ion-button>
+<div class="scan-box" [hidden]="!scanActive"></div>
+
+</ion-content>
+<ion-footer>
+  <ion-grid [hidden]="scanActive">
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col style="text-align: center">
+        <ion-buttons>
+          <ion-button
+            color="success"
+            fill="outline"
+            (click)="agregar_item_servicio()"
+          >
+            Agregar Items &nbsp;
+            <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+          </ion-button>
+
+          &nbsp;&nbsp;&nbsp;&nbsp;
+
+          <ion-button
+            color="primary"
+            fill="outline"
+            (click)="guardar_selected()"
+          >
+            Guardar Detalle &nbsp;
+            <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

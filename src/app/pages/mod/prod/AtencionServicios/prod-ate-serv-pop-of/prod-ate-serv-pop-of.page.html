@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title>{{titulo_modal}}</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-button (click)="FCloseModal()" class="">
+        <ion-icon part="icon" aria-hidden="true" role="img" class="md hydrated" name="chevron-back-outline"></ion-icon>
+        Cancelar
+      </ion-button>
+    </ion-buttons>
+    
+  </ion-toolbar>
+
+  <ion-item>
+    <ion-searchbar
+    
+    style="width: 100%"
+    #IdHtmlInputSearch
+    mode="ios"
+    debounce="1700"
+    cancelButtonText="Cancelar"
+    enterkeyhint="done"
+    placeholder="Filtrar parametros"
+    [(ngModel)]="NgModInputSearch"
+    (ionChange)="FFindRows()"
+  >
+  </ion-searchbar>
+  </ion-item>
+
+</ion-header>
+
+<ion-content>
+  
+  
+
+  <ion-list
+    *ngFor="let Row of DataSetGrid; let i=index let isOdd=odd; let isEven=even"
+    [class.odd]="isOdd"
+    [class.even]="isEven"
+    lines="full"
+    inset="true"
+  >
+    <ion-item
+      button
+      (click)="FSelectedItem(Row.idordenfabricab,Row.correorden,Row.Y04002,Row.idofpterminado,i,Row.idsubfamilia,Row.idclase,Row.nomsubfam,Row.nomclase,Row.Y04001)"
+    >
+      <ion-label>
+        <h1>{{Row.correorden}}</h1>
+        <p>{{Row.nomsubfam}}</p>
+        <p>{{Row.nomclase}}</p>
+        <p>{{Row.Y04002}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

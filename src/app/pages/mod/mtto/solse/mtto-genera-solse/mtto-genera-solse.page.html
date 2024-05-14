@@ -1,0 +1,156 @@
+<ion-header [hidden]="scanActive">
+  <ion-toolbar mode="ios">
+    <ion-title text-capitalize>Lista SOLSE</ion-title>
+    <ion-buttons slot="start">
+      <ion-button
+        (click)="regresar_listado_servicios()"
+        
+        color="danger"
+      >
+        <ion-icon name="close"></ion-icon>
+        Regresar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #idContent [style.--background]="scanActive ? '#00000000':'#fff'"  [scrollEvents]="true"
+(ionScrollStart)="logScrollStart()"
+(ionScroll)="logScrolling($event)"
+>
+  <ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-sm="6" size-md="2" size-xl="1"><div class="text-align: right">Nro. O.T.:</div></ion-col>
+      <ion-col size-sm="6" size-md="2" size-xl="2" ><div class="text-align: left"><strong>{{NroOtHtml}}</strong></div></ion-col>
+      <ion-col size-sm="6" size-md="2" size-xl="1">Equipo: </ion-col>
+      <ion-col size-sm="6" size-md="2" size-xl="2"><strong>{{CodEquipoHtml}}</strong></ion-col>
+      <ion-col size-sm="6" size-md="2" size-xl="2">F.Creacion O.T.:</ion-col>
+      <ion-col size-sm="6" size-md="2" size-xl="2"><strong>{{FchCreaOtHtml}}</strong></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-item>
+  
+    <ion-list >
+        
+          <ion-card style="
+          border: black;
+          border: 2px solid;
+          background-color: white;
+          border-radius: 25px;
+          width: 95% !important;
+          margin: 2ch !important;
+          padding:0px;" mode="ios" type="button" [hidden]="scanActive" *ngFor="let item3 of ArrayItemsSelectedDesti;let i = index">
+            <ion-card-header>
+              <ion-row>
+                <ion-col size="2"> Correlativo: </ion-col>
+                <ion-col size="10">
+                  <ion-input
+                  [hidden]="scanActive"
+                    required="true"
+                    color="primary"
+                    type="text"
+                    mode="ios"
+                    disabled
+                    [(ngModel)]="item3.corre_otss"
+                    value="{{item3.corre_otss}}"
+                  ></ion-input>
+                </ion-col>
+              </ion-row>         
+            </ion-card-header>
+            <ion-card-content>
+          <ion-grid [style.--background]="scanActive ? '#00000000':'#fff'">
+            
+            <ion-row>
+              <ion-col size="2"> Pieza: </ion-col>
+              <ion-col size="10">
+                <ion-input
+                [hidden]="scanActive"
+                  type="text"
+                  disabled
+                  placeholder="Ingrese Solse"
+                  [(ngModel)]="item3.nomclase_os"
+                  value="{{item3.nomclase_os}}"
+                ></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="2"> Cantidad: </ion-col>
+              <ion-col size="10">
+                <ion-input
+                [hidden]="scanActive"
+                  required="true"
+                  color="primary"
+                  type="number"
+                  mode="ios"
+                  disabled
+                  [(ngModel)]="item3.cantidad_otss"
+                  value="{{item3.cantidad_otss}}"
+                ></ion-input>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="2"> Codigo QR: </ion-col>
+              <ion-col size="10" style="padding: 1px">
+                <ion-input
+                  type="text"
+                  placeholder="Ingrese Codigo Q.R."
+                  [(ngModel)]="item3.codigo_qr_os"
+                  value="{{item3.codigo_qr_os}}"
+                  
+                ></ion-input>
+                
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-button
+                [hidden]="scanActive"
+                color="light"
+                expand="full"
+                (click)="start_scan_qr(i)"
+              >
+              <ion-text color="primary">Iniciar Scaneo Q.R.</ion-text>
+                <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+              </ion-button>
+              </ion-col>
+            </ion-row>
+
+          
+
+            <ion-row>
+              <ion-col size="12" >
+                <ion-button
+                [hidden]="scanActive"
+                color="light"
+                expand="full"
+                (click)="actulizar_solse_qr(item3.idotsolse,i)"
+              >
+              <ion-text color="success">Actualizar Q.R.</ion-text>
+                <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+              </ion-button>   
+              </ion-col>
+            </ion-row>
+
+          </ion-grid>
+          
+      </ion-card-content>
+      </ion-card>
+        
+       
+      
+
+     
+    </ion-list>
+    <!--  buscador -->
+    
+    <ion-button                
+    color="success"
+    expand="full"
+    (click)="stopScanner()"
+    [hidden]="!scanActive"
+  >
+     &nbsp;Detener
+  </ion-button>
+  <div class="scan-box" [hidden]="!scanActive"></div>
+</ion-content>

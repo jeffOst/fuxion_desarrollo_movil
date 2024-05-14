@@ -1,0 +1,14 @@
+
+// .sticky-header {
+//   position: -webkit-sticky;
+//   position: sticky;
+//   top: 0;
+//   // background-color: white;
+//   z-index: 1; /* Asegura que esté por encima del contenido desplazable */
+// }
+
+ion-list-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}

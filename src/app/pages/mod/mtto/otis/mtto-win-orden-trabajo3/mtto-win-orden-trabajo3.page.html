@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-item>
+
+      <ion-chip slot="start" color="primary" (click)="FLoadPiezasAcordion()">
+        <ion-icon name="refresh-outline"></ion-icon>
+        <ion-label>Actualizar</ion-label>
+      </ion-chip>
+
+      <ion-title text-capitalize>
+        <ion-label>SERVICIOS INTERNOS Y EXTERNOS
+        </ion-label>
+      </ion-title>
+
+      <ion-chip slot="end" mode="ios" color="primary" (click)="agregarItemSinPieza()">
+        <ion-label>Agregar</ion-label>
+        <ion-icon name="add"></ion-icon>
+      </ion-chip>
+
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item-group *ngFor="let row of EditDataRest">
+      <ion-item-divider button="true" class="divider" *ngIf="row.orden==='1'">
+        <ion-label>&nbsp;<strong>{{row.nomclase}}</strong></ion-label>
+
+
+        <ion-chip slot="end" mode="ios" color="primary" (click)="agregarItem(row)">
+          <ion-label>Agregar</ion-label>
+          <ion-icon name="add"></ion-icon>
+        </ion-chip>
+
+      </ion-item-divider>
+
+      <ion-item *ngIf="row.orden==='2'" style="border-style: hidden">
+        <ion-button style="margin-inline-end: 2px;" color="danger" slot="start" (click)="FItemEliminar($event,row);" no-padding>
+          Quitar
+          <ion-icon name="trash" slot="start"></ion-icon>
+        </ion-button>
+
+
+        <ion-toggle
+                mode="ios"
+                [disabled]="row.habilitar_toggle === '0'"
+                [checked]="row.check_toggle === '1'"
+                labelPlacement="start"
+                (ionChange)="FasignaServicio($event,row)"
+                style="width: 98%;border-style: hidden"
+              >
+                <p style="font-size: small">
+                  <ion-badge slot="end" color="{{row.color_atendido}}">{{row.estado_abre}}</ion-badge>
+                  <ion-text color="primary">{{row.nomclase}}</ion-text>
+                  Cnt.Teorica:
+                  <ion-text color="secondary"
+                    >{{row.otd_cantidad_plan}}</ion-text
+                  >
+                </p>
+              </ion-toggle>
+
+              <ion-input slot="end" type="number"
+              [disabled]="row.habilitar_input === '0'"
+              [(ngModel)]="row.otd_cantidad"
+              (ionBlur)="FBlourInput($event,row)"
+              style="text-align: end;height: 35px !important;width: 15%;border-color: black;margin-inline-start: 2px;border: 1px;" ></ion-input>
+
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+
+  <!-- </ion-accordion-group> -->
+</ion-content>
+<ion-footer>
+  <ion-button (click)="mostrarConfirmacion()"  expand="full" [disabled]="globalVal.ot_estado_general>'2'" color="primary">Terminado</ion-button>
+</ion-footer>

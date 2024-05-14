@@ -1,0 +1,429 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-item>
+      <ion-title text-capitalize>
+        <ion-label>DATOS GENERALES</ion-label>
+      </ion-title>
+      <!-- <form [formGroup]="FormCheckListPaso1" #f="ngForm">
+      <ion-toggle justify="end" mode="ios"
+      formControlName="checklist_paso1_apli"
+      (ionChange)="SaveCheckNoAplicaPaso($event)" >Aplica Paso?
+      </ion-toggle>
+      </form> -->
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="FormCheckListPaso1" #f="ngForm">
+    <ion-list mode="ios" class="ion-no-padding">
+      <ion-item-group>
+      <ion-item-divider color="primary">
+        <ion-label> General </ion-label>
+      </ion-item-divider>
+
+    <ion-item>
+      <ion-label>
+        <p>Nro.Informe Tecnico</p>
+        <ion-input
+          type="text"
+          formControlName="corre_fisico"
+        ></ion-input>
+      </ion-label>
+      <ion-button slot="end" (click)="DownloadOpenLocalPdf()" >
+        <ion-icon slot="start" name="cloud-download-sharp"></ion-icon>
+        PDF</ion-button>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>PROCEDENCIA</p>
+        <ion-input
+          type="text"
+          maxlength="80"
+          formControlName="Y06002"
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>F.Creacion O.T.</p>
+        <ion-input
+          type="text"
+          maxlength="80"
+          formControlName="ot_fech_inicio_labor"
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>Dias Operativos</p>
+        <ion-input
+          type="text"
+          maxlength="80"
+          formControlName="dias_trabajados"
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+
+      <!-- <ion-item *ngIf="ItemVisibleMotor">
+        <ion-label>
+          <p>Tipo Orden de Trabajo</p>
+          <ion-select
+            cancelText="Cancelar"
+            (ionChange)="FSelectChangeTipoOt($event,0)"
+            [selectedText]="TipoOtPivotSelectedText"
+            placeholder="Seleccionar Tipo OT"
+            color="primary"
+            interface="action-sheet"
+            mode="ios"
+          >
+            <ion-select-option
+              *ngFor="let tipo of DsTipoOt"
+              [value]="tipo['codigo']"
+              >{{tipo['nombre']}}
+            </ion-select-option>
+          </ion-select>
+        </ion-label>
+      </ion-item>
+      <div *ngIf="FormCheckListPaso1.get('idtipo_otc').hasError('valorNoValido')" style="color: var(--ion-color-danger);">
+        Falta seleccionar este campo
+      </div> -->
+      <ion-item *ngIf="ItemVisibleMotor">
+        <ion-label>
+          <p>Tipo Bomba</p>
+          <ion-select
+            cancelText="Cancelar"
+            (ionChange)="FSelectChangeTipoBomba($event,0)"
+            [selectedText]="TipoBombaPivotSelectedText"
+            placeholder="Seleccionar Tipo Bomba"
+            color="primary"
+            interface="action-sheet"
+            mode="ios"
+          >
+            <ion-select-option
+              *ngFor="let tipo of DsTipoBomba"
+              [value]="tipo['codigo']"
+              >{{tipo['nombre']}}
+            </ion-select-option>
+          </ion-select>
+        </ion-label>
+      </ion-item>
+      <div *ngIf="FormCheckListPaso1.get('tipobomba_otc').hasError('valorNoValido')" style="color: var(--ion-color-danger);">
+        Falta seleccionar este campo
+      </div>
+      <ion-item *ngIf="ItemVisibleMotor">
+        <ion-label>
+          <p>Material:</p>
+
+          <ion-select
+            cancelText="Cancelar"
+            (ionChange)="FSelectChangeTipoMaterial($event,0)"
+            [selectedText]="MaterialPivotSelectedText"
+            placeholder="Seleccionar Material"
+            color="primary"
+            interface="action-sheet"
+            mode="ios"
+          >
+            <ion-select-option
+              *ngFor="let tipo of DsMaterial"
+              [value]="tipo['codigo']"
+              >{{tipo['nombre']}}
+            </ion-select-option>
+          </ion-select>
+        </ion-label>
+      </ion-item>
+      <div *ngIf="FormCheckListPaso1.get('id_tipo_material_ot').hasError('valorNoValido')" style="color: var(--ion-color-danger);">
+        Falta seleccionar este campo
+      </div>
+
+      <ion-item *ngIf="ItemVisibleBomba">
+        <ion-label>
+          <p>Motor:</p>
+          <ion-select
+            cancelText="Cancelar"
+            (ionChange)="FSelectChangeMotor($event,0)"
+            [selectedText]="MotorPivotSelectedText"
+            placeholder="Seleccionar Motor"
+            color="primary"
+            interface="action-sheet"
+            mode="ios"
+          >
+            <ion-select-option
+              *ngFor="let tipo of DsMotor"
+              [value]="tipo['codigo']"
+              >{{tipo['nombre']}}
+            </ion-select-option>
+          </ion-select>
+        </ion-label>
+      </ion-item>
+
+      <ion-item *ngIf="ItemVisibleBomba">
+        <ion-label>
+          <p>Voltaje:</p>
+          <ion-select
+            cancelText="Cancelar"
+            (ionChange)="FSelectChangeVoltaje($event,0)"
+            [selectedText]="VoltajePivotSelectedText"
+            formControlName="voltaje_ot"
+            placeholder="Seleccionar Voltaje"
+            color="primary"
+            interface="action-sheet"
+            mode="ios"
+          >
+            <ion-select-option
+              *ngFor="let tipo of DsVoltaje"
+              [value]="tipo['codigo']"
+              >{{tipo['nombre']}}
+            </ion-select-option>
+          </ion-select>
+        </ion-label>
+      </ion-item>
+      <ion-item *ngIf="ItemVisibleBomba">
+        <ion-label>
+          <p>Frecuencia:</p>
+          <ion-select
+            cancelText="Cancelar"
+            (ionChange)="FSelectChangeFrecuencia($event,0)"
+            [selectedText]="FrecuenciaPivotSelectedText"
+            formControlName="idfrecuencia_ot"
+            placeholder="Seleccionar Frecuencia"
+            color="primary"
+            interface="action-sheet"
+            mode="ios"
+          >
+            <ion-select-option
+              *ngFor="let tipo of DsFrecuencia"
+              [value]="tipo['codigo']"
+              >{{tipo['nombre']}}
+            </ion-select-option>
+          </ion-select>
+        </ion-label>
+      </ion-item>
+      <ion-item *ngIf="ItemVisibleBomba">
+        <ion-label>
+          <p>Velocidad de Rotacion:</p>
+          <ion-select
+            cancelText="Cancelar"
+            (ionChange)="FSelectChangeVelRot($event,0)"
+            [selectedText]="VelRotPivotSelectedText"
+            formControlName="idvelrot_ot"
+            placeholder="Seleccionar velocidad de rotacion"
+            color="primary"
+            interface="action-sheet"
+            mode="ios"
+          >
+            <ion-select-option
+              *ngFor="let tipo of DsVelrot"
+              [value]="tipo['codigo']"
+              >{{tipo['nombre']}}
+            </ion-select-option>
+          </ion-select>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">
+          Observaciones:
+        </ion-label>
+          <ion-textarea [autoGrow]="true"
+               [autofocus]="true" mode="ios" [autoGrow]="true"
+          formControlName="ot_nota"
+          ></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="ItemVisibleTablero">
+        <ion-label >
+          <p>Tipo de Potencia:</p>
+          <ion-select
+            cancelText="Cancelar"
+            (ionChange)="FSelectChangePotencia($event,0)"
+            [selectedText]="PotenciaPivotSelectedText"
+            placeholder="Seleccionar Tipo de Potencia"
+            color="primary"
+            interface="action-sheet"
+            mode="ios"
+          >
+            <ion-select-option
+              *ngFor="let tipo of DsTipoPotencia"
+              [value]="tipo['codigo']"
+              >{{tipo['nombre']}}
+            </ion-select-option>
+          </ion-select>
+        </ion-label>
+      </ion-item>
+      <div *ngIf="FormCheckListPaso1.get('potencia').hasError('valorNoValido')" style="color: var(--ion-color-danger);">
+        Falta seleccionar este campo
+      </div>
+      <ion-item *ngIf="ItemVisibleTablero">
+        <ion-label>
+          <p>Tipo de Equipamiento:</p>
+          <ion-select
+            cancelText="Cancelar"
+            (ionChange)="FSelectChangeTipoEquipamiento($event,0)"
+            [selectedText]="TipoEquipamientoPivotSelectedText"
+            placeholder="Seleccionar Tipo de Equipamiento"
+            color="primary"
+            interface="action-sheet"
+            mode="ios"
+          >
+            <ion-select-option
+              *ngFor="let tipo of DsTipoEquipamiento"
+              [value]="tipo['codigo']"
+              >{{tipo['nombre']}}
+            </ion-select-option>
+          </ion-select>
+        </ion-label>
+      </ion-item>
+      <div *ngIf="FormCheckListPaso1.get('id_tipo_equipamiento_ot').hasError('valorNoValido')" style="color: var(--ion-color-danger);">
+        Falta seleccionar este campo
+      </div>
+      <ion-item *ngIf="ItemVisibleTablero">
+        <ion-label>
+          <p>Estandar:</p>
+          <ion-select
+            cancelText="Cancelar"
+            (ionChange)="FSelectChangeEstandar($event,0)"
+            [selectedText]="EstandarPivotSelectedText"
+            placeholder="Seleccionar Estandar"
+            color="primary"
+            interface="action-sheet"
+            mode="ios"
+          >
+            <ion-select-option
+              *ngFor="let tipo of DsEstandar"
+              [value]="tipo['codigo']"
+              >{{tipo['nombre']}}
+            </ion-select-option>
+          </ion-select>
+        </ion-label>
+      </ion-item>
+      <div *ngIf="FormCheckListPaso1.get('id_estandar_ot').hasError('valorNoValido')" style="color: var(--ion-color-danger);">
+        Falta seleccionar este campo
+      </div>
+      <ion-item *ngIf="ItemVisibleTablero">
+        <ion-label>
+          <p>Tension de Fuerza:</p>
+          <ion-select
+            cancelText="Cancelar"
+            (ionChange)="FSelectChangeTensionFuerza($event,0)"
+            [selectedText]="TensionFuerzaPivotSelectedText"
+            placeholder="Seleccionar Tension de Fuerza"
+            color="primary"
+            interface="action-sheet"
+            mode="ios"
+          >
+            <ion-select-option
+              *ngFor="let tipo of DsTensionFuerza"
+              [value]="tipo['codigo']"
+              >{{tipo['nombre']}}
+            </ion-select-option>
+          </ion-select>
+        </ion-label>
+      </ion-item>
+      <ion-item *ngIf="ItemVisibleTablero">
+        <ion-label>
+          <p>Tension de Mando:</p>
+          <ion-select
+            cancelText="Cancelar"
+            (ionChange)="FSelectChangeTensionMando($event,0)"
+            [selectedText]="TensionMandoPivotSelectedText"
+            placeholder="Seleccionar tension de mando"
+            color="primary"
+            interface="action-sheet"
+            mode="ios"
+          >
+            <ion-select-option
+              *ngFor="let tipo of DsTensionMando"
+              [value]="tipo['codigo']"
+              >{{tipo['nombre']}}
+            </ion-select-option>
+          </ion-select>
+        </ion-label>
+      </ion-item>
+      <ion-item-divider color="primary" *ngIf="ItemVisibleMotor">
+       Motor
+        <!-- <ion-toggle   
+      mode="ios" color="success" labelPlacement="start"  [checked]="ot_idtoggle === 1" (ionChange)="onToggle($event)">Servicio de Rebobinado:</ion-toggle><br /><br/> -->
+    </ion-item-divider>
+    <!-- <ion-item *ngIf="ItemVisibleMotor">
+      <ion-label>
+        <p>Estado</p>
+        <ion-input
+        type="text"
+        maxlength="80"
+        formControlName="estado_dis_motor_otc"
+        ></ion-input>
+      </ion-label>
+    </ion-item>  -->
+    
+    <ion-item *ngIf="ItemVisibleMotor" >
+      <!-- <ion-item *ngIf="ItemVisibleMotor" [attr.disabled]="toggleState"></ion-item> -->
+        <ion-label>
+          <p>Codigo de Motor</p>
+          <ion-input
+          type="text"
+          maxlength="80"
+          formControlName="ot_cod_reb_motor"
+          ></ion-input>
+        </ion-label>
+      </ion-item>
+      <ion-item-divider color="primary" *ngIf="ItemProCau">
+        <ion-label> SERVICIO DE REBOBINADO </ion-label>
+    </ion-item-divider>
+
+      <ion-item *ngIf="ItemPropro">
+        <ion-label>
+          <p>Proceso:</p>
+          <ion-select
+            cancelText="Cancelar"
+            (ionChange)="FSelectChangeDsProceso($event,0)"
+            [selectedText]="TipoOtProcesoSelectedText"
+            placeholder="Seleccionar Proceso"
+            color="primary"
+            interface="action-sheet"
+            mode="ios"
+          >
+            <ion-select-option
+              *ngFor="let tipo of DsProceso"
+              [value]="tipo['codigo']"
+              >{{tipo['nombre']}}
+            </ion-select-option>
+          </ion-select>
+        </ion-label>
+      </ion-item>
+
+      <ion-item *ngIf="ItemProCau">
+        <ion-label>
+          <p>Causa:</p>
+          <ion-select
+            cancelText="Cancelar"
+            (ionChange)="FSelectChangeDsCausa($event,0)"
+            [selectedText]="TipoOtCausaSelectedText"
+            placeholder="Seleccionar Causa"
+            color="primary"
+            interface="action-sheet"
+            mode="ios"
+          >
+            <ion-select-option
+              *ngFor="let tipo of DsCausa"
+              [value]="tipo['codigo']"
+              >{{tipo['nombre']}}
+            </ion-select-option>
+          </ion-select>
+        </ion-label>
+      </ion-item>
+
+     
+    </ion-item-group>
+
+    </ion-list>
+  </form>
+</ion-content>
+
+<ion-footer>
+
+  <ion-button color="primary"  (click)="mostrarConfirmacion()"  expand="full">Guardar General</ion-button>
+
+
+</ion-footer>

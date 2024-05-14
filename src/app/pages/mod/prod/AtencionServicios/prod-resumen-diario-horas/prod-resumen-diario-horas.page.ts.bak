@@ -1,0 +1,20 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+
+@Component({
+  selector: 'app-prod-resumen-diario-horas',
+  templateUrl: './prod-resumen-diario-horas.page.html',
+  styleUrls: ['./prod-resumen-diario-horas.page.scss'],
+  standalone: true,
+  imports: [IonicModule, CommonModule, FormsModule]
+})
+export class ProdResumenDiarioHorasPage implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}

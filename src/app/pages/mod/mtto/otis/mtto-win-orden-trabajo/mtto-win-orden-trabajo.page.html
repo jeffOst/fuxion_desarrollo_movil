@@ -1,0 +1,94 @@
+<ion-header [translucent]="true">
+  <ion-toolbar
+    mode="ios"
+    [color]="networkStatus && networkStatus.connected? 'primary':'danger'"
+  >
+    <ion-title text-capitalize>{{tituloTollBar}}
+
+    </ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="mtto-list-orden-trabajo"
+        [text]="Cancelar"
+        [disabled]="disableButton"
+      >
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-toolbar class="ion-no-border">
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <h1>{{globalVal.nom_configuracion_exm}}</h1>
+        <p>{{FormHtmlJs.modelo}}</p>
+      </ion-label>
+      <ion-label class="ion-text-center labelcenter">
+        <h1>{{FormHtmlJs.codsmg}}</h1>
+        <ion-badge slot="end" color="{{colorReqFab}}">{{tituloRepFab}}</ion-badge>
+        </ion-label
+      >
+      <ion-label slot="end" class="ion-text-end text-small">
+        <h3>N°:{{FormHtmlJs.id_orden_trab_fis_cab}}</h3>
+        <h3>{{NombresUsuarioLocal}}</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-toolbar>
+
+<ion-content>
+  <ion-tabs #myTabs>
+    <ion-tab-bar
+      slot="top"
+      color="primary"
+      translucent="true"
+      style="border-radius: 5px"
+    >
+      <ion-tab-button
+        tab="page1"
+        value="1"
+        (click)="mySelect(1,$event)"
+        selected="true"
+      >
+        <ion-icon name="settings-sharp"></ion-icon>
+        GENERAL
+      </ion-tab-button>
+      <ion-tab-button tab="page2" value="2" (click)="mySelect(2,$event)">
+        <ion-icon name="cart-outline"></ion-icon>
+        MATERIALES
+      </ion-tab-button>
+
+      <ion-tab-button  *ngIf="ItemhidMotor"
+        class="ion-no-padding"
+        tab="page3"
+        value="3"
+        (click)="mySelect(3,$event)"
+      >
+        <ion-icon name="construct-sharp"></ion-icon>
+        <ion-label>SERVICIOS</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button *ngIf="ItemhidMotor"
+        tab="page4"
+        class="favorites-button"
+        (click)="mySelect(4,$event)"
+        color="light">
+        <ion-icon name="newspaper-outline"></ion-icon>
+        <ion-label>SOLSE</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button  *ngIf="ItemVisibleMotor" tab="page5" value="5" (click)="mySelect(5,$event)">
+        <ion-icon name="hammer-outline"></ion-icon>
+        <ion-label>ENTREGA MOTOR</ion-label>
+
+      </ion-tab-button>
+      <ion-tab-button   tab="page6" value="6" (click)="mySelect(6,$event)">
+        <ion-icon name="accessibility-outline"></ion-icon>
+        <ion-label>H.H.</ion-label>
+
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

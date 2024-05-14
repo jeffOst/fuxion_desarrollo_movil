@@ -1,0 +1,71 @@
+<ion-toolbar class="ion-no-border">
+  <ion-grid>
+    <ion-row class="ion-justify-content-start">
+      <ion-col class="ion-align-self-start" size="10">
+        <app-header titulo="Lista de Informe tableros"></app-header>
+      </ion-col>
+      <ion-col class="ion-align-self-end" size="2">
+        <ion-label
+          position="fixed"
+          class="label-nameusuario"
+          color="secondary"
+        ></ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+<ion-item>
+  <ion-searchbar
+  #IdHtmlInputSearch
+  mode="ios"
+  animated="true"
+  cancelButtonText="Cancelar"
+  enterkeyhint="done"
+  placeholder="Filtrar Parametros"
+  color="secondary"
+  search-icon="search-circle"
+  [(ngModel)]="NgModInputSearch"
+  (ionInput)="FListaEquipos($event)"
+>
+</ion-searchbar>
+ 
+
+<ion-icon
+  slot="end"
+  name="sync-outline"
+  name="sync-outline"
+  (click)="FListaEquipos($event)"
+></ion-icon>
+  
+</ion-item>
+</ion-toolbar>
+
+<ion-content>
+  <ion-list [inset]="true">
+
+
+    <ion-item  *ngFor="let Row of DataSetGrid"
+    button detail="true" detail-icon="caret-forward-outline" mode="ios" (click)="FNuevaCheckList(Row)"
+    >
+
+    <!-- <ion-badge slot="start" color="black">INFT</ion-badge> -->
+
+            <ion-label [hidden]="scanActive">
+               <strong><div style="color:danger">{{ Row.codsmg }}
+              </div> </strong> 
+              <p>
+
+                Nro.O.T.:&nbsp;<ion-text color="danger">{{ Row.idinforme_tab }} &nbsp;</ion-text>
+                <!-- Procedencia:&nbsp;<ion-text color="secondary">{{ Row.Y06002 }} &nbsp;</ion-text>
+                F.Creacion:&nbsp;<ion-text color="success">{{ Row.ot_fech_inicio_labor }} &nbsp;</ion-text>
+                Modelo:&nbsp;<ion-text color="primary">{{ Row.modelo }}</ion-text
+                >&nbsp; -->
+
+              </p></ion-label>
+
+              <ion-badge slot="end" color="primary">borrador</ion-badge>
+
+          <!-- </ion-item> -->
+
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,425 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-item>
+    <ion-title text-capitalize
+      ><ion-label>INSTALACION DE SELLOS MECANICOS
+        <p>CONTROL DE SELLO MECANICO</p>
+      </ion-label></ion-title>
+      <form [formGroup]="FormCheckListPaso4" #f="ngForm">
+        <ion-toggle justify="end" mode="ios"
+        formControlName="checklist_paso4_apli"
+        (ionChange)="SaveCheckNoAplicaPaso($event)" >Aplica Paso?
+        </ion-toggle>
+        </form>
+  </ion-item>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form [formGroup]="FormCheckListPaso4" #f="ngForm">
+  <ion-list mode="ios" class="ion-no-padding">
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle1($event)"  style="width: 50%;"
+        formControlName="sel_sup_apl">
+        SELLO SUPERIOR
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>CONDICION</p>
+        <ion-segment mode="ios"  formControlName="sel_sup_condic_cp4">
+          <ion-segment-button value="1">
+            <ion-label>NUEVO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>USADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>ESTATUS</p>
+        <ion-segment mode="ios" formControlName="sel_sup_estatu_cp4">
+          <ion-segment-button value="1">
+            <ion-label>INSTALADO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>EN PROCESO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>COMPRESIÓN (MM)</p>
+        <ion-input type="text"  maxlength="80"
+        formControlName="sel_sup_compre_cp4"
+
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>CONFORME AL PART LIST</p>
+        <ion-segment mode="ios" formControlName="sel_sup_part_list_cp4">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>TIPO</p>
+        <ion-segment mode="ios" formControlName="sel_sup_tipo_cp4">
+          <ion-segment-button value="1">
+            <ion-label>MONO RESORTE</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>MG</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>BD</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="4">
+            <ion-label>MG1</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="5">
+            <ion-label>ORIGINAL</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating"> OBSERVACIONES </ion-label>
+      <ion-textarea
+      formControlName="sel_sup_obse_cp4"
+
+        [autofocus]="true"
+        mode="ios"
+        [autoGrow]="true"
+       ></ion-textarea>
+    </ion-item>
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle2($event)"  style="width: 50%;"
+        formControlName="sel_int_apl">
+        SELLO INTERMEDIO
+            </ion-toggle>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-label>
+        <p>CONDICION</p>
+        <ion-segment mode="ios" formControlName="sel_int_condic_cp4">
+          <ion-segment-button value="1">
+            <ion-label>NUEVO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>USADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>ESTATUS</p>
+        <ion-segment mode="ios" formControlName="sel_int_estatu_cp4">
+          <ion-segment-button value="1">
+            <ion-label>INSTALADO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>EN PROCESO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>COMPRESIÓN (MM)</p>
+        <ion-input type="text"  maxlength="80"
+        formControlName="sel_int_compre_cp4"
+
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>CONFORME AL PART LIST</p>
+        <ion-segment mode="ios" formControlName="sel_int_part_list_cp4">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>TIPO</p>
+        <ion-segment mode="ios" formControlName="sel_int_tipo_cp4">
+          <ion-segment-button value="1">
+            <ion-label>MONO RESORTE</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>MG</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>BD</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="4">
+            <ion-label>MG1</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="5">
+            <ion-label>ORIGINAL</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating"> OBSERVACIONES </ion-label>
+      <ion-textarea
+        [autofocus]="true"
+        mode="ios"
+        [autoGrow]="true"
+      formControlName="sel_int_obse_cp4"
+
+        ></ion-textarea>
+    </ion-item>
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle3($event)"  style="width: 50%;"
+        formControlName="sel_infe_apl">
+        SELLO INFERIOR
+            </ion-toggle>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-label>
+        <p>CONDICION</p>
+        <ion-segment mode="ios" formControlName="sel_infe_condic_cp4">
+          <ion-segment-button value="1">
+            <ion-label>NUEVO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>USADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>ESTATUS</p>
+        <ion-segment mode="ios" formControlName="sel_infe_estatu_cp4">
+          <ion-segment-button value="1">
+            <ion-label>INSTALADO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>EN PROCESO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>COMPRESIÓN (MM)</p>
+        <ion-input type="text"  maxlength="80"
+        formControlName="sel_infe_compre_cp4"
+
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>CONFORME AL PART LIST</p>
+        <ion-segment mode="ios" formControlName="sel_infe_part_list_cp4">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>TIPO</p>
+        <ion-segment mode="ios" formControlName="sel_infe_tipo_cp4">
+          <ion-segment-button value="1">
+            <ion-label>MONO RESORTE</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>MG</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="3">
+            <ion-label>BD</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="4">
+            <ion-label>MG1</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="5">
+            <ion-label>ORIGINAL</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating"> OBSERVACIONES </ion-label>
+      <ion-textarea
+        [autofocus]="true"
+        mode="ios"
+        [autoGrow]="true"
+      formControlName="sel_infe_obse_cp4"
+
+        ></ion-textarea>
+    </ion-item>
+<!-- -------------------------------INICIO CONTROL-------------------------------- -->
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle4($event)"  style="width: 50%;"
+        formControlName="pru_her_apl">
+        PRUEBA DE HERMETICIDAD
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>EJECUTADO</p>
+        <ion-segment mode="ios" formControlName="pru_her_ejec_cp4">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>FECHA EJECUCION</p>
+        <ion-label>{{FormCheckListPaso4.value.pru_her_fch_ejec_cp4}}</ion-label>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle5($event)"  style="width: 50%;"
+        formControlName="pre_pru_apl">
+        PRESION  DE PRUEBA (BAR)
+            </ion-toggle>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-label>
+        <p>VALOR:</p>
+        <ion-input type="text" formControlName="pru_her_valor_cp4"
+
+
+        ></ion-input>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>EJECUTADO</p>
+        <ion-segment mode="ios" formControlName="pre_pru_ejec_cp4">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>FECHA EJECUCION</p>
+        <ion-label>{{FormCheckListPaso4.value.pre_pru_fch_ejec_cp4}}</ion-label>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider>
+      <ion-toggle mode="ios" (ionChange)="toggle6($event)"  style="width: 50%;"
+        formControlName="lle_cam_apl">
+        LLENADO DE CAMARA DE ACEITE
+            </ion-toggle>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <p>EJECUTADO</p>
+        <ion-segment mode="ios" formControlName="lle_cam_ejec_cp4">
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>FECHA EJECUCION</p>
+        <ion-label>{{FormCheckListPaso4.value.lle_cam_fch_ejec_cp4}}</ion-label>
+      </ion-label>
+    </ion-item>
+<!-- --------------------------------FIN CONTROL------------------------------------------ -->
+<ion-item-divider>
+  SUPERVISOR RESPONSABLE
+</ion-item-divider>
+<ion-item>
+  <ion-label>
+    <p>OBSERVACIONES:</p>
+    <ion-textarea [disabled]="disableButtonPaso1" style="width:100%;height: 30px;"  formControlName="revi_respsble_obs_cp4"
+
+    ></ion-textarea>
+  </ion-label>
+</ion-item>
+
+  </ion-list>
+</form>
+</ion-content>
+<ion-footer>
+  <form [formGroup]="FormCheckListPaso4" #f="ngForm">
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col style="text-align: center">
+        <ion-segment style="width: 110%;" class="ion_segment_3d" mode="ios" formControlName="idestado_revi_paso4_cp4" >
+
+          <ion-segment-button (click)="SaveFormBorradorPaso1()" value="1" layout="icon-end">
+            <ion-icon name="close" color="danger"></ion-icon>
+            <ion-label color="danger">BORRADOR</ion-label>
+          </ion-segment-button>
+          <ion-segment-button (click)="SaveFormTerminadoPaso1()" value="2" layout="icon-end">
+            <ion-icon color="success" name="checkmark"></ion-icon>
+            <ion-label color="success">TERMINADO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button (click)="SaveFormTerminadoPaso1()" value="3" layout="icon-end" [disabled]="disableButtonPaso1">
+            <ion-icon name="star"></ion-icon>
+            <ion-label color="secondary">VERIFICADO</ion-label>
+          </ion-segment-button>
+          <ion-segment-button (click)="SaveFormTerminadoPaso1()" value="4" layout="icon-end" [disabled]="disableButtonPaso1">
+            <ion-icon color="warning" name="alert"></ion-icon>
+            <ion-label color="warning" >RECHAZADO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</form>
+</ion-footer>

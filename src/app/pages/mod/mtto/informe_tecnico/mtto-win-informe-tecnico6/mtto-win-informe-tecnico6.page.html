@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar mode="ios" class="ion-no-padding">
+
+      <ion-title text-capitalize>
+        <ion-label>ANTES DEL DESMONTAJE
+        </ion-label>
+      </ion-title>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="FormInformeTecPaso3" #f="ngForm">
+    <ion-list mode="ios" class="ion-no-padding">
+
+      <ion-item>
+        <ion-label position="floating">
+          FALLA PRIMARIA:
+        </ion-label>
+          <ion-textarea [autoGrow]="true"
+               [autofocus]="true" mode="ios" [autoGrow]="true"
+          formControlName="falla_primaria_ic"
+          ></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">
+          FALLA SECUNDARIA:
+        </ion-label>
+          <ion-textarea [autoGrow]="true"
+               [autofocus]="true" mode="ios" [autoGrow]="true"
+          formControlName="falla_secundaria_ic"
+          ></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">
+          ANALISIS DEL PROBLEMA:
+        </ion-label>
+          <ion-textarea [autoGrow]="true"
+               [autofocus]="true" mode="ios" [autoGrow]="true"
+          formControlName="analisis_del_problema"
+          ></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">
+          RECLAMO:
+        </ion-label>
+          <ion-textarea [autoGrow]="true"
+               [autofocus]="true" mode="ios" [autoGrow]="true"
+          formControlName="componentes_de_reclamo"
+          ></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">
+          CONCLUSIONES SUP.PLANTA:
+        </ion-label>
+          <ion-textarea [autoGrow]="true"
+               [autofocus]="true" mode="ios" [autoGrow]="true"
+          formControlName="nro_fotos"
+          ></ion-textarea>
+      </ion-item>
+
+</ion-list>
+</form>
+</ion-content>
+<ion-footer>
+
+  <form [formGroup]="FormInformeTecPaso3" #f="ngForm">
+    <ion-grid>
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col style="text-align: center">
+          <ion-segment style="width: 110%;" class="ion_segment_3d" mode="ios" formControlName="estado_informe" >
+
+            <ion-segment-button (click)="SaveFormBorradorPaso2()" value="1" layout="icon-end">
+              <ion-icon name="close" color="danger"></ion-icon>
+              <ion-label color="danger">BORRADOR</ion-label>
+            </ion-segment-button>
+            <ion-segment-button (click)="SaveFormBorradorPaso2()" value="2" layout="icon-end">
+              <ion-icon color="success" name="checkmark"></ion-icon>
+              <ion-label color="success">TERMINADO</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+</ion-footer>
+

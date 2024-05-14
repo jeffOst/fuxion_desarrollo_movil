@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title>Lista de Servicios::</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancelar_listaservicios(0,0,0,0,0)" color="danger">
+        <ion-icon name="close"></ion-icon>
+        Cancelar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-item>
+    <ion-searchbar
+      style="width: 80%"
+      #idinputsearch_equipo
+      mode="ios"
+      debounce="2500"
+      cancelButtonText="Cancelar"
+      enterkeyhint="done"
+      placeholder="Filtrar Servicios"
+      [(ngModel)]="search_term_equipo"
+      (ionChange)="lista_servicios()"
+    >
+    </ion-searchbar>
+    <ion-icon
+      slot="end"
+      name="sync-outline"
+      (click)="lista_servicios()"
+      #idIconButtonSync
+    ></ion-icon>
+  </ion-item>
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="headgrid" size-sm="3" size-md="3" size-xl="4"
+          ><ion-label color="dark">Codigo</ion-label></ion-col
+        >
+        <ion-col class="headgrid" size-sm="5" size-md="5" size-xl="4"
+          >Descripcion</ion-col
+        >
+        <ion-col class="headgrid" size-sm="4" size-md="4" size-xl="4"
+          >Pieza</ion-col
+        >
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+  <ion-list
+    *ngFor="let item_equipo of results_equipos; let i=index let isOdd=odd; let isEven=even"
+    [class.odd]="isOdd"
+    [class.even]="isEven"
+    lines="full"
+    inset="true"
+  >
+    <ion-item
+      button
+      (click)="seleccionar_servicio(item_equipo.Y04002,item_equipo.Y04001,item_equipo.SEQMASERV,item_equipo.nomclase,item_equipo.nombre)"
+    >
+      <ion-grid>
+        <ion-row>
+          <ion-col size-sm="3" size-md="3" size-xl="2"
+            >{{item_equipo.Y04001}}</ion-col
+          >
+          <ion-col size-sm="5" size-md="5" size-xl="6"
+            >{{item_equipo.Y04002}}</ion-col
+          >
+          <ion-col size-sm="4" size-md="4" size-xl="4"
+            >{{item_equipo.nomclase}}</ion-col
+          >
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>

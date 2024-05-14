@@ -1,0 +1,132 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-item>
+      <ion-title text-capitalize>
+        <ion-label>INSPECCION VISUAL</ion-label>
+      </ion-title>
+      <!-- <form [formGroup]="FormCheckListPaso1" #f="ngForm">
+      <ion-toggle justify="end" mode="ios"
+      formControlName="checklist_paso1_apli"
+      (ionChange)="SaveCheckNoAplicaPaso($event)" >Aplica Paso?
+      </ion-toggle>
+      </form> -->
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="FormCheckListPaso2">
+    <!-- [formGroup]="FormInformeTecPaso3" #f="ngForm" -->
+    <ion-list mode="ios" class="ion-no-padding">
+      <ion-item-group>
+        <ion-item-divider color="primary">
+          <ion-label> <ion-icon slot="start" name="radio-button-on-outline" aria-hidden="true"></ion-icon> Botoneras </ion-label>
+        </ion-item-divider>
+<ion-item>
+  <ion-label position="floating">
+    Pulsadores:
+  </ion-label>
+    <ion-textarea [autoGrow]="true"
+         [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="pulsador1"
+    >  </ion-textarea>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">
+    Lamparas:
+  </ion-label>
+    <ion-textarea [autoGrow]="true"
+         [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="lamparas1"
+    > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">
+    Conmutadores:
+  </ion-label>
+    <ion-textarea [autoGrow]="true"
+         [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="conmutadores"
+    > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+</ion-item>
+</ion-item-group>
+<ion-item-group>
+  <ion-item-divider color="primary">
+    <ion-label> <ion-icon slot="start" name="speedometer-outline" aria-hidden="true"></ion-icon> Dispositivos de Registro </ion-label>
+  </ion-item-divider>
+  <ion-item>
+    <ion-label position="floating">
+      Horometro:
+    </ion-label>
+      <ion-textarea [autoGrow]="true"
+           [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="horometro"
+      > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">
+      Amperimetro:
+    </ion-label>
+      <ion-textarea [autoGrow]="true"
+           [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="amper"
+      > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">
+      Voltimetro:
+    </ion-label>
+      <ion-textarea [autoGrow]="true"
+           [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="voltim"
+      > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">
+      key Pad/ Mando externo SOFT STARTER/ VDF:
+    </ion-label>
+      <ion-textarea [autoGrow]="true"
+           [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="keypad"
+      > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">
+      Baliza Sonora:
+    </ion-label>
+      <ion-textarea [autoGrow]="true"
+           [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="balsono"
+      > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+  </ion-item>
+</ion-item-group>
+<ion-item-group>
+  <ion-item-divider color="primary">
+    <ion-label> <ion-icon name="cube-outline"></ion-icon> Estructura externa </ion-label>
+  </ion-item-divider>
+  <ion-item>
+    <ion-label position="floating">
+      Prensaestopas PG:
+    </ion-label>
+      <ion-textarea [autoGrow]="true"
+           [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="prensaes"
+      > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">
+      Gabinete Metalico (Estado de estructura):
+    </ion-label>
+      <ion-textarea [autoGrow]="true"
+           [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="gabmetal"
+      > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">
+      Otras-observaciones:
+    </ion-label>
+      <ion-textarea [autoGrow]="true"
+           [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="obser1"
+      > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+  </ion-item>
+</ion-item-group>
+</ion-list>
+</form>
+</ion-content>
+<ion-footer>
+
+  <ion-button  expand="full" (click)="SaveFormInfPaso1()">GUARDAR</ion-button>
+  <!-- (click)="SaveFormBorradorPaso2()" -->
+
+</ion-footer>

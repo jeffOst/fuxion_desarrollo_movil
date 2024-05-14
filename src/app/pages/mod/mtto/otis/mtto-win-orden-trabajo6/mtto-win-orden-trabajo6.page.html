@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-item>
+      <ion-title text-capitalize>
+        <ion-label>Registro Horas Hombre</ion-label>
+      </ion-title>
+      </ion-item>
+  </ion-toolbar>
+</ion-header>
+<ion-item-divider color="primary">Registrar Item</ion-item-divider>
+<ion-content class="ion-padding">
+  <form [formGroup]="FormCheckListPaso6" #f="ngForm">
+    <ion-list mode="ios" class="ion-no-padding" >
+      <ion-item>
+        <ion-label>Fecha y Hora de Inicio:</ion-label>
+        <ion-datetime-button locale="es-ES" datetime="datetime1"></ion-datetime-button>
+        <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
+          <ng-template>
+            <ion-datetime locale="es-ES" id="datetime1" mode="ios" displayFormat="YYYY-MM-DD HH:mm" presentation="date-time"
+              [preferWheel]="true" [showDefaultButtons]="true" pickerFormat="YYYY-MM-DD HH:mm"
+              [(ngModel)]="ng_fch_entrega_mtto" [ngModelOptions]="{standalone: true}">
+            </ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label>Fecha y Hora Fin:</ion-label>
+        <ion-datetime-button locale="es-PE" datetime="datetime2"></ion-datetime-button>
+        <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
+          <ng-template>
+            <ion-datetime locale="es-ES" id="datetime2" mode="ios" displayFormat="YYYY-MM-DD HH:mm" presentation="date-time"
+              [preferWheel]="true" [showDefaultButtons]="true" pickerFormat="YYYY-MM-DD HH:mm"
+              [(ngModel)]="ng_fch_entrega_mtto2" [ngModelOptions]="{standalone: true}">
+            </ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>Estado:</p>
+            <ion-select
+              cancelText="Cancelar"
+              (ionChange)="FSelectChangeMotor($event,0)"
+            [selectedText]="MotorRebSelectedText"
+            formControlName="reb_motor"
+              placeholder="Seleccionar Estado"
+              color="primary"
+              interface="action-sheet"
+              mode="ios"
+            >
+              <ion-select-option  *ngFor="let tipo of RebMotor"
+              [value]="tipo['codigo']"
+              >{{tipo['nombre']}}
+                
+              </ion-select-option>
+            </ion-select>
+          </ion-label>
+        </ion-item>
+        <ion-button expand="block"(click)="mostrarConfirmacion6()">
+          <ion-icon name="add-outline"  ></ion-icon>Agregar</ion-button>
+    </ion-list>
+  </form>
+</ion-content>
+
+
+<!-- <ion-item-divider color="primary">Lista de Fechas {{ 'textoFinal' }}</ion-item-divider> -->
+<ion-item-divider color="primary" class="divider-with-text">
+  <span>Lista de Fechas</span>
+  <div class="spacer"></div>
+  <!-- <span>Total de horas: {{ sumarTiempos(filas) }}</span> -->
+</ion-item-divider>
+<ion-content>
+  <ion-list [inset]="true">
+
+
+    <ion-item  *ngFor="let Row of listmotor"
+    button detail="true" detail-icon="trash-outline" mode="ios" (click)="mostrarEliminar6($event,Row);"
+    >
+
+   
+            <ion-label [hidden]="scanActive"
+             >
+              <p>
+
+                Fecha y Hora de Inicio:&nbsp;<ion-text color="success">{{ Row.ot_fech_inicio }} &nbsp;</ion-text>
+                Fecha y Hora Fin:&nbsp;<ion-text color="secondary">{{ Row.ot_fech_fin }} &nbsp;</ion-text>
+                Estado:&nbsp;<ion-text color="{{Row.color_estado}}">{{ Row.estado }} &nbsp;</ion-text>
+                Horas:&nbsp;<ion-text color="warning">{{ Row.tiempo_diferencia }} &nbsp;</ion-text>
+                <!-- F.Creacion:&nbsp;<ion-text color="success">{{ Row.ot_fech_inicio_labor }} &nbsp;</ion-text>
+                Modelo:&nbsp;<ion-text color="primary">{{ Row.modelo }}</ion-text> -->
+                &nbsp;
+
+              </p></ion-label>
+
+              
+
+          <!-- </ion-item> -->
+
+    </ion-item>
+  </ion-list>
+
+     
+</ion-content>

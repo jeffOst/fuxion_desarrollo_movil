@@ -1,0 +1,189 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title text-capitalize>Solicitud Revisión Q.C.</ion-title>
+    <!--<ion-title color="primary" style="font-size: 6px;">{{NomUsuario}}</ion-title>-->
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="prod-list-acti-programada"
+        [text]="Cancelar"
+
+      >
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">
+            Orden de Fabricación &nbsp;:</ion-col
+          >
+          <ion-col size="9">
+            <ion-input
+              [(ngModel)]="FormModel.correorden"
+
+
+            >
+            </ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Codigo P.T. &nbsp;:</ion-col>
+          <ion-col size="9">
+            <ion-input
+              [(ngModel)]="FormModel.codigo_pt"
+              [attr.disabled]="readonly_qr"
+            >
+            </ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">
+            Descripción del Componente &nbsp;:</ion-col
+          >
+          <ion-col size="9">
+            <ion-input
+              [(ngModel)]="FormModel.descripcion_pt"
+              [attr.disabled]="readonly_qr"
+            >
+            </ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Tecnico: </ion-col>
+          <ion-col size="9">
+            <ion-input
+              type="text"
+              [(ngModel)]="FormModel.nombres_tecnico"
+              value="{{FormModel.nombres_tecnico}}"
+              readonly
+            ></ion-input>
+            <!-- <ion-item>
+              <ion-searchbar
+                (click)="FOpenModalTecnico(i)"
+                type="text"
+                placeholder="Buscar Tecnico"
+                mode="ios"
+                readonly
+                [(ngModel)]="FormModel.nombres_tecnico"
+                value="{{FormModel.nombres_tecnico}}"
+              >
+              </ion-searchbar>
+            </ion-item> -->
+            <div class="{{CssNotiTecnico}}"></div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">Total Piezas: </ion-col>
+          <ion-col size="9" class="ion-text-start">
+            <ion-input
+            readonly
+            [(ngModel)]="FormModel.cantidad"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">Atendido Piezas: </ion-col>
+          <ion-col size="9" class="ion-text-start">
+            <ion-input
+            readonly
+            [(ngModel)]="FormModel.cantidad_atendido"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Cantidad: </ion-col>
+          <ion-col size="9" class="ion-text-start">
+
+            <ion-input
+                      type="number"
+
+                      [(ngModel)]="FormModel.cantidad_scc"
+                    ></ion-input>
+
+            <!-- <app-input-with-button
+              [(ngModel)]="FormModel.cantidad_scc"
+              ngDefaultControl
+            ></app-input-with-button> -->
+
+            <!-- <ion-card
+              style="
+                border: 1px solid #989aa2 !important;
+                padding: 0px !important;
+                width: 35% !important;
+                height: 48px !important;
+              "
+            >
+              <ion-row>
+                <ion-col size="8" style="padding: 0px !important;">
+                  <ion-item style="align-items:baseline !important">
+                    <ion-input
+                      type="number"
+
+                      [(ngModel)]="FormModel.cantidad_scc"
+                    ></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                  <ion-item style="align-items:baseline !important">
+                    <ion-button
+                      color="danger"
+                      name="remove-outline"
+                      expand="full"
+                      (click)="minus()"
+                    >
+                      &nbsp; - &nbsp;</ion-button
+                    >
+                    <ion-button
+                      color="success"
+                      name="add-outline"
+                      expand="full"
+                      (click)="plus()"
+                      >&nbsp;+&nbsp;</ion-button>
+
+                  </ion-item>
+
+                </ion-col>
+              </ion-row>
+            </ion-card> -->
+            <div class="{{CssNotiCantidad}}"></div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col style="text-align: center">
+        <ion-buttons>
+          <ion-button
+            (click)="FCancelarForm()"
+            [disabled]="disableButton"
+            color="danger"
+          >
+            <ion-icon name="close-outline"></ion-icon>&nbsp; Cancelar
+          </ion-button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <ion-button
+            (click)="FSaveForm()"
+            [disabled]="disableButton"
+            color="primary"
+          >
+            <ion-icon name="save-outline"></ion-icon>&nbsp;
+            <strong> Iniciar </strong>
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

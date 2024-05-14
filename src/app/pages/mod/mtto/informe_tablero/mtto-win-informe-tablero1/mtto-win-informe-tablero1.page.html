@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-item>
+      <ion-title text-capitalize>
+        <ion-label>DATOS GENERALES</ion-label>
+      </ion-title>
+      <!-- <form [formGroup]="FormCheckListPaso1" #f="ngForm">
+      <ion-toggle justify="end" mode="ios"
+      formControlName="checklist_paso1_apli"
+      (ionChange)="SaveCheckNoAplicaPaso($event)" >Aplica Paso?
+      </ion-toggle>
+      </form> -->
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form [formGroup]="FormCheckListPaso1">
+    <ion-list mode="ios" class="ion-no-padding">
+      <ion-item>
+        <ion-label>
+          <p>Marca</p>
+          <!-- <ion-input  labelPlacement="stacked" disabled formControlName="marca"></ion-input> -->
+          <ion-input  labelPlacement="stacked"  formControlName="marca" readonly></ion-input>
+      </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+        <p>Potencia</p>
+        <ion-input  labelPlacement="stacked"  formControlName="potencia" readonly></ion-input>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <p>Tipo de Arranque:</p>
+          <ion-input  labelPlacement="stacked"  formControlName="tarranque" readonly></ion-input>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+        <p>Voltaje de Mando</p>
+        <ion-input  labelPlacement="stacked"  formControlName="voltajeman" readonly></ion-input>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <p>Procedencia</p>
+          <ion-input  labelPlacement="stacked"  formControlName="site" readonly></ion-input>
+      </ion-label>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label>
+          <p>Fecha de Inicio:</p></ion-label>
+        <ion-datetime-button locale="es-ES" datetime="date1"></ion-datetime-button>
+        <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
+          <ng-template>
+            <ion-datetime locale="es-ES" id="date1" mode="ios" displayFormat="YYYY-MM-DD" presentation="date"
+              [preferWheel]="true" [showDefaultButtons]="true" pickerFormat="YYYY-MM-DD"
+              [(ngModel)]="ng_fch_ini_inf" [ngModelOptions]="{standalone: true}"
+               >
+               
+            </ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+      <ion-item>
+        <ion-label><p>Fecha Fin:</p></ion-label>
+        <ion-datetime-button locale="es-ES" datetime="date2"></ion-datetime-button>
+        <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
+          <ng-template>
+            <ion-datetime locale="es-ES" id="date2" mode="ios" displayFormat="YYYY-MM-DD" presentation="date"
+              [preferWheel]="true" [showDefaultButtons]="true" pickerFormat="YYYY-MM-DD"
+              [(ngModel)]="ng_fch_fin_inf" [ngModelOptions]="{standalone: true}"
+               >
+               
+            </ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item> -->
+      <ion-item>
+        <ion-label>
+          <p>Horas de Trabajo</p>
+        <ion-input  labelPlacement="stacked" formControlName="horastrab"></ion-input>
+      </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <p>Fecha de Creacion</p>
+        <ion-input  labelPlacement="stacked" formControlName="fech_de_registro"></ion-input>
+      </ion-label>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+
+<ion-footer>
+
+  <ion-button  expand="full" (click)="SaveFormTerminadoPaso1()">GUARDAR</ion-button>
+  <!-- (click)="SaveFormBorradorPaso1()" -->
+
+</ion-footer>

@@ -1,0 +1,20 @@
+<app-header titulo="Pagina Principal"></app-header>
+<ion-content>
+  <h1>BIENVENIDO</h1>
+  <ion-label position="fixed" class="label-nameusuario" color="secondary"><h1>{{NomUsuario}}</h1></ion-label>
+</ion-content>
+<ion-footer>
+  <ion-card *ngIf="hideCardTA" mode="ios" style="align-items: center">
+    <ion-button
+      style="width:50%"
+      fill="clear"
+      expand="block"
+      (click)="FListarActvidades()"
+    >
+      <ion-label color="primary" style="font: size 6px">
+        <ion-icon name="grid-outline"></ion-icon>
+        Tabla de actividades
+      </ion-label>
+    </ion-button>
+  </ion-card>
+</ion-footer>

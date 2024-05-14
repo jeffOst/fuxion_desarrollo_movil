@@ -1,0 +1,158 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-item>
+      <ion-title text-capitalize>
+        <ion-label>PARTE ELECTRICA</ion-label>
+      </ion-title>
+      <!-- <form [formGroup]="FormCheckListPaso1" #f="ngForm">
+      <ion-toggle justify="end" mode="ios"
+      formControlName="checklist_paso1_apli"
+      (ionChange)="SaveCheckNoAplicaPaso($event)" >Aplica Paso?
+      </ion-toggle>
+      </form> -->
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="FormCheckListPaso3">
+    <!-- [formGroup]="FormInformeTecPaso3" #f="ngForm" -->
+    <ion-list mode="ios" class="ion-no-padding">
+      <ion-item-group>
+        <ion-item-divider color="tertiary">
+          <ion-label>PRUEBA DE FUNCIONAMIENTO</ion-label>
+        </ion-item-divider>
+        <ion-item-divider color="primary">
+          <ion-label> <ion-icon slot="start" name="barbell-outline" aria-hidden="true"></ion-icon> Circuito de Fuerza</ion-label>
+        </ion-item-divider>
+<ion-item>
+  <ion-label position="floating">
+    Contactores:
+  </ion-label>
+    <ion-textarea [autoGrow]="true"
+         [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="contactores"   >  </ion-textarea>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">
+    Interruptor Principal:
+  </ion-label>
+    <ion-textarea [autoGrow]="true"
+         [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="intprin" 
+    > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">
+    Relé térmico:
+  </ion-label>
+    <ion-textarea [autoGrow]="true"
+         [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="reltec" 
+    > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+</ion-item>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-item-divider color="primary">
+          <ion-label> <ion-icon slot="start" name="game-controller-outline" aria-hidden="true"></ion-icon> Circuito de Mando</ion-label>
+        </ion-item-divider>
+<ion-item>
+  <ion-label position="floating">
+    Pulsadores:
+  </ion-label>
+    <ion-textarea [autoGrow]="true"
+         [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="pulsador2" 
+    > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">
+    Lámparas:
+  </ion-label>
+    <ion-textarea [autoGrow]="true"
+         [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="lamparas2" 
+    > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">
+    Conmutadores:
+  </ion-label>
+    <ion-textarea [autoGrow]="true"
+         [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="conmutadores2" 
+    > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">
+    Relé de fases:
+  </ion-label>
+    <ion-textarea [autoGrow]="true"
+         [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="relefas" 
+    > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">
+    Horometro:
+  </ion-label>
+    <ion-textarea [autoGrow]="true"
+         [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="horometro2" 
+    > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">
+    Bloques auxiliares:
+  </ion-label>
+    <ion-textarea [autoGrow]="true"
+         [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="bloqaux" 
+    > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">
+    Barra tierra:
+  </ion-label>
+    <ion-textarea [autoGrow]="true"
+         [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="bartierr" 
+    > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+</ion-item>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-item-divider color="primary">
+          <ion-label> <ion-icon slot="start" name="water-outline" aria-hidden="true"></ion-icon> Sistema Fuga residual / Ventilación forzada</ion-label>
+        </ion-item-divider>
+<ion-item>
+  <ion-label position="floating">
+    Sistema de Fuga residual (GCHK-100/Modulo diferencial):
+  </ion-label>
+    <ion-textarea [autoGrow]="true"
+         [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="sistdefuga" 
+    > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">
+    Bobina disparo/Toroide:
+  </ion-label>
+    <ion-textarea [autoGrow]="true"
+         [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="bobdis" 
+    > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">
+    Ventilador/Extractor:
+  </ion-label>
+    <ion-textarea [autoGrow]="true"
+         [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="ventextr" 
+    > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">
+    Otros - Observaciones:
+  </ion-label>
+    <ion-textarea [autoGrow]="true"
+         [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="obser2" 
+    > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
+</ion-item>
+      </ion-item-group>
+    </ion-list>
+  </form>
+</ion-content>
+<ion-footer>
+
+  <ion-button  expand="full" (click)="SaveFormInfPaso1()">GUARDAR</ion-button>
+  <!-- (click)="SaveFormBorradorPaso2()" -->
+
+</ion-footer>

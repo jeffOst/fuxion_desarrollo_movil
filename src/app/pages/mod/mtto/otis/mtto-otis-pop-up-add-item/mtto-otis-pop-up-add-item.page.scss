@@ -1,0 +1,72 @@
+/* Cambiar el tamaño de letra y color de texto para todas las filas */
+.ion-row {
+  font-size: 10px;
+  color:black; /* Cambia el color de texto a tu preferencia */
+  font-weight: bold;
+}
+
+// /* Cambiar el color de fondo para filas específicas */
+// .ion-row.highlighted {
+//   background-color: #ffcc00; /* Cambia el color de fondo a tu preferencia */
+// }
+// /* Cambiar el tamaño de letra y color de texto para todas las columnas */
+ion-col {
+  font-size: 9px;
+  color: #555; /* Cambia el color de texto a tu preferencia */
+}
+
+// /* Cambiar el color de fondo para columnas específicas */
+// ion-col.highlighted {
+//   background-color: #66ccff; /* Cambia el color de fondo a tu preferencia */
+// }
+
+
+// /* Aplicar estilo al ion-grid */
+// ion-grid {
+//   display: grid;
+//   grid-template-rows: auto 1fr; /* Primera fila para el encabezado, segunda fila para el detalle */
+//   overflow: auto; /* Agregar scroll vertical */
+// }
+
+// /* Estilo para las filas del encabezado */
+// ion-row.header {
+//   background-color: #f0f0f0; /* Color de fondo del encabezado */
+//   font-weight: bold; /* Texto en negrita */
+// }
+
+// /* Estilo para las columnas del encabezado */
+ion-col.header {
+  border: 1px solid #ccc; /* Borde de las columnas del encabezado */
+  padding: 8px; /* Espaciado interior */
+  color:black; /* Cambia el color de texto a tu preferencia */
+  font-weight: bold;
+}
+
+// /* Estilo para las columnas del detalle */
+ion-col.detail {
+  border-bottom: 1px solid #ccc; /* Borde de las columnas del detalle */
+  padding: 4px; /* Espaciado interior */
+}
+/***************************************************/
+/* Estilos para el encabezado */
+.header-grid {
+  display: grid;
+  grid-template-rows: auto; /* Una fila para el encabezado */
+}
+
+/* Estilos para el contenido (detalle) */
+.content-grid {
+  display: grid;
+  grid-template-rows: repeat(auto-fill, minmax(40px, 1fr)); /* Filas dinámicas para el contenido */
+  overflow-y: scroll; /* Agregar scroll vertical al contenido */
+  max-height: 500px; /* Altura máxima del contenido (ajusta según tus necesidades) */
+}
+
+ion-chip{
+  height: 25px;
+  font-size: 9px;
+  margin-inline:0px;
+  margin-top:0px;
+  margin-bottom: 0px;
+
+}

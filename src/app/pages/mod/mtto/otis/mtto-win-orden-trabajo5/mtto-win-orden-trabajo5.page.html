@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-item>
+      <ion-title text-capitalize>
+        <ion-label>ENTREGA DE MOTOR</ion-label>
+      </ion-title>
+      </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="FormCheckListPaso5">
+    <ion-list mode="ios" class="ion-no-padding" >
+      <ion-item>
+      <ion-label>F. Asignacion:</ion-label>
+        <ion-datetime-button label="F.Registro Guia:" locale="es-PE" datetime="datetime" ></ion-datetime-button>
+        <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
+          <ng-template>
+            <ion-datetime locale="es-PE" id="datetime" mode="ios" displayFormat="YYYY-MM-DD HH:mm"  presentation="date-time"
+              [preferWheel]="true" [showDefaultButtons]="true"  pickerFormat="YYYY-MM-DD HH:mm"
+              [(ngModel)]="ng_fch_ini_inf" [ngModelOptions]="{standalone: true}">
+            </ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+      <ion-item>
+        <ion-label>F. Lectura:</ion-label>
+        <ion-input readonly color="primary" formControlName="fch_entrega_mtto"> 
+          <!--  -->
+         </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Equipo Inicial: &nbsp;</ion-label>
+        <ion-input readonly formControlName="equipo_ini"> 
+        </ion-input>
+      </ion-item>
+    <ion-item>
+        <ion-searchbar
+        (click)="open_popup_bombas()"
+        type="text"
+        placeholder="Seleccionar Bomba"
+        mode="ios"
+        readonly
+        formControlName="codsmg"> 
+        Equipo Final:&nbsp;   </ion-searchbar
+        >
+        <!-- correlativo_mtto -->
+      
+    </ion-item>
+    <ion-item >
+      <ion-label>Correlativo:       &nbsp;  </ion-label>
+      <ion-input formControlName="correlativo_mtto" readonly></ion-input></ion-item>
+    
+      <ion-item>
+      <ion-label>Observaciones:&nbsp;  </ion-label>
+      <ion-input formControlName="obs_entrega"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        R. Nucleo: 
+        <ion-segment mode="ios"  formControlName="r_nucleo"
+        (ionChange)="onTouched($event)"
+        >
+          <ion-segment-button value="1">
+            <ion-label>SI</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            <ion-label>NO</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-label>
+      <!-- [(ngModel)]="NamesForm.reclamo_icmd1" value="{{NamesForm.reclamo_icmd1}}"
+        (ionChange)="segmentChanged($event)" -->
+    </ion-item>
+    <!-- <ion-item>
+      <ion-input formControlName="id_orden_trab_cab_2"></ion-input>
+    </ion-item> -->
+    <!-- <ion-item>
+      <ion-label>Codigo Nucleo: &nbsp;</ion-label>
+      <ion-input formControlName="cod_nucleo_lt"> 
+      </ion-input>
+    </ion-item> -->
+    </ion-list>
+  </form>
+</ion-content>
+
+<ion-footer>
+
+  <ion-button color="primary"  (click)="mostrarConfirmacion()"  expand="full">Guardar Cambios</ion-button>
+
+</ion-footer>

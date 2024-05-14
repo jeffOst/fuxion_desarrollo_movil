@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-item>
+      <ion-title text-capitalize>
+        <ion-label>SERVICIOS</ion-label>
+      </ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form  [formGroup]="FormCheckListPaso5">
+    <ion-list mode="ios" class="ion-no-padding">
+      <ion-item>
+      <ion-toggle formControlName="pintadoTablero" (ionChange)="savebutton1()">Pintado de Tablero Eléctrico</ion-toggle><br /><br />
+      </ion-item>
+      <ion-item>
+      <ion-toggle formControlName="monymant" (ionChange)="savebutton1()" >Montaje y Mantenimiento de Circuito Eléctrico</ion-toggle><br /><br />
+      </ion-item>
+      <ion-item>
+      <ion-toggle formControlName="pruebygen" (ionChange)="savebutton1()">Prueba y generación de Protocolo</ion-toggle><br /><br />
+      </ion-item>
+      <ion-item>
+      <ion-toggle formControlName="arenado" (ionChange)="savebutton1()">Arenado de Gabinete Metálico</ion-toggle><br /><br />
+      </ion-item>
+      <ion-item>
+      <ion-toggle formControlName="rep" (ionChange)="savebutton1()">Reparación por Soldadura de gabinetes metálicos</ion-toggle><br /><br />
+      </ion-item>
+      <ion-item>
+      <ion-toggle formControlName="cal" (ionChange)="savebutton1()"> Calado de Gabienete Metálico</ion-toggle><br /><br />
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
