@@ -30,7 +30,7 @@ import { Plugins } from '@capacitor/core';
 import { PopUpEquRecinadoPage } from 'src/app/pages/mod/mtto/pop-up-equ-recinado/pop-up-equ-recinado.page';
 import { FormsModule, FormBuilder, Validators, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 
-import { IonTabs } from '@ionic/angular'
+
 
 
 const { Device, Network, FilesystemDirectory } = Plugins;
@@ -55,7 +55,6 @@ export class MttoWinRecinadoPage implements OnInit {
   button2Active: boolean = false;
 
 
-  @ViewChild('myTabs') tabRef: IonTabs;
   @ViewChild('filePicker', { static: false }) filePickerRef: ElementRef<HTMLInputElement>;
   //photo: SafeResourceUrl;
   isDesktop: boolean;

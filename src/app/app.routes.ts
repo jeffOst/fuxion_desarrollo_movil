@@ -340,21 +340,6 @@ export const routes: Routes = [
     path: 'pop-up-form-herra',
     loadComponent: () => import('./pages/mod/mtto/checklist_herra/pop-up-form-herra/pop-up-form-herra.page').then(m => m.PopUpFormHerraPage)
   },
-  {
-    path: 'mtto-win-recinado-tab-1',
-    loadComponent: () => import('./pages/mod/mtto/mtto-win-recinado-tab-1/mtto-win-recinado-tab-1.page').then( m => m.MttoWinRecinadoTab1Page)
-  },
-  {
-    path: 'mtto-win-recinado-tab-2',
-    loadComponent: () => import('./pages/mod/mtto/mtto-win-recinado-tab-2/mtto-win-recinado-tab-2.page').then( m => m.MttoWinRecinadoTab2Page)
-  },
-  {
-    path: 'mtto-win-recinado',
-    loadChildren: () => import('./pages/mod/mtto/mtto-win-recinado/tabs.routes').then((m) => m.routes),
-    canActivate: [AuthGuardService], data: { loginRoute: '/login' }
-  },
-
-  
   
 
 ];
