@@ -81,21 +81,22 @@ export class MttoListChecklistHerraPage implements OnInit {
     this.navCtrl.navigateForward(['/mtto-win-checklist-herra'], navigationExtras);
     //aqui es la ruta del primer win q contendra el form
   }
-  FNewherra2(Row: any) {
-    this.ApiService.NewForm(this.IdUsuarioLocal)
-    // .then((rest) => {
-    //   this.EditDataRest = rest['form'];
-    //   try {Row = this.EditDataRest[0];} catch (error) {
-    //     console.log('error:::>', error);
-    //   };
-    //   let navigationExtras: NavigationExtras = {
-    //     state: { Row },
-    //   };
-      // console.log('navigationExtras1111',navigationExtras);
-      // this.globalVal.checklist_paso_pivot = '';
-      // this.navCtrl.navigateForward(['/mtto-win-checklist-herra'], navigationExtras);
+  FNewherra2(Row: any,id: any) {
+    this.ApiService.NewForm(this.IdUsuarioLocal,id)
+    .then((rest) => {
+      this.EditDataRest = rest['form'];
+      console.log('forrrrrmmmmm',this.EditDataRest)
+      try {Row = this.EditDataRest[0];} catch (error) {
+        console.log('error:::>', error);
+      };
+      let navigationExtras: NavigationExtras = {
+        state: { Row },
+      };
+      console.log('navigationExtras1111',navigationExtras);
+      this.globalVal.checklist_paso_pivot = '';
+      this.navCtrl.navigateForward(['/mtto-win-checklist-herra'], navigationExtras);
       //aqui es la ruta del primer win q contendra el form
-    // });
+    });
   }
 
   FListaEquipos(event) {

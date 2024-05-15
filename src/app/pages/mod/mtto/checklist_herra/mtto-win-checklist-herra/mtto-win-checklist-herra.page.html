@@ -22,26 +22,14 @@
   <!-- <form [formGroup]="FormCheckListPaso1" #f="ngForm"> -->
     <form [formGroup]="FormCheckListPaso1" #f="ngForm">
     <ion-list mode="ios" class="ion-no-padding">
-      <!-- <ion-item>
-        <ion-label>
-          <p>Tecnico</p>
-          <ion-select
-          cancelText="Cancelar"
-          (ionChange)="FSelectChangTecnico($event,0)"
-          [selectedText]="TecnicoPivotSelectedText"
-          placeholder="Seleccionar tecnico"
-          color="primary"
-          formControlName="idusuario" 
-          interface="action-sheet"
-          mode="ios"> 
-          <ion-select-option
-            *ngFor="let tipo of DsTecnico"
-            [value]="tipo['id_personal']"
-            >{{tipo['tecnico_cl']}}
-          </ion-select-option>
-        </ion-select>
-        </ion-label>
-      </ion-item> -->
+      <ion-item>
+        <ion-input formControlName="tipo_ckl" readonly class="ion-text-center"></ion-input>
+    </ion-item>
+      
+      <ion-item>
+          <ion-input label="Correlativo:&nbsp;" formControlName="correlativo" readonly></ion-input>
+      </ion-item>
+
       <ion-item>
         <ion-searchbar
         (click)="open_popup_tecni()"
@@ -50,15 +38,25 @@
         mode="ios"
         readonly
         formControlName="nomusuario"> 
-        Tecnico:&nbsp;   </ion-searchbar
-        >
-        <!-- correlativo_mtto -->
-      
+        Tecnico:&nbsp;   </ion-searchbar>
     </ion-item>
       <ion-item>
         <ion-label>
           <p>Mesa de Trabajo</p>
-          <ion-select  placeholder="Busqueda de mesa" >
+          <ion-select 
+          cancelText="Cancelar"
+          (ionChange)="FSelectChangeMesa($event,0)"
+          [selectedText]="MesaPivotSelectedText"
+          placeholder="Seleccionar mesa de Trabajo"
+          color="primary"
+          interface="action-sheet"
+          mode="ios"
+          >
+          <ion-select-option
+            *ngFor="let colm of DsMesa"
+            [value]="colm['codigo']"
+            >{{colm['nombre']}}
+          </ion-select-option>
           </ion-select>
         </ion-label>
       </ion-item>
@@ -72,37 +70,47 @@
           placeholder="Seleccionar Isla"
           color="primary"
           interface="action-sheet"
-          mode="ios"> 
-        <!-- formControlName="idfrecuencia_ot" -->
+          mode="ios"
+          > 
           <ion-select-option
             *ngFor="let tipo of DsIsla"
+            [value]="tipo['codigo']"
             >{{tipo['nombre']}}
           </ion-select-option>
         </ion-select>
         </ion-label>
       </ion-item>
       <ion-item>
-        <ion-label>F. de Inspeccion:</ion-label>
+        <ion-label>Fecha y Hora:</ion-label>
           <ion-datetime-button label="F.Registro Guia:" locale="es-PE" datetime="datetime" [disabled]="true"></ion-datetime-button>
           <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
             <ng-template>
               <ion-datetime locale="es-PE" id="datetime" mode="ios" displayFormat="YYYY-MM-DD HH:mm"  presentation="date-time"
                 [preferWheel]="true" [showDefaultButtons]="true"  pickerFormat="YYYY-MM-DD HH:mm"
               >
-              <!-- [(ngModel)]="ng_fch_ini_inf" [ngModelOptions]="{standalone: true}" -->
+              <!--  [ngModelOptions]="{standalone: true}" -->
               </ion-datetime>
             </ng-template>
           </ion-popover>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">
+            Observacion:
+          </ion-label>
+            <ion-textarea [autoGrow]="true"
+                 [autofocus]="true" mode="ios" [autoGrow]="true" formControlName="obser" 
+            > <!--formControlName="falla_secundaria_ic"--> </ion-textarea>
         </ion-item>
         <ion-item-divider color="primary">
           <ion-label ></ion-label>
         </ion-item-divider>
         <ion-item style="padding: 0px;border:0px">
-        <ion-chip slot="end" mode="ios" color="primary" (click)="open_popup_herra()" >
+          <ion-label slot="start">B: Bueno R: Regular M: Malo E: Extraviado</ion-label>
+          <ion-chip slot="end" mode="ios" color="primary" (click)="open_popup_herra()" >
           <ion-label>Agregar</ion-label>
           <ion-icon name="add"></ion-icon>
         </ion-chip>
-        <ion-chip slot="end" color="primary" (click)="FLoadmot()">
+        <ion-chip slot="end" color="primary" (click)="FLoadmot1()">
           <ion-icon name="refresh-outline"></ion-icon>
           <ion-label>Actualizar</ion-label>
         </ion-chip>
@@ -114,20 +122,25 @@
         <ion-badge slot="start" color="medium" no-padding>{{Row.fila}}.-</ion-badge>
         <ion-label style="display: flex; justify-content: space-between;">
           <div style="display: flex; flex-direction: column;">
-            <p style="margin-right: 10px;">{{Row.Y04002}}</p>
+            <p style="width: 250px; margin-right: 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+              {{Row.Y04002}}
+          </p>
             <p>{{'Serie: '+Row.serie_hd}}</p>
           </div>
           <div style="display: flex;">
-            <ion-toggle mode="ios" [checked]="Row.icchecktog_hd" (ionChange)="onToggle($event)"></ion-toggle>
-            <ion-segment mode="ios" style="width: 200px;" formControlName="idestado_hd">
-              <ion-segment-button value="1" style="font-size: 12px; padding: 5px;">
-                <ion-label>Bueno</ion-label>
+            <!-- <ion-toggle mode="ios" [checked]="Row.icchecktog_hd" (ionChange)="onToggle($event)"></ion-toggle> -->
+            <ion-segment mode="ios" style="width: 300px;" value="{{Row.idestado_hd}}" (ionChange)="FBlourInput($event,Row)">
+              <ion-segment-button color="success" value="1" style="font-size: 12px; padding: 5px;">
+                <ion-label>B</ion-label>
               </ion-segment-button>
-              <ion-segment-button value="2" style="font-size: 12px; padding: 5px;">
-                <ion-label>Regular</ion-label>
+              <ion-segment-button color="warning" value="2" style="font-size: 12px; padding: 5px;">
+                <ion-label>R</ion-label>
               </ion-segment-button>
-              <ion-segment-button value="3" style="font-size: 12px; padding: 5px;">
-                <ion-label>Malo</ion-label>
+              <ion-segment-button color="danger" value="3" style="font-size: 12px; padding: 5px;">
+                <ion-label>M</ion-label>
+              </ion-segment-button>
+              <ion-segment-button color="dark" value="4" style="font-size: 12px; padding: 5px;">
+                <ion-label>E</ion-label>
               </ion-segment-button>
             </ion-segment>
           </div>
@@ -140,6 +153,10 @@
   </form>
 </ion-content>
 <ion-footer>
-  <!-- <ion-button (click)="mostrarConfirmacion()"  expand="full" [disabled]="globalVal.ot_estado_general>'2'" color="primary">Terminado</ion-button> -->
-  <ion-button expand="full" color="primary">Terminado</ion-button>
+  <ion-button (click)="mostrarConfirmacion()" expand="full" color="primary">Terminado</ion-button>
 </ion-footer>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 40px;" (click)="open_popupimages()">
+  <ion-fab-button color="primary" mode="ios" title="Item Formulario">
+    <ion-icon name="camera-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

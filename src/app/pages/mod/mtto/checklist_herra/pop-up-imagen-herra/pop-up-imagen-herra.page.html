@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-toolbar mode="ios">
+      <ion-title>Subida de Imagenes</ion-title>
+      <ion-buttons slot="start">
+        <ion-button (click)="cancelar_listaservicios('','','')" class="">
+          <ion-icon part="icon" aria-hidden="true" role="img" class="md hydrated" name="chevron-back-outline"></ion-icon>
+          Atras
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+  <ion-item lines="none"  class="ion-text-center">
+    <ion-chip color="success" (click)="selectImageSource()">
+        <ion-icon name="camera-reverse-outline"></ion-icon>
+        <ion-label>Agregar Imagen</ion-label>
+        <ion-icon name="add-outline"></ion-icon>
+    </ion-chip>
+  </ion-item>
+
+  <ion-list>
+    <ion-item *ngFor="let img of images;index as pos">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="DirectorioFotos+img.idnomadjunto"></ion-img>
+      </ion-thumbnail>
+      <ion-img [src]="img.webviewPath"></ion-img>
+      <ion-label>{{img.name}}</ion-label>
+       <ion-button slot="end" fill="clear" (click)="deleteImage(img.idadjunto,pos)">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button> 
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -340,6 +340,9 @@ export const routes: Routes = [
     path: 'pop-up-form-herra',
     loadComponent: () => import('./pages/mod/mtto/checklist_herra/pop-up-form-herra/pop-up-form-herra.page').then(m => m.PopUpFormHerraPage)
   },
-  
+  {
+    path: 'pop-up-imagen-herra',
+    loadComponent: () => import('./pages/mod/mtto/checklist_herra/pop-up-imagen-herra/pop-up-imagen-herra.page').then(m => m.PopUpImagenHerraPage)
+  }
 
 ];

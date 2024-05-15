@@ -2,10 +2,34 @@
     <ion-toolbar mode="ios">
       <ion-title>Listado de Herramientas</ion-title>
       <ion-buttons slot="start">
-        <!-- <ion-button (click)="cancelar_listaservicios('','','')" class="">
+        <ion-button (click)="cancelar_listaservicios('','','')" class="">
           <ion-icon part="icon" aria-hidden="true" role="img" class="md hydrated" name="chevron-back-outline"></ion-icon>
-          Cancelar
-        </ion-button> -->
+          Atras
+        </ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
+  <ion-content >
+    <ion-item>
+      <ion-searchbar style="width: 98%;" #IdHtmlInputSearch mode="ios" cancelButtonText="Cancelar"
+      enterkeyhint="done" placeholder="Buscar Herramientas" [(ngModel)]="NgModInputSearch" >
+    </ion-searchbar>
+    <ion-icon
+    slot="end"
+    name="sync-outline"
+    (click)="FFindRows()"
+    #idIconButtonSync
+    ></ion-icon>
+    </ion-item>
+  
+    <ion-list *ngFor="let Row of DataSetGrid; let i=index let isOdd=odd; let isEven=even" [class.odd]="isOdd" [class.even]="isEven" lines="full" inset=true>
+      <ion-item>
+      <ion-label>
+      <strong>{{Row.Y04002}}</strong>
+      <p>{{'Codigo: '+Row.Y04001}}</p>
+    </ion-label>
+    <ion-checkbox [(ngModel)]="Row.flg_checklist_herra" (ionChange)="saveEvent($event,Row)" justify="space-between" ></ion-checkbox>
+  </ion-item>
+  </ion-list>
+  
+  </ion-content>
