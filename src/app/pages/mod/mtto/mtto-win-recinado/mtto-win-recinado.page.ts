@@ -48,13 +48,39 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 })
 export class MttoWinRecinadoPage implements OnInit {
 
+  
+  mostrarBoton1: boolean = false;
+  mostrarBoton2: boolean = false;
+
   showGroup1: boolean = false;
   showGroup2: boolean = false;
 
   button1Active: boolean = false;
   button2Active: boolean = false;
 
+  pareja_f1_f2_detalle1_readonly: boolean = false;
+  pareja_f1_f3_detalle1_readonly: boolean = false;
+  pareja_f1_p_detalle1_readonly: boolean = false;
+  pareja_f1_g_detalle1_readonly: boolean = false;
+  pareja_f2_f3_detalle1_readonly: boolean = false;
+  pareja_f2_p_detalle1_readonly: boolean = false;
+  pareja_f2_g_detalle1_readonly: boolean = false;
+  pareja_f3_p_detalle1_readonly: boolean = false;
+  pareja_f3_g_detalle1_readonly: boolean = false;
+  pareja_p_g_detalle1_readonly: boolean = false;
 
+  pareja_f1_f2_detalle2_readonly: boolean = false;
+  pareja_f1_f3_detalle2_readonly: boolean = false;
+  pareja_f1_p_detalle2_readonly: boolean = false;
+  pareja_f1_g_detalle2_readonly: boolean = false;
+  pareja_f2_f3_detalle2_readonly: boolean = false;
+  pareja_f2_p_detalle2_readonly: boolean = false;
+  pareja_f2_g_detalle2_readonly: boolean = false;
+  pareja_f3_p_detalle2_readonly: boolean = false;
+  pareja_f3_g_detalle2_readonly: boolean = false;
+  pareja_p_g_detalle2_readonly: boolean = false;
+
+  //isReadonly: boolean = false; // Inicialmente no es readonly
   @ViewChild('filePicker', { static: false }) filePickerRef: ElementRef<HTMLInputElement>;
   //photo: SafeResourceUrl;
   isDesktop: boolean;
@@ -65,6 +91,8 @@ export class MttoWinRecinadoPage implements OnInit {
   rest_tipo_cables: any;
   rest_diagnosticos: any;
   rest_estados: any;
+  rest_conexion: any;
+  rest_marca: any;
   images = [];
   public photos: Photo[] = [];
   private PHOTO_STORAGE: string = "photos";
@@ -189,9 +217,16 @@ export class MttoWinRecinadoPage implements OnInit {
       metraje_inspeccion2: new FormControl(''),
       detalle_rcd1: new FormControl(''),
       detalle_rcd2: new FormControl(''),
+      temperatura_pruebas1: new FormControl(''),
+      temperatura_pruebas2: new FormControl(''),
+
+      voltaje_diseno_rcc: new FormControl(''),
+
+      factor_correccion_rcd1: new FormControl(''),
+      factor_correccion_rcd2: new FormControl(''),
+
       reclamo_rcd1: new FormControl('0', Validators.required),
       reclamo_rcd2: new FormControl('0'),
-
       pareja_f1_f2_acac: new FormControl(''),
       pareja_f1_f3_acac: new FormControl(''),
       pareja_f1_p_acac: new FormControl(''),
@@ -216,6 +251,10 @@ export class MttoWinRecinadoPage implements OnInit {
 
       idestadocable_rcd1: new FormControl('', Validators.required),
       idestadocable_rcd2: new FormControl(''),
+
+      id_conexion_rcc: new FormControl(''),
+      id_marca_cable_rcc: new FormControl(''),
+
       ca1_mts_pp1: new FormControl('0', Validators.required),///metraje final
       ca1_mts_pp2: new FormControl('0'),
       //ca2_mts_pp1: new FormControl('0',Validators.required),
@@ -255,6 +294,29 @@ export class MttoWinRecinadoPage implements OnInit {
       f2_p_acp2: new FormControl(''),
       f3_p_acp2: new FormControl(''),
       g_p_acp2: new FormControl(''),
+
+
+      pareja_f1_f2_detalle1: new FormControl(''),
+      pareja_f1_f3_detalle1: new FormControl(''),
+      pareja_f1_p_detalle1: new FormControl(''),
+      pareja_f1_g_detalle1: new FormControl(''),
+      pareja_f2_f3_detalle1: new FormControl(''),
+      pareja_f2_p_detalle1: new FormControl(''),
+      pareja_f2_g_detalle1: new FormControl(''),
+      pareja_f3_p_detalle1: new FormControl(''),
+      pareja_f3_g_detalle1: new FormControl(''),
+      pareja_p_g_detalle1: new FormControl(''),
+
+      pareja_f1_f2_detalle2: new FormControl(''),
+      pareja_f1_f3_detalle2: new FormControl(''),
+      pareja_f1_p_detalle2: new FormControl(''),
+      pareja_f1_g_detalle2: new FormControl(''),
+      pareja_f2_f3_detalle2: new FormControl(''),
+      pareja_f2_p_detalle2: new FormControl(''),
+      pareja_f2_g_detalle2: new FormControl(''),
+      pareja_f3_p_detalle2: new FormControl(''),
+      pareja_f3_g_detalle2: new FormControl(''),
+      pareja_p_g_detalle2: new FormControl(''),
 
 
       //VERIFICACION CABLE CORTADO
@@ -348,7 +410,16 @@ export class MttoWinRecinadoPage implements OnInit {
       return this.uid.IMEI
     }*/
 
+
   async ngOnInit() {
+
+/*     const valorInicial = this.FormRecinado.get('id_conexion_rcc')?.value;
+    
+    console.log("verifica el valor inicial");
+    console.log(valorInicial);
+    
+    this.actualizarVisibilidadBotones(valorInicial); */
+
 
     if ((this.plt.is('mobile') && this.plt.is('hybrid')) || this.plt.is('desktop')) {
       this.isDesktop = true;
@@ -368,6 +439,9 @@ export class MttoWinRecinadoPage implements OnInit {
       this.rest_tipo_cables = res['tcable'];
       this.rest_diagnosticos = res['diagnostico'];
       this.rest_estados = res['estcable'];
+      this.rest_conexion = res['conexion'];
+      this.rest_marca = res['marca_cable'];
+
       // console.log("this.rest_estados",res['estcable']);
 
       this.ref.detectChanges();
@@ -396,6 +470,8 @@ export class MttoWinRecinadoPage implements OnInit {
           this.selectedTextDiagnostico1(1);
           this.selectedTextDiagnostico2(1);
           this.selectedTextTCable3(1);
+          this.selectedTextTCable4(1);
+          this.selectedTextTCable5(1);
         }
 
 
@@ -547,12 +623,19 @@ export class MttoWinRecinadoPage implements OnInit {
         metraje_inspeccion2: this.EditDataRest[1].metraje_rcd,
         tipo_cable1: this.EditDataRest[0].tipocable_rcd,
         tipo_cable2: this.EditDataRest[1].tipocable_rcd,
+        id_conexion_rcc: this.EditDataRest[0].id_conexion_rcc,
+        id_marca_cable_rcc: this.EditDataRest[0].id_marca_cable_rcc,
         idestadocable_rcd1: this.EditDataRest[0].idestadocable_rcd,
         idestadocable_rcd2: this.EditDataRest[1].idestadocable_rcd,
         reclamo_rcd1: this.EditDataRest[0].reclamo_rcd,
         reclamo_rcd2: this.EditDataRest[1].reclamo_rcd,
         detalle_rcd1: this.EditDataRest[0].detalle_rcd,
         detalle_rcd2: this.EditDataRest[1].detalle_rcd,
+        temperatura_pruebas1: this.EditDataRest[0].temperatura_pruebas_rcd,
+        temperatura_pruebas2: this.EditDataRest[1].temperatura_pruebas_rcd,
+        voltaje_diseno_rcc: this.EditDataRest[0].voltaje_diseno_rcc,
+        factor_correccion_rcd1: this.EditDataRest[0].factor_correccion_rcd,
+        factor_correccion_rcd2: this.EditDataRest[1].factor_correccion_rcd,
         //fch_reg_ot_rcc: new Date(this.EditDataRest[0].fch_reg_ot_rcc).toISOString(),
         fch_reg_ot_rcc: this.EditDataRest[0].fch_reg_ot_rcc,
         nroot: this.EditDataRest[1].nroot,
@@ -611,6 +694,29 @@ export class MttoWinRecinadoPage implements OnInit {
         f2_p_acp2: this.EditDataRest[1].f2_p_acp,
         f3_p_acp2: this.EditDataRest[1].f3_p_acp,
         g_p_acp2: this.EditDataRest[1].g_p_acp,
+
+
+        pareja_f1_f2_detalle1: this.EditDataRest[0].pareja_f1_f2_detalle,
+        pareja_f1_f3_detalle1: this.EditDataRest[0].pareja_f1_f3_detalle,
+        pareja_f1_p_detalle1: this.EditDataRest[0].pareja_f1_p_detalle,
+        pareja_f1_g_detalle1: this.EditDataRest[0].pareja_f1_g_detalle,
+        pareja_f2_f3_detalle1: this.EditDataRest[0].pareja_f2_f3_detalle,
+        pareja_f2_p_detalle1: this.EditDataRest[0].pareja_f2_p_detalle,
+        pareja_f2_g_detalle1: this.EditDataRest[0].pareja_f2_g_detalle,
+        pareja_f3_p_detalle1: this.EditDataRest[0].pareja_f3_p_detalle,
+        pareja_f3_g_detalle1: this.EditDataRest[0].pareja_f3_g_detalle,
+        pareja_p_g_detalle1: this.EditDataRest[0].pareja_p_g_detalle,
+
+        pareja_f1_f2_detalle2: this.EditDataRest[1].pareja_f1_f2_detalle,
+        pareja_f1_f3_detalle2: this.EditDataRest[1].pareja_f1_f3_detalle,
+        pareja_f1_p_detalle2: this.EditDataRest[1].pareja_f1_p_detalle,
+        pareja_f1_g_detalle2: this.EditDataRest[1].pareja_f1_g_detalle,
+        pareja_f2_f3_detalle2: this.EditDataRest[1].pareja_f2_f3_detalle,
+        pareja_f2_p_detalle2: this.EditDataRest[1].pareja_f2_p_detalle,
+        pareja_f2_g_detalle2: this.EditDataRest[1].pareja_f2_g_detalle,
+        pareja_f3_p_detalle2: this.EditDataRest[1].pareja_f3_p_detalle,
+        pareja_f3_g_detalle2: this.EditDataRest[1].pareja_f3_g_detalle,
+        pareja_p_g_detalle2: this.EditDataRest[1].pareja_p_g_detalle,
 
         //AQUI SE ASIGNA VALORES
         //CABLE 1
@@ -705,6 +811,22 @@ export class MttoWinRecinadoPage implements OnInit {
       this.toogle27 = this.EditDataRest[0].realizar_prueba_dias_dfr;
       this.toogle28 = this.EditDataRest[0].cambiar_cable_dfr;
 
+      //input readonly de la seccion cable cortocircuitado cable 1
+      this.pareja_f1_f2_detalle1_readonly = !this.toogle12;
+      this.pareja_f1_f3_detalle1_readonly = !this.toogle13;
+      this.pareja_f1_p_detalle1_readonly = !this.toogle14;
+      this.pareja_f1_g_detalle1_readonly = !this.toogle15;
+      this.pareja_f2_f3_detalle1_readonly = !this.toogle16;
+      this.pareja_f2_p_detalle1_readonly = !this.toogle17;
+      this.pareja_f2_g_detalle1_readonly = !this.toogle18;
+      this.pareja_f3_p_detalle1_readonly = !this.toogle19;
+      this.pareja_f3_g_detalle1_readonly = !this.toogle20;
+      this.pareja_p_g_detalle1_readonly = !this.toogle21;
+
+      //Al abrir la ventana verifique si tiene un cabla asignado y muestre u oculte los botones del cable 1 y 2
+      const valorInicial = this.FormRecinado.get('id_conexion_rcc')?.value;
+      this.actualizarVisibilidadBotones(valorInicial);
+
       //CABLE 2
       this.toogle29 = this.EditDataRest[1].toogle1;
       this.toogle30 = this.EditDataRest[1].toogle2;
@@ -734,6 +856,21 @@ export class MttoWinRecinadoPage implements OnInit {
       this.toogle54 = this.EditDataRest[1].mantener_operacion_dfr;
       this.toogle55 = this.EditDataRest[1].realizar_prueba_dias_dfr;
       this.toogle56 = this.EditDataRest[1].cambiar_cable_dfr;
+
+      //input readonly de la seccion cable cortocircuitado cable 1
+      this.pareja_f1_f2_detalle2_readonly = !this.toogle40;
+      this.pareja_f1_f3_detalle2_readonly = !this.toogle41;
+      this.pareja_f1_p_detalle2_readonly = !this.toogle42;
+      this.pareja_f1_g_detalle2_readonly = !this.toogle43;
+      this.pareja_f2_f3_detalle2_readonly = !this.toogle44;
+      this.pareja_f2_p_detalle2_readonly = !this.toogle45;
+      this.pareja_f2_g_detalle2_readonly = !this.toogle46;
+      this.pareja_f3_p_detalle2_readonly = !this.toogle47;
+      this.pareja_f3_g_detalle2_readonly = !this.toogle48;
+      this.pareja_p_g_detalle2_readonly = !this.toogle49;
+
+
+
 
       this.termistor_m1 = this.EditDataRest[0].thermistor_m;
       this.termistor_t1 = this.EditDataRest[0].thermistor_n;
@@ -767,6 +904,40 @@ export class MttoWinRecinadoPage implements OnInit {
     console.log(':::this.FormRecinado.value.idrecinadocablecab:::::::::::::::>>');
     this.loadImages(this.FormRecinado.value.idrecinadocablecab);
     console.log('<<<<::::::::::::::::::>>');
+  }
+  selectedTextTCable4(op) {
+    let nombre = null;
+    if (op == 1) {////////despues de cargar de TS
+
+      console.log('this.rest_estados aquiii', this.rest_conexion);
+
+      this.rest_conexion.forEach(es => {
+
+        console.log('this.FormRecinado.get(id_conexion_rcc).value', this.FormRecinado.get('id_conexion_rcc').value);
+
+        if (this.FormRecinado.get('id_conexion_rcc').value == es.codigo) {
+          nombre = es.nombre;
+        }
+      });
+    } else {
+
+    }
+    return nombre;
+  }
+  selectedTextTCable5(op) {
+    let nombre = null;
+    if (op == 1) {////////despues de cargar de TS
+
+      this.rest_conexion.forEach(es => {
+
+        if (this.FormRecinado.get('id_marca_cable_rcc').value == es.codigo) {
+          nombre = es.nombre;
+        }
+      });
+    } else {
+
+    }
+    return nombre;
   }
   selectedTextTCable3(op) {
     let nombre = null;
@@ -844,6 +1015,31 @@ export class MttoWinRecinadoPage implements OnInit {
 
     }
     return nombre;
+  }
+
+
+  select_change_estado(event: any) {
+
+    //ESTRELLA TRIANGULO = 1 
+    //DIRECTO = 2
+    const value = event.detail.value;
+    this.actualizarVisibilidadBotones(value);
+
+  }
+  
+  actualizarVisibilidadBotones(value: any) {
+    
+    if (value === 2) { //'DIRECTO'
+      this.mostrarBoton1 = true;
+      this.mostrarBoton2 = false;
+    } else if (value === 1) { //'ESTRELLA_TRIANGULO'
+      this.mostrarBoton1 = true;
+      this.mostrarBoton2 = true;
+    } else {
+      this.mostrarBoton1 = false;
+      this.mostrarBoton2 = false;
+    }
+    
   }
 
   showGroup(groupNumber: number) {
@@ -967,8 +1163,8 @@ export class MttoWinRecinadoPage implements OnInit {
       quality: 100, // Opcional: ajusta la calidad de las imágenes
       correctOrientation: true,
     };
-  
-  
+
+
     try {
       const val = await Camera.pickImages(galleryOptions);
       const images = val.photos;
@@ -977,55 +1173,55 @@ export class MttoWinRecinadoPage implements OnInit {
       for (let index = 0; index < images.length; index++) {
         this.imgs.push(images[index].webPath);
       }
-  
+
       this.sendImages();
     } catch (error) {
       console.error('Error picking images', error);
     }
-    
+
     ///////////***********************fi nue codigo */
   }
 
   sendImages() {
 
     this.popLodingMenaje = this.loadingController
-    .create({
-      //spinner: null,
-      //duration: 5000,
-      message: 'Guardando foto...',
-      translucent: true, //,
-      //cssClass: 'custom-class custom-loading'
-    })
-    .then((loading) => {
-      loading.present();
-    });
-  
+      .create({
+        //spinner: null,
+        //duration: 5000,
+        message: 'Guardando foto...',
+        translucent: true, //,
+        //cssClass: 'custom-class custom-loading'
+      })
+      .then((loading) => {
+        loading.present();
+      });
+
     Promise.all(this.imgs.map(imgPath => this.convertAndAddToBlobs(imgPath)))
       .then(() => {
-  
+
         //this.sendImagesToServer();
-    // this.api.uploadImage(filePath, , 'png').subscribe(newImage => {
-    console.log('ingresaaaa aqui');
-    
+        // this.api.uploadImage(filePath, , 'png').subscribe(newImage => {
+        console.log('ingresaaaa aqui');
+
         let respons = this.api.uploadImage(
           this.imageBlobs,
           this.FormRecinado.value.idrecinadocablecab,
-            'png'
-          ).subscribe(
-            (newImage) => {
-              this.loadingController.dismiss();
-             
-              this.loadImages( this.FormRecinado.value.idrecinadocablecab);
-              //this.ref.detectChanges();
-              console.log('salio okkkk::', newImage);
-              ///aqui cerrar pop loading imagennnnn
-            },
-            (error) => {
-              console.log('error__::>', error);
-            }
-          );
-  
-  
+          'png'
+        ).subscribe(
+          (newImage) => {
+            this.loadingController.dismiss();
+
+            this.loadImages(this.FormRecinado.value.idrecinadocablecab);
+            //this.ref.detectChanges();
+            console.log('salio okkkk::', newImage);
+            ///aqui cerrar pop loading imagennnnn
+          },
+          (error) => {
+            console.log('error__::>', error);
+          }
+        );
+
+
       })
       .catch(error => {
         console.error('Error converting and adding Blobs', error);
@@ -1033,7 +1229,7 @@ export class MttoWinRecinadoPage implements OnInit {
   }
   async convertAndAddToBlobs(imgPath: string) {
     try {
-      console.log('convertAndAddToBlobs',imgPath);
+      console.log('convertAndAddToBlobs', imgPath);
       const blob = await this.getBlobFromImagePath(imgPath);
       this.addImageBlob(blob);
     } catch (error) {
@@ -1385,9 +1581,6 @@ export class MttoWinRecinadoPage implements OnInit {
 
     //console.log(valor.detail.value);
   }
-  select_change_estado(e) {
-  }
-
   funtion_toogle(event: any, acc: any) {
 
     console.log("verifica aqui");
@@ -1435,33 +1628,43 @@ export class MttoWinRecinadoPage implements OnInit {
 
     //VERIFICACION CABLE CORTOCIRCUITADO
     if (acc == 12) {
+      this.pareja_f1_f2_detalle1_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle12'].setValue(valor1);
     }
     if (acc == 13) {
+      this.pareja_f1_f3_detalle1_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle13'].setValue(valor1);
     }
     if (acc == 14) {
+      this.pareja_f1_p_detalle1_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle14'].setValue(valor1);
     }
     if (acc == 15) {
+      this.pareja_f1_g_detalle1_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle15'].setValue(valor1);
     }
     if (acc == 16) {
+      this.pareja_f2_f3_detalle1_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle16'].setValue(valor1);
     }
     if (acc == 17) {
+      this.pareja_f2_p_detalle1_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle17'].setValue(valor1);
     }
     if (acc == 18) {
+      this.pareja_f2_g_detalle1_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle18'].setValue(valor1);
     }
     if (acc == 19) {
+      this.pareja_f3_p_detalle1_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle19'].setValue(valor1);
     }
     if (acc == 20) {
+      this.pareja_f3_g_detalle1_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle20'].setValue(valor1);
     }
     if (acc == 21) {
+      this.pareja_p_g_detalle1_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle21'].setValue(valor1);
     }
     if (acc == 22) {
@@ -1523,33 +1726,43 @@ export class MttoWinRecinadoPage implements OnInit {
 
     // VERIFICACION CABLE CORTOCIRCUITADO - CABLE 2
     if (acc == 40) {
+      this.pareja_f1_f2_detalle2_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle40'].setValue(valor1);
     }
     if (acc == 41) {
+      this.pareja_f1_f3_detalle2_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle41'].setValue(valor1);
     }
     if (acc == 42) {
+      this.pareja_f1_p_detalle2_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle42'].setValue(valor1);
     }
     if (acc == 43) {
+      this.pareja_f1_g_detalle2_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle43'].setValue(valor1);
     }
     if (acc == 44) {
+      this.pareja_f2_f3_detalle2_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle44'].setValue(valor1);
     }
     if (acc == 45) {
+      this.pareja_f2_p_detalle2_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle45'].setValue(valor1);
     }
     if (acc == 46) {
+      this.pareja_f2_g_detalle2_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle46'].setValue(valor1);
     }
     if (acc == 47) {
+      this.pareja_f3_p_detalle2_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle47'].setValue(valor1);
     }
     if (acc == 48) {
+      this.pareja_f3_g_detalle2_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle48'].setValue(valor1);
     }
     if (acc == 49) {
+      this.pareja_p_g_detalle2_readonly = !event.detail.checked;
       this.FormRecinado.controls['toogle49'].setValue(valor1);
     }
     if (acc == 50) {
