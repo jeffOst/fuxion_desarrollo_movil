@@ -134,7 +134,7 @@ export class ProdAteServListActividadesPage implements OnInit {
         this.prodGestionServicioService.ListFindActividades(this.NgModInputSearch, this.IdUsuarioLocal, this.IdDispositivo).then((res) => {
           this.MultiArrayServicios = res;
           let sContacts = this.MultiArrayServicios;//this.sortArray(this.MultiArrayServicios, 'nombres_tecnico', 1);
-          this.MultiArrayServicios = this.groupByArray(sContacts, 'nombres_tecnico', 'hora_ini_acti_otd');
+          this.MultiArrayServicios = this.groupByArray(sContacts, 'maquina', 'hora_ini_acti_otd');
           //console.log('this.MultiArrayServicios', this.MultiArrayServicios);
 
         }).finally(() => {
