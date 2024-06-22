@@ -114,4 +114,28 @@ nomclase:string;
     this.cancelar_listaservicios(Y04002,Y04001,SEQMASERV,es_con_procesos_ms,flag_serv_eje_ms);
   }
 
+  agregar_servicio_actividad() {
+    console.log('Texto ingresado:', this.NgModInputSearch);
+    // Aquí puedes agregar la lógica que necesites cuando se haga clic en el botón
+
+    const loading = this.loadingController.create({
+      message: 'Cargando lista...',
+      translucent: true//,
+    }).then(
+      loading => {
+        loading.present();
+        this.ApiService.agregarServiciosByPieza(this.NgModInputSearch,this.idpieza_,this.avatar_,this.IdUsuarioLocal,this.IdDispositivo,this.nomclase).then((res) => {
+          this.DataSetGrid = res;
+        }).finally(() => {
+          
+          //this.loadingController.dismiss();
+          this.loadingController.dismiss().then(() => {
+            this.FFindRows(); // Llamada a la función para listar después de registrar
+          });
+
+        });
+      });
+
+  }
+
 }

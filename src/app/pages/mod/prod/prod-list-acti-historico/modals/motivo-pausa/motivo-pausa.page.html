@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Observaciones</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Cancelar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Escribe el Motivo de la Pausa de Actividad</ion-label>
+    <ion-textarea [(ngModel)]="observaciones" class="custom-textarea"></ion-textarea>
+  </ion-item>
+  <ion-footer>
+    <ion-button expand="full" (click)="guardar()">Guardar</ion-button>
+  </ion-footer>
+</ion-content>

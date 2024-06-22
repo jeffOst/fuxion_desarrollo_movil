@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy  } from '@angular/core';
 import { IonInput, LoadingController, NavController } from '@ionic/angular';
 import { ProdGestionServicioService } from 'src/app/api/prod/prod-gestion-servicio.service';
 import { Storage } from "@ionic/storage";
-import { Router, NavigationExtras } from '@angular/router';
+import { Router, NavigationExtras, NavigationEnd } from '@angular/router';
 import { MPieza } from 'src/app/interfaces/prod/Pieza';
 import { HeaderComponent } from 'src/app/components/header/header.component';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-prod-ate-serv-list-actividades',
   templateUrl: './prod-ate-serv-list-actividades.page.html',
@@ -17,9 +18,11 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
 })
 
 
-export class ProdAteServListActividadesPage implements OnInit {
+export class ProdAteServListActividadesPage implements OnInit, OnDestroy {
+  private routerSubscription: Subscription;
   @ViewChild('IdHtmlInputSearch') idInputSearch: IonInput;
-  TituloDinamico: string = "Tabla de Actividades";
+  //TituloDinamico: string = "Tabla de Actividades";
+  TituloDinamico: string = "Orden de Fabricacion en Proceso";
   NgModInputSearch: string = "";
   MultiArrayServicios: any;
   IdUsuarioLocal: string;
@@ -59,9 +62,35 @@ export class ProdAteServListActividadesPage implements OnInit {
 
   }
 
+  /*
   ngOnInit() {
-    this.FFindRows();
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd && event.url === '/prod-ate-serv-list-actividades') {
+        this.FFindRows();
+      }
+    });
   }
+  */
+
+  ngOnInit() {
+    this.routerSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd && event.url === '/prod-ate-serv-list-actividades') {
+        this.FFindRows();
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
+  }
+
+  /*
+  ngOnInit() {
+      this.FFindRows();
+  }
+*/
 
   ionViewDidLoad() {
 
@@ -69,11 +98,13 @@ export class ProdAteServListActividadesPage implements OnInit {
   ionViewDidEnter() {
     
   }
+  /*
   ngOnDestroy() {
     // setTimeout(() => {
     //   alert('ngOnDestroy');
     // }, 600)
   }
+  */
   FSelectedItem(row: any) {
     console.log(row);
     //let row1:any;
@@ -121,6 +152,26 @@ export class ProdAteServListActividadesPage implements OnInit {
   //
 
   ////////////////////////////////declarion funciones clientes
+  async FFindRows() {
+    const loading = await this.loadingController.create({
+      message: 'Cargando lista...',
+      translucent: true
+    });
+    
+    await loading.present();
+
+    try {
+      const res = await this.prodGestionServicioService.ListFindActividades(this.NgModInputSearch, this.IdUsuarioLocal, this.IdDispositivo);
+      this.MultiArrayServicios = res;
+      const sContacts = this.MultiArrayServicios;
+      this.MultiArrayServicios = this.groupByArray(sContacts, 'maquina', 'hora_ini_acti_otd');
+    } catch (error) {
+      console.error('Error al cargar las actividades:', error);
+    } finally {
+      await loading.dismiss();
+    }
+  }
+  /*
   FFindRows() {
     const loading = this.loadingController.create({
       //spinner: null,
@@ -147,6 +198,7 @@ export class ProdAteServListActividadesPage implements OnInit {
         });
       });
   }
+  */
   /////////////////////funciones de agrupacion
   groupByArray(xs, key, sortKey) {
     return xs.reduce(function (rv, x) {

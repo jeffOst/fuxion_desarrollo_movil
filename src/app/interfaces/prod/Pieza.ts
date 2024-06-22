@@ -67,6 +67,8 @@ export interface MPieza {
     observacion: string,
     fecha_inicio: string,
     fecha_fin: string,
+    fecha_inicio_formato_iso: string,
+    fecha_fin_formato_iso: string,
     acc: string,//save
     pk_idservicio: string,
     ////////////////actividad
@@ -111,6 +113,8 @@ export interface MPieza {
     fechafin_prod:string,   
     fechainicio: string,
     flag_agregado: string,
-    plano_diseno: string
+    plano_diseno: string,
+    motivoPausa: string,
+    
 
 }

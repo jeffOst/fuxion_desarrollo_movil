@@ -112,6 +112,24 @@ export class ProdGestionServicioService {
     return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
     );
   }
+
+  agregarServiciosByPieza(InputSearch: string, idpieza: string, tipServicio: string, id_usuario_local: string, id_dispositivo: string, nomclase: string): Promise<any> {
+    let dataPost = JSON.stringify(
+      {
+        acc: 32,
+        s: InputSearch,
+        nomclase: nomclase,
+        idpieza: idpieza,
+
+        tipServicio: tipServicio,
+        idusu: id_usuario_local,
+        iddevice: id_dispositivo
+      }
+    );
+    return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
+    );
+  }
+
   ListFindPiezaByActividad(InputSearch: string, idpieza: string, tipServicio: string, id_usuario_local: string, id_dispositivo: string, idclase: string, idsubfamilia: string, nomsubfam: string): Promise<any> {
     let dataPost = JSON.stringify(
       {
@@ -172,6 +190,19 @@ export class ProdGestionServicioService {
     let dataPost = JSON.stringify(
       {
         acc: 9,
+        s: InputSearch,
+        idusu: id_usuario_local,
+        iddevice: id_dispositivo
+
+      }
+    );
+    return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
+    );
+  }
+  ListFindActividadesHistorico(InputSearch: string, id_usuario_local: string, id_dispositivo: string): Promise<any> {
+    let dataPost = JSON.stringify(
+      {
+        acc: 31,
         s: InputSearch,
         idusu: id_usuario_local,
         iddevice: id_dispositivo

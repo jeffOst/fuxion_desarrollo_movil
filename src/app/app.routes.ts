@@ -343,6 +343,14 @@ export const routes: Routes = [
   {
     path: 'pop-up-imagen-herra',
     loadComponent: () => import('./pages/mod/mtto/checklist_herra/pop-up-imagen-herra/pop-up-imagen-herra.page').then(m => m.PopUpImagenHerraPage)
+  },
+  {
+    path: 'prod-list-acti-historico',
+    loadComponent: () => import('./pages/mod/prod/prod-list-acti-historico/prod-list-acti-historico.page').then( m => m.ProdListActiHistoricoPage)
+  },
+  {
+    path: 'motivo-pausa',
+    loadComponent: () => import('./pages/mod/prod/prod-list-acti-historico/modals/motivo-pausa/motivo-pausa.page').then( m => m.MotivoPausaPage)
   }
-
+  
 ];

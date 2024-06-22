@@ -220,6 +220,10 @@ try {
 
   FListarActvidades(){
 
+    console.log("VERIFCAR AQUI, ENVIA ESTAS VARIABLES")
+    console.log(this.idMenu);
+    console.log(this.TituloDinamico);   
+
     let navigationExtras: NavigationExtras = {
       state: {idmenu:this.idMenu,menu:this.TituloDinamico}
     };

@@ -49,16 +49,23 @@
     <ion-toolbar > -->
       <ion-row style="width: 100% !important;">
         
+        <ion-col class="headgrid" size-sm="0.3" size-md="0.3" size-xl="0.3"><ion-label style="color: black;">Estado</ion-label></ion-col>
         <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1"><ion-label style="color: black;">Operario</ion-label></ion-col>
-        <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1"><ion-label style="color: black;">Nro. OT/OF</ion-label></ion-col>
-        <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1"><ion-label style="color: black;">Equipo</ion-label></ion-col>
+        <ion-col class="headgrid" size-sm="0.5" size-md="0.5" size-xl="0.5"><ion-label style="color: black;">Nro. OT/OF</ion-label></ion-col>
+        
+        <ion-col class="headgrid" size-sm="0.5" size-md="0.5" size-xl="0.5"><ion-label style="color: black;">Cantidad</ion-label></ion-col>
+
+        <ion-col class="headgrid" size-sm="0.5" size-md="0.5" size-xl="0.5"><ion-label style="color: black;">Equipo</ion-label></ion-col>
         <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1"><ion-label style="color: black;">Pieza</ion-label></ion-col>
         <ion-col class="headgrid" size-sm="2" size-md="2" size-xl="2"><ion-label style="color: black;">Servicio</ion-label></ion-col>
 
         <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1"><ion-label style="color: black;">F. Inicio</ion-label></ion-col>
         <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1"><ion-label style="color: black;">F. Fin</ion-label></ion-col>
-        <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1"><ion-label style="color: black;">Tiempo</ion-label></ion-col>
-        <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1"><ion-label style="color: black;">Cantidad</ion-label></ion-col>
+        <ion-col class="headgrid" size-sm="0.5" size-md="0.5" size-xl="0.5"><ion-label style="color: black;">Duracion</ion-label></ion-col>
+        
+        <ion-col class="headgrid" size-sm="0.5" size-md="0.5" size-xl="0.5"><ion-label style="color: black;">Tiempo Pausa Min.</ion-label></ion-col>
+        <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1"><ion-label style="color: black;">Motivo Pausa</ion-label></ion-col>
+
         <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1"><ion-label style="color: black;">Observacion</ion-label></ion-col>
         <ion-col class="headgrid" size-sm="0.5" size-md="0.5" size-xl="0.5"><ion-label style="color: black;">Semana</ion-label></ion-col>
         <!-- <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1">Eficiencia(h)</ion-col> -->
@@ -72,7 +79,9 @@
 
     <ion-item-divider style="height: 30px !important;" color="light"
     [hidden]="scanActive"
-      ><ion-icon
+      >
+      <!--
+      <ion-icon
         name="ellipse"
         color="danger"
         slot="start"
@@ -84,7 +93,8 @@
         slot="start"
         *ngIf="group.values[0].flag_pendientes != 0"
       ></ion-icon>
-     <div class="ion-text-uppercase">{{group.key}}</div></ion-item-divider>
+      -->
+     <div class="ion-text-uppercase"><b>{{group.key}}</b></div></ion-item-divider>
 
     <!-- -->
       <ion-item *ngFor="let Row of group.values" [hidden]="scanActive"
@@ -94,18 +104,32 @@
         <ion-grid fixed="false" style="width: 150% !important;">
           <ion-row style="width: 100% !important;font-size: 0.7em;">
             
+            <!-- Columna del ícono condicional -->
+            <ion-col size-sm="0.3" size-md="0.3" size-xl="0.3">
+              <ion-icon name="ellipse" [color]="Row.idestado=='2' ? 'danger':'success'" style="font-size: 2em; transform: scale(1);"></ion-icon>
+            </ion-col>
+
             <ion-col size-sm="1" size-md="1" size-xl="1">{{Row.nombres_tecnico}}</ion-col>
-            <ion-col size-sm="1" size-md="1" size-xl="1">{{Row.correorden}}</ion-col>
-            <ion-col size-sm="1" size-md="1" size-xl="1"><ion-label [color]="Row.idestado!='3' ? 'warning':'dark'">{{Row.codsmg}}</ion-label></ion-col>
+            <ion-col size-sm="0.5" size-md="0.5" size-xl="0.5">{{Row.correorden}}</ion-col>
+            <ion-col size-sm="0.5" size-md="0.5" size-xl="0.5">{{Row.cantidad}}</ion-col>
+
+            <!--<ion-col size-sm="0.5" size-md="0.5" size-xl="0.5"><ion-label [color]="Row.idestado!='3' ? 'warning':'dark'">{{Row.codsmg}}</ion-label></ion-col>-->
+            <ion-col size-sm="0.5" size-md="0.5" size-xl="0.5"><ion-label [color]="'dark'">{{Row.codsmg}}</ion-label></ion-col>
+
             <ion-col size-sm="1" size-md="1" size-xl="1"><ion-label class="ion-text-wrap">{{Row.nomclase}}</ion-label></ion-col>
             <ion-col size-sm="2" size-md="2" size-xl="2">{{Row.Y04002}}</ion-col>
             
             <ion-col size-sm="1" size-md="1" size-xl="1">{{Row.fecha_inicio}}</ion-col>
             <ion-col size-sm="1" size-md="1" size-xl="1" >{{Row.fecha_fin}}</ion-col>
-            <ion-col size-sm="1" size-md="1" size-xl="1">{{Row.tiempo}}</ion-col>
-            <ion-col size-sm="1" size-md="1" size-xl="1">{{Row.cantidad}}</ion-col>
+            <ion-col size-sm="0.5" size-md="0.5" size-xl="0.5">{{Row.tiempo}}</ion-col>
+            
+            <ion-col size-sm="0.5" size-md="0.5" size-xl="0.5">{{Row.tiempo_pausa}}</ion-col>
+            <ion-col size-sm="1.1" size-md="1.1" size-xl="1.1">{{Row.motivo_pausa}}</ion-col>
+
+            
             <ion-col size-sm="1" size-md="1" size-xl="1">{{Row.observacion}}</ion-col>
-            <ion-col size-sm="0.5" size-md="0.5" size-xl="0.5"><ion-label [color]="Row.idestado!='3' ? 'warning':'dark'">{{Row.Nsemanaofmes}}</ion-label></ion-col>
+            <!--<ion-col size-sm="0.5" size-md="0.5" size-xl="0.5"><ion-label [color]="Row.idestado!='3' ? 'warning':'dark'">{{Row.Nsemanaofmes}}</ion-label></ion-col>-->
+            <ion-col size-sm="0.5" size-md="0.5" size-xl="0.5"><ion-label [color]="'dark'">{{Row.Nsemanaofmes}}</ion-label></ion-col>
           </ion-row>
         </ion-grid>
       </ion-item>
@@ -142,7 +166,7 @@
     >
       <ion-label color="primary" style="font: size 6px">
         <ion-icon name="grid-outline"></ion-icon>
-        Tabla de actividades
+        Orden de Fabricacion en Proceso
       </ion-label>
     </ion-button>
   </ion-card>

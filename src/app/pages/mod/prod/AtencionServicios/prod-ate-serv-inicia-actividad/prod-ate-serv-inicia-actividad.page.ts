@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController } from '@ionic/angular';
+import { NavController, LoadingController, ModalController, } from '@ionic/angular';
 import { Router, NavigationExtras } from '@angular/router';
 import { MPieza } from 'src/app/interfaces/prod/Pieza';
 import { ProdGestionServicioService } from "src/app/api/prod/prod-gestion-servicio.service";
@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { Storage } from '@ionic/storage';
+import { MotivoPausaPage } from 'src/app/pages/mod/prod/prod-list-acti-historico/modals/motivo-pausa/motivo-pausa.page';
+
 
 
 @Component({
@@ -15,7 +17,7 @@ import { Storage } from '@ionic/storage';
   templateUrl: './prod-ate-serv-inicia-actividad.page.html',
   styleUrls: ['./prod-ate-serv-inicia-actividad.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule , PdfViewerModule]
+  imports: [IonicModule, CommonModule, FormsModule, PdfViewerModule]
 })
 
 export class ProdAteServIniciaActividadPage implements OnInit {
@@ -37,7 +39,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
   idTipoActividad: number;
   flagUpdatedObsOK: boolean = true;
   obs_aux: any;
-  rest_serv_eje:any;
+  rest_serv_eje: any;
   fechainicio_prod: string;
   fechafin_prod: string;
   NombresUsuarioLocal: string;
@@ -51,6 +53,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
     public storage: Storage,
     private loadingController: LoadingController,
     public ApiServices: ProdGestionServicioService,
+    private modalCtrl: ModalController
   ) {
 
     let localStorage;
@@ -116,13 +119,13 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       this.DsIniciaActividad.idservicio_x_eje_otd = this.navParams.idservicio_x_eje_otd;
 
       this.DsIniciaActividad.flag_serv_eje_ms = this.navParams.flag_serv_eje_ms
-      
+
       this.DsIniciaActividad.plano_diseno = this.navParams.plano_diseno
 
       //this.fechainicio_prod = '2024-02-29T14:00:00.000Z'; // Formato ISO
       //this.fechainicio_prod = '2024-02-29 15:11:54Z'; // Formato ISO
-      this.fechainicio_prod = this.navParams.fecha_inicio; // Formato ISO
-      this.fechafin_prod = this.navParams.fecha_fin; // Formato ISO
+      this.fechainicio_prod = this.navParams.fecha_inicio_formato_iso; // Formato ISO
+      this.fechafin_prod = this.navParams.fecha_fin_formato_iso; // Formato ISO
 
       /////////////metalizado
       //console.log('this.DsIniciaActividad.proceso_metalizado::', this.DsIniciaActividad.proceso_metalizado);
@@ -153,7 +156,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       }
       console.log('this.navParams::43:::>', this.DsIniciaActividad);
 
-      if (this.navParams.index==0) {
+      if (this.navParams.index == 0) {
         /////nuevo
         console.log('nuevooooo');
 
@@ -202,19 +205,19 @@ export class ProdAteServIniciaActividadPage implements OnInit {
     // }).then(
     //   loading => {
     //     loading.present();
-        //console.log(this.device.uuid);listado_resumen_diario
-        this.ApiServices.LoadFormIniciaActividad(this.DsIniciaActividad.pk_idservicio,this.DsIniciaActividad.actividad).then((res) => {
-          console.log('this.results=>>>', res);
-          this.DsIniciaActividad.cantidad = res[0]['cantidad'];
-          this.DsIniciaActividad.observacion   = res[0]['obs'];
-          console.log('this.results=>>>', res);
+    //console.log(this.device.uuid);listado_resumen_diario
+    this.ApiServices.LoadFormIniciaActividad(this.DsIniciaActividad.pk_idservicio, this.DsIniciaActividad.actividad).then((res) => {
+      console.log('this.results=>>>', res);
+      this.DsIniciaActividad.cantidad = res[0]['cantidad'];
+      this.DsIniciaActividad.observacion = res[0]['obs'];
+      console.log('this.results=>>>', res);
 
-        }).finally(() => {
-          //this.loadingController.dismiss();
-        });
+    }).finally(() => {
+      //this.loadingController.dismiss();
+    });
 
 
-      // });
+    // });
 
 
 
@@ -234,10 +237,10 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
     if (this.flagResumenDiario == '1') {
       this.navCtrl.navigateForward("prod-resumen-diario-horas");
-    } 
+    }
     else if (this.idTargetMenu == 1) {
       this.navCtrl.navigateForward("prod-list-acti-programada");
-    } 
+    }
     else {
       this.navCtrl.navigateForward("prod-ate-serv-list-actividades");
     }
@@ -282,35 +285,106 @@ export class ProdAteServIniciaActividadPage implements OnInit {
         break;
     }
   }
-  FEstadoActividad(tip: number) {
-    console.log('FEstadoActividad', tip);
 
+
+  async openObservacionesPausaModal(): Promise<any> {
+    const modal = await this.modalCtrl.create({
+      component: MotivoPausaPage,
+      backdropDismiss: true,
+      showBackdrop: true,
+      mode: 'ios',
+      componentProps: {
+        valorModal: this.DsIniciaActividad.pk_idservicio,
+        idusuario: this.IdUsuarioLocal
+      }
+    });
+  
+    return new Promise((resolve) => {
+      modal.onDidDismiss().then((dataReturned) => {
+        if (dataReturned !== null && dataReturned.data !== undefined) {
+          resolve(dataReturned.data);
+          //console.log("revisar aqui");
+          //console.log(dataReturned.data);
+
+        } else {
+          resolve({ flag_guardar: 0, observaciones: '' }); // Devuelve un objeto con valores por defecto
+        }
+      });
+      modal.present();
+    });
+  }
+
+  async FEstadoActividad(tip: number) {
+    console.log('FEstadoActividad', tip);
+  
     switch (tip) {
-      case 2:////pausa
-        this.hideBtnReanuda = true;
-        this.hideBtnInicio = false;
-        this.hideNomEstado = false;
-        this.DsIniciaActividad.estado = "PAUSA";
+      case 2: ////pausa
+  
+        let flagGuardado: any = null; // Inicializa la variable con un valor por defecto
+        let observacionGuardado: string = '';
+        const modalRetorno = await this.openObservacionesPausaModal(); // Llama a la función
+  
+        if (modalRetorno !== null) {
+          if (modalRetorno.flag_guardar !== undefined) {
+            flagGuardado = modalRetorno.flag_guardar; // Asigna el valor retornado
+          } else {
+            flagGuardado = 0; // Valor por defecto si no está definido
+          }
+  
+          if (modalRetorno.observaciones !== undefined) {
+            observacionGuardado = modalRetorno.observaciones; // Asigna el valor retornado
+          } else {
+            observacionGuardado = ''; // Valor por defecto si no está definido
+          }
+
+        } else {
+          flagGuardado = 0; // Valor por defecto si no está definido
+          observacionGuardado = ''; // Valor por defecto si no está definido
+        }
+  
+  
+        console.log("Valor flag_guardar:", flagGuardado); // Imprime el valor
+        console.log("Valor observacionGuardado:", observacionGuardado); // Imprime el valor
+
+        if(flagGuardado == 1){
+          this.hideBtnReanuda = true;
+          this.hideBtnInicio = false;
+          this.hideNomEstado = false;
+          this.DsIniciaActividad.estado = "PAUSA";
+          this.DsIniciaActividad.motivoPausa = observacionGuardado;
+
+          this.FSaveEstado(tip);
+        }
+
         break;
-      case 3:////finalizar
+
+      case 3: ////finalizar
         this.hideBtnReanuda = false;
         this.hideBtnInicio = false;
         this.hideNomEstado = true;
         this.DsIniciaActividad.estado = "FINALIZAR";
+
+        this.FSaveEstado(tip);
+
         break;
-      case 4:////reanudar
+        
+      case 4: ////reanudar
         this.hideBtnReanuda = false;
         this.hideBtnInicio = true;
         this.hideNomEstado = false;
         this.DsIniciaActividad.estado = "REANUDAR";
-        break;
+        
+        this.FSaveEstado(tip);
 
+        break;
+  
       default:
         break;
     }
-
-    this.FSaveEstado(tip);
+  
+    //this.FSaveEstado(tip);
   }
+
 
   FSaveEstado(idEstadoBtn) {
 
@@ -343,9 +417,9 @@ export class ProdAteServIniciaActividadPage implements OnInit {
             console.log('navigationExtras', navigationExtras);
             //this.navCtrl.navigateForward(['prod-ate-serv-inicia-actividad'], navigationExtras);
 
+            // Navegar de vuelta a la lista y pasar un parámetro
+            //this.router.navigate(['/prod-ate-serv-list-actividades'], { queryParams: { refresh: true } });
           }
-
-
 
         }).finally(() => {
 
@@ -377,37 +451,37 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       //   loading => {
       //     loading.present();
 
-          this.DsIniciaActividad.acc = '21';
-          this.ApiServices.SaveInicioActividad(this.DsIniciaActividad).then((res) => {
-            let rest: any;
-            rest = res[0];
-            this.obs_aux = this.DsIniciaActividad.observacion;
+      this.DsIniciaActividad.acc = '21';
+      this.ApiServices.SaveInicioActividad(this.DsIniciaActividad).then((res) => {
+        let rest: any;
+        rest = res[0];
+        this.obs_aux = this.DsIniciaActividad.observacion;
 
-            if (rest.o_nres == 0) {
-              alert('Error, no se pudo guardar correctamente.');
-            } else {
+        if (rest.o_nres == 0) {
+          alert('Error, no se pudo guardar correctamente.');
+        } else {
 
-              //this.DsIniciaActividad.pk_idservicio=rest.o_nres
-              ///this.DsIniciaActividad.fecha_fin = rest.p1
+          //this.DsIniciaActividad.pk_idservicio=rest.o_nres
+          ///this.DsIniciaActividad.fecha_fin = rest.p1
 
-              //this.loadingController.dismiss();
+          //this.loadingController.dismiss();
 
-              this.flagUpdatedObsOK = true;
-              //console.log('navigationExtras', navigationExtras);
-              //this.navCtrl.navigateForward(['prod-ate-serv-inicia-actividad'], navigationExtras);
+          this.flagUpdatedObsOK = true;
+          //console.log('navigationExtras', navigationExtras);
+          //this.navCtrl.navigateForward(['prod-ate-serv-inicia-actividad'], navigationExtras);
 
-            }
-
-
-
-          // }).finally(() => {
-
-          //   console.log('finalyyyy');
+        }
 
 
-          // });
 
-        });
+        // }).finally(() => {
+
+        //   console.log('finalyyyy');
+
+
+        // });
+
+      });
 
     }///fin if
 
@@ -436,7 +510,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
     }).then(
       loading => {
         loading.present();
-        this.ApiServices.load_cbos_any_edit_ini_actvidad(this.DsIniciaActividad.actividad, '','').then((res) => {
+        this.ApiServices.load_cbos_any_edit_ini_actvidad(this.DsIniciaActividad.actividad, '', '').then((res) => {
           this.rest_serv_eje = res['servicio_eje'];
 
         }).finally(() => {
@@ -445,7 +519,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       });
   }
 
-  onFechaInicioChange(event: CustomEvent, valor1:string, valor2:string) {
+  onFechaInicioChange(event: CustomEvent, valor1: string, valor2: string) {
 
     // El evento tiene la propiedad 'detail' que contiene el valor seleccionado
     console.log('Fecha inicio cambiada | actualizar:', event.detail.value);
@@ -454,17 +528,17 @@ export class ProdAteServIniciaActividadPage implements OnInit {
     var fecha_cambiada = event.detail.value;
     var idservicio = valor1;
     var avatar = valor2;
-    
+
     console.log("verifica aquiii id");
     console.log(this.IdUsuarioLocal);
-    
+
     this.ApiServices.UpdateFechaInicioProd(fecha_cambiada, idservicio, avatar, this.IdUsuarioLocal).then((res) => {
-      
+
       let rest: any;
       rest = res[0];
 
       if (rest.o_nres == 0) {
-        
+
         alert('Error, no se pudo guardar correctamente.');
 
       } else {
@@ -480,25 +554,25 @@ export class ProdAteServIniciaActividadPage implements OnInit {
   }
 
 
-  onFechaFinChange(event: CustomEvent, valor1:string, valor2:string) {
-    
+  onFechaFinChange(event: CustomEvent, valor1: string, valor2: string) {
+
     // El evento tiene la propiedad 'detail' que contiene el valor seleccionado
     console.log('Fecha fin cambiada | actualizar:', event.detail.value);
     console.log(valor1);
-    
+
     // Puedes realizar otras operaciones aquí según tus necesidades
     var fecha_cambiada = event.detail.value;
     var idservicio = valor1;
     var avatar = valor2;
-    
+
 
     this.ApiServices.UpdateFechaFinProd(fecha_cambiada, idservicio, avatar, this.IdUsuarioLocal).then((res) => {
-      
+
       let rest: any;
       rest = res[0];
 
       if (rest.o_nres == 0) {
-        
+
         alert('Error, no se pudo guardar correctamente.');
 
       } else {
@@ -534,7 +608,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       }
     });
 
-    
+
   }
 
 }
