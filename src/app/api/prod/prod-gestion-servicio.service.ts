@@ -120,7 +120,6 @@ export class ProdGestionServicioService {
         s: InputSearch,
         nomclase: nomclase,
         idpieza: idpieza,
-
         tipServicio: tipServicio,
         idusu: id_usuario_local,
         iddevice: id_dispositivo

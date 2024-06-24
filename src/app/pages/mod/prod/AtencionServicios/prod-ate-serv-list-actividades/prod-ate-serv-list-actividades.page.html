@@ -94,7 +94,20 @@
         *ngIf="group.values[0].flag_pendientes != 0"
       ></ion-icon>
       -->
-     <div class="ion-text-uppercase"><b>{{group.key}}</b></div></ion-item-divider>
+      <div class="ion-text-uppercase">
+        <b>{{group.key}}</b>    
+        &nbsp;   
+        <ion-icon
+          name="ellipse"
+          color="danger"
+          slot="start"
+          *ngIf="group.values[0].orden_actividad == 2"
+          style="font-size: 1.2rem;" 
+        ></ion-icon>   
+      </div>
+    
+    
+    </ion-item-divider>
 
     <!-- -->
       <ion-item *ngFor="let Row of group.values" [hidden]="scanActive"
@@ -106,7 +119,7 @@
             
             <!-- Columna del ícono condicional -->
             <ion-col size-sm="0.3" size-md="0.3" size-xl="0.3">
-              <ion-icon name="ellipse" [color]="Row.idestado=='2' ? 'danger':'success'" style="font-size: 2em; transform: scale(1);"></ion-icon>
+              <ion-icon  *ngIf="group.values[0].orden_actividad == 1" name="ellipse" [color]="Row.idestado=='2' ? 'danger':'success'" style="font-size: 2em; transform: scale(1);"></ion-icon>
             </ion-col>
 
             <ion-col size-sm="1" size-md="1" size-xl="1">{{Row.nombres_tecnico}}</ion-col>
