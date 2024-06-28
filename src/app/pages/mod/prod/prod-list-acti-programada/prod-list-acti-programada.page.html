@@ -85,10 +85,11 @@
               <p>
                 {{ contact.EQUIPOID }}
                 <ion-text color="secondary"
-                  >{{ contact.cantidad }} &nbsp;</ion-text
+                  >Cantidad: {{ contact.cantidad }} &nbsp;</ion-text
                 >
                 <ion-text color="primary">{{ contact.correorden }}</ion-text
-                >&nbsp; {{ contact.fcreacion_ofpt }}
+                >&nbsp; <!--{{ contact.fcreacion_ofpt }}-->
+                {{ contact.avatar }}
                 <ion-badge color="warning">{{contact.prioridad_aof}}</ion-badge>
               </p></ion-label
             >

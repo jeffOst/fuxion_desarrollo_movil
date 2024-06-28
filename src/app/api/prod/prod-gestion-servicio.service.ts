@@ -149,9 +149,11 @@ export class ProdGestionServicioService {
   }
 
   SaveInicioActividad(row: any): Promise<any> {
+
     let dataPost = JSON.stringify(
       row
     );
+
     return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
     );
   }

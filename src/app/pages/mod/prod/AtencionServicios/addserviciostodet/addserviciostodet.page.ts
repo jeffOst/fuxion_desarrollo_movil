@@ -1485,6 +1485,9 @@ export class AddserviciostodetPage implements OnInit {
     let index = 0;
     let siono = 0
 
+    console.log('Valor de cantidad:', this.ArrayItemsSelectedDesti[0].cantidad);
+
+
     for (const row of this.ArrayItemsSelectedDesti) {
       ///actividad 
       if (this.ArrayItemsSelectedDesti[index].avatar == null || this.ArrayItemsSelectedDesti[index].avatar == '') {
@@ -1634,12 +1637,14 @@ export class AddserviciostodetPage implements OnInit {
           this.ArrayItemsSelectedDesti[0].acc = '7';
           this.ArrayItemsSelectedDesti[0].fechainicio_prod = this.fechainicio_prod;
           this.ArrayItemsSelectedDesti[0].fechafin_prod = this.fechafin_prod;
+          this.ArrayItemsSelectedDesti[0].cantidad = this.ArrayItemsSelectedDesti[0].cantidad;
           //this.ArrayItemsSelectedDesti[0].flag_agregado = this.flagResumenDiario;
 
           if (this.flagResumenDiario == "1") { this.ArrayItemsSelectedDesti[0].flag_agregado = '1'; } else { this.ArrayItemsSelectedDesti[0].flag_agregado = '0'; }
 
-          //console.log("verificar aqui el console log:")
-          //console.log(this.ArrayItemsSelectedDesti[0].fechainicio_prod);
+          console.log("verificar aqui el console log:")
+          console.log(this.ArrayItemsSelectedDesti[0].cantidad);
+          console.log(this.ArrayItemsSelectedDesti[0]);
 
           this.ApiServices.SaveInicioActividad(this.ArrayItemsSelectedDesti[0]).then((res) => {
             let rest: any;

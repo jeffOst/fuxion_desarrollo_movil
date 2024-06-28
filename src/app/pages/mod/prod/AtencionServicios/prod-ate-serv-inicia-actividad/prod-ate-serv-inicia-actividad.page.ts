@@ -127,6 +127,10 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       this.fechainicio_prod = this.navParams.fecha_inicio_formato_iso; // Formato ISO
       this.fechafin_prod = this.navParams.fecha_fin_formato_iso; // Formato ISO
 
+      this.DsIniciaActividad.cantidad_total = this.navParams.cantidad_total;
+      this.DsIniciaActividad.cantidad_revisada = this.navParams.cantidad_revisada;
+      this.DsIniciaActividad.cantidad_pendiente = this.navParams.cantidad_pendiente;
+
       /////////////metalizado
       //console.log('this.DsIniciaActividad.proceso_metalizado::', this.DsIniciaActividad.proceso_metalizado);
 
@@ -388,6 +392,14 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
   FSaveEstado(idEstadoBtn) {
 
+    console.log("debo revisar AQUI - FINALIZAR ACTIVIDAD")
+    console.log(this.DsIniciaActividad);
+
+    console.log(this.DsIniciaActividad.idofpterminado);
+    console.log(this.DsIniciaActividad.idmaquina);
+
+
+    
     const loading = this.loadingController.create({
       message: 'Cargando...',
       translucent: true//,
@@ -429,7 +441,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
         });
 
       });
-
+      
   }
 
   unCheckFocus(e) {
