@@ -160,15 +160,15 @@
     
     <ion-item>
       <ion-label>
-        <p>Cantidad:</p>
-        <h1>{{DsIniciaActividad.cantidad_total}}</h1>
+        <p><b>Cantidad:</b></p>
+        <h1><b>{{DsIniciaActividad.cantidad_total}}</b></h1>
       </ion-label>
     </ion-item>
 
     <ion-item>
       <ion-label>
-        <p>Cantidad Revisado:</p>
-        <h1>{{DsIniciaActividad.cantidad_revisada}}</h1>
+        <p><b>Cantidad Terminado:</b></p>
+        <h1 style="color: rgb(74, 204, 81);"><b>{{DsIniciaActividad.cantidad_revisada}}</b></h1>
       </ion-label>
     </ion-item>
 
@@ -181,7 +181,10 @@
         (call_click_padre)="unCheckFocus(2)"
       ></app-input-with-button> -->
 
-      <ion-input type="number" label="Cantidad Ingresar:" labelPlacement="floating" [clearInput]="true" [(ngModel)]="DsIniciaActividad.cantidad_pendiente" (ionBlur)="unCheckFocus(2)"></ion-input>
+      <!--<ion-input type="number" label="Cantidad Ingresar:" labelPlacement="floating" [clearInput]="true" [(ngModel)]="DsIniciaActividad.cantidad_pendiente" (ionBlur)="unCheckFocus(2)"></ion-input>-->
+
+      <ion-input type="number" label="Ingresar Cantidad Terminada:" labelPlacement="floating" [clearInput]="true" [(ngModel)]="DsIniciaActividad.cantidad_ingresar" (ionChange)="onCantPendChange($event)"></ion-input>
+
 
       <!-- <ion-label>
       <p>Cantidad</p>

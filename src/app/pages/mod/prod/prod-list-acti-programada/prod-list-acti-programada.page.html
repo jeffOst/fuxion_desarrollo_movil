@@ -63,6 +63,12 @@
       ></ion-icon>
       <ion-icon
         name="ellipse"
+        color="tertiary"
+        slot="start"
+        *ngIf=" group.key == 'EN PROCESO'"
+      ></ion-icon>
+      <ion-icon
+        name="ellipse"
         color="success"
         slot="start"
         *ngIf=" group.key == 'COMPLETADO'"
@@ -87,6 +93,9 @@
                 <ion-text color="secondary"
                   >Cantidad: {{ contact.cantidad }} &nbsp;</ion-text
                 >
+                <ion-text color="danger"
+                  >Pendiente: {{ contact.cantidad_pendiente }} &nbsp;</ion-text
+                >
                 <ion-text color="primary">{{ contact.correorden }}</ion-text
                 >&nbsp; <!--{{ contact.fcreacion_ofpt }}-->
                 {{ contact.avatar }}
@@ -95,6 +104,7 @@
             >
           </ion-item>
           <ion-item>
+            <!--
             <ion-button
               expand="block"
               color="white"
@@ -103,14 +113,11 @@
               (click)="FIniciarActvividad(contact)"
               title="Iniciar Actividad"
             >
-              <ion-icon
-                [hidden]="scanActive"
-                expand="block"
-                color="dark"
-                size="small"
-                name="play-forward"
-              ></ion-icon>
+            -->
+            <ion-button expand="block" color="white" size="small" slot="end" title="Iniciar Actividad">
+              <ion-icon [hidden]="scanActive" expand="block" color="dark" size="small" name="play-forward"></ion-icon>
             </ion-button>
+            
           </ion-item>
         </ion-item>
       </ion-card>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController, ModalController, } from '@ionic/angular';
+import { NavController, LoadingController, ModalController, AlertController } from '@ionic/angular';
 import { Router, NavigationExtras } from '@angular/router';
 import { MPieza } from 'src/app/interfaces/prod/Pieza';
 import { ProdGestionServicioService } from "src/app/api/prod/prod-gestion-servicio.service";
@@ -53,7 +53,8 @@ export class ProdAteServIniciaActividadPage implements OnInit {
     public storage: Storage,
     private loadingController: LoadingController,
     public ApiServices: ProdGestionServicioService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private alertController: AlertController
   ) {
 
     let localStorage;
@@ -118,9 +119,9 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       this.DsIniciaActividad.servi0000cio_eje = this.navParams.servicio_eje;
       this.DsIniciaActividad.idservicio_x_eje_otd = this.navParams.idservicio_x_eje_otd;
 
-      this.DsIniciaActividad.flag_serv_eje_ms = this.navParams.flag_serv_eje_ms
+      this.DsIniciaActividad.flag_serv_eje_ms = this.navParams.flag_serv_eje_ms;
 
-      this.DsIniciaActividad.plano_diseno = this.navParams.plano_diseno
+      this.DsIniciaActividad.plano_diseno = this.navParams.plano_diseno;
 
       //this.fechainicio_prod = '2024-02-29T14:00:00.000Z'; // Formato ISO
       //this.fechainicio_prod = '2024-02-29 15:11:54Z'; // Formato ISO
@@ -130,6 +131,12 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       this.DsIniciaActividad.cantidad_total = this.navParams.cantidad_total;
       this.DsIniciaActividad.cantidad_revisada = this.navParams.cantidad_revisada;
       this.DsIniciaActividad.cantidad_pendiente = this.navParams.cantidad_pendiente;
+      this.DsIniciaActividad.cantidad_ingresar = 0;
+
+      console.log("VERIFICAR A<QUIIIIII;");
+      console.log(this.navParams.cantidad_total);
+      console.log(this.navParams.cantidad_revisada);
+      console.log(this.navParams.cantidad_pendiente);
 
       /////////////metalizado
       //console.log('this.DsIniciaActividad.proceso_metalizado::', this.DsIniciaActividad.proceso_metalizado);
@@ -302,7 +309,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
         idusuario: this.IdUsuarioLocal
       }
     });
-  
+
     return new Promise((resolve) => {
       modal.onDidDismiss().then((dataReturned) => {
         if (dataReturned !== null && dataReturned.data !== undefined) {
@@ -320,21 +327,21 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
   async FEstadoActividad(tip: number) {
     console.log('FEstadoActividad', tip);
-  
+
     switch (tip) {
       case 2: ////pausa
-  
+
         let flagGuardado: any = null; // Inicializa la variable con un valor por defecto
         let observacionGuardado: string = '';
         const modalRetorno = await this.openObservacionesPausaModal(); // Llama a la función
-  
+
         if (modalRetorno !== null) {
           if (modalRetorno.flag_guardar !== undefined) {
             flagGuardado = modalRetorno.flag_guardar; // Asigna el valor retornado
           } else {
             flagGuardado = 0; // Valor por defecto si no está definido
           }
-  
+
           if (modalRetorno.observaciones !== undefined) {
             observacionGuardado = modalRetorno.observaciones; // Asigna el valor retornado
           } else {
@@ -345,12 +352,12 @@ export class ProdAteServIniciaActividadPage implements OnInit {
           flagGuardado = 0; // Valor por defecto si no está definido
           observacionGuardado = ''; // Valor por defecto si no está definido
         }
-  
-  
-        console.log("Valor flag_guardar:", flagGuardado); // Imprime el valor
-        console.log("Valor observacionGuardado:", observacionGuardado); // Imprime el valor
 
-        if(flagGuardado == 1){
+
+        //console.log("Valor flag_guardar:", flagGuardado); // Imprime el valor
+        //console.log("Valor observacionGuardado:", observacionGuardado); // Imprime el valor
+
+        if (flagGuardado == 1) {
           this.hideBtnReanuda = true;
           this.hideBtnInicio = false;
           this.hideNomEstado = false;
@@ -363,29 +370,61 @@ export class ProdAteServIniciaActividadPage implements OnInit {
         break;
 
       case 3: ////finalizar
-        this.hideBtnReanuda = false;
-        this.hideBtnInicio = false;
-        this.hideNomEstado = true;
-        this.DsIniciaActividad.estado = "FINALIZAR";
 
-        this.FSaveEstado(tip);
+        //console.log(this.DsIniciaActividad.cantidad_pendiente);
+
+        if (this.DsIniciaActividad.cantidad_ingresar <= 0) {
+
+          const alert = await this.alertController.create({
+            header: 'Error',
+            message: 'El campo Cantidad a Ingresar no puede ser 0 o menor',
+            buttons: ['OK']
+          });
+          await alert.present();
+          //this.DsIniciaActividad.cantidad_pendiente = this.DsIniciaActividad.cantidad_total - this.DsIniciaActividad.cantidad_revisada;
+          this.DsIniciaActividad.cantidad_ingresar = 0;
+          return;
+
+        } else if (this.DsIniciaActividad.cantidad_ingresar > (this.DsIniciaActividad.cantidad_pendiente)) {
+          
+          const alert = await this.alertController.create({
+            header: 'Error',
+            message: 'No puede exceder la cantidad pendiente de ingresar',
+            buttons: ['OK']
+          });
+
+          await alert.present();
+          //this.DsIniciaActividad.cantidad_pendiente = this.DsIniciaActividad.cantidad_total - this.DsIniciaActividad.cantidad_revisada;
+          this.DsIniciaActividad.cantidad_ingresar = 0;
+          return;
+
+        } else {
+          console.log("Finalizando actividad");
+
+          this.hideBtnReanuda = false;
+          this.hideBtnInicio = false;
+          this.hideNomEstado = true;
+          this.DsIniciaActividad.estado = "FINALIZAR";
+
+          this.FSaveEstado(tip);
+        }
 
         break;
-        
+
       case 4: ////reanudar
         this.hideBtnReanuda = false;
         this.hideBtnInicio = true;
         this.hideNomEstado = false;
         this.DsIniciaActividad.estado = "REANUDAR";
-        
+
         this.FSaveEstado(tip);
 
         break;
-  
+
       default:
         break;
     }
-  
+
     //this.FSaveEstado(tip);
   }
 
@@ -399,7 +438,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
     console.log(this.DsIniciaActividad.idmaquina);
 
 
-    
+
     const loading = this.loadingController.create({
       message: 'Cargando...',
       translucent: true//,
@@ -441,7 +480,53 @@ export class ProdAteServIniciaActividadPage implements OnInit {
         });
 
       });
+
+  }
+
+  async onCantPendChange(event: any) {
+
+    /*
+      console.log('El valor del input ha cambiado:', event.detail.value);
+      console.log(event.detail.value);
+      console.log(this.DsIniciaActividad.cantidad_pendiente);
+      console.log(this.DsIniciaActividad.cantidad_total);
+      console.log(this.DsIniciaActividad.cantidad_revisada);
+      console.log(this.DsIniciaActividad.cantidad_total - this.DsIniciaActividad.cantidad_revisada);
+    */
+
+    if (this.DsIniciaActividad.cantidad_ingresar > (this.DsIniciaActividad.cantidad_pendiente)) {
+
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'No puede exceder la cantidad pendiente de ingresar',
+        buttons: ['OK']
+      });
+
+      await alert.present();
+      //this.DsIniciaActividad.cantidad_pendiente = this.DsIniciaActividad.cantidad_total - this.DsIniciaActividad.cantidad_revisada;
+      this.DsIniciaActividad.cantidad_ingresar = 0;
+
+      return;
+
+    } else if (this.DsIniciaActividad.cantidad_ingresar < 0) {
+
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'La cantidad a ingresar no puede ser menor a 0',
+        buttons: ['OK']
+      });
+      await alert.present();
+      //this.DsIniciaActividad.cantidad_pendiente = this.DsIniciaActividad.cantidad_total - this.DsIniciaActividad.cantidad_revisada;
+      this.DsIniciaActividad.cantidad_ingresar = 0;
       
+      return;
+
+    }
+    else {
+      console.log("ingresa a else");
+    }
+
+
   }
 
   unCheckFocus(e) {

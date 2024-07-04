@@ -7,7 +7,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { MPieza } from 'src/app/interfaces/prod/Pieza';
 import { SearchType, ProdGestionServicioService } from "src/app/api/prod/prod-gestion-servicio.service";
 import { Storage } from "@ionic/storage";
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController, ModalController, AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -41,7 +41,8 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
     private router: Router,
     public prodservice: ProdGestionServicioService,
     private storage: Storage,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    private alertController: AlertController
   ) {
 
     let localStorage: any;
@@ -105,9 +106,14 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
       this.FormHtmlJs.idsolicitante_scc = this.id_usuario_local;
 
       this.FormHtmlJs.plano_diseno = this.navParams.plano_diseno;
+      this.FormHtmlJs.cantidad_total = this.navParams.cantidad;
+      this.FormHtmlJs.cantidad_revisada = this.navParams.cantidad_revisada;
+      this.FormHtmlJs.cantidad_pendiente= this.navParams.cantidad_pendiente;
+
 
       console.log('this.FormHtmlJs', this.FormHtmlJs);
 
+      
       /////////////////////////
     });//////////FIN  STORAGE
     this.storage.get('DEVICE_INFO').then((result1) => {
@@ -125,13 +131,45 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
 
   }
 
-  FIniciarActvividad() {
-    let row: any = this.FormHtmlJs;
-    row.maquina = 'Iniciar Actividad';
-    let navigationExtras: NavigationExtras = {
-      state: row
-    };
-    this.navCtrl.navigateForward(['addserviciostodet'], navigationExtras);
+  async FIniciarActvividad() {
+    
+    console.log("verificar el estado actual");
+    console.log(this.navParams.idestado);
+
+    if (this.navParams.idestado == 2) {
+
+      const alert = await this.alertController.create({
+        header: 'Alerta',
+        message: 'Este registro ya se encuentra completado, no se puede iniciar otra actividad',
+        buttons: ['Aceptar']
+      });
+      await alert.present();
+      return;
+
+    }
+    else if (this.navParams.idestado == 3) {
+
+      const alert = await this.alertController.create({
+        header: 'Alerta',
+        message: 'Este registro esta Proceso de revision, debe finalizar el registro ya creado que se encuentra en Orden De Fabricacion En Proceso. (Debe asignar la cantidad que se reviso.)',
+        buttons: ['Aceptar']
+      });
+      await alert.present();
+      return;
+
+    }
+    else{
+
+      console.log(this.FormHtmlJs); //////////
+
+      let row: any = this.FormHtmlJs;
+      row.maquina = 'Iniciar Actividad';
+      let navigationExtras: NavigationExtras = {
+        state: row
+      };
+      this.navCtrl.navigateForward(['addserviciostodet'], navigationExtras);
+    }    
+
   }
 
   cancelar_ejecucion() {

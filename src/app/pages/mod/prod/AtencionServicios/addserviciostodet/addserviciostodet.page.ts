@@ -228,6 +228,11 @@ export class AddserviciostodetPage implements OnInit {
 
       this.ArrayItemsSelectedDesti[0].fechafin_prod = this.navParams.fechafin_prod;
 
+      this.ArrayItemsSelectedDesti[0].cantidad_total = this.navParams.cantidad_total;
+      this.ArrayItemsSelectedDesti[0].cantidad_revisada = this.navParams.cantidad_revisada;
+      this.ArrayItemsSelectedDesti[0].cantidad_pendiente = this.navParams.cantidad_pendiente;
+
+
       // Llama a la función para configurar el estado inicial de ItemVisibleFechaHora después de 4 segundos
       setTimeout(() => {
         if (this.flagResumenDiario === "1") { this.ItemVisibleFechaHora = true; } else { this.ItemVisibleFechaHora = false; }
@@ -1638,7 +1643,33 @@ export class AddserviciostodetPage implements OnInit {
           this.ArrayItemsSelectedDesti[0].fechainicio_prod = this.fechainicio_prod;
           this.ArrayItemsSelectedDesti[0].fechafin_prod = this.fechafin_prod;
           this.ArrayItemsSelectedDesti[0].cantidad = this.ArrayItemsSelectedDesti[0].cantidad;
-          //this.ArrayItemsSelectedDesti[0].flag_agregado = this.flagResumenDiario;
+          
+          //this.ArrayItemsSelectedDesti[0].cantidad_total = this.ArrayItemsSelectedDesti[0].cantidad;
+          
+          console.log("REVISAR LAS CANTIDADES AQUIIIIIIII ------>");
+          console.log(this.ArrayItemsSelectedDesti[0].cantidad_total);
+          console.log(this.ArrayItemsSelectedDesti[0].cantidad_revisada);
+          console.log(this.ArrayItemsSelectedDesti[0].cantidad_pendiente);
+
+          if(this.ArrayItemsSelectedDesti[0].cantidad_total === undefined){
+            this.ArrayItemsSelectedDesti[0].cantidad_total = '1';
+          }else{
+            this.ArrayItemsSelectedDesti[0].cantidad_total = this.ArrayItemsSelectedDesti[0].cantidad_total;
+          }
+
+          if(this.ArrayItemsSelectedDesti[0].cantidad_revisada === undefined){
+            this.ArrayItemsSelectedDesti[0].cantidad_revisada = '0';
+          }else{
+            this.ArrayItemsSelectedDesti[0].cantidad_revisada = this.ArrayItemsSelectedDesti[0].cantidad_revisada;
+          }
+
+          if(this.ArrayItemsSelectedDesti[0].cantidad_pendiente === undefined){
+            this.ArrayItemsSelectedDesti[0].cantidad_pendiente = '1';
+          }else{
+            this.ArrayItemsSelectedDesti[0].cantidad_pendiente = this.ArrayItemsSelectedDesti[0].cantidad_pendiente;
+          }
+
+
 
           if (this.flagResumenDiario == "1") { this.ArrayItemsSelectedDesti[0].flag_agregado = '1'; } else { this.ArrayItemsSelectedDesti[0].flag_agregado = '0'; }
 
