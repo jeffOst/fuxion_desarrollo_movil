@@ -140,7 +140,7 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
 
       const alert = await this.alertController.create({
         header: 'Alerta',
-        message: 'Este registro ya se encuentra completado, no se puede iniciar otra actividad',
+        message: 'Este registro se encuentra completado, no se puede iniciar otra actividad. (Se debe volver a asignar la Actividad.)',
         buttons: ['Aceptar']
       });
       await alert.present();

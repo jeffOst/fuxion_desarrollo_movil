@@ -385,7 +385,18 @@ export class ProdAteServIniciaActividadPage implements OnInit {
           this.DsIniciaActividad.cantidad_ingresar = 0;
           return;
 
-        } else if (this.DsIniciaActividad.cantidad_ingresar > (this.DsIniciaActividad.cantidad_pendiente)) {
+        }
+        else {
+          console.log("Finalizando actividad");
+
+          this.hideBtnReanuda = false;
+          this.hideBtnInicio = false;
+          this.hideNomEstado = true;
+          this.DsIniciaActividad.estado = "FINALIZAR";
+
+          this.FSaveEstado(tip);
+        }
+        /*else if (this.DsIniciaActividad.cantidad_ingresar > (this.DsIniciaActividad.cantidad_pendiente)) {
           
           const alert = await this.alertController.create({
             header: 'Error',
@@ -398,16 +409,8 @@ export class ProdAteServIniciaActividadPage implements OnInit {
           this.DsIniciaActividad.cantidad_ingresar = 0;
           return;
 
-        } else {
-          console.log("Finalizando actividad");
-
-          this.hideBtnReanuda = false;
-          this.hideBtnInicio = false;
-          this.hideNomEstado = true;
-          this.DsIniciaActividad.estado = "FINALIZAR";
-
-          this.FSaveEstado(tip);
-        }
+        }*/
+       
 
         break;
 
@@ -494,6 +497,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       console.log(this.DsIniciaActividad.cantidad_total - this.DsIniciaActividad.cantidad_revisada);
     */
 
+    /*
     if (this.DsIniciaActividad.cantidad_ingresar > (this.DsIniciaActividad.cantidad_pendiente)) {
 
       const alert = await this.alertController.create({
@@ -508,7 +512,8 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
       return;
 
-    } else if (this.DsIniciaActividad.cantidad_ingresar < 0) {
+    }*/
+    if (this.DsIniciaActividad.cantidad_ingresar < 0) {
 
       const alert = await this.alertController.create({
         header: 'Error',
@@ -518,7 +523,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       await alert.present();
       //this.DsIniciaActividad.cantidad_pendiente = this.DsIniciaActividad.cantidad_total - this.DsIniciaActividad.cantidad_revisada;
       this.DsIniciaActividad.cantidad_ingresar = 0;
-      
+
       return;
 
     }
