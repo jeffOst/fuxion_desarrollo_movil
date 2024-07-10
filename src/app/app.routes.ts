@@ -351,6 +351,43 @@ export const routes: Routes = [
   {
     path: 'motivo-pausa',
     loadComponent: () => import('./pages/mod/prod/prod-list-acti-historico/modals/motivo-pausa/motivo-pausa.page').then( m => m.MotivoPausaPage)
+  },
+  {
+    path: 'rrhh-horas-extras',
+    loadComponent: () => import('./pages/mod/rrhh/rrhh-horas-extras/rrhh-horas-extras.page').then( m => m.RrhhHorasExtrasPage)
+  },
+  {
+    path: 'rrhh-win-horas-extras',
+    loadComponent: () => import('./pages/mod/rrhh/rrhh-win-horas-extras/rrhh-win-horas-extras.page').then( m => m.RrhhWinHorasExtrasPage)
+  },
+  {
+    path: 'rrhh-popup-tecnico',
+    loadComponent: () => import('./pages/mod/rrhh/rrhh-popup-tecnico/rrhh-popup-tecnico.page').then( m => m.RrhhPopupTecnicoPage)
+  },
+  {
+    path: 'rrhh-popup-servicios',
+    loadComponent: () => import('./pages/mod/rrhh/rrhh-popup-servicios/rrhh-popup-servicios.page').then( m => m.RrhhPopupServiciosPage)
+  },
+  {
+    path: 'rrhh-popup-actividad',
+    loadComponent: () => import('./pages/mod/rrhh/rrhh-popup-actividad/rrhh-popup-actividad.page').then( m => m.RrhhPopupActividadPage)
+  },
+  {
+    path: 'rrhh-popup-motivo',
+    loadComponent: () => import('./pages/mod/rrhh/rrhh-popup-motivo/rrhh-popup-motivo.page').then( m => m.RrhhPopupMotivoPage)
+  },
+  {
+    path: 'rrhh-popup-supervisor',
+    loadComponent: () => import('./pages/mod/rrhh/rrhh-popup-supervisor/rrhh-popup-supervisor.page').then( m => m.RrhhPopupSupervisorPage)
+  },
+  {
+    path: 'rrhh-popup-descripcion',
+    loadComponent: () => import('./pages/mod/rrhh/rrhh-popup-descripcion/rrhh-popup-descripcion.page').then( m => m.RrhhPopupDescripcionPage)
+  },
+  {
+    path: 'rrhh-popup-area',
+    loadComponent: () => import('./pages/mod/rrhh/rrhh-popup-area/rrhh-popup-area.page').then( m => m.RrhhPopupAreaPage)
   }
+  
   
 ];

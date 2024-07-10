@@ -1,0 +1,152 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title text-capitalize>Formulario Horas Extras</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="prod-list-acti-programada" [text]="Cancelar">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <form [formGroup]="FormCheckListPaso1" #f="ngForm">
+  <ion-list 
+    [style.--background]="scanActive ? '#00000000':'#fff'">
+    <ion-item [hidden]="scanActive">
+      <ion-grid [hidden]="scanActive">
+
+        <ion-row class="ion-align-items-center">
+          <ion-col>
+            <ion-grid>
+
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end"> Tecnico: </ion-col>
+                <ion-col size="9">
+                  <ion-item>
+                    <ion-input required="true" color="primary" mode="ios" formControlName= "nom_tecni" readonly>
+                    </ion-input>
+                  </ion-item>
+                  <div></div>
+                </ion-col>
+              </ion-row>
+
+              <ion-row class="ion-align-items-center">
+              <ion-col size="3" class="ion-text-end"> Actividad: </ion-col>
+              <ion-col size="9">
+                <ion-item>
+                  <ion-searchbar (click)="FOpenModalActividad()" type="text" placeholder="Buscar Actividad" mode="ios" formControlName="actividad">
+                  </ion-searchbar>
+                </ion-item>
+                <div></div>
+              </ion-col>
+            </ion-row>
+            </ion-grid>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">Programa: </ion-col>
+          <ion-col size="9" class="ion-text-start">
+            <ion-item>
+              <ion-searchbar (click)="open_popup_servicios()" type="text" placeholder="Seleccionar Programa" mode="ios" formControlName="nom_serv">
+              </ion-searchbar>
+            </ion-item>
+           
+          </ion-col>
+        </ion-row>
+
+        
+        <ion-row hidden class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Cantidad: </ion-col>
+          <ion-col size="9">
+            <ion-item>
+              <ion-input required="true" color="primary" type="number" mode="ios" formControlName="cantidad" 
+                >
+                <!-- [(ngModel)]="item2.cantidad"
+                value="{{item2.cantidad}}" -->
+              </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>  
+
+        <ion-row hidden class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Descripcion: </ion-col>
+          <ion-col size="9">
+            <ion-item>
+              <ion-searchbar (click)="open_popup_descrip()" type="text" placeholder="Seleccionar Descripcion" mode="ios" formControlName="descrip"></ion-searchbar>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row hidden class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Motivo: </ion-col>
+          <ion-col size="9">
+            <ion-item>
+              <ion-searchbar (click)="open_popup_motivo()" type="text" placeholder="Seleccionar Motivo" mode="ios" formControlName="motivo"></ion-searchbar>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">Area: </ion-col>
+          <ion-col size="9" class="ion-text-start">
+            <ion-item>
+              <ion-searchbar (click)="open_popup_area()" type="text" placeholder="Seleccionar Area" mode="ios" formControlName="area">
+              </ion-searchbar>
+            </ion-item>
+           
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">Supervisor: </ion-col>
+          <ion-col size="9" class="ion-text-start">
+            <ion-item>
+              <ion-searchbar (click)="open_popup_supervisor()" type="text" placeholder="Seleccionar Supervisor" mode="ios" formControlName="supervisor">
+              </ion-searchbar>
+            </ion-item>
+           
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">Tipo de Horas: </ion-col>
+          <ion-col size="9" class="ion-text-start">
+        <ion-item>
+          <ion-select placeholder="Seleccionar el tipo de Horas" formControlName="tip_horas" >
+          <ion-select-option value="1">H. Extras</ion-select-option>
+          <ion-select-option value="2">H. Compensada</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+      </ion-row>
+
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</form>
+</ion-content>
+<ion-footer>
+  <ion-grid [hidden]="scanActive">
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col style="text-align: center">
+        <ion-buttons (click)="cancelar_ejecucion()">
+          <!-- (click)="cancelar_ejecucion()"  -->
+          <ion-button  color="danger" >
+            <ion-icon name="close-outline"></ion-icon>&nbsp; Cancelar
+          </ion-button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+
+          <ion-button (click)="SaveFormTerminadoPaso1(1)"  *ngIf="!disableButton1" color="success">
+            <ion-icon name="save-outline"></ion-icon>&nbsp; Iniciar
+          </ion-button>
+          <ion-button (click)="SaveFormTerminadoPaso1(2)" *ngIf="!disableButton" color="primary">
+            <ion-icon name="save-outline"></ion-icon>&nbsp; Finalizar
+          </ion-button>
+        </ion-buttons>
+        
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

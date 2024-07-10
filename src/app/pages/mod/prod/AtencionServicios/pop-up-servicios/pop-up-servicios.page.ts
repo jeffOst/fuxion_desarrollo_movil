@@ -138,4 +138,23 @@ nomclase:string;
 
   }
 
+  onSearchChange(event:any){
+    const query = event.target.value;
+    if (query && query.trim() !== '') {
+      this.ApiService.ListFindServiciosByPieza(this.NgModInputSearch,this.idpieza_,this.avatar_,this.IdUsuarioLocal,this.IdDispositivo,this.nomclase).then((res) => {
+        this.DataSetGrid = res;
+        //console.log(this.results_equipos);
+      }).finally(() => {
+        this.loadingController.dismiss();
+       
+        // setTimeout(() => {            
+        // this.IdHtmlInputSearch.setFocus();
+        // },600)
+ 
+      });
+    }
+ 
+  }
+
+
 }

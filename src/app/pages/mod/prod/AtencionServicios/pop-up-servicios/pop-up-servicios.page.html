@@ -14,7 +14,7 @@
   <ion-item>
 
     <ion-searchbar style="width: 98%;" #IdHtmlInputSearch mode="ios" cancelButtonText="Cancelar" enterkeyhint="done"
-      placeholder="Escriba aqui el Servicio" [(ngModel)]="NgModInputSearch">
+      placeholder="Escriba aqui el Servicio" [(ngModel)]="NgModInputSearch" (ionInput)="onSearchChange($event)">
     </ion-searchbar>
 
     <ion-button (click)="agregar_servicio_actividad()" color="warning">
