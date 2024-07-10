@@ -373,11 +373,11 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
         //console.log(this.DsIniciaActividad.cantidad_pendiente);
 
-        if (this.DsIniciaActividad.cantidad_ingresar <= 0) {
+        if (this.DsIniciaActividad.cantidad_ingresar < 0) {
 
           const alert = await this.alertController.create({
             header: 'Error',
-            message: 'El campo Cantidad a Ingresar no puede ser 0 o menor',
+            message: 'El campo Cantidad a Ingresar no puede ser menor a 0.',
             buttons: ['OK']
           });
           await alert.present();

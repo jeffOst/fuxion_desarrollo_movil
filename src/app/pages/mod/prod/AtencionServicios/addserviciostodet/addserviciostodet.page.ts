@@ -65,6 +65,7 @@ export class AddserviciostodetPage implements OnInit {
   alertSiNo: any;
   rest_maquina: any;
   rest_material: any;
+  rest_turno: any;
   rest_proceso: any;
   rest_proceso_metalizado: any;
   rest_servicio_metalizado: any;
@@ -84,6 +85,7 @@ export class AddserviciostodetPage implements OnInit {
   CssNotiQr: string;
   CssNotiBomba: string;
   CssNotiMaterial: string;
+  CssNotiTurno: string;
   CssNotiTenico: string;
   CssNotiMaquina: string;
   CssNotiServicio: string;
@@ -207,6 +209,7 @@ export class AddserviciostodetPage implements OnInit {
       
       this.ArrayItemsSelectedDesti[0].material = this.navParams.material;
       this.ArrayItemsSelectedDesti[0].idmaterial = this.navParams.idmaterial;
+      this.ArrayItemsSelectedDesti[0].idturno = this.navParams.idturno;
             
       this.ArrayItemsSelectedDesti[0].Y04001 = this.navParams.Y04001;
       this.ArrayItemsSelectedDesti[0].Y04002 = this.navParams.Y04002;
@@ -571,6 +574,18 @@ export class AddserviciostodetPage implements OnInit {
         this.ArrayItemsSelectedDesti[index].material = row.nombre;
         this.ArrayItemsSelectedDesti[index].idmaterial = row.codigo
         console.log(this.ArrayItemsSelectedDesti[index].material);
+      }
+    }
+  }
+
+  select_change_turno(ev, index) {
+    console.log('select_change_turno::', this.rest_pieza);
+    for (const row of this.rest_turno) {
+      console.log(this.ArrayItemsSelectedDesti[index].turno);
+      console.log(row.codigo)
+      if (row.codigo == ev.detail.value) {
+        this.ArrayItemsSelectedDesti[index].turno = row.descrip;
+        this.ArrayItemsSelectedDesti[index].idturno = row.codigo
       }
     }
   }
@@ -1497,7 +1512,16 @@ export class AddserviciostodetPage implements OnInit {
       ///actividad 
       if (this.ArrayItemsSelectedDesti[index].avatar == null || this.ArrayItemsSelectedDesti[index].avatar == '') {
         siono = 2;
-        msgg = ' Fala seleccionar actividad ';
+        msgg = ' Falta seleccionar actividad ';
+        break;
+      }
+
+      //turno
+      this.CssNotiTurno = 'field_required_ok';
+      if (this.ArrayItemsSelectedDesti[index].turno == null || this.ArrayItemsSelectedDesti[index].turno == '') {
+        siono = 2;
+        msgg = ' Falta agregar el Turno que pertenece.';
+        this.CssNotiTurno = 'field_required';
         break;
       }
 
@@ -1506,7 +1530,7 @@ export class AddserviciostodetPage implements OnInit {
         ////Pieza
         if (this.ArrayItemsSelectedDesti[index].nomclase == null || this.ArrayItemsSelectedDesti[index].nomclase == '') {
           siono = 2;
-          msgg = ' Fala seleccionar  Pieza';
+          msgg = ' Falta seleccionar  Pieza';
           this.CssNotiPieza = 'field_required';
           break;
         }
@@ -1515,7 +1539,7 @@ export class AddserviciostodetPage implements OnInit {
         this.CssNotiMaterial = 'field_required_ok';
         if (this.ArrayItemsSelectedDesti[index].material == null || this.ArrayItemsSelectedDesti[index].material == '') {
           siono = 2;
-          msgg = ' Fala agregar material';
+          msgg = ' Falta agregar material';
           this.CssNotiMaterial = 'field_required';
           break;
         }
@@ -1525,7 +1549,7 @@ export class AddserviciostodetPage implements OnInit {
       this.CssNotiServicio = 'field_required_ok';
       if (this.ArrayItemsSelectedDesti[index].Y04002 == null || this.ArrayItemsSelectedDesti[index].Y04002 == '') {
         siono = 2;
-        msgg = ' Fala agregar servicio';
+        msgg = ' Falta agregar servicio';
         this.CssNotiServicio = 'field_required';
         break;
       }
@@ -1760,6 +1784,7 @@ export class AddserviciostodetPage implements OnInit {
         this.ApiServices.load_cbos_pieza_material_maquina(this.actividad, this.IdUsuarioLocal, this.IdDispositivo).then((res) => {
           this.rest_maquina = res['maquinas'];
           this.rest_material = res['material'];
+          this.rest_turno = res['turno'];
           //this.rest_proceso = res['proceso'];
           this.rest_pieza = res['pieza'];
           this.rest_servicio_metalizado = res['servicio_metalizado'];

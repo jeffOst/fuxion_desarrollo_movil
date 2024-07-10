@@ -169,6 +169,8 @@
                 </ion-col>
               </ion-row>
 
+              
+
               <ion-row class="ion-align-items-center">
                 <ion-col size="3" class="ion-text-end"> Tecnico: </ion-col>
                 <ion-col size="9">
@@ -325,7 +327,7 @@
                 value="{{item2.cantidad}}"></ion-input>
             </ion-item>
           </ion-col>
-        </ion-row>  
+        </ion-row>
 
         <!---OCULTAR AQUI-
         <ion-item *ngIf="ItemVisibleFechaHora">
@@ -344,18 +346,31 @@
         </ion-item>
         -->
 
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Turno: </ion-col>
+          <ion-col size="9">
+            <ion-select cancelText="Cancelar" (ionChange)="select_change_turno($event,i)"
+              [selectedText]="item2.turno" placeholder="Seleccionar turno" color="primary"
+              [(ngModel)]="item2.idturno" interface="action-sheet" mode="ios">
+              <ion-select-option *ngFor="let fila of rest_turno" [value]="fila['codigo']">{{fila['descrip']}}
+              </ion-select-option>
+            </ion-select>
+            <div class="{{CssNotiTurno}}"></div>
+          </ion-col>
+        </ion-row>
+        <!--
         <ion-row hidden class="ion-align-items-center">
           <ion-col size="3" class="ion-text-end"> Tiempo Estandar: </ion-col>
           <ion-col size="9">
             <ion-item>
               <ion-input required="true" color="primary" type="number" mode="ios" [(ngModel)]="item2.tiempo_estandar"
-                value="{{item2.tiempo_estandar}}" readonly ></ion-input>
+                value="{{item2.tiempo_estandar}}" readonly></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
-
+        -->
         <ion-row hidden class="ion-align-items-center">
-          
+
           <ion-col size="9">
             <ion-item *ngIf="ItemVisibleFechaHora">
               <ion-col size="4" class="ion-text-end">Fecha y Hora de Inicio:</ion-col>
@@ -365,8 +380,8 @@
                 <ng-template>
                   <ion-datetime locale="es-ES" id="datetime1" mode="ios" displayFormat="YYYY-MM-DD HH:mm"
                     presentation="date-time" [preferWheel]="true" [showDefaultButtons]="true"
-                    pickerFormat="YYYY-MM-DD HH:mm" [(ngModel)]="fechainicio_prod" (ionChange)="onFechaChangeInicio($event)"
-                    [ngModelOptions]="{standalone: true}">
+                    pickerFormat="YYYY-MM-DD HH:mm" [(ngModel)]="fechainicio_prod"
+                    (ionChange)="onFechaChangeInicio($event)" [ngModelOptions]="{standalone: true}">
                   </ion-datetime>
                 </ng-template>
               </ion-popover>
