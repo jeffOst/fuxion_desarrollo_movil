@@ -205,7 +205,7 @@ export class MttoWinOrdenTrabajo1Page implements OnInit {
       corre_inf_cab_otc: [''],
       corre_fisico: [''],
       dias_trabajados: [''],
-      ot_cod_reb_motor: [{  disabled: true },''], 
+      ot_cod_reb_motor: [''], 
       ot_idtoggle: [''],
       estado_dis_motor_otc:[''],
       idestado_cerrado: [''],
@@ -479,7 +479,7 @@ export class MttoWinOrdenTrabajo1Page implements OnInit {
     await alert.present();
   }
 //////////////
-onToggle(ev) {
+/*onToggle(ev) {
   console.log("holaaaaa",ev);
   
   let toggle_2;
@@ -498,6 +498,7 @@ onToggle(ev) {
      console.log(this.toggleState);
      
 }
+*/
   async SaveFormTerminadoPaso1() {
     if (this.FormCheckListPaso1.valid) {
       this.id_orden_trab_cab = this.globalVal.id_orden_trab_cab;
