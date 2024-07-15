@@ -41,7 +41,7 @@ export class LoginPage implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required],
       siteform: ['000', Validators.required],
-      ip: ['192.168.3.82/erpgeo_hidro', Validators.required]
+      ip: ['fuxion.geohidraulica.com.pe', Validators.required] //'192.168.3.82/erpgeo_hidro'
     })
     //this.load_sites();
 

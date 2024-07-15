@@ -48,7 +48,7 @@ export class RrhhWinHorasExtrasPage implements OnInit {
   estaCargando: boolean = false;
   NombresUsuarioLocal: string;
   IdUsuarioLocal: string;
-
+  // tip_horas: string = '1';  // Valor predeterminado
   constructor(
     private router: Router,
     private modalCtrl: ModalController,
@@ -61,22 +61,22 @@ export class RrhhWinHorasExtrasPage implements OnInit {
   ) {
 
     this.FormCheckListPaso1 = this.formBuilder.group({
-      nom_tecni:[''],
-      nom_serv:[''],
-      actividad: [''],
-      motivo: [''],
-      supervisor:[''],
-      area:[''],
-      descrip : [''],
-      cantidad: [''],
-      tip_horas: [''],
+      nom_tecni:['',Validators.required],
+      nom_serv:['',Validators.required],
+      actividad: ['',Validators.required],
+      motivo: ['',Validators.required],
+      supervisor:['',Validators.required],
+      area:['',Validators.required],
+      descrip : ['',Validators.required],
+      cantidad: ['',Validators.required],
+      tip_horas: ['',Validators.required],
 
       button: [''],
 
       idtecni: [''],
       idactivi: [''],
       idprogra: [''],
-      iddescrip: [''],
+      // iddescrip: [''],
       idmotivo: [''],
       idarea: [''],
       idsuper: [''],
@@ -95,7 +95,16 @@ export class RrhhWinHorasExtrasPage implements OnInit {
       //user_name
       console.log('localStorage',this.NombresUsuarioLocal);
       console.log('localStorage',this.IdUsuarioLocal);
-      
+      this.FormCheckListPaso1.controls['nom_tecni'].setValue(
+        this.NombresUsuarioLocal
+      );
+  
+      this.FormCheckListPaso1.controls['idtecni'].setValue(
+        this.IdUsuarioLocal
+      );
+      this.FormCheckListPaso1.controls['tip_horas'].setValue(
+        '1'
+      );
     });
 
     this.navParamsAny = this.router.getCurrentNavigation().extras.state['Row'];
@@ -247,28 +256,28 @@ export class RrhhWinHorasExtrasPage implements OnInit {
     });
     return await modal.present();
   }
-  async open_popup_descrip() {
-    const modal = await this.modalCtrl.create({
-      component: RrhhPopupDescripcionPage,
-      backdropDismiss: true,
-      showBackdrop: true,
-      mode: 'ios'
-    });
+  // async open_popup_descrip() {
+  //   const modal = await this.modalCtrl.create({
+  //     component: RrhhPopupDescripcionPage,
+  //     backdropDismiss: true,
+  //     showBackdrop: true,
+  //     mode: 'ios'
+  //   });
 
-    modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned.data != undefined) {
-        this.dataReturned5 = dataReturned.data;
-        console.log('dataReturned::207', dataReturned);
-        this.FormCheckListPaso1.controls['descrip'].setValue(
-          this.dataReturned5.nombres
-        );
-        this.FormCheckListPaso1.controls['iddescrip'].setValue(
-          this.dataReturned5.id
-        );
-      }
-    });
-    return await modal.present();
-  }
+  //   modal.onDidDismiss().then((dataReturned) => {
+  //     if (dataReturned.data != undefined) {
+  //       this.dataReturned5 = dataReturned.data;
+  //       console.log('dataReturned::207', dataReturned);
+  //       this.FormCheckListPaso1.controls['descrip'].setValue(
+  //         this.dataReturned5.nombres
+  //       );
+  //       this.FormCheckListPaso1.controls['iddescrip'].setValue(
+  //         this.dataReturned5.id
+  //       );
+  //     }
+  //   });
+  //   return await modal.present();
+  // }
   async FOpenModalActividad() {
     const modal = await this.modalCtrl.create({
       component: RrhhPopupActividadPage,
@@ -293,56 +302,89 @@ export class RrhhWinHorasExtrasPage implements OnInit {
   }
 
   cancelar_ejecucion() {
-    this.navCtrl.navigateForward('rrhh-horas-extras');////addnoprogramado
+    // this.navCtrl.navigateForward('rrhh-horas-extras');////addnoprogramado
   }
   async SaveFormTerminadoPaso1(value:any) {
-    this.FormCheckListPaso1.controls['button'].setValue(
-      value
-    );
-
-      
+    console.log('que esta validando aqui?',this.FormCheckListPaso1.valid);
+    
+    if (this.FormCheckListPaso1.valid) {
+      this.FormCheckListPaso1.controls['button'].setValue(
+        value
+      );
+      // Lógica para manejar un formulario válido
       await this.ApiService.GuardarInfPaso1(this.FormCheckListPaso1.value)
-        .then( async (res) => {
-          this.loadingController.dismiss();
-          let css_msj=res[0].o_nres=='0'?'alerta-error':'alerta-ok';
+      .then( async (res) => {
+        this.loadingController.dismiss();
+        let css_msj=res[0].o_nres=='0'?'alerta-error':'alerta-ok';
 
-          const alert = await this.alertController.create({
-            header: 'ALERTA',
-            subHeader: 'Confirmacion',
-            cssClass:css_msj,
-            mode: 'ios',
-            animated: true,
-            message: res[0].o_msj,// 'La operación se completó con éxito.',
-            buttons: [
-              {
-                text: 'Aceptar',
+        const alert = await this.alertController.create({
+          header: 'ALERTA',
+          subHeader: 'Confirmacion',
+          cssClass:css_msj,
+          mode: 'ios',
+          animated: true,
+          message: res[0].o_msj,// 'La operación se completó con éxito.',
+          buttons: [
+            {
+              text: 'Aceptar',
 
-                handler: () => {
+              handler: () => {
 
-                  console.log('Operación confirmada');
-                  if (res[0].o_nres == '1') {
-                    this.navCtrl.navigateForward(['rrhh-horas-extras']);
-                  }
-                },
+                console.log('Operación confirmada');
+                if (res[0].o_nres == '1') {
+                  this.navCtrl.navigateForward(['rrhh-horas-extras']);
+                }
               },
-            ],
-          });
-
-          await alert.present();
-
-
-        })
-        .finally(() => {
-          console.log('finally:::>>LN:394');
-          // this.FLoadForms();
-          //this.navCtrl.navigateForward(["mtto-list-recinado"]);
-          
-        })
-        .catch((err) => {
-          console.log('errror:::>>>>>>>>>', err);
+            },
+          ],
         });
+
+        await alert.present();
+
+
+      })
+      .finally(() => {
+        console.log('finally:::>>LN:394');
+        // this.FLoadForms();
+        //this.navCtrl.navigateForward(["mtto-list-recinado"]);
+        
+      })
+      .catch((err) => {
+        console.log('errror:::>>>>>>>>>', err);
+      });
+    } else {
+      // Manejo de errores de validación
+      console.log('entraaaaa al elseeee');
+      
+      this.showAlert();
+    }
+      
+     
       //////////////////////////////////////////////////////////
 
+  }
+  async showAlert() {
+    const alert = await this.alertController.create({
+      header: 'ALERTA',
+      subHeader: 'Confirmacion',
+      cssClass:'alerta-error',
+      mode: 'ios',
+      animated: true,
+      message: 'Error falta completar datos',
+      buttons: [
+        {
+          text: 'Aceptar',
+
+          handler: () => {
+
+            console.log('Operación confirmada');
+           
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   FLoadForms() {
@@ -367,7 +409,7 @@ export class RrhhWinHorasExtrasPage implements OnInit {
                 motivo: this.EditDataRest[0].motivo,
                 supervisor:this.EditDataRest[0].supervisor,
                 area:this.EditDataRest[0].area,
-                descrip: this.EditDataRest[0].descrip,
+                descrip: this.EditDataRest[0].descrip_he,
                 cantidad: this.EditDataRest[0].cantidad,
                 tip_horas: this.EditDataRest[0].tip_horahe,
                 button: this.EditDataRest[0].estado_reg_hhee,
@@ -375,7 +417,7 @@ export class RrhhWinHorasExtrasPage implements OnInit {
                 idtecni: this.IdUsuarioLocal,
                 idactivi: this.EditDataRest[0].actividad_he,
                 idprogra: this.EditDataRest[0].idprogram_prod,
-                iddescrip: this.EditDataRest[0].iddescrip_he,
+                // iddescrip: this.EditDataRest[0].iddescrip_he,
                 idmotivo: this.EditDataRest[0].idmotivo_he,
                 idarea: this.EditDataRest[0].idarea_he,
                 idsuper: this.EditDataRest[0].idsupervisor_he,
