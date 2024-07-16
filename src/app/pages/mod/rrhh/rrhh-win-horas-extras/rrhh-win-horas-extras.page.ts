@@ -68,11 +68,11 @@ export class RrhhWinHorasExtrasPage implements OnInit {
       supervisor:['',Validators.required],
       area:['',Validators.required],
       descrip : ['',Validators.required],
-      cantidad: ['',Validators.required],
+      
       tip_horas: ['',Validators.required],
 
       button: [''],
-
+      cantidad: [''],
       idtecni: [''],
       idactivi: [''],
       idprogra: [''],

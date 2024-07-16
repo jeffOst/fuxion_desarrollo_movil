@@ -31,7 +31,7 @@
               </ion-row>
 
               <ion-row class="ion-align-items-center">
-              <ion-col size="3" class="ion-text-end"> Actividad: </ion-col>
+              <ion-col size="3" class="ion-text-end"> Actividad Demandada Por: </ion-col>
               <ion-col size="9">
                 <ion-item>
                   <ion-searchbar (click)="FOpenModalActividad()" type="text" placeholder="Buscar Actividad" mode="ios" formControlName="actividad">
@@ -45,7 +45,7 @@
         </ion-row>
 
         <ion-row class="ion-align-items-center">
-          <ion-col size="3" class="ion-text-end">Programa: </ion-col>
+          <ion-col size="3" class="ion-text-end">Programa a realizar: </ion-col>
           <ion-col size="9" class="ion-text-start">
             <ion-item>
               <ion-searchbar (click)="open_popup_servicios()" type="text" placeholder="Seleccionar Programa" mode="ios" formControlName="nom_serv">
@@ -60,7 +60,7 @@
           <ion-col size="3" class="ion-text-end"> Cantidad: </ion-col>
           <ion-col size="9">
             <ion-item>
-              <ion-input required="true" color="primary" type="number" mode="ios" formControlName="cantidad" 
+              <ion-input color="primary" type="number" mode="ios" formControlName="cantidad" 
                 >
                 <!-- [(ngModel)]="item2.cantidad"
                 value="{{item2.cantidad}}" -->
@@ -70,7 +70,7 @@
         </ion-row>  
 
         <ion-row hidden class="ion-align-items-center">
-          <ion-col size="3" class="ion-text-end"> Descripcion: </ion-col>
+          <ion-col size="3" class="ion-text-end"> Descripcion Programa: </ion-col>
           <ion-col size="9">
             <ion-item>
               <ion-input type="text" placeholder="Ingrese su Descripcion" mode="ios" formControlName="descrip"></ion-input>
@@ -88,7 +88,7 @@
         </ion-row>
         
         <ion-row class="ion-align-items-center">
-          <ion-col size="3" class="ion-text-end">Area: </ion-col>
+          <ion-col size="3" class="ion-text-end">Area Solicitante: </ion-col>
           <ion-col size="9" class="ion-text-start">
             <ion-item>
               <ion-searchbar (click)="open_popup_area()" type="text" placeholder="Seleccionar Area" mode="ios" formControlName="area">
