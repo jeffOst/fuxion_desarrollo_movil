@@ -72,26 +72,26 @@ export class RrhhHorasExtrasService {
       .toPromise()
       .then((results) => results);
   }
-  ListFindPersonal(InputSearch: string, id_usuario_local: string, id_dispositivo: string): Promise<any> {
+  ListFindPersonal(InputSearch: string, id_usuario_local: string, id_maquina: string): Promise<any> {
     let dataPost = JSON.stringify(
       {
         acc: 2,
         s: InputSearch,
         idusu: id_usuario_local,
-        iddevice: id_dispositivo
+        id_maquina: id_maquina
 
       }
     );
     return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
     );
   }
-  ListFindServicios(InputSearch: string, id_usuario_local: string, id_dispositivo: string): Promise<any> {
+  ListFindServicios(InputSearch: string, id_usuario_local: string, id_area: string): Promise<any> {
     let dataPost = JSON.stringify(
       {
         acc: 3,
         s: InputSearch,
         idusu: id_usuario_local,
-        iddevice: id_dispositivo
+        id_area: id_area
 
       }
     );

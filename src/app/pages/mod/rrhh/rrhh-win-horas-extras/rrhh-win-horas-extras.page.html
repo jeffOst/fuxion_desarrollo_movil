@@ -29,9 +29,39 @@
                   <div></div>
                 </ion-col>
               </ion-row>
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end">Area Solicitante: </ion-col>
+                <ion-col size="9" class="ion-text-start">
+                  <ion-item>
+                    <ion-searchbar (click)="open_popup_area()" type="text" placeholder="Seleccionar Area" mode="ios" formControlName="area">
+                    </ion-searchbar>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
 
               <ion-row class="ion-align-items-center">
-              <ion-col size="3" class="ion-text-end"> Actividad Demandada Por: </ion-col>
+          <ion-col size="3" class="ion-text-end">Sub-Area: </ion-col>
+          <ion-col size="9" class="ion-text-start">
+            <ion-item>
+              <ion-searchbar (click)="open_popup_servicios(FormCheckListPaso1.get('idarea').value)" type="text" placeholder="Seleccionar Sub-Area" mode="ios" formControlName="nom_serv">
+              </ion-searchbar>
+            </ion-item>
+           
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">Maquina/Puesto: </ion-col>
+          <ion-col size="9" class="ion-text-start">
+            <ion-item>
+              <ion-searchbar (click)="FOpenModalTecnico(FormCheckListPaso1.get('idprogra').value)" type="text" placeholder="Seleccionar Maquina" mode="ios" formControlName="maquina">
+              </ion-searchbar>
+            </ion-item>           
+          </ion-col>
+        </ion-row>
+
+              <ion-row class="ion-align-items-center">
+              <ion-col size="3" class="ion-text-end"> Categoria: </ion-col>
               <ion-col size="9">
                 <ion-item>
                   <ion-searchbar (click)="FOpenModalActividad()" type="text" placeholder="Buscar Actividad" mode="ios" formControlName="actividad">
@@ -43,19 +73,31 @@
             </ion-grid>
           </ion-col>
         </ion-row>
-
-        <ion-row class="ion-align-items-center">
-          <ion-col size="3" class="ion-text-end">Programa a realizar: </ion-col>
-          <ion-col size="9" class="ion-text-start">
+        <ion-row hidden class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Motivo: </ion-col>
+          <ion-col size="9">
             <ion-item>
-              <ion-searchbar (click)="open_popup_servicios()" type="text" placeholder="Seleccionar Programa" mode="ios" formControlName="nom_serv">
-              </ion-searchbar>
+              <ion-searchbar (click)="open_popup_motivo()" type="text" placeholder="Seleccionar Motivo" mode="ios" formControlName="motivo"></ion-searchbar>
             </ion-item>
-           
+          </ion-col>
+        </ion-row>
+        
+
+        
+        
+
+        <ion-row hidden class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Tarea Especifica: </ion-col>
+          <ion-col size="9">
+            <ion-item>
+              <ion-input type="text" placeholder="Ingrese su Detalle" mode="ios" formControlName="descrip"></ion-input>
+            </ion-item>
           </ion-col>
         </ion-row>
 
+       
         
+       
         <ion-row hidden class="ion-align-items-center">
           <ion-col size="3" class="ion-text-end"> Cantidad: </ion-col>
           <ion-col size="9">
@@ -68,36 +110,7 @@
             </ion-item>
           </ion-col>
         </ion-row>  
-
-        <ion-row hidden class="ion-align-items-center">
-          <ion-col size="3" class="ion-text-end"> Descripcion Programa: </ion-col>
-          <ion-col size="9">
-            <ion-item>
-              <ion-input type="text" placeholder="Ingrese su Descripcion" mode="ios" formControlName="descrip"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <ion-row hidden class="ion-align-items-center">
-          <ion-col size="3" class="ion-text-end"> Motivo: </ion-col>
-          <ion-col size="9">
-            <ion-item>
-              <ion-searchbar (click)="open_popup_motivo()" type="text" placeholder="Seleccionar Motivo" mode="ios" formControlName="motivo"></ion-searchbar>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        
-        <ion-row class="ion-align-items-center">
-          <ion-col size="3" class="ion-text-end">Area Solicitante: </ion-col>
-          <ion-col size="9" class="ion-text-start">
-            <ion-item>
-              <ion-searchbar (click)="open_popup_area()" type="text" placeholder="Seleccionar Area" mode="ios" formControlName="area">
-              </ion-searchbar>
-            </ion-item>
-           
-          </ion-col>
-        </ion-row>
-
+     
         <ion-row class="ion-align-items-center">
           <ion-col size="3" class="ion-text-end">Supervisor: </ion-col>
           <ion-col size="9" class="ion-text-start">
@@ -108,6 +121,37 @@
            
           </ion-col>
         </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">Inicio: </ion-col>
+          <ion-col size="2"> 
+            <ion-datetime-button locale="es-PE" datetime="datetime1"></ion-datetime-button>
+              <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
+                <ng-template>
+                  <ion-datetime locale="es-ES" id="datetime1" mode="ios" displayFormat="YYYY-MM-DD HH:mm" presentation="date-time"
+                    [preferWheel]="true" [showDefaultButtons]="true" pickerFormat="YYYY-MM-DD HH:mm" [(ngModel)]="fechaini_he" [ngModelOptions]="{standalone: true}"
+                    (ionChange)="onFechaChangeInicio($event)"
+                    >
+                  </ion-datetime>
+                </ng-template>
+              </ion-popover>
+          </ion-col>
+          <ion-col size="1" class="ion-text-end">Fin: </ion-col>
+          <ion-col size="2">
+            <ion-datetime-button locale="es-PE" datetime="datetime2"></ion-datetime-button>
+              <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
+                <ng-template>
+                  <ion-datetime locale="es-ES" id="datetime2" mode="ios" displayFormat="YYYY-MM-DD HH:mm" presentation="date-time"
+                    [preferWheel]="true" [showDefaultButtons]="true" pickerFormat="YYYY-MM-DD HH:mm" [(ngModel)]="fechafin_he" [ngModelOptions]="{standalone: true}"
+                    (ionChange)="onFechaChangeFin($event)"
+                    >
+                  </ion-datetime>
+                </ng-template>
+              </ion-popover>
+          </ion-col>
+        </ion-row>
+
+
         <ion-row class="ion-align-items-center">
           <ion-col size="3" class="ion-text-end">Tipo de Horas: </ion-col>
           <ion-col size="9" class="ion-text-start">
@@ -137,8 +181,8 @@
           </ion-button>
           &nbsp;&nbsp;&nbsp;&nbsp;
 
-          <ion-button (click)="SaveFormTerminadoPaso1(1)"  *ngIf="!disableButton1" color="success">
-            <ion-icon name="save-outline"></ion-icon>&nbsp; Iniciar
+          <ion-button (click)="SaveFormTerminadoPaso1(1)"  *ngIf="!disableButton1" color="primary">
+            <ion-icon name="save-outline"></ion-icon>&nbsp; Registrar
           </ion-button>
           <ion-button (click)="SaveFormTerminadoPaso1(2)" *ngIf="!disableButton" color="primary">
             <ion-icon name="save-outline"></ion-icon>&nbsp; Finalizar

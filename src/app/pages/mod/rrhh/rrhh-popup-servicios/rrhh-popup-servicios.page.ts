@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RrhhHorasExtrasService } from 'src/app/api/rrhh/rrhh-horasextras.service';
-import { IonInput, NavParams, LoadingController, ModalController } from '@ionic/angular';
+import { NavController, AlertController, IonInput, Platform,NavParams, LoadingController, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-rrhh-popup-servicios',
@@ -19,11 +19,17 @@ export class RrhhPopupServiciosPage implements OnInit {
   NgModInputSearch:any;
 IdUsuarioLocal:string;
 IdDispositivo:string;
+id_area: any;
   constructor(
     public ApiService:RrhhHorasExtrasService,
     public  modalCtrl:ModalController,
     private loadingCtrl: LoadingController,
-  ) { }
+    public navParams: NavParams,
+  ) { 
+    this.id_area=navParams.get('id_area');
+    console.log('ayudaaaa',this.id_area);
+    
+  }
 
   ngOnInit() {
     this.FFindRows();
@@ -61,7 +67,7 @@ IdDispositivo:string;
     }).then(
       loading => {
         loading.present();
-        this.ApiService.ListFindServicios(this.NgModInputSearch,this.IdUsuarioLocal,this.IdDispositivo).then((res) => {
+        this.ApiService.ListFindServicios(this.NgModInputSearch,this.IdUsuarioLocal,this.id_area).then((res) => {
           this.DataSetGrid = res;
         }).finally(() => {
           this.loadingCtrl.dismiss();

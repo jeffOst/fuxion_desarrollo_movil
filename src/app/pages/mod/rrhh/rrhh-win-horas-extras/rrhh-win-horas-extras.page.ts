@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormsModule,
@@ -48,6 +48,10 @@ export class RrhhWinHorasExtrasPage implements OnInit {
   estaCargando: boolean = false;
   NombresUsuarioLocal: string;
   IdUsuarioLocal: string;
+  codareabus: any;
+  filteredSubAreas = [];
+  fechafin_he: any;
+  fechaini_he: any;
   // tip_horas: string = '1';  // Valor predeterminado
   constructor(
     private router: Router,
@@ -68,7 +72,7 @@ export class RrhhWinHorasExtrasPage implements OnInit {
       supervisor:['',Validators.required],
       area:['',Validators.required],
       descrip : ['',Validators.required],
-      
+      maquina: [''],
       tip_horas: ['',Validators.required],
 
       button: [''],
@@ -76,14 +80,26 @@ export class RrhhWinHorasExtrasPage implements OnInit {
       idtecni: [''],
       idactivi: [''],
       idprogra: [''],
+      idmaquina:[''],
       // iddescrip: [''],
       idmotivo: [''],
       idarea: [''],
       idsuper: [''],
-      id_documento:['']
-    })
-   }
+      id_documento:[''],
+      fch_ini:[''],
+      fch_fin:['']
+    });
+    this.FormCheckListPaso1.get('idarea').valueChanges.subscribe((value) => {
+      this.updateSubAreas(value);
+    });
+    this.updateSubAreas(this.FormCheckListPaso1.get('idarea').value);
 
+   }
+   updateSubAreas(areaId: number) {
+    // this.filteredSubAreas = this.subAreas[areaId] || [];
+    console.log('area',areaId);
+    // this.FormCheckListPaso1.get('nom_serv').setValue('');
+  }
   ngOnInit() {
     this.estaCargando = true;
     let localStorage: any;
@@ -132,6 +148,11 @@ export class RrhhWinHorasExtrasPage implements OnInit {
 
   }
   ionViewWillEnter() {
+    const fechaActual = new Date();
+    fechaActual.setHours(fechaActual.getHours() - 5)
+    this.fechaini_he = fechaActual.toISOString();
+    this.fechafin_he = fechaActual.toISOString();
+    
     if (this.navParamsAny.idreghoex!= 0){
 
       this.FLoadForms();
@@ -146,34 +167,42 @@ export class RrhhWinHorasExtrasPage implements OnInit {
       this.IdUsuarioLocal
     );
   }
-  // async FOpenModalTecnico() {
-  //   const modal = await this.modalCtrl.create({
-  //     component: RrhhPopupTecnicoPage,
-  //     backdropDismiss: true,
-  //     showBackdrop: true,
-  //     mode: 'ios'
-  //   });
+  async FOpenModalTecnico(val) {
+    const modal = await this.modalCtrl.create({
+      component: RrhhPopupTecnicoPage,
+      backdropDismiss: true,
+      showBackdrop: true,
+      mode: 'ios',
+      componentProps: {
+        // index_p: this.i_row,
+         id_maquina:val
+       }
+    });
 
-  //   modal.onDidDismiss().then((dataReturned) => {
-  //     if (dataReturned.data != undefined) {
-  //       this.dataReturned = dataReturned.data;
-  //       console.log('dataReturned::206', dataReturned);
-  //       this.FormCheckListPaso1.controls['area'].setValue(
-  //         this.dataReturned.area
-  //       );
-  //       this.FormCheckListPaso1.controls['idarea'].setValue(
-  //         this.dataReturned.id_areapert
-  //       );
-  //     }
-  //   });
-  //   return await modal.present();
-  // }
-  async open_popup_servicios() {
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned.data != undefined) {
+        this.dataReturned = dataReturned.data;
+        console.log('dataReturned::206', dataReturned);
+        this.FormCheckListPaso1.controls['maquina'].setValue(
+          this.dataReturned.nombres
+        );
+        this.FormCheckListPaso1.controls['idmaquina'].setValue(
+          this.dataReturned.id
+        );
+      }
+    });
+    return await modal.present();
+  }
+  async open_popup_servicios(val) {
     const modal = await this.modalCtrl.create({
       component: RrhhPopupServiciosPage,
       backdropDismiss: true,
       showBackdrop: true,
-      mode: 'ios'
+      mode: 'ios',
+      componentProps: {
+        // index_p: this.i_row,
+         id_area:val
+       }
     });
 
     modal.onDidDismiss().then((dataReturned) => {
@@ -235,11 +264,16 @@ export class RrhhWinHorasExtrasPage implements OnInit {
     return await modal.present();
   }
   async open_popup_area() {
+    
     const modal = await this.modalCtrl.create({
       component: RrhhPopupAreaPage,
       backdropDismiss: true,
       showBackdrop: true,
-      mode: 'ios'
+      mode: 'ios',
+      componentProps: {
+        // index_p: this.i_row,
+       
+       }
     });
 
     modal.onDidDismiss().then((dataReturned) => {
@@ -305,8 +339,6 @@ export class RrhhWinHorasExtrasPage implements OnInit {
     // this.navCtrl.navigateForward('rrhh-horas-extras');////addnoprogramado
   }
   async SaveFormTerminadoPaso1(value:any) {
-    console.log('que esta validando aqui?',this.FormCheckListPaso1.valid);
-    
     if (this.FormCheckListPaso1.valid) {
       this.FormCheckListPaso1.controls['button'].setValue(
         value
@@ -386,6 +418,27 @@ export class RrhhWinHorasExtrasPage implements OnInit {
 
     await alert.present();
   }
+  onFechaChangeInicio(event: CustomEvent) {
+    // El evento tiene la propiedad 'detail' que contiene el valor seleccionado
+    console.log('Fecha cambiada:', event.detail.value);
+    this.FormCheckListPaso1.controls['fch_ini'].setValue(
+      event.detail.value
+    );
+    // Puedes realizar otras operaciones aquí según tus necesidades
+  }
+
+  onFechaChangeFin(event: CustomEvent) {
+    // El evento tiene la propiedad 'detail' que contiene el valor seleccionado
+    console.log('Fecha cambiada:', event.detail.value);
+    this.FormCheckListPaso1.controls['fch_fin'].setValue(
+      event.detail.value
+    );
+    // Puedes realizar otras operaciones aquí según tus necesidades
+  }
+  async consult_sub_area(){
+    await this.ApiService.GuardarInfPaso1(this.FormCheckListPaso1.controls['idarea'].value)
+    
+  }
 
   FLoadForms() {
     const loading = this.loadingController
@@ -421,8 +474,15 @@ export class RrhhWinHorasExtrasPage implements OnInit {
                 idmotivo: this.EditDataRest[0].idmotivo_he,
                 idarea: this.EditDataRest[0].idarea_he,
                 idsuper: this.EditDataRest[0].idsupervisor_he,
-                id_documento:this.EditDataRest[0].idreghoex
+                id_documento:this.EditDataRest[0].idreghoex,
+                maquina:this.EditDataRest[0].maquina,
+                idmaquina:this.EditDataRest[0].idmaquina_he,
+                fch_ini:this.EditDataRest[0].fech_registro_ini,
+                fch_fin:this.EditDataRest[0].fech_registro_fin,
                });
+           
+               this.fechaini_he=this.EditDataRest[0].fech_registro_ini
+               this.fechafin_he=this.EditDataRest[0].fech_registro_fin
            
               
             }catch (error) {

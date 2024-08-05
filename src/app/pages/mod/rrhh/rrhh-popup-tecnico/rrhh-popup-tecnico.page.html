@@ -39,12 +39,12 @@
        [class.odd]="isOdd"
     [class.even]="isEven" -->
     <ion-item
-      button (click)="FSelectedItem(Row.idempleado,Row.nomb_apell,Row.area,Row.id_areapert)" >
+      button (click)="FSelectedItem(Row.codigo,Row.descrip)" >
       <!-- 
     > -->
       <ion-label>
-        <strong>{{Row.nomb_apell}}</strong>
-        <p>{{Row.cargo_trab}}</p>
+        <strong>{{Row.descrip}}</strong>
+        <!-- <p>{{Row.cargo_trab}}</p> -->
       </ion-label>
     </ion-item>
   </ion-list>

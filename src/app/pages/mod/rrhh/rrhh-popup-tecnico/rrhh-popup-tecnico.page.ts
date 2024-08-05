@@ -20,22 +20,23 @@ export class RrhhPopupTecnicoPage implements OnInit {
 IdUsuarioLocal:string;
 IdDispositivo:string;
 id_areapert:string;
+id_maquina: any;
   constructor(
     public ApiService:RrhhHorasExtrasService,
     public  modalCtrl:ModalController,
     private loadingCtrl: LoadingController,
-  ) { }
+    public navParams: NavParams,
+  ) { this.id_maquina=navParams.get('id_maquina');
+    console.log('maquinaaa de guerra',this.id_maquina);}
 
   ngOnInit() {
     this.FFindRows();
   }
 
-  async FOnCloseModel(id,nombres,area,id_areapert){
+  async FOnCloseModel(id,nombres){
     const onClosedData:any = {
       id:id,
-      nombres:nombres,
-      area: area,
-      id_areapert: id_areapert
+      nombres:nombres
     };
     console.log(
       onClosedData
@@ -44,8 +45,8 @@ id_areapert:string;
     await this.modalCtrl.dismiss(onClosedData);
 
   }
-  FSelectedItem(id:string,nombres:string,area:string,id_areapert:string){
-    this.FOnCloseModel(id,nombres,area,id_areapert);
+  FSelectedItem(id:string,nombres:string){
+    this.FOnCloseModel(id,nombres);
 
   }
   FCloseModal(){
@@ -53,7 +54,7 @@ id_areapert:string;
     this.id_personal=(this.id_personal == undefined)?'':this.id_personal;
     this.area=(this.area == undefined)?'':this.area;
     this.id_areapert=(this.id_areapert== undefined)?'':this.id_areapert;
-    this.FOnCloseModel(this.id_personal,this.nombre_tecnico,this.area,this.id_areapert);
+    this.FOnCloseModel(this.id_personal,this.nombre_tecnico);
 
   }
   FFindRows(){
@@ -66,7 +67,7 @@ id_areapert:string;
     }).then(
       loading => {
         loading.present();
-        this.ApiService.ListFindPersonal(this.NgModInputSearch,this.IdUsuarioLocal,this.IdDispositivo).then((res) => {
+        this.ApiService.ListFindPersonal(this.NgModInputSearch,this.IdUsuarioLocal,this.id_maquina).then((res) => {
           this.DataSetGrid = res;
         }).finally(() => {
           this.loadingCtrl.dismiss();
