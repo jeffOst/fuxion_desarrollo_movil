@@ -152,6 +152,12 @@ export class RrhhWinHorasExtrasPage implements OnInit {
     fechaActual.setHours(fechaActual.getHours() - 5)
     this.fechaini_he = fechaActual.toISOString();
     this.fechafin_he = fechaActual.toISOString();
+    this.FormCheckListPaso1.controls['fch_ini'].setValue(
+      this.fechaini_he 
+    );
+    this.FormCheckListPaso1.controls['fch_fin'].setValue(
+      this.fechafin_he 
+    );
     
     if (this.navParamsAny.idreghoex!= 0){
 
