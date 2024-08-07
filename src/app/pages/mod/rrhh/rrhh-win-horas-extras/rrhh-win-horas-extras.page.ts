@@ -219,12 +219,16 @@ export class RrhhWinHorasExtrasPage implements OnInit {
     });
     return await modal.present();
   }
-  async open_popup_motivo() {
+  async open_popup_motivo(val) {
     const modal = await this.modalCtrl.create({
       component: RrhhPopupMotivoPage,
       backdropDismiss: true,
       showBackdrop: true,
-      mode: 'ios'
+      mode: 'ios',
+      componentProps: {
+        // index_p: this.i_row,
+         id_motivo:val
+       }
     });
 
     modal.onDidDismiss().then((dataReturned) => {
@@ -241,12 +245,16 @@ export class RrhhWinHorasExtrasPage implements OnInit {
     });
     return await modal.present();
   }
-  async open_popup_supervisor() {
+  async open_popup_supervisor(val) {
     const modal = await this.modalCtrl.create({
       component: RrhhPopupSupervisorPage,
       backdropDismiss: true,
       showBackdrop: true,
-      mode: 'ios'
+      mode: 'ios',
+      componentProps: {
+        // index_p: this.i_row,
+         id_supervisor:val
+       }
     });
 
     modal.onDidDismiss().then((dataReturned) => {
@@ -312,12 +320,16 @@ export class RrhhWinHorasExtrasPage implements OnInit {
   //   });
   //   return await modal.present();
   // }
-  async FOpenModalActividad() {
+  async FOpenModalActividad(val) {
     const modal = await this.modalCtrl.create({
       component: RrhhPopupActividadPage,
       backdropDismiss: true,
       showBackdrop: true,
-      mode: 'ios'
+      mode: 'ios',
+      componentProps: {
+        // index_p: this.i_row,
+         id_categoria:val
+       }
     });
 
     modal.onDidDismiss().then((dataReturned) => {

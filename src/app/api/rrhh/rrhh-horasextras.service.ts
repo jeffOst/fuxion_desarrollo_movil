@@ -98,19 +98,21 @@ export class RrhhHorasExtrasService {
     return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
     );
   }
-  ListFindActividad(InputSearch: string, id_usuario_local: string, id_dispositivo: string): Promise<any> {
+  ListFindActividad(InputSearch: string, id_usuario_local: string, id_categoria: string): Promise<any> {
     let dataPost = JSON.stringify(
       {
-        acc: 4
+        acc: 4,
+        id_categoria: id_categoria
       }
     );
     return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
     );
   }
-  ListFindMotivo(InputSearch: string, id_usuario_local: string, id_dispositivo: string): Promise<any> {
+  ListFindMotivo(InputSearch: string, id_usuario_local: string, id_motivo: string): Promise<any> {
     let dataPost = JSON.stringify(
       {
-        acc: 5
+        acc: 5,
+        id_motivo: id_motivo
       }
     );
     return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
@@ -128,10 +130,11 @@ export class RrhhHorasExtrasService {
     return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
     );
   }
-  ListFindSupervisor(InputSearch: string, id_usuario_local: string, id_dispositivo: string): Promise<any> {
+  ListFindSupervisor(InputSearch: string, id_usuario_local: string, id_supervisor: string): Promise<any> {
     let dataPost = JSON.stringify(
       {
-        acc: 6
+        acc: 6,
+        id_supervisor: id_supervisor
       }
     );
     return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results

@@ -64,7 +64,7 @@
               <ion-col size="3" class="ion-text-end"> Categoria: </ion-col>
               <ion-col size="9">
                 <ion-item>
-                  <ion-searchbar (click)="FOpenModalActividad()" type="text" placeholder="Buscar Actividad" mode="ios" formControlName="actividad">
+                  <ion-searchbar (click)="FOpenModalActividad(FormCheckListPaso1.get('idarea').value)" type="text" placeholder="Buscar Actividad" mode="ios" formControlName="actividad">
                   </ion-searchbar>
                 </ion-item>
                 <div></div>
@@ -77,7 +77,7 @@
           <ion-col size="3" class="ion-text-end"> Motivo: </ion-col>
           <ion-col size="9">
             <ion-item>
-              <ion-searchbar (click)="open_popup_motivo()" type="text" placeholder="Seleccionar Motivo" mode="ios" formControlName="motivo"></ion-searchbar>
+              <ion-searchbar (click)="open_popup_motivo(FormCheckListPaso1.get('idarea').value)" type="text" placeholder="Seleccionar Motivo" mode="ios" formControlName="motivo"></ion-searchbar>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -115,7 +115,7 @@
           <ion-col size="3" class="ion-text-end">Supervisor: </ion-col>
           <ion-col size="9" class="ion-text-start">
             <ion-item>
-              <ion-searchbar (click)="open_popup_supervisor()" type="text" placeholder="Seleccionar Supervisor" mode="ios" formControlName="supervisor">
+              <ion-searchbar (click)="open_popup_supervisor(FormCheckListPaso1.get('idarea').value)" type="text" placeholder="Seleccionar Supervisor" mode="ios" formControlName="supervisor">
               </ion-searchbar>
             </ion-item>
            
@@ -125,12 +125,12 @@
         <ion-row class="ion-align-items-center">
           <ion-col size="3" class="ion-text-end">Inicio: </ion-col>
           <ion-col size="2"> 
-            <ion-datetime-button locale="es-PE" datetime="datetime1"></ion-datetime-button>
+            <ion-datetime-button locale="es-PE" datetime="datetime1" class="custom-datetime"></ion-datetime-button>
               <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
                 <ng-template>
                   <ion-datetime locale="es-ES" id="datetime1" mode="ios" displayFormat="YYYY-MM-DD HH:mm" presentation="date-time"
                     [preferWheel]="true" [showDefaultButtons]="true" pickerFormat="YYYY-MM-DD HH:mm" [(ngModel)]="fechaini_he" [ngModelOptions]="{standalone: true}"
-                    (ionChange)="onFechaChangeInicio($event)"
+                    (ionChange)="onFechaChangeInicio($event)" 
                     >
                   </ion-datetime>
                 </ng-template>

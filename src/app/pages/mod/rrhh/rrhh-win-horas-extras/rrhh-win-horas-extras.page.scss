@@ -1,0 +1,10 @@
+.custom-datetime {
+    .datetime-text {
+      color: red !important;
+    }
+  }
+  
+  ion-datetime.custom-datetime {
+    --ion-text-color: red;
+    --color: red;
+  }

@@ -18,11 +18,14 @@ export class RrhhPopupSupervisorPage implements OnInit {
   NgModInputSearch:any;
 IdUsuarioLocal:string;
 IdDispositivo:string;
+id_supervisor:any;
   constructor(
     public ApiService:RrhhHorasExtrasService,
     public  modalCtrl:ModalController,
     private loadingCtrl: LoadingController,
-  ) { }
+    public navParams: NavParams,
+  ) {this.id_supervisor=navParams.get('id_supervisor');
+    console.log('maquinaaa de guerra',this.id_supervisor);}
 
   ngOnInit() {
     this.FFindRows();
@@ -60,7 +63,7 @@ IdDispositivo:string;
     }).then(
       loading => {
         loading.present();
-        this.ApiService.ListFindSupervisor(this.NgModInputSearch,this.IdUsuarioLocal,this.IdDispositivo).then((res) => {
+        this.ApiService.ListFindSupervisor(this.NgModInputSearch,this.IdUsuarioLocal,this.id_supervisor).then((res) => {
           this.DataSetGrid = res;
         }).finally(() => {
           this.loadingCtrl.dismiss();

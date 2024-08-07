@@ -18,11 +18,16 @@ export class RrhhPopupMotivoPage implements OnInit {
   NgModInputSearch:any;
 IdUsuarioLocal:string;
 IdDispositivo:string;
+id_motivo: any;
   constructor(
     public ApiService:RrhhHorasExtrasService,
     public  modalCtrl:ModalController,
     private loadingCtrl: LoadingController,
-  ) { }
+    public navParams: NavParams,
+  ) {
+    this.id_motivo=navParams.get('id_motivo');
+    console.log('maquinaaa de guerra',this.id_motivo);
+   }
 
   ngOnInit() {
     this.FFindRows();
@@ -57,7 +62,7 @@ IdDispositivo:string;
     }).then(
       loading => {
         loading.present();
-        this.ApiService.ListFindMotivo(this.NgModInputSearch,this.IdUsuarioLocal,this.IdDispositivo).then((res) => {
+        this.ApiService.ListFindMotivo(this.NgModInputSearch,this.IdUsuarioLocal,this.id_motivo).then((res) => {
           this.DataSetGrid = res;
         }).finally(() => {
           this.loadingCtrl.dismiss();

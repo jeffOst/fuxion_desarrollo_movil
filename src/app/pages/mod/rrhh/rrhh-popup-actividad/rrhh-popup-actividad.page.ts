@@ -18,11 +18,14 @@ export class RrhhPopupActividadPage implements OnInit {
   NgModInputSearch:any;
 IdUsuarioLocal:string;
 IdDispositivo:string;
+id_categoria: any;
   constructor(
     public ApiService:RrhhHorasExtrasService,
     public  modalCtrl:ModalController,
     private loadingCtrl: LoadingController,
-  ) { }
+    public navParams: NavParams,
+  ) { this.id_categoria=navParams.get('id_categoria');
+    console.log('maquinaaa de guerra',this.id_categoria);}
 
   ngOnInit() {
     this.FFindRows();
@@ -57,7 +60,7 @@ IdDispositivo:string;
     }).then(
       loading => {
         loading.present();
-        this.ApiService.ListFindActividad(this.NgModInputSearch,this.IdUsuarioLocal,this.IdDispositivo).then((res) => {
+        this.ApiService.ListFindActividad(this.NgModInputSearch,this.IdUsuarioLocal,this.id_categoria).then((res) => {
           this.DataSetGrid = res;
         }).finally(() => {
           this.loadingCtrl.dismiss();
