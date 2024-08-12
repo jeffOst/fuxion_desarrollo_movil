@@ -354,7 +354,7 @@ export class RrhhWinHorasExtrasPage implements OnInit {
   }
 
   cancelar_ejecucion() {
-    // this.navCtrl.navigateForward('rrhh-horas-extras');////addnoprogramado
+     this.navCtrl.navigateForward('rrhh-horas-extras');////addnoprogramado
   }
   async SaveFormTerminadoPaso1(value:any) {
     if (this.FormCheckListPaso1.valid) {

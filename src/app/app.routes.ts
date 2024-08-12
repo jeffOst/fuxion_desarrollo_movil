@@ -387,7 +387,11 @@ export const routes: Routes = [
   {
     path: 'rrhh-popup-area',
     loadComponent: () => import('./pages/mod/rrhh/rrhh-popup-area/rrhh-popup-area.page').then( m => m.RrhhPopupAreaPage)
+  },  {
+    path: 'rrhh-list-aprob-he',
+    loadComponent: () => import('./pages/mod/rrhh/rrhh-list-aprob-he/rrhh-list-aprob-he.page').then( m => m.RrhhListAprobHePage)
   }
+
   
   
 ];

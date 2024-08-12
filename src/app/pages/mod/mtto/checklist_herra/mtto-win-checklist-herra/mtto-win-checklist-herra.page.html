@@ -105,7 +105,7 @@
           <ion-label ></ion-label>
         </ion-item-divider>
         <ion-item style="padding: 0px;border:0px">
-          <ion-label slot="start">B: Bueno R: Regular M: Malo E: Extraviado</ion-label>
+          <ion-label slot="start">B: Bueno R: Regular M: Malo E: Extraviado NE: No entregado</ion-label>
           <ion-chip slot="end" mode="ios" color="primary" (click)="open_popup_herra()" >
           <ion-label>Agregar</ion-label>
           <ion-icon name="add"></ion-icon>
@@ -129,18 +129,21 @@
           </div>
           <div style="display: flex;">
             <!-- <ion-toggle mode="ios" [checked]="Row.icchecktog_hd" (ionChange)="onToggle($event)"></ion-toggle> -->
-            <ion-segment mode="ios" style="width: 300px;" value="{{Row.idestado_hd}}" (ionChange)="FBlourInput($event,Row)">
-              <ion-segment-button color="success" value="1" style="font-size: 12px; padding: 5px;">
+            <ion-segment mode="ios" style="width: 350px;" value="{{Row.idestado_hd}}" (ionChange)="FBlourInput($event,Row)">
+              <ion-segment-button color="success" value="1" style="font-size: 12px; padding: 3px;">
                 <ion-label>B</ion-label>
               </ion-segment-button>
-              <ion-segment-button color="warning" value="2" style="font-size: 12px; padding: 5px;">
+              <ion-segment-button color="warning" value="2" style="font-size: 12px; padding: 3px;">
                 <ion-label>R</ion-label>
               </ion-segment-button>
-              <ion-segment-button color="danger" value="3" style="font-size: 12px; padding: 5px;">
+              <ion-segment-button color="danger" value="3" style="font-size: 12px; padding: 3px;">
                 <ion-label>M</ion-label>
               </ion-segment-button>
-              <ion-segment-button color="dark" value="4" style="font-size: 12px; padding: 5px;">
+              <ion-segment-button color="dark" value="4" style="font-size: 12px; padding: 3px;">
                 <ion-label>E</ion-label>
+              </ion-segment-button>
+              <ion-segment-button color="dark" value="5" style="font-size: 12px; padding: 3px;">
+                <ion-label>NE</ion-label>
               </ion-segment-button>
             </ion-segment>
           </div>

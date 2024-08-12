@@ -160,6 +160,34 @@ export class RrhhHorasExtrasService {
       .post(url12 + '?acc=8', dataPost)
       .toPromise()
   }
+
+
+  AprobaHorasExtras( paramsToBd: any,id_usuario_local: string): Promise<any> {
+    let dataPost = JSON.stringify(
+      {
+        acc: 11,
+        numeros: paramsToBd,
+        idusu: id_usuario_local
+      }
+    );
+    return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
+    );
+  }
+
+  // async AprobaHorasExtras(
+  //   paramsToBd: any //:Observable<any>
+  // ) {
+  //   console.log('Dentro::GuardarFormulario::>', paramsToBd);
+  //   // console.log('Dentro::GuardarFormulario::>', paramsToBd);
+  //   let requestFinalizaBd: any;
+  //   let url12: string = this.urlApiInf;
+  //   let dataPost = JSON.stringify(paramsToBd);
+  //   console.log('dataPost',dataPost);
+    
+  //   return this.httpClient
+  //     .post(url12 + '?acc=11', dataPost)
+  //     .toPromise()
+  // }
   FormFindinftab1(corre_inf_cab: string): Promise<any>{
     let url12: string = this.urlApiInf;
     //let url12: string = "http://localhost/erpgeo_hidro/aw_modulos/prod/CApiValesServicios.php";
