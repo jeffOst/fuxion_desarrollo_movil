@@ -173,6 +173,17 @@ export class RrhhHorasExtrasService {
     return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
     );
   }
+  rechazaHorasExtras( paramsToBd: any,id_usuario_local: string): Promise<any> {
+    let dataPost = JSON.stringify(
+      {
+        acc: 12,
+        numeros: paramsToBd,
+        idusu: id_usuario_local
+      }
+    );
+    return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
+    );
+  }
 
   // async AprobaHorasExtras(
   //   paramsToBd: any //:Observable<any>

@@ -65,7 +65,13 @@
 </ion-list>
 </ion-content>
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button color="primary" mode="ios" title="O.T. de Produccion" (click)="aprobhorasextras()">
+  
+  <!-- Segundo botón flotante encima del primero -->
+  <ion-fab-button color="danger" mode="ios" title="Rechazar" (click)="rechazarhorasextras()">
+    <ion-icon name="trash"></ion-icon>
+  </ion-fab-button>
+  <!-- Primer botón flotante -->
+  <ion-fab-button color="primary" mode="ios" title="Aprobacion" (click)="aprobhorasextras()">
     <ion-icon name="checkmark"></ion-icon>
   </ion-fab-button>
 </ion-fab>

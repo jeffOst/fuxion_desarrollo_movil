@@ -240,7 +240,9 @@ export class RrhhListAprobHePage implements OnInit {
                           console.log('Operación confirmada');
                           if (res[0].o_nres == '1') {
                             // this.navCtrl.navigateForward(['rrhh-list-aprob-he']);
+                            
                             this.FListaInicial(); // Llamar a la función FListaInicial
+                            // this.selectedString= '';
                           }
                         },
                       },
@@ -250,6 +252,80 @@ export class RrhhListAprobHePage implements OnInit {
                 })
                 .finally(() => {
                   console.log('finally:::>>LN:394');
+                  this.resetSelection();
+                })
+                .catch((err) => {
+                  this.loadingController.dismiss(); // Cerrar el loading en caso de error
+                  console.log('errror:::>>>>>>>>>', err);
+                });
+            },
+          },
+        ],
+      });
+    
+      await confirmAlert.present();
+    }
+
+    resetSelection() {
+      this.selectedItems = []; // Limpiar la lista de ítems seleccionados
+      this.selectedString = ''; // Limpiar la cadena generada
+      console.log('Valores limpiados:', this.selectedString, this.selectedItems);
+    }
+    async rechazarhorasextras() {
+      // Crear y mostrar el mensaje de confirmación
+      const confirmAlert = await this.alertController.create({
+        header: 'Confirmación',
+        message: '¿Estás seguro de que deseas rechazar las horas seleccionadas?',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            handler: () => {
+              console.log('Operación cancelada por el usuario.');
+            },
+          },
+          {
+            text: 'Aceptar',
+            handler: async () => {
+              // Mostrar un loading spinner mientras se procesa la solicitud
+              const loading = await this.loadingController.create({
+                message: 'Procesando...',
+              });
+              await loading.present();
+    
+              // Ejecutar la función AprobaHorasExtras
+              await this.ApiService.rechazaHorasExtras(this.selectedString, this.IdUsuarioLocal)
+                .then(async (res) => {
+                  this.loadingController.dismiss(); // Cerrar el loading
+    
+                  let css_msj = res[0].o_nres == '0' ? 'alerta-error' : 'alerta-ok';
+                  const alert = await this.alertController.create({
+                    header: 'ALERTA',
+                    subHeader: 'Confirmación',
+                    cssClass: css_msj,
+                    mode: 'ios',
+                    animated: true,
+                    message: res[0].o_msj, // 'La operación se completó con éxito.',
+                    buttons: [
+                      {
+                        text: 'Aceptar',
+                        handler: () => {
+                          console.log('Operación confirmada');
+                          if (res[0].o_nres == '1') {
+                            
+                            // this.navCtrl.navigateForward(['rrhh-list-aprob-he']);
+                            this.FListaInicial(); // Llamar a la función FListaInicial
+                            // this.selectedString= '';
+                          }
+                        },
+                      },
+                    ],
+                  });
+                  await alert.present();
+                })
+                .finally(() => {
+                  console.log('finally:::>>LN:394');
+                  this.resetSelection();
                 })
                 .catch((err) => {
                   this.loadingController.dismiss(); // Cerrar el loading en caso de error
