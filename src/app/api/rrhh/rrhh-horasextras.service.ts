@@ -134,7 +134,8 @@ export class RrhhHorasExtrasService {
     let dataPost = JSON.stringify(
       {
         acc: 6,
-        id_supervisor: id_supervisor
+        id_supervisor: id_supervisor,
+        idusu: id_usuario_local
       }
     );
     return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results

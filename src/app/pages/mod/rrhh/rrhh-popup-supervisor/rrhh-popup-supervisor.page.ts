@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Storage } from '@ionic/storage';
 import { IonicModule } from '@ionic/angular';
 import { RrhhHorasExtrasService } from 'src/app/api/rrhh/rrhh-horasextras.service';
 import { IonInput, NavParams, LoadingController, ModalController } from '@ionic/angular';
@@ -19,18 +20,37 @@ export class RrhhPopupSupervisorPage implements OnInit {
 IdUsuarioLocal:string;
 IdDispositivo:string;
 id_supervisor:any;
+estaCargando: boolean = false;
+NombresUsuarioLocal: string;
   constructor(
     public ApiService:RrhhHorasExtrasService,
     public  modalCtrl:ModalController,
     private loadingCtrl: LoadingController,
+    public storage: Storage,
     public navParams: NavParams,
   ) {this.id_supervisor=navParams.get('id_supervisor');
     console.log('maquinaaa de guerra',this.id_supervisor);}
 
   ngOnInit() {
-    this.FFindRows();
+    // this.FFindRows();
   }
 
+  ionViewWillEnter() {
+    this.estaCargando = true;
+    let localStorage: any;
+    this.storage.get('USER_INFO').then((result1) => {
+      localStorage = result1;
+      this.NombresUsuarioLocal = localStorage.user_name;
+      this.IdUsuarioLocal = localStorage.user_id;
+      //user_id
+      //user_name
+
+      //if (this.estaCargando == false) {
+      // this.FListaInicial();
+      this.FFindRows();
+      //}
+    });
+  }
   async FOnCloseModel(id,nombres){
     const onClosedData:any = {
       id:id,
