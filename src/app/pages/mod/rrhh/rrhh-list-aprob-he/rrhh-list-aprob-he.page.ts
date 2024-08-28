@@ -125,7 +125,7 @@ export class RrhhListAprobHePage implements OnInit {
         .then((loading) => {
           loading.present();
   
-          this.ApiService.ListFindOts(
+          this.ApiService.ListAprobHorasExtras(
             this.NgModInputSearch,
             this.IdUsuarioLocal,
             'H',
