@@ -130,13 +130,13 @@ export class RrhhWinHorasExtrasPage implements OnInit {
       this.disableButton=true
       this.disableButton1=true
     }
-    else if (this.disabledbuton==0){
-      this.disableButton =  true
-      this.disableButton1= false 
+    else if (this.disabledbuton==1){
+      this.disableButton =  false
+      this.disableButton1= true 
     }
     else {
-      this.disableButton = false
-      this.disableButton1=true
+      this.disableButton = true
+      this.disableButton1=false
     }
 
 
@@ -363,6 +363,61 @@ export class RrhhWinHorasExtrasPage implements OnInit {
       );
       // Lógica para manejar un formulario válido
       await this.ApiService.GuardarInfPaso1(this.FormCheckListPaso1.value)
+      .then( async (res) => {
+        this.loadingController.dismiss();
+        let css_msj=res[0].o_nres=='0'?'alerta-error':'alerta-ok';
+
+        const alert = await this.alertController.create({
+          header: 'ALERTA',
+          subHeader: 'Confirmacion',
+          cssClass:css_msj,
+          mode: 'ios',
+          animated: true,
+          message: res[0].o_msj,// 'La operación se completó con éxito.',
+          buttons: [
+            {
+              text: 'Aceptar',
+
+              handler: () => {
+
+                console.log('Operación confirmada');
+                if (res[0].o_nres == '1') {
+                  this.navCtrl.navigateForward(['rrhh-horas-extras']);
+                }
+              },
+            },
+          ],
+        });
+
+        await alert.present();
+
+
+      })
+      .finally(() => {
+        console.log('finally:::>>LN:394');
+        // this.FLoadForms();
+        //this.navCtrl.navigateForward(["mtto-list-recinado"]);
+        
+      })
+      .catch((err) => {
+        console.log('errror:::>>>>>>>>>', err);
+      });
+    } else {
+      // Manejo de errores de validación
+      console.log('entraaaaa al elseeee');
+      
+      this.showAlert();
+    }
+      
+     
+      //////////////////////////////////////////////////////////
+
+  }
+  async actTerminadoPaso1() {
+    if (this.FormCheckListPaso1.valid) {
+
+      // Lógica para manejar un formulario válido
+      await this.ApiService.GuardarActPaso1(this.FormCheckListPaso1.value)
       .then( async (res) => {
         this.loadingController.dismiss();
         let css_msj=res[0].o_nres=='0'?'alerta-error':'alerta-ok';

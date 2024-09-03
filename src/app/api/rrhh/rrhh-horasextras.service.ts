@@ -185,6 +185,17 @@ export class RrhhHorasExtrasService {
       .post(url12 + '?acc=8', dataPost)
       .toPromise()
   }
+  async GuardarActPaso1(
+    paramsToBd: any //:Observable<any>
+  ) {
+    console.log('Dentro::GuardarFormulario::>', paramsToBd);
+    let requestFinalizaBd: any;
+    let url12: string = this.urlApiInf;
+    let dataPost = JSON.stringify(paramsToBd);
+    return this.httpClient
+      .post(url12 + '?acc=14', dataPost)
+      .toPromise()
+  }
 
 
   AprobaHorasExtras( paramsToBd: any,id_usuario_local: string): Promise<any> {
