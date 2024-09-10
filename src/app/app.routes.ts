@@ -390,6 +390,18 @@ export const routes: Routes = [
   },  {
     path: 'rrhh-list-aprob-he',
     loadComponent: () => import('./pages/mod/rrhh/rrhh-list-aprob-he/rrhh-list-aprob-he.page').then( m => m.RrhhListAprobHePage)
+  },
+  {
+    path: 'grid-entrega-bombas',
+    loadComponent: () => import('./pages/mod/prod/checklist_entrega_bombas/grid-entrega-bombas/grid-entrega-bombas.page').then( m => m.GridEntregaBombasPage)
+  },
+  {
+    path: 'win-entrega-bombas1',
+    loadComponent: () => import('./pages/mod/prod/checklist_entrega_bombas/win-entrega-bombas1/win-entrega-bombas1.page').then( m => m.WinEntregaBombas1Page)
+  },
+  {
+    path: 'pop-up-ot-protocolos',
+    loadComponent: () => import('./pages/mod/prod/checklist_entrega_bombas/pop-up-ot-protocolos/pop-up-ot-protocolos.page').then( m => m.PopUpOtProtocolosPage)
   }
 
   

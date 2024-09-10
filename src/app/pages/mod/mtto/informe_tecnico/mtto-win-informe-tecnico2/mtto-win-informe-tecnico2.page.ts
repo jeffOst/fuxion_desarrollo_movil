@@ -96,9 +96,9 @@ export class MttoWinInformeTecnico2Page implements OnInit {
         loading.present();
 
         //this.corre_inf_cab = this.globalVal.corre_inf_cab;
-        console.log(this.corre_inf_cab);
+        console.log(this.globalVal.corre_inf_cab);
 
-        this.ApiService.FLoadPiezasAcordion('1', '')
+        this.ApiService.FLoadPiezasAcordion('1', '',this.globalVal.corre_inf_cab)
           .then((rest) => {
             console.log(rest);
             //this.ValuesAcordionGroup=[];
@@ -106,7 +106,7 @@ export class MttoWinInformeTecnico2Page implements OnInit {
             this.EditDataRest.forEach(element => {
               console.log(element);
               console.log(element.idclase);
-  console.log(this.ValuesAcordionGroup);
+              console.log(this.ValuesAcordionGroup);
 
   //this.ValuesAcordionGroup.push(element.idclase);
 });
@@ -120,10 +120,10 @@ console.log(this.ValuesAcordionGroup);
       });
   }
 
-  FasignaServicio(ev,idservicio,idpapa,idhijo,idclase){
+  FasignaServicio(ev,idservicio,idpapa,idhijo,idclase,cod_material){
     console.log(ev);
     let ck = (ev.detail['checked'])?'1':'0';
-    this.ApiService.GuardarFormPaso2(idservicio,idpapa,idhijo,this.IdUsuarioLocal,idclase,ck)
+    this.ApiService.GuardarFormPaso2(idservicio,idpapa,idhijo,this.IdUsuarioLocal,idclase,ck,cod_material)
               .then((res) => {
                 //this.loadingController.dismiss();
                 //alert('Guardado correctamente.');
@@ -155,8 +155,8 @@ console.log(this.ValuesAcordionGroup);
             //this.DsServiciosxPieza={};
             console.log(this.DsServiciosxPieza);
             console.log(idclase.length);
-if (idclase.length>0) {
-console.log('ingresooo');
+            if (idclase.length>0) {
+            console.log('ingresooo');
 
 //this.DsServiciosxPieza=rest;
 

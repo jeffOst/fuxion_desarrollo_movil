@@ -43,7 +43,7 @@
       <ion-item *ngFor="let row of DsServiciosxPieza[Opcion2.idclase]">
 
 
-        <ion-toggle mode="ios" [checked]="row.idestado_is === '1'" labelPlacement="start" (ionChange)="FasignaServicio($event,row.seqmaserv_is,globalVal.corre_inf_cab,row.idinformeservicio,Opcion2.idclase)"  style="width: 80%;">
+        <ion-toggle mode="ios" [checked]="row.idestado_is === '1'" labelPlacement="start" (ionChange)="FasignaServicio($event,row.seqmaserv_is,globalVal.corre_inf_cab,row.idinformeservicio,Opcion2.idclase,Opcion2.SEQMA04)"  style="width: 80%;">
           <ion-label style="font-size: small;">{{row.Y04002}}</ion-label>
           </ion-toggle>
 

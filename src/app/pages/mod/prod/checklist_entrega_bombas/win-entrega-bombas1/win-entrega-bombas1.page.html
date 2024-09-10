@@ -1,0 +1,217 @@
+<ion-header [translucent]="true">
+  <ion-toolbar mode="ios">
+    <ion-title text-capitalize>Registro Entrega de Bombas</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="prod-list-acti-programada" [text]="Cancelar">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form action="">
+    <ion-list [style.--background]="scanActive ? '#00000000':'#fff'">
+      <ion-item [hidden]="scanActive">
+        <ion-grid [hidden]="scanActive">
+
+          <ion-row class="ion-align-items-center">
+            <ion-col>
+              <ion-grid>
+
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Codigo Bomba: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-input (click)="win_equipo_protocol()" required="true" color="primary" mode="ios" readonly></ion-input>
+                      <ion-icon slot="end" name="search" color="primary"></ion-icon>
+                    </ion-item>
+                    <div></div>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Lugar Destino: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-input required="true" color="primary" mode="ios" readonly>
+                      </ion-input>
+                    </ion-item>
+                    <div></div>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Fecha de Envio: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-datetime-button locale="es-PE" datetime="datetime2"></ion-datetime-button>
+                      <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
+                        <ng-template>
+                          <ion-datetime locale="es-ES" id="datetime2" mode="ios" displayFormat="YYYY-MM-DD" presentation="date"
+                            [preferWheel]="true" [showDefaultButtons]="true" pickerFormat="YYYY-MM-DD">
+                          </ion-datetime>
+                        </ng-template>
+                      </ion-popover>
+                    </ion-item>
+                    <div></div>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Potencia de Bomba: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-input required="true" color="primary" mode="ios" readonly>
+                      </ion-input>
+                    </ion-item>
+                    <div></div>
+                  </ion-col>
+                </ion-row>
+
+                <ion-item-divider color="primary">
+                  <ion-label>La Bomba se encuentra:</ion-label>
+                  <ion-label>La Bomba se encuentra:</ion-label>
+                </ion-item-divider>
+
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Cadena: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                    </ion-item>
+                    <div></div>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Pescadores: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                    </ion-item>
+                    <div></div>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Placa: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                    </ion-item>
+                    <div></div>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Codigo: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                    </ion-item>
+                    <div></div>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Bomba Armada: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                    </ion-item>
+                    <div></div>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Cover,Cilindro,colador: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                    </ion-item>
+                    <div></div>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Cancamos de Izaje: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                    </ion-item>
+                    <div></div>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Empaque: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                    </ion-item>
+                    <div></div>
+                  </ion-col>
+                </ion-row>
+
+                <ion-item-divider color="primary">
+                  <ion-label>La Bomba se encuentra:</ion-label>
+                </ion-item-divider>
+
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Correctamente pintado: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                    </ion-item>
+                    <div></div>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Campana Instalada: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                    </ion-item>
+                    <div></div>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Codigo Visible: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                    </ion-item>
+                    <div></div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

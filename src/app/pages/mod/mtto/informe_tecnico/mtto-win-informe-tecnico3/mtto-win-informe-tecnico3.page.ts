@@ -101,7 +101,7 @@ export class MttoWinInformeTecnico3Page implements OnInit {
         //this.corre_inf_cab = this.globalVal.corre_inf_cab;
         console.log(this.corre_inf_cab);
 
-        this.ApiService.FLoadPiezasAcordion('2', '')
+        this.ApiService.FLoadPiezasAcordion('2', '',this.globalVal.corre_inf_cab)
           .then((rest) => {
             console.log(rest);
             //this.ValuesAcordionGroup=[];
@@ -121,10 +121,10 @@ export class MttoWinInformeTecnico3Page implements OnInit {
       });
   }
 
-  FasignaServicio(ev,idservicio,idpapa,idhijo,idclase){
+  FasignaServicio(ev,idservicio,idpapa,idhijo,idclase,cod_material){
     console.log(ev);
     let ck = (ev.detail['checked'])?'1':'0';
-    this.ApiService.GuardarFormPaso2(idservicio,idpapa,idhijo,this.IdUsuarioLocal,idclase,ck)
+    this.ApiService.GuardarFormPaso2(idservicio,idpapa,idhijo,this.IdUsuarioLocal,idclase,ck,cod_material)
               .then((res) => {
                 //this.loadingController.dismiss();
                 //alert('Guardado correctamente.');

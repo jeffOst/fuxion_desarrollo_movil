@@ -81,12 +81,14 @@ export class MttoInformeTecnicoService {
 
   FLoadPiezasAcordion(
     id: string,
-    p2: string
+    p2: string,
+    cod_inf:string
   ): Promise<any> {
     let dataPost = JSON.stringify({
       acc: 7,
       id: id,
-      p2:p2
+      p2:p2,
+      cod_inf: cod_inf
     });
     return this.httpClient
       .post(this.urlApiProd, dataPost)
@@ -205,12 +207,12 @@ export class MttoInformeTecnicoService {
       .toPromise()
   }
   async GuardarFormPaso2(
-    idservicio,idpapa,idhijo,idusuario,idclase,ck
+    idservicio,idpapa,idhijo,idusuario,idclase,ck,cod_material
   ) {
     //console.log('Dentro::GuardarFormulario::>', paramsToBd);
     let requestFinalizaBd: any;
     let paramsToBd:any={
-      idservicio:idservicio,idpapa:idpapa,idhijo:idhijo,idusuario:idusuario,acc:9,idclase:idclase,ck:ck
+      idservicio:idservicio,idpapa:idpapa,idhijo:idhijo,idusuario:idusuario,acc:9,idclase:idclase,ck:ck,cod_material
     }
     let url12: string = this.urlApiProd;
     let dataPost = JSON.stringify(paramsToBd);
