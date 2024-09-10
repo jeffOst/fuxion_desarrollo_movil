@@ -23,13 +23,13 @@
   ></ion-icon>
   </ion-item>
 
-  <ion-list *ngFor="let Row of DataSetGrid; let i=index let isOdd=odd; let isEven=even" [class.odd]="isOdd" [class.even]="isEven" lines="full" inset=true>
+  <ion-list *ngFor="let Row of DataSetGrid">
     <ion-item button (click)="FSelectedItem(Row.codsmg,Row.id_orden_trab_fis_cab,Row.nombre,Row.id_orden_trab_cab,Row.ot_estado_general,Row.guia_salida_mtto)">
     <ion-label>
     <strong>{{Row.codsmg}}</strong>
-    <p>{{Row.id_orden_trab_fis_cab +' - Motor: '+Row.cod_motor_mtto}}</p>
+    <!-- <p>{{Row.id_orden_trab_fis_cab +' - Motor: '+Row.cod_motor_mtto}}</p>
     <p>{{'Tecnico: '+Row.tecnico}}</p>
-    <p>{{'Estado O.T: '+Row.nombre}}</p>
+    <p>{{'Estado O.T: '+Row.nombre}}</p> -->
     <!-- <p [style.color]="Row.guia_salida_mtto === 'DISPONIBLE' ? 'green' : 'red'">{{'Estado Bomba: '+Row.guia_salida_mtto}}</p> -->
     <!-- <p>{{Row.id_orden_trab_cab}}</p> -->
   </ion-label>

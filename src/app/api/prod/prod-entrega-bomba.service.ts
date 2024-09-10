@@ -53,21 +53,7 @@ export class ProdEntregaBomba {
   ) { }
 
   ///////////////////////lista de solses
-  load_lista_solse(idot: string, idotsolse_otd: string): Promise<any> {
-    let url12: string = this.urlApiProd;
-    //let url12: string = "http://localhost/erpgeo_hidro/aw_modulos/prod/CApiValesServicios.php";
-    let dataPost = JSON.stringify(
-      {
-        idot: (idot),
-        acc: 5,
-        idtablet: 'this.device.uuid',
-        idotsolse_otd: idotsolse_otd
-      }
-    );
-    return this.http.post(url12, dataPost).toPromise().then(results => results//.json()
-    );
 
-  }
  
   ListBombasDisponible(InputSearch:string): Promise<any> {
     let dataPost = JSON.stringify(
@@ -81,4 +67,17 @@ export class ProdEntregaBomba {
     );
   }
 
+  // ListBombasDisponible(
+  //   InputSearch: string
+
+  // ): Promise<any> {
+  //   let dataPost = JSON.stringify({
+  //     acc: 1,
+  //     s: InputSearch
+  //   });
+  //   return this.httpClient
+  //     .post(this.urlApiProd, dataPost)
+  //     .toPromise()
+  //     .then((results) => results);
+  // }
 }

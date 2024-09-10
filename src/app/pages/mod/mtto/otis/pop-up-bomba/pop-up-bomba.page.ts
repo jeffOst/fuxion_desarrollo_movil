@@ -87,9 +87,6 @@ export class PopUpBombaPage implements OnInit {
         }).finally(() => {
           this.loadingController.dismiss();
           
-          // setTimeout(() => {            
-          // this.IdHtmlInputSearch.setFocus();
-          // },600)
 
         });
       });

@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+// import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NavController, AlertController, IonInput, Platform,NavParams, LoadingController, ModalController } from '@ionic/angular';
 import { ProdEntregaBomba } from 'src/app/api/prod/prod-entrega-bomba.service';
+import { FormsModule, NgForm,NgModel,NgModelGroup,ReactiveFormsModule} from '@angular/forms';
 @Component({
   selector: 'app-pop-up-ot-protocolos',
   templateUrl: './pop-up-ot-protocolos.page.html',
   styleUrls: ['./pop-up-ot-protocolos.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule,ReactiveFormsModule]
 })
 export class PopUpOtProtocolosPage implements OnInit {
   DataSetGrid:any;
@@ -50,8 +51,8 @@ export class PopUpOtProtocolosPage implements OnInit {
         //InputSearch:string,idpieza: string,tipServicio: string,id_usuario_local: string, id_dispositivo: string
        //////////////////////////////////////////////// revisar 
         this.ApiService.ListBombasDisponible(this.NgModInputSearch).then((res) => {
+          console.log('respuesta de esto',res);
           this.DataSetGrid = res;
-          //console.log(this.results_equipos);
         }).finally(() => {
           this.loadingController.dismiss();
           
