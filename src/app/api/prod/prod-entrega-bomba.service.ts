@@ -67,17 +67,71 @@ export class ProdEntregaBomba {
     );
   }
 
-  // ListBombasDisponible(
-  //   InputSearch: string
+  async GuardarFormPaso1(
+    paramsToBd: any, //:Observable<any>
+  ) {
+    console.log('Dentro::GuardarFormulario::>', paramsToBd);
+    let requestFinalizaBd: any;
+    let url12: string = this.urlApiProd;
+    let dataPost = JSON.stringify(paramsToBd);
+    
+    
+    console.log('Fuera::GuardarFormulario::>', dataPost);
+    return this.httpClient
+      .post(url12 + '?acc=2', dataPost)
+      .toPromise()
+  }
 
-  // ): Promise<any> {
-  //   let dataPost = JSON.stringify({
-  //     acc: 1,
-  //     s: InputSearch
-  //   });
-  //   return this.httpClient
-  //     .post(this.urlApiProd, dataPost)
-  //     .toPromise()
-  //     .then((results) => results);
-  // }
+  Listgridprot(
+    InputSearch: string,
+      id_usuario_local: string,
+      id_dispositivo: string,
+      SelectFiltra: string,
+      SelectFiltra2: string,
+  ): Promise<any> {
+    let dataPost = JSON.stringify({
+      acc: 3,
+      s: InputSearch,
+      idusu: id_usuario_local,
+      iddevice: id_dispositivo,
+      SelectFiltra:SelectFiltra,
+      SelectFiltra2:SelectFiltra2,
+    });
+    return this.httpClient
+      .post(this.urlApiProd, dataPost)
+      .toPromise()
+      .then((results) => results);
+  }
+
+  cargaReg(
+    // InputSearch: string,
+    //   id_usuario_local: string,
+    //   id_dispositivo: string,
+    //   SelectFiltra: string,
+    //   SelectFiltra2: string,
+    idregistro: string
+  ): Promise<any> {
+    let dataPost = JSON.stringify({
+      acc: 4,
+      idregistro: idregistro
+      // idusu: id_usuario_local,
+      // iddevice: id_dispositivo,
+      // SelectFiltra:SelectFiltra,
+      // SelectFiltra2:SelectFiltra2,
+    });
+    return this.httpClient
+      .post(this.urlApiProd, dataPost)
+      .toPromise()
+      .then((results) => results);
+  }
+  cargaFirma(
+  ): Promise<any> {
+    let dataPost = JSON.stringify({
+      acc: 5
+    });
+    return this.httpClient
+      .post(this.urlApiProd, dataPost)
+      .toPromise()
+      .then((results) => results);
+  }
 }

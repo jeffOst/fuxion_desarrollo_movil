@@ -20,6 +20,7 @@ export class PopUpOtProtocolosPage implements OnInit {
     private loadingController: LoadingController,
     private ApiService: ProdEntregaBomba,
     private alertController: AlertController,
+    private loadingCtrl: LoadingController,
   ) { }
 
   ngOnInit() {
@@ -38,101 +39,34 @@ export class PopUpOtProtocolosPage implements OnInit {
   ionViewDidEnter(){
     this.FFindRows();
   }
-  FFindRows() {
-    const loading = this.loadingController.create({
-      //spinner: null,
-      //duration: 5000,
+  FFindRows(){
+    const loading = this.loadingCtrl.create({
       message: 'Cargando lista...',
-      translucent: true//,
-      //cssClass: 'custom-class custom-loading'
+      translucent: true
     }).then(
       loading => {
         loading.present();
-        //InputSearch:string,idpieza: string,tipServicio: string,id_usuario_local: string, id_dispositivo: string
-       //////////////////////////////////////////////// revisar 
         this.ApiService.ListBombasDisponible(this.NgModInputSearch).then((res) => {
-          console.log('respuesta de esto',res);
           this.DataSetGrid = res;
         }).finally(() => {
-          this.loadingController.dismiss();
-          
-          // setTimeout(() => {            
-          // this.IdHtmlInputSearch.setFocus();
-          // },600)
-
+          this.loadingCtrl.dismiss();
         });
       });
   }
-  FSelectedItem(codsmg,id_orden_trab_fis_cab,nombre,id_orden_trab_cab,ot_estado_general,guia_salida_mtto){
+  FSelectedItem(id:string,nombres:string){
+    this.FOnCloseModel(id,nombres);
+
+  }
+  async FOnCloseModel(id,nombres){
+    const onClosedData:any = {
+      id:id,
+      nombres:nombres
+    };
+    console.log(
+      onClosedData
+    );
     
-    if (guia_salida_mtto=='ENVIADO A MINA') {
-      this.mostrarmnsj2();   
-    }
-    else if (ot_estado_general==3) {
-      this.mostrarmnsj1(codsmg); 
-      this.cancelar_listaservicios(codsmg,id_orden_trab_fis_cab,nombre,id_orden_trab_cab,ot_estado_general);
-    }  
-    else {
-      this.mostrarmnsj ();   
-    }
-    // this.cancelar_listaservicios(codsmg,id_orden_trab_fis_cab,nombre,id_orden_trab_cab,ot_estado_general);
-  }
-  async mostrarmnsj1(variable1: string) {
-    const alert = await this.alertController.create({
-      header: 'Asignacion Motor',
-      message: `Esta asignando este motor a la bomba  ${variable1}`,
-      cssClass: 'alerta-confirma',
-      mode: 'ios',
-      buttons: [
-        {
-          text: 'Aceptar',
-          handler: () => {
-            // Aquí podrías agregar lógica adicional si es necesario
-          },
-        },
-      ],
-    });
-  
-    await alert.present();
-  }
-  
+    await this.modalCtrl.dismiss(onClosedData);
 
-  
-  async mostrarmnsj() {
-    const alert = await this.alertController.create({
-      header: 'Atención',
-      message: 'No se puede aperturar el registro, el estado debe ser aprobado',
-      cssClass:'alerta-confirma',
-            mode: 'ios',
-      buttons: [
-        {
-          text: 'Aceptar',
-          handler: () => {
-            
-          },
-        },
-      ],
-    });
-
-    await alert.present();
-  }
-
-  async mostrarmnsj2() {
-    const alert = await this.alertController.create({
-      header: 'Atención',
-      message: 'La bomba seleccionada, a sido enviada a Mina, no se puede seleccionar',
-      cssClass:'alerta-confirma',
-            mode: 'ios',
-      buttons: [
-        {
-          text: 'Aceptar',
-          handler: () => {
-            
-          },
-        },
-      ],
-    });
-
-    await alert.present();
   }
 }

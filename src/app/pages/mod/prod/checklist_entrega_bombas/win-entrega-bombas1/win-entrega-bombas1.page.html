@@ -2,17 +2,17 @@
   <ion-toolbar mode="ios">
     <ion-title text-capitalize>Registro Entrega de Bombas</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="prod-list-acti-programada" [text]="Cancelar">
+      <ion-back-button defaultHref="grid-entrega-bombas" [text]="Cancelar">
       </ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form action="">
+  <form [formGroup]="FormCheckListPaso1" #f="ngForm">
     <ion-list [style.--background]="scanActive ? '#00000000':'#fff'">
-      <ion-item [hidden]="scanActive">
-        <ion-grid [hidden]="scanActive">
+      <ion-item >
+        <ion-grid >
 
           <ion-row class="ion-align-items-center">
             <ion-col>
@@ -22,17 +22,26 @@
                   <ion-col size="3" class="ion-text-end"> Codigo Bomba: </ion-col>
                   <ion-col size="9">
                     <ion-item>
-                      <ion-input (click)="win_equipo_protocol()" required="true" color="primary" mode="ios" readonly></ion-input>
-                      <ion-icon slot="end" name="search" color="primary"></ion-icon>
+                      <ion-input  required="true" color="primary" mode="ios" formControlName= "nomb_bomba" readonly></ion-input>
                     </ion-item>
                     <div></div>
                   </ion-col>
                 </ion-row>
                 <ion-row class="ion-align-items-center">
-                  <ion-col size="3" class="ion-text-end"> Lugar Destino: </ion-col>
+                  <ion-col size="3" class="ion-text-end"> SITE Destino: </ion-col>
                   <ion-col size="9">
                     <ion-item>
-                      <ion-input required="true" color="primary" mode="ios" readonly>
+                      <ion-input required="true" color="primary" mode="ios" formControlName= "lugar_dest" readonly>
+                      </ion-input>
+                    </ion-item>
+                    <div></div>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Potencia de Bomba: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-input required="true" color="primary" mode="ios"  formControlName= "potencia_bomba" readonly>
                       </ion-input>
                     </ion-item>
                     <div></div>
@@ -42,11 +51,12 @@
                   <ion-col size="3" class="ion-text-end"> Fecha de Envio: </ion-col>
                   <ion-col size="9">
                     <ion-item>
-                      <ion-datetime-button locale="es-PE" datetime="datetime2"></ion-datetime-button>
+                      <ion-datetime-button locale="es-PE" datetime="datetime1"></ion-datetime-button>
                       <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
                         <ng-template>
-                          <ion-datetime locale="es-ES" id="datetime2" mode="ios" displayFormat="YYYY-MM-DD" presentation="date"
-                            [preferWheel]="true" [showDefaultButtons]="true" pickerFormat="YYYY-MM-DD">
+                          <ion-datetime locale="es-ES" id="datetime1" mode="ios" displayFormat="YYYY-MM-DD" presentation="date"
+                            [preferWheel]="true" [showDefaultButtons]="true" pickerFormat="YYYY-MM-DD" 
+                            [(ngModel)]="ng_fch_entrega_mtto" [ngModelOptions]="{standalone: true}">
                           </ion-datetime>
                         </ng-template>
                       </ion-popover>
@@ -54,19 +64,7 @@
                     <div></div>
                   </ion-col>
                 </ion-row>
-                <ion-row class="ion-align-items-center">
-                  <ion-col size="3" class="ion-text-end"> Potencia de Bomba: </ion-col>
-                  <ion-col size="9">
-                    <ion-item>
-                      <ion-input required="true" color="primary" mode="ios" readonly>
-                      </ion-input>
-                    </ion-item>
-                    <div></div>
-                  </ion-col>
-                </ion-row>
-
                 <ion-item-divider color="primary">
-                  <ion-label>La Bomba se encuentra:</ion-label>
                   <ion-label>La Bomba se encuentra:</ion-label>
                 </ion-item-divider>
 
@@ -74,10 +72,9 @@
                   <ion-col size="3" class="ion-text-end"> Cadena: </ion-col>
                   <ion-col size="9">
                     <ion-item>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" formControlName="estado1"></ion-input>
+                      <ion-checkbox slot="start"  mode="ios" formControlName="buton11" (ionChange)="onCheckboxChange11($event)"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" formControlName="observ1"></ion-input>
                     </ion-item>
                     <div></div>
                   </ion-col>
@@ -86,10 +83,9 @@
                   <ion-col size="3" class="ion-text-end"> Pescadores: </ion-col>
                   <ion-col size="9">
                     <ion-item>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" formControlName="estado2"></ion-input>
+                      <ion-checkbox slot="start"  mode="ios" formControlName="buton12" (ionChange)="onCheckboxChange12($event)"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" formControlName="observ2"></ion-input>
                     </ion-item>
                     <div></div>
                   </ion-col>
@@ -98,22 +94,17 @@
                   <ion-col size="3" class="ion-text-end"> Placa: </ion-col>
                   <ion-col size="9">
                     <ion-item>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                      <ion-input  type="text" placeholder="Ingrese su Observacion" mode="ios" formControlName="observ3"></ion-input>
                     </ion-item>
-                    <div></div>
                   </ion-col>
                 </ion-row>
                 <ion-row class="ion-align-items-center">
                   <ion-col size="3" class="ion-text-end"> Codigo: </ion-col>
                   <ion-col size="9">
                     <ion-item>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" formControlName="estado4"></ion-input>
+                      <ion-checkbox slot="start"  mode="ios" formControlName="buton13" (ionChange)="onCheckboxChange13($event)"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" formControlName="observ4"></ion-input>
                     </ion-item>
                     <div></div>
                   </ion-col>
@@ -122,10 +113,9 @@
                   <ion-col size="3" class="ion-text-end"> Bomba Armada: </ion-col>
                   <ion-col size="9">
                     <ion-item>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" formControlName="estado5"></ion-input>
+                      <ion-checkbox slot="start"  mode="ios" formControlName="buton14" (ionChange)="onCheckboxChange14($event)"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" formControlName="observ5"></ion-input>
                     </ion-item>
                     <div></div>
                   </ion-col>
@@ -134,10 +124,9 @@
                   <ion-col size="3" class="ion-text-end"> Cover,Cilindro,colador: </ion-col>
                   <ion-col size="9">
                     <ion-item>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" formControlName="estado6"></ion-input>
+                      <ion-checkbox slot="start"  mode="ios" formControlName="buton15" (ionChange)="onCheckboxChange15($event)"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" formControlName="observ6"></ion-input>
                     </ion-item>
                     <div></div>
                   </ion-col>
@@ -146,10 +135,9 @@
                   <ion-col size="3" class="ion-text-end"> Cancamos de Izaje: </ion-col>
                   <ion-col size="9">
                     <ion-item>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" formControlName="estado7"></ion-input>
+                      <ion-checkbox slot="start"  mode="ios" formControlName="buton16" (ionChange)="onCheckboxChange16($event)"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" formControlName="observ7"></ion-input>
                     </ion-item>
                     <div></div>
                   </ion-col>
@@ -158,10 +146,21 @@
                   <ion-col size="3" class="ion-text-end"> Empaque: </ion-col>
                   <ion-col size="9">
                     <ion-item>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" formControlName="estado8"></ion-input>
+                      <ion-checkbox slot="start"  mode="ios" formControlName="buton17" (ionChange)="onCheckboxChange17($event)"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" formControlName="observ8"></ion-input>
+                    </ion-item>
+                    <div></div>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Tipo Campana: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-input  slot="start" (click)="win_equipo_protocol()" required="true" color="primary" mode="ios" formControlName= "nomb_campana" readonly></ion-input>
+                      <ion-icon slot="start" name="search" color="primary"></ion-icon>
+                      <ion-checkbox slot="start"  mode="ios" formControlName="buton18" (ionChange)="onCheckboxChange18($event)"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" formControlName="estado3"></ion-input>
                     </ion-item>
                     <div></div>
                   </ion-col>
@@ -175,10 +174,9 @@
                   <ion-col size="3" class="ion-text-end"> Correctamente pintado: </ion-col>
                   <ion-col size="9">
                     <ion-item>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" formControlName="estado9"></ion-input>
+                      <ion-checkbox slot="start"  mode="ios" formControlName="buton19" (ionChange)="onCheckboxChange19($event)"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" formControlName="observ9"></ion-input>
                     </ion-item>
                     <div></div>
                   </ion-col>
@@ -187,10 +185,9 @@
                   <ion-col size="3" class="ion-text-end"> Campana Instalada: </ion-col>
                   <ion-col size="9">
                     <ion-item>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" formControlName="estado10"></ion-input>
+                      <ion-checkbox slot="start"  mode="ios" formControlName="buton20" (ionChange)="onCheckboxChange20($event)"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" formControlName="observ10"></ion-input>
                     </ion-item>
                     <div></div>
                   </ion-col>
@@ -199,10 +196,32 @@
                   <ion-col size="3" class="ion-text-end"> Codigo Visible: </ion-col>
                   <ion-col size="9">
                     <ion-item>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" ></ion-input>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-checkbox slot="start"  mode="ios"></ion-checkbox>
-                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" ></ion-input>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Estado" mode="ios" formControlName="estado11"></ion-input>
+                      <ion-checkbox slot="start"  mode="ios" formControlName="buton21" (ionChange)="onCheckboxChange21($event)"></ion-checkbox>
+                      <ion-input slot="start" type="text" placeholder="Ingrese su Observacion" mode="ios" formControlName="observ11"></ion-input>
+                    </ion-item>
+                    <div></div>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Firma: </ion-col>
+                  <ion-col size="3">
+                    <ion-item>
+                      <ion-select placeholder="Elige una opción" interface="action-sheet" formControlName="firm1">
+                        <ion-select-option *ngFor="let opcion of opciones" [value]="opcion.id_personal">
+                          {{ opcion.personal }}
+                        </ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="1" class="ion-text-end"> Firma: </ion-col>
+                  <ion-col size="3">
+                    <ion-item>
+                      <ion-select placeholder="Elige una opción" interface="action-sheet"formControlName="firm2">
+                        <ion-select-option *ngFor="let opcion of opciones" [value]="opcion.id_personal">
+                          {{ opcion.personal }}
+                        </ion-select-option>
+                      </ion-select>
                     </ion-item>
                     <div></div>
                   </ion-col>
@@ -215,3 +234,29 @@
     </ion-list>
   </form>
 </ion-content>
+
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col style="text-align: center">
+        <ion-buttons >
+          <!-- (click)="cancelar_ejecucion()"  -->
+          <!-- <ion-button  color="danger"  (click)="cancelar_ejecucion">
+            <ion-icon name="close-outline"></ion-icon>&nbsp; Cancelar
+          </ion-button>-->
+          <ion-button (click)="SaveFormTerminadoPaso1(1)" *ngIf="!disableButton" color="primary">
+            <ion-icon name="save-outline"></ion-icon>&nbsp; Borrador
+          </ion-button>
+          <ion-button (click)="SaveFormTerminadoPaso1(2)" *ngIf="!disableButton" color="success">
+            <ion-icon name="checkmark-circle"></ion-icon>&nbsp; Terminado
+          </ion-button>
+          &nbsp;&nbsp;&nbsp;&nbsp; 
+         </ion-buttons> 
+        
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

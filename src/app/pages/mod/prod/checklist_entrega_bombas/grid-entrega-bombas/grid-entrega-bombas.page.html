@@ -40,7 +40,7 @@
       animated="true"
       cancelButtonText="Cancelar"
       enterkeyhint="done"
-      placeholder="Filtrar Parametros"
+      placeholder="Filtrar Codgio de Equipo"
       [(ngModel)]="NgModInputSearch"     
       color="secondary"
       search-icon="search-circle">
@@ -49,8 +49,8 @@
     <ion-icon
       slot="end"
       name="sync-outline"
+      (click)="FLoadForms()" 
       #idIconButtonSync>
-      <!-- (click)="FListaEquiposAlterno()" -->
   </ion-icon>
   </ion-item>
 
@@ -59,22 +59,22 @@
 <ion-list [inset]="true">
     <ion-item  *ngFor="let Row of DataSetGrid"
     button detail="true" detail-icon="caret-forward-outline" mode="ios" (click)="FNuevaCheckList(Row)">
-    <ion-badge slot="start" color="{{Row.color_rep_fab}}">{{Row.rep_fab}}</ion-badge>
+    <!-- <ion-badge slot="start" color="{{Row.color_rep_fab}}">{{Row.rep_fab}}</ion-badge> -->
 
             <ion-label [hidden]="scanActive">
-              <!-- <strong><div style="color:{{Row.color_reproceso}};">{{ Row.codsmg }}
-              </div> </strong> -->
+              <strong><div >{{ Row.codsmg }}
+              </div> </strong>
               <p>
 
-                Nro.O.T.:&nbsp;<ion-text color="danger">{{ Row.id_orden_trab_fis_cab }} &nbsp;</ion-text>
-                Procedencia:&nbsp;<ion-text color="secondary">{{ Row.Y06002 }} &nbsp;</ion-text>
-                F.Creacion:&nbsp;<ion-text color="success">{{ Row.ot_fech_inicio_labor }} &nbsp;</ion-text>
-                Modelo:&nbsp;<ion-text color="primary">{{ Row.modelo }}</ion-text
-                >&nbsp;
+                <!-- Equipo:&nbsp;<ion-text color="danger">{{ Row.codsmg }} &nbsp;</ion-text> -->
+                Nro O.T:&nbsp;<ion-text color="secondary">{{ Row.id_orden_trab_fis_cab }} &nbsp;</ion-text>
+                Destino:&nbsp;<ion-text color="success">{{ Row.destino }} &nbsp;</ion-text>
+                Fecha Entrega:&nbsp;<ion-text color="success">{{ Row.fecha }} &nbsp;</ion-text>
+                <!-- >&nbsp; -->
 
               </p></ion-label>
 
-              <ion-badge slot="end" color="{{Row.color_atendido}}">{{Row.ma00estado_nombre}}</ion-badge>
+              <ion-badge slot="end" color="{{Row.color_estado}}">{{Row.nom_estado}}</ion-badge>
 
           <!-- </ion-item> -->
 

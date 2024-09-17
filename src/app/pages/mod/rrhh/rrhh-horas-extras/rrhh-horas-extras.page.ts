@@ -140,6 +140,7 @@ if (this.searchTerm.trim().length >=6) {
             this.loadingController.dismiss();
             setTimeout(() => {
               //this.idinputsearch_equipo.setFocus();
+              
             }, 600);
           })
           .catch(() => {

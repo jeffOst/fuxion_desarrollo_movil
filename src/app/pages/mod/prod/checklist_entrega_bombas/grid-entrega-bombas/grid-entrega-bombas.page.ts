@@ -16,6 +16,9 @@ import {
 } from '@ionic/angular';
 import { HeaderComponent } from '../../../../../components/header/header.component';
 import { WinEntregaBombas1Page } from 'src/app/pages/mod/prod/checklist_entrega_bombas/win-entrega-bombas1/win-entrega-bombas1.page';
+import { ProdEntregaBomba } from 'src/app/api/prod/prod-entrega-bomba.service';
+import { checklist_en } from 'src/app/interfaces/prod/checklist_entrega';
+
 @Component({
   selector: 'app-grid-entrega-bombas',
   templateUrl: './grid-entrega-bombas.page.html',
@@ -32,9 +35,18 @@ isToggled: boolean = false;
 toggleText: string = 'Inactivo';
 DataSetGrid: any;
 dataReturned: any;
+IdUsuarioLocal: string;
+SelectFiltra: any;
+SelectFiltra2: any;
+SSelectFiltro: any;
+estaCargando: boolean = false;
+
   constructor(
     private modalCtrl: ModalController,
     public navCtrl: NavController,
+    private loadingController: LoadingController,
+    private ApiService: ProdEntregaBomba,
+    public globalVal: checklist_en,
   ) { }
 
 ngOnInit() {
@@ -42,8 +54,13 @@ ngOnInit() {
   toggleChanged() {
     console.log('Toggle state:', this.isToggled ? 'Activo' : 'Inactivo');
   }
-  FNuevaCheckList(row: any ){
-
+  FNuevaCheckList(Row: any ){
+    let navigationExtras: NavigationExtras = {
+      state: { Row },
+    };
+    console.log(navigationExtras);
+    this.globalVal.checklist_paso_pivot = '';
+    this.navCtrl.navigateForward(['/win-entrega-bombas1'], navigationExtras);
   }
   OpenModalEquipos(){
       // // const modal = await this.modalCtrl.create({
@@ -71,4 +88,45 @@ ngOnInit() {
       // // return await modal.present();
       this.navCtrl.navigateForward(['win-entrega-bombas1']);
   }
+  ionViewWillEnter() { 
+      this.FLoadForms();
+    }
+    FLoadForms() {
+      const loading = this.loadingController
+      .create({
+        message: 'Cargando lista...',
+        translucent: true, //,
+        //cssClass: 'custom-class custom-loading'
+      })
+      .then((loading) => {
+        loading.present();
+
+        this.ApiService.Listgridprot(
+          this.NgModInputSearch,
+          this.IdUsuarioLocal,
+          'H',
+          this.SelectFiltra,
+          this.SelectFiltra2
+        )
+          .then((res) => {
+            this.DataSetGrid = res;
+            this.loadingController.dismiss();
+            this.estaCargando = false;
+          })
+          .finally(() => {
+            this.loadingController.dismiss();
+            setTimeout(() => {
+              //this.idinputsearch_equipo.setFocus();
+            }, 600);
+          })
+          .catch(() => {
+            //console.log('catcha api lista');
+          })
+          .then((err) => {
+            console.log('thennnnn', err);
+            loading.dismiss();
+          });
+      });
+        
+      }
 }
