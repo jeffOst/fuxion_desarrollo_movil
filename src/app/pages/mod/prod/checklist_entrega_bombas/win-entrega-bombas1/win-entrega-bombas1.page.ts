@@ -54,6 +54,7 @@ export class WinEntregaBombas1Page implements OnInit {
     public globalVal: checklist_en,
     private router: Router,//,
     public storage: Storage,
+    public navCtrl: NavController,
   ) { 
     this.FormCheckListPaso1 = this.formBuilder.group({
       nomb_bomba:[''],
@@ -208,6 +209,7 @@ onCheckboxChange21(event: any) {
 
 
 async SaveFormTerminadoPaso1(estado:any) {
+  //  if (estado==1){}
    if (this.FormCheckListPaso1.valid) {
     const loading = this.loadingController
       .create({
@@ -244,6 +246,7 @@ async SaveFormTerminadoPaso1(estado:any) {
                 // Realiza acciones adicionales después de aceptar la confirmación
               //  this.FLoadForms();
                 console.log('Operación confirmada');
+                this.navCtrl.navigateForward(['grid-entrega-bombas']);
               },
             },
           ],
@@ -269,6 +272,72 @@ async SaveFormTerminadoPaso1(estado:any) {
     }
 
   }
+
+  async SaveFormTerminadoPaso11(estado:any) {
+    //  if (estado==1){}
+    //  if (this.FormCheckListPaso1.valid) {
+      const loading = this.loadingController
+        .create({
+          message: 'Guardando Paso 1...',
+          translucent: true, 
+        })
+        .then((loading) => {
+          loading.present();
+        });
+        this.FormCheckListPaso1.controls['fech_hora'].setValue(
+          this.ng_fch_entrega_mtto
+        );
+        this.FormCheckListPaso1.controls['estado'].setValue(
+          estado
+        );
+  
+      await this.ApiService.GuardarFormPaso1(this.FormCheckListPaso1.value)
+        .then( async (res) => {
+          this.loadingController.dismiss();
+          let css_msj=(res[0].o_nres=='0')?'alerta-error':'alerta-ok';
+  
+          const alert = await this.alertController.create({
+            header: 'CONFIRMACION',
+            subHeader: 'ENTREGA MOTOR',
+            cssClass:css_msj,
+            mode: 'ios',
+            animated: true,
+            message: res[0].o_msj,// 'La operación se completó con éxito.',
+            buttons: [
+              {
+                text: 'Aceptar',
+  
+                handler: () => {
+                  // Realiza acciones adicionales después de aceptar la confirmación
+                //  this.FLoadForms();
+                this.navCtrl.navigateForward(['grid-entrega-bombas']);
+                console.log('Operación confirmada');
+                },
+              },
+            ],
+          });
+  
+          await alert.present();
+  
+  
+        })
+        .finally(() => {
+          console.log('finally:::>>LN:394');
+          // this.FLoadForms();
+          //this.navCtrl.navigateForward(["mtto-list-recinado"]);
+        })
+        .catch((err) => {
+          console.log('errror:::>>>>>>>>>', err);
+        });
+      // } else {
+      //   // Manejo de errores de validación
+      //   console.log('entraaaaa al elseeee');
+        
+      //   this.showAlert();
+      // }
+  
+    }
+
   async showAlert() {
     const alert = await this.alertController.create({
       header: 'ALERTA',
