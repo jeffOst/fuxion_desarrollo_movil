@@ -44,7 +44,8 @@ export class WinEntregaBombas1Page implements OnInit {
   opciones: any;
   firma1: any;
   firma2: any;
-  
+  // idmaterial: any;
+  // idmedida: any;
   constructor(
     private modalCtrl: ModalController,
     public formBuilder: UntypedFormBuilder,
@@ -63,9 +64,16 @@ export class WinEntregaBombas1Page implements OnInit {
       lugar_dest:['',Validators.required],
       potencia_bomba: [''],
       idprotocolo: [''],
+      idmaterial:[''],
+      idmedida:[''],
       fech_hora:[''],
-
       estado:[''],
+      lr1:[''],
+      lr2:[''],
+      tc1:[''],
+      tc2:[''],
+      cc1:[''],
+      cc2:[''],
 
       estado1:[''],
       estado2:[''],
@@ -393,6 +401,12 @@ FListaInicial(){
           idcampana: this.DataSetGrid[0].idcampana_ceb,
           fech_hora: this.DataSetGrid[0].fch_entrega_ceb,
 
+          lr1:this.DataSetGrid[0].ca1_mts_pp,
+          lr2:this.DataSetGrid[0].ca2_mts_pp,
+          tc1:this.DataSetGrid[0].tipcable1,
+          tc2:this.DataSetGrid[0].tipcable2,
+          cc1:this.DataSetGrid[0].ca1_estado_pp,
+          cc2:this.DataSetGrid[0].ca2_estado_pp,
           estado:this.DataSetGrid[0].estado_ceb,
 
           estado1:this.DataSetGrid[0].estados1_ceb,
@@ -432,12 +446,16 @@ FListaInicial(){
           buton21:this.DataSetGrid[0].btn21_ceb,
           firm1:this.DataSetGrid[0].idfirma1,    
           firm2:this.DataSetGrid[0].idfirma2,    
-          
+          idmaterial:this.DataSetGrid[0].idmaterial_ceb,
+          idmedida:this.DataSetGrid[0].idmedida_ceb,
         });
-        this.ng_fch_entrega_mtto=this.DataSetGrid[0].fch_entrega_ceb
-        this.firma1=this.DataSetGrid[0].idfirma1
-        this.firma2=this.DataSetGrid[0].idfirma2
-        console.log('horraaaa',this.firma1);
+        this.ng_fch_entrega_mtto=this.DataSetGrid[0].fch_entrega_ceb,
+        this.firma1=this.DataSetGrid[0].idfirma1,
+        this.firma2=this.DataSetGrid[0].idfirma2,
+        // this.idmaterial=this.DataSetGrid[0].idmaterial_ceb,
+        // this.idmedida=this.DataSetGrid[0].idmedida_ceb
+
+        console.log('material',this.firma1);
         if (this.DataSetGrid[0].estado_ceb==2){
           this.disableButton=true
         }
@@ -498,4 +516,16 @@ FFirmInicial(){
   });
 
 }
+onSelectMat(event: any) {
+  // console.log('Selection material:', event.detail.value);
+  this.FormCheckListPaso1.controls['idmaterial'].setValue(
+    event.detail.value
+  );
+}
+onSelectMed(event: any) {
+  this.FormCheckListPaso1.controls['idmedida'].setValue(
+    event.detail.value
+  );
+}
+
 }
