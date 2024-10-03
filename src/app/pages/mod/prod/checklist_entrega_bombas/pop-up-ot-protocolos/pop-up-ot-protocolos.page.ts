@@ -36,6 +36,9 @@ export class PopUpOtProtocolosPage implements OnInit {
     await this.modalCtrl.dismiss(onClosedData);
 
   }
+  FCloseModal(){
+    this.FOnCloseModelWithoutData();
+  }
   ionViewDidEnter(){
     this.FFindRows();
   }
@@ -69,4 +72,7 @@ export class PopUpOtProtocolosPage implements OnInit {
     await this.modalCtrl.dismiss(onClosedData);
 
   }
+  async FOnCloseModelWithoutData() {
+    await this.modalCtrl.dismiss(); // No pasa ningún dato
+}
 }

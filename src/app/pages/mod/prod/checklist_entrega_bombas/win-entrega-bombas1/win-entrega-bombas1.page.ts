@@ -44,6 +44,8 @@ export class WinEntregaBombas1Page implements OnInit {
   opciones: any;
   firma1: any;
   firma2: any;
+  estprotocolo: any;
+  estbaker: any;
   // idmaterial: any;
   // idmedida: any;
   constructor(
@@ -61,7 +63,7 @@ export class WinEntregaBombas1Page implements OnInit {
       nomb_bomba:[''],
       nomb_campana:[''],
       idcampana:[''],
-      lugar_dest:['',Validators.required],
+      lugar_dest:[''],
       potencia_bomba: [''],
       idprotocolo: [''],
       idmaterial:[''],
@@ -113,6 +115,8 @@ export class WinEntregaBombas1Page implements OnInit {
 
       firm1:[''],
       firm2:[''],
+      estprotocolo:[''],
+      estbaker:[''],
     });
   }
 
@@ -218,7 +222,8 @@ onCheckboxChange21(event: any) {
 
 async SaveFormTerminadoPaso1(estado:any) {
   //  if (estado==1){}
-   if (this.FormCheckListPaso1.valid) {
+  //  if (this.FormCheckListPaso1.valid) {
+   if (this.estprotocolo==1 && this.estbaker==1) {
     const loading = this.loadingController
       .create({
         message: 'Guardando Paso 1...',
@@ -353,7 +358,7 @@ async SaveFormTerminadoPaso1(estado:any) {
       cssClass:'alerta-error',
       mode: 'ios',
       animated: true,
-      message: 'Error el SITE destino, debe ser agregado por Activos',
+      message: 'Error el Protocolo y Baker deben estar Aprobados ',
       buttons: [
         {
           text: 'Aceptar',
@@ -448,10 +453,15 @@ FListaInicial(){
           firm2:this.DataSetGrid[0].idfirma2,    
           idmaterial:this.DataSetGrid[0].idmaterial_ceb,
           idmedida:this.DataSetGrid[0].idmedida_ceb,
+          estprotocolo:this.DataSetGrid[0].flag_evaluacion_ppc,
+          estbaker:this.DataSetGrid[0].estado_baker
         });
         this.ng_fch_entrega_mtto=this.DataSetGrid[0].fch_entrega_ceb,
         this.firma1=this.DataSetGrid[0].idfirma1,
         this.firma2=this.DataSetGrid[0].idfirma2,
+
+        this.estprotocolo=this.DataSetGrid[0].flag_evaluacion_ppc,
+        this.estbaker=this.DataSetGrid[0].estado_baker
         // this.idmaterial=this.DataSetGrid[0].idmaterial_ceb,
         // this.idmedida=this.DataSetGrid[0].idmedida_ceb
 

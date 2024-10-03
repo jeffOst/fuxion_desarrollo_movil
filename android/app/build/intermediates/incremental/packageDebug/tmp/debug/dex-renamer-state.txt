@@ -1,4 +1,4 @@
-#Tue Sep 17 17:35:12 PET 2024
+#Tue Oct 01 16:35:32 PET 2024
 base.0=D\:\\Nueva carpeta\\fuxion_desarrollo_movil\\android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=D\:\\Nueva carpeta\\fuxion_desarrollo_movil\\android\\app\\build\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
 base.2=D\:\\Nueva carpeta\\fuxion_desarrollo_movil\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
