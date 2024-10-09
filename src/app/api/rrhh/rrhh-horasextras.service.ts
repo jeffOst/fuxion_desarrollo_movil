@@ -58,6 +58,7 @@ export class RrhhHorasExtrasService {
       id_dispositivo: string,
       SelectFiltra: string,
       SelectFiltra2: string,
+      cond: any,
   ): Promise<any> {
     let dataPost = JSON.stringify({
       acc: 1,
@@ -66,6 +67,7 @@ export class RrhhHorasExtrasService {
       iddevice: id_dispositivo,
       SelectFiltra:SelectFiltra,
       SelectFiltra2:SelectFiltra2,
+      cond: cond
     });
     return this.httpClient
       .post(this.urlApiProd, dataPost)

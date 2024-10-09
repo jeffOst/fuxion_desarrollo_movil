@@ -80,8 +80,8 @@ export class RrhhListAprobHePage implements OnInit {
           this.IdUsuarioLocal,
           'H',
           this.SelectFiltra = this.SelectFiltra ? this.SelectFiltra.toString() : "",
-          this.SelectFiltra2 = this.SelectFiltra2 ? this.SelectFiltra2.toString() : ""
-          
+          this.SelectFiltra2 = this.SelectFiltra2 ? this.SelectFiltra2.toString() : "",
+          2
         )
           .then((res) => {
             this.DataSetGrid = res;
