@@ -288,6 +288,22 @@ export class ProdGestionServicioService {
     );
   }
 
+  ListFindHojaRuta(InputSearch: string, idofpterminado: string, id_usuario_local: string, id_dispositivo: string): Promise<any> {
+    let dataPost = JSON.stringify(
+      {
+        acc: 33,
+        s: InputSearch,
+        idofpterminado: idofpterminado,
+        idusu: id_usuario_local,
+        iddevice: id_dispositivo
+
+      }
+    );
+    return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
+    );
+  }
+
+  
   load_cbos_ma00(): Promise<any> {
 
     let dataPost = JSON.stringify(

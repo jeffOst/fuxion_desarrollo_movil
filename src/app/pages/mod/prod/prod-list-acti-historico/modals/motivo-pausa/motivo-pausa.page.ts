@@ -15,6 +15,7 @@ export class MotivoPausaPage implements OnInit {
 
   observaciones: string = '';
   valorModal: number; // Variable para recibir el valor
+  CssMotiParada: string;
 
   constructor(
     private navParams: NavParams,

@@ -8,6 +8,22 @@
 </ion-header>
 
 <ion-content>
+
+  <!--
+  <ion-row class="ion-align-items-center">
+    <ion-col size="3" class="ion-text-end"> Material: </ion-col>
+    <ion-col size="9">
+      <ion-select cancelText="Cancelar" (ionChange)="select_change_material($event,i)" [selectedText]="item2.material"
+        placeholder="Seleccionar material" color="primary" [(ngModel)]="item2.idmaterial" interface="action-sheet"
+        mode="ios">
+        <ion-select-option *ngFor="let tipo of rest_material" [value]="tipo['codigo']">{{tipo['nombre']}}
+        </ion-select-option>
+      </ion-select>
+      <div class="{{CssMotiParada}}"></div>
+    </ion-col>
+  </ion-row>
+  -->
+
   <ion-item>
     <ion-label position="floating">Escribe el Motivo de la Pausa de Actividad</ion-label>
     <ion-textarea [(ngModel)]="observaciones" class="custom-textarea"></ion-textarea>

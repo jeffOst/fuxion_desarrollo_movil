@@ -21,6 +21,7 @@ import { NavController, LoadingController, ModalController, AlertController } fr
 export class ProdAteServAsignaEstadoPage implements OnInit {
   //FormHtmlJs: {} as MPieza[]=[];
   CantEntregasCalidad: number = 0;
+  CantItemsHojaRuta: number = 0;
   navParams: any;
   FormHtmlJs: any;
   ResptApi: any;
@@ -30,6 +31,7 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
   nombre_dispositivo: string;
   IdCboEstadoActual: string;
   DsGridSolicitudQc: any;
+  DsGridHojaRuta: any;
   FlagCCalidad: boolean = false;
   hide_div_reproceso: boolean = false;
   CssReproceso: string;
@@ -108,12 +110,12 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
       this.FormHtmlJs.plano_diseno = this.navParams.plano_diseno;
       this.FormHtmlJs.cantidad_total = this.navParams.cantidad;
       this.FormHtmlJs.cantidad_revisada = this.navParams.cantidad_revisada;
-      this.FormHtmlJs.cantidad_pendiente= this.navParams.cantidad_pendiente;
+      this.FormHtmlJs.cantidad_pendiente = this.navParams.cantidad_pendiente;
 
 
       console.log('this.FormHtmlJs', this.FormHtmlJs);
 
-      
+
       /////////////////////////
     });//////////FIN  STORAGE
     this.storage.get('DEVICE_INFO').then((result1) => {
@@ -132,7 +134,7 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
   }
 
   async FIniciarActvividad() {
-    
+
     console.log("verificar el estado actual");
     console.log(this.navParams.idestado);
 
@@ -147,6 +149,7 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
       return;
 
     }
+    /*
     else if (this.navParams.idestado == 3) {
 
       const alert = await this.alertController.create({
@@ -158,17 +161,19 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
       return;
 
     }
-    else{
+    */
+    else {
 
+      console.log("recisar este console log");
       console.log(this.FormHtmlJs); //////////
 
       let row: any = this.FormHtmlJs;
-      row.maquina = 'Iniciar Actividad';
+      //row.maquina = 'Iniciar Actividad';
       let navigationExtras: NavigationExtras = {
         state: row
       };
       this.navCtrl.navigateForward(['addserviciostodet'], navigationExtras);
-    }    
+    }
 
   }
 
@@ -213,6 +218,14 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
 
     });
     //
+
+    this.prodservice.ListFindHojaRuta('', this.FormHtmlJs.idofpterminado, this.id_usuario_local, this.id_dispositivo).then((res) => {
+      console.log(res);
+      this.DsGridHojaRuta = res; //aquio
+      this.CantItemsHojaRuta = this.DsGridHojaRuta.length;
+    }).finally(() => {
+
+    });
 
   }
 
