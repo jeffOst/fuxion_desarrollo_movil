@@ -365,6 +365,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
           this.DsIniciaActividad.motivoPausa = observacionGuardado;
 
           this.FSaveEstado(tip);
+
         }
 
         break;
@@ -435,11 +436,9 @@ export class ProdAteServIniciaActividadPage implements OnInit {
   FSaveEstado(idEstadoBtn) {
 
     console.log("debo revisar AQUI - FINALIZAR ACTIVIDAD")
+    console.log(this.DsIniciaActividad.motivoPausa);
     console.log(this.DsIniciaActividad);
-
-    console.log(this.DsIniciaActividad.idofpterminado);
-    console.log(this.DsIniciaActividad.idmaquina);
-
+    
 
 
     const loading = this.loadingController.create({

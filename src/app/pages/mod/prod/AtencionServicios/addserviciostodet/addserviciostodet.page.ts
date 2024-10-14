@@ -86,6 +86,7 @@ export class AddserviciostodetPage implements OnInit {
   CssNotiBomba: string;
   CssNotiMaterial: string;
   CssNotiTurno: string;
+  CssMotiParada: string;
   CssNotiTenico: string;
   CssNotiMaquina: string;
   CssNotiServicio: string;
@@ -253,6 +254,8 @@ export class AddserviciostodetPage implements OnInit {
   ngOnInit() {
 
     ////console.log('ib ngOnInit');
+    console.log("verifgicar aquii:")
+    console.log(this.ArrayItemsSelectedDesti);
 
 
   }

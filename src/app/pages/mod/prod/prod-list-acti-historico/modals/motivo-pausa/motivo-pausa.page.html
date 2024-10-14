@@ -9,26 +9,26 @@
 
 <ion-content>
 
-  <!--
-  <ion-row class="ion-align-items-center">
-    <ion-col size="3" class="ion-text-end"> Material: </ion-col>
-    <ion-col size="9">
-      <ion-select cancelText="Cancelar" (ionChange)="select_change_material($event,i)" [selectedText]="item2.material"
-        placeholder="Seleccionar material" color="primary" [(ngModel)]="item2.idmaterial" interface="action-sheet"
-        mode="ios">
-        <ion-select-option *ngFor="let tipo of rest_material" [value]="tipo['codigo']">{{tipo['nombre']}}
-        </ion-select-option>
-      </ion-select>
-      <div class="{{CssMotiParada}}"></div>
-    </ion-col>
-  </ion-row>
-  -->
-
+  <!-- Modificación del estilo para el label y el ion-select -->
   <ion-item>
+    <ion-label position="floating">Motivo de Pausa</ion-label>
+    <ion-select [(ngModel)]="CssMotiParada" (ionChange)="onMotivoChange($event)" placeholder="Selecciona un motivo" interface="action-sheet" class="custom-select">
+      <!-- Recorre los motivos traídos desde la base de datos -->
+      <ion-select-option *ngFor="let motivo of motivosPausa" [value]="motivo.codigo">
+        {{ motivo.nombre }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Este campo se muestra solo si se selecciona 'OTROS' (ID = 15) -->
+  <ion-item *ngIf="mostrarTextoObservaciones" id="texto_observaciones">
     <ion-label position="floating">Escribe el Motivo de la Pausa de Actividad</ion-label>
     <ion-textarea [(ngModel)]="observaciones" class="custom-textarea"></ion-textarea>
   </ion-item>
+
   <ion-footer>
-    <ion-button expand="full" (click)="guardar()">Guardar</ion-button>
+    <ion-button expand="full" class="boton-guardar" (click)="guardar()">Guardar</ion-button>
   </ion-footer>
+
+
 </ion-content>
