@@ -83,6 +83,17 @@ export class ProdGestionServicioService {
     );
 
   }
+
+  load_cbos_motivo_pausa_maquina(): Promise<any> {
+    let dataPost = JSON.stringify(
+      {
+        acc: 34
+      }
+    );
+    return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
+    );
+  }
+
   ListFindPersonal(InputSearch: string, id_usuario_local: string, id_dispositivo: string): Promise<any> {
     let dataPost = JSON.stringify(
       {

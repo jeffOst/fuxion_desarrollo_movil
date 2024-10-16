@@ -1,5 +1,25 @@
 .custom-textarea {
-    min-height: 200px; /* Ajusta esta altura según tus necesidades */
-    height: 100%;     /* Ajusta la altura a tu preferencia */
-  }
-  
+  min-height: 200px; /* Ajusta esta altura según tus necesidades */
+  height: 100%;     /* Ajusta la altura a tu preferencia */
+}
+
+.custom-select {
+  width: 100%; /* Aumenta el ancho del ion-select al 100% */
+}
+
+#texto_observaciones {
+  margin-top: 20px; /* Añade un margen superior al textarea */
+}
+
+.boton-guardar {
+  margin-top: 50px;
+} 
+
+ion-item {
+  --inner-padding-end: 0;
+  --inner-padding-start: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  width: 100%;
+}
+
