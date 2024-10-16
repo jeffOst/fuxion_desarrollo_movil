@@ -1,85 +1,70 @@
- import { CommonModule, NgIf  } from '@angular/common';
- import { IonicModule } from '@ionic/angular';
-
-// @Component({
-//   selector: 'app-home',
-//   templateUrl: 'home.page.html',
-//   styleUrls: ['home.page.scss'],
-//   standalone: true,
-//   imports: [IonicModule],
-// })
-// export class HomePage {
-//   constructor() {}
-// }
-
+import { CommonModule, NgIf } from '@angular/common';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { Component } from '@angular/core';
-//import { LaravelPassportService } from 'laravel-passport';
 import { NavController, MenuController } from '@ionic/angular';
 import { Router, NavigationExtras } from '@angular/router';
 import { GlovalProvider } from "src/app/interfaces/mtto/GlobalVal";
-//import { LoginPage } from "../login/login.page";
-import{ HeaderComponent } from "../components/header/header.component";
+import { HeaderComponent } from "../components/header/header.component";
 import { Storage } from "@ionic/storage";
+//import { HelloWorldModalComponent } from '../components/modals/hello-world-modal.component'; // Importa tu modal
+import { ModalHorometroInicioPage } from '../components/modals/modal-horometro-inicio/modal-horometro-inicio.page'; // Importa tu modal
+
 @Component({
-    selector: 'app-home',
+  selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonicModule,HeaderComponent,CommonModule,NgIf],
+  imports: [IonicModule, HeaderComponent, CommonModule, NgIf],
 })
 export class HomePage {
   NombresUsuarioLocal: string;
-  hideCardTA:boolean=false;
+  hideCardTA: boolean = false;
+
   constructor(
-    //private laravelP:LaravelPassportService,
-    public navCtrl:NavController,
-    private menuCrl:MenuController,
+    public navCtrl: NavController,
+    private menuCrl: MenuController,
     private storage: Storage,
-    public globalVal: GlovalProvider
-    //public menuComponent:MenuComponent
-    ) {    
-      let localStorage: any;
-      this.storage.create();
-      this.storage.get('USER_INFO').then((result1) => {
-        localStorage = (result1);
-        this.NomUsuario=localStorage.user_name;
-        this.globalVal.global_user_id = localStorage.user_id;
-        console.log('this.device.uuid');
-        console.log("aqui 222" + this.globalVal.global_user_id);
-      });
-
-      
-
+    public globalVal: GlovalProvider,
+    private modalCtrl: ModalController // Agrega ModalController
+  ) {    
+    let localStorage: any;
+    this.storage.create();
+    this.storage.get('USER_INFO').then((result1) => {
+      localStorage = (result1);
+      this.NomUsuario = localStorage.user_name;
+      this.globalVal.global_user_id = localStorage.user_id;
+    });
   }
-  NomUsuario:String;
-  logout(){
-    //this.laravelP.logout();
-    //this.navCtrl.navigateRoot('/login');
-  }
-  
 
-  FListarActvidades(){
-    
+  NomUsuario: String;
+
+  logout() {}
+
+  FListarActvidades() {
     let navigationExtras: NavigationExtras = {
-      state: {idmenu:0,menu:'TABLA ACTIVIDADES'}
+      state: { idmenu: 0, menu: 'TABLA ACTIVIDADES' }
     };
-    this.navCtrl.navigateForward(['prod-ate-serv-list-actividades'],navigationExtras);
-
+    this.navCtrl.navigateForward(['prod-ate-serv-list-actividades'], navigationExtras);
   }
-  ngOnInit() {
-/////////////////valida logeado
 
+  async openModal() { // Método para abrir el modal
+    const modal = await this.modalCtrl.create({
+      //component: HelloWorldModalComponent
+      component: ModalHorometroInicioPage
+    });
+    return await modal.present();
+  }
+
+  ngOnInit() {
     let localStorage: any;
     this.storage.get('USER_INFO').then((result1) => {
       localStorage = (result1);
-      console.log('localStorage_user', localStorage);
       this.NombresUsuarioLocal = localStorage.user_name;
-      console.log('ngoninit', this.NombresUsuarioLocal);
 
-
-      if (localStorage.area=='PRODUCCION') {
-        this.hideCardTA=true;
+      if (localStorage.area == 'PRODUCCION') {
+        this.hideCardTA = true;
         this.FListarActvidades();
+        this.openModal(); // Abre el modal cuando la condición se cumple
       }
 
       if (this.NombresUsuarioLocal == '') {
@@ -88,9 +73,5 @@ export class HomePage {
     }).catch(err => {
       console.log('errrr', err);
     })
-
   }
-
-
 }
-

@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Formulario</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="onSubmit()">
+    <!-- Combobox para Turno -->
+    <ion-item>
+      <ion-label>Turno</ion-label>
+      <ion-select [(ngModel)]="formData.turno" name="turno" interface="action-sheet">
+        <ion-select-option *ngFor="let turno of turnos" [value]="turno.codigo">{{ turno.descrip }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Combobox para Maquina -->
+    <ion-item>
+      <ion-label>Maquina</ion-label>
+      <ion-select [(ngModel)]="formData.maquina" name="maquina" interface="action-sheet" (ionChange)="onMaquinaChange($event)">
+        <ion-select-option *ngFor="let maquina of maquinas" [value]="maquina.codigo">{{ maquina.nombre }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Campo Horometro Inicial -->
+    <ion-item>
+      <ion-label>Horometro Inicial</ion-label>
+      <ion-input [(ngModel)]="formData.horometroInicial" name="horometroInicial" type="text"></ion-input>
+    </ion-item>
+
+    <!--NOMBRE MAQUINA-->
+    <ion-input [(ngModel)]="nombreMaquina" name="nombre_maquina" type="text"></ion-input>
+
+
+    <!-- Botón para guardar -->
+    <ion-button expand="full" type="submit">Guardar</ion-button>
+  </form>
+</ion-content>
