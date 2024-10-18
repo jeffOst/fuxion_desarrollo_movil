@@ -245,6 +245,34 @@ export class LogincustomService {
     });
   }
 
+  async refrescar_prod_load_menuxusuario(username: string, maquina: string) {
+
+    let url: string =
+      ApiBackDomains.UrlDomainLocal + this.urlApiLogin + '?acc=5';
+    let dataPost = JSON.stringify({
+      v1: username,
+      v2: maquina,
+      v3: '000', //por defaul solo sucursal principal
+    });
+
+    return this.http.post(url, dataPost).subscribe((resultado) => {
+      if (resultado) {
+        this.dbData = resultado; 
+
+        if (this.dbData === null) {
+          this.msjErrorBd = 'No existe el usuario.';
+          return false;
+        } else {
+          this.array_menu = this.dbData;
+          this.storage.set('USER_MENU', this.dbData).then((response) => {});
+          //this.router.navigate(['/home']);
+          this.authState.next(true);
+        }
+        ///////////////////////redirecciona home
+      } //fin resultado
+    });
+  }
+
   async load_permisosxusuario(username: string) {
     //let url: string = "http://192.168.0.108/erpgeo_hidro/aw_modulos/mae/CApiLogin.php?acc=2";
     let url: string = this.urlApiLogin + '?acc=4';
