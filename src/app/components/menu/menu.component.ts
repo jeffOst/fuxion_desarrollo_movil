@@ -21,7 +21,8 @@ import { Storage } from "@ionic/storage";
 //import { ProdListActiProgramadaPage } from "../../mod/prod/prod-list-acti-programada/prod-list-acti-programada.page";
 import { NgFor } from '@angular/common';
 import { IonicModule, ModalController } from '@ionic/angular';
-import { LogoutModalComponent } from '../../components/modals/logout-modal.component'; // Importa tu modal
+import { ModalHorometroFinPage } from '../../components/modals/modal-horometro-fin/modal-horometro-fin.page'; // Importa tu modal
+
 
 @Component({
   selector: 'app-menu',
@@ -135,7 +136,7 @@ export class MenuComponent implements OnInit {
   async logout() {
     // Abre el modal antes de continuar con el logout
     const modal = await this.modalController.create({
-      component: LogoutModalComponent,
+      component: ModalHorometroFinPage,
     });
 
     modal.onDidDismiss().then((data) => {

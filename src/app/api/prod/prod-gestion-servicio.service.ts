@@ -185,6 +185,18 @@ export class ProdGestionServicioService {
     );
   }
 
+  SaveHorometroFin(iduser: string, horometroFin: string): Promise<any> {
+    let dataPost = JSON.stringify(
+      {
+        acc: 36,
+        iduser: iduser,
+        horometroFin: horometroFin
+      }
+    );
+    return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
+    );
+  }
+
   
   UpdateFechaInicioProd(fecha: string, idservicio: string, avatar: string, idusuario: string): Promise<any> {
     let dataPost = JSON.stringify(
