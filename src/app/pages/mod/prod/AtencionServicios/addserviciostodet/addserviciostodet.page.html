@@ -1,3 +1,9 @@
+<style>
+  .elemento_oculto {
+    display: none;
+  }
+</style>
+
 <ion-header>
   <ion-toolbar mode="ios">
     <ion-title text-capitalize>Formulario Servicio</ion-title>
@@ -89,7 +95,8 @@
                 </ion-col>
               </ion-row>
 
-              <ion-row *ngIf="hide_div_pt[i]" class="ion-align-items-center">
+
+              <ion-row class="elemento_oculto" *ngIf="hide_div_pt[i]" class="ion-align-items-center">
                 <ion-col size="3" class="ion-text-end">Clase: </ion-col>
                 <ion-col size="9">
                   <ion-item>
@@ -102,7 +109,8 @@
                 </ion-col>
               </ion-row>
 
-              <ion-row *ngIf="hide_div_serv[i]" class="ion-align-items-center">
+
+              <ion-row class="elemento_oculto" *ngIf="hide_div_serv[i]" class="ion-align-items-center">
                 <ion-col size="3" class="ion-text-end">Pieza Servicio:
                 </ion-col>
                 <ion-col size="7">
@@ -137,7 +145,7 @@
                   </ion-item>
                 </ion-col>
               </ion-row>
-              <ion-row *ngIf="hide_div_pt[i]" class="ion-align-items-center">
+              <ion-row class="elemento_oculto" *ngIf="hide_div_pt[i]" class="ion-align-items-center">
                 <ion-col size="3" class="ion-text-end">
                   Descripción de Versión:
                 </ion-col>
@@ -169,9 +177,9 @@
                 </ion-col>
               </ion-row>
 
-              
 
-              <ion-row class="ion-align-items-center">
+
+              <ion-row class="elemento_oculto" class="ion-align-items-center">
                 <ion-col size="3" class="ion-text-end"> Tecnico: </ion-col>
                 <ion-col size="9">
                   <ion-item>
@@ -185,7 +193,7 @@
 
 
               <!--AQUI--->
-              <ion-row class="ion-align-items-center">
+              <ion-row class="elemento_oculto" class="ion-align-items-center">
                 <ion-col size="3" class="ion-text-end">Tipo de Registro:</ion-col>
                 <ion-col size="9">
                   <ion-item>
@@ -349,9 +357,9 @@
         <ion-row class="ion-align-items-center">
           <ion-col size="3" class="ion-text-end"> Turno: </ion-col>
           <ion-col size="9">
-            <ion-select cancelText="Cancelar" (ionChange)="select_change_turno($event,i)"
-              [selectedText]="item2.turno" placeholder="Seleccionar turno" color="primary"
-              [(ngModel)]="item2.idturno" interface="action-sheet" mode="ios">
+            <ion-select cancelText="Cancelar" (ionChange)="select_change_turno($event,i)" [selectedText]="item2.turno"
+              placeholder="Seleccionar turno" color="primary" [(ngModel)]="item2.idturno" interface="action-sheet"
+              mode="ios">
               <ion-select-option *ngFor="let fila of rest_turno" [value]="fila['codigo']">{{fila['descrip']}}
               </ion-select-option>
             </ion-select>

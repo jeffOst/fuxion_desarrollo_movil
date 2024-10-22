@@ -1,9 +1,14 @@
+<style>
+
+#nombre_maquina{
+  display: none;
+}
+
+</style>
+
 <ion-header>
   <ion-toolbar>
-    <ion-title>Formulario</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="dismiss()">Cerrar</ion-button>
-    </ion-buttons>
+    <ion-title>Registro de Horometro Inicial</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -25,14 +30,16 @@
       </ion-select>
     </ion-item>
 
-    <!-- Campo Horometro Inicial -->
+
+    <!-- Campo Horometro Inicial --> 
     <ion-item>
       <ion-label>Horometro Inicial</ion-label>
-      <ion-input [(ngModel)]="formData.horometroInicial" name="horometroInicial" type="text"></ion-input>
+      <ion-input [(ngModel)]="formData.horometroInicial" name="horometroInicial" type="time"></ion-input>
     </ion-item>
 
+
     <!--NOMBRE MAQUINA-->
-    <ion-input [(ngModel)]="nombreMaquina" name="nombre_maquina" type="text"></ion-input>
+    <ion-input [(ngModel)]="nombreMaquina" name="nombre_maquina" id="nombre_maquina" type="text"></ion-input>
 
 
     <!-- Botón para guardar -->

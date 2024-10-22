@@ -152,36 +152,25 @@ export class ModalHorometroInicioPage implements OnInit {
 
   FSaveHorometro(iduser: string, idmaquina: string, turno: string, horometroInicial: string) {
 
-    const loading = this.loadingController.create({
-      message: 'Registrando Horometro...',
+    this.loadingController.create({
+      message: 'Regsitrando Horometro...',
       translucent: true
-    }).then(
-      loading => {
-        loading.present();
+    }).then(loading => {
+      loading.present();
+      this.ApiServices.SaveHorometroInicio(iduser, idmaquina, turno, horometroInicial).then((res) => {
 
-        this.ApiServices.SaveHorometroInicio(iduser, idmaquina, turno, horometroInicial).then((res) => {
+        let rest: any;
+        rest = res[0];
 
-          let rest: any;
-          rest = res[0];
+        if (rest.o_nres == 0) {
+          alert('Error, no se pudo guardar correctamente.');
+        }
 
-          console.log(rest);
-          console.log(rest.o_nres);
-
-          if (rest.o_nres == 0) {
-            alert('Error, no se pudo guardar correctamente.');
-          } else {
-
-            this.loadingController.dismiss();
-
-          }
-
-        }).finally(() => {
-
-          console.log('finalyyyy');
-
-        });
-
+      }).finally(() => {
+        loading.dismiss();
       });
+    });
+
 
   }
 

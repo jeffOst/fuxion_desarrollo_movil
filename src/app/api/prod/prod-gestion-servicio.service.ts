@@ -225,6 +225,17 @@ export class ProdGestionServicioService {
     return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
     );
   }
+
+  verificar_existe_horometroInicioxUsuario(iduser: string): Promise<any> {
+    let dataPost = JSON.stringify(
+      {
+        acc: 37,
+        iduser: iduser
+      }
+    );
+    return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
+    );
+  }
   
   ListFindActividades(InputSearch: string, id_usuario_local: string, id_dispositivo: string): Promise<any> {
     let dataPost = JSON.stringify(
