@@ -94,23 +94,70 @@ export class ModalHorometroInicioPage implements OnInit {
     this.modalController.dismiss();
   }
 
-  onSubmit() {
-    // Lógica para manejar los datos del formulario
-    console.log('Datos del formulario:', this.formData);
-    this.dismiss(); // Cierra el modal después de guardar
+  async onSubmit() {
 
-    console.log("verificar maquina")
-    console.log(this.formData.maquina);
-    console.log(this.nombreMaquina);
+    
+    if (this.formData.turno.toString() == null || this.formData.turno.toString() == '') {
 
-    //REGISTRA EL HOROMETRO DE INICIO
-    this.FSaveHorometro(this.globalVal.global_user_id, this.formData.maquina.toString(), this.formData.turno.toString(), this.formData.horometroInicial.toString());
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'Falta agregar el Turno que pertenece.',
+        buttons: ['OK']
+      });
+      await alert.present();
+      return;
 
-    //REDIRECCIONA AL LA VENTANA DE LA MAQUINA SELECCIONADA
-    this.goto_menu('prod-list-acti-programada', this.formData.maquina.toString(), this.nombreMaquina);
+    }
+    else if (this.formData.maquina.toString() == null || this.formData.maquina.toString() == '') {
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'Falta agregar la maquina que pertenece.',
+        buttons: ['OK']
+      });
+      await alert.present();
+      return;
+    } else {
 
-    //REFRESCAR EL MENU MOSTRANDO SOLO LA MAQUINA SELECCIONADA
-    this.refrescar_menu_produccion(this.globalVal.global_user_id, this.formData.maquina.toString());
+      // Lógica para manejar los datos del formulario
+      //console.log('Datos del formulario:', this.formData);
+      if (this.formData.horometroInicial.toString() == '00:00') {
+
+        const alert = await this.alertController.create({
+          header: 'Error',
+          message: 'El valor del Horometro a ingresar no puede ser 0',
+          buttons: ['OK']
+        });
+        await alert.present();
+        return;
+
+      }
+      else if (this.formData.horometroInicial.toString() == '') {
+
+        const alert = await this.alertController.create({
+          header: 'Error',
+          message: 'La cantidad a ingresar no puede ser igual a vacio.',
+          buttons: ['OK']
+        });
+        await alert.present();
+
+        return;
+
+      }
+      else {
+        //REGISTRA EL HOROMETRO DE INICIO
+        this.FSaveHorometro(this.globalVal.global_user_id, this.formData.maquina.toString(), this.formData.turno.toString(), this.formData.horometroInicial.toString());
+
+        //REDIRECCIONA AL LA VENTANA DE LA MAQUINA SELECCIONADA
+        this.goto_menu('prod-list-acti-programada', this.formData.maquina.toString(), this.nombreMaquina);
+
+        //REFRESCAR EL MENU MOSTRANDO SOLO LA MAQUINA SELECCIONADA
+        this.refrescar_menu_produccion(this.globalVal.global_user_id, this.formData.maquina.toString());
+
+        this.dismiss(); // Cierra el modal después de guardar
+
+      }
+    
+    }
 
   }
 
@@ -178,13 +225,13 @@ export class ModalHorometroInicioPage implements OnInit {
   goto_menu(nombre_menu: string, params: string, titulo: string): void {
     //this.navCtrl.push(ProdlistvalespendComponent);
     let _params;
-
+    /*
     console.log("revisar aqui");
     console.log(nombre_menu); // prod-list-acti-programada
     console.log(params); // 5
     console.log(titulo); // TC1
     console.log("--------------------------------------");
-
+    */
 
     let params_http = [];
     console.log(params);
@@ -222,8 +269,6 @@ export class ModalHorometroInicioPage implements OnInit {
       }
     }
   }
-
-
 
 
 }

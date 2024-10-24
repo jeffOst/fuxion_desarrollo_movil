@@ -23,6 +23,7 @@ export class LogincustomService {
   array_menu: any;
   array_device: any;
   area: string = '';
+  permiso_80: string = '';
   urlApiLogin: string = 'aw_modulos/mae/CApiLogin.php'; ///local
   UrlDominio: string = ApiBackDomains.UrlDomainLocal;
   //urlApiLogin: string = "https://thingproxy.freeboard.io/fetch/https://fuxion.geohidraulica.com.pe/aw_modulos/mae/CApiLogin.php";////produc
@@ -151,6 +152,7 @@ export class LogincustomService {
               this.id_personal = this.dbData[i].id_personal;
               this.nombrecompleto = this.dbData[i].nombrecompleto;
               this.area = this.dbData[i].area_aux_p;
+              this.permiso_80 = this.dbData[i].permiso_80;
               //console.log(this.dbData[i].nombrecompleto)
               //console.log(this.nombrecompleto)
             }
@@ -171,6 +173,7 @@ export class LogincustomService {
                 user_name: this.nombrecompleto,
                 imei: imei_,
                 area: this.area,
+                permiso_80: this.permiso_80
               };
               this.uniqueDeviceIDStr = 'result1.uuid';
               ///console.log("dummy_reponse ", dummy_reponse);

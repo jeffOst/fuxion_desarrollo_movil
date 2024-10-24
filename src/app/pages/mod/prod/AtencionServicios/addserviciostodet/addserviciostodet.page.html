@@ -95,42 +95,44 @@
                 </ion-col>
               </ion-row>
 
+              <div class="elemento_oculto">
+                <ion-row *ngIf="hide_div_pt[i]" class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end">Clase: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-searchbar (click)="FOpenPopUpClaseByPieza(i)" type="text" placeholder="Buscar Clase"
+                        mode="ios" readonly [(ngModel)]="item2.nomsubfam" value="{{item2.nomsubfam}}">
+                      </ion-searchbar>
+                    </ion-item>
+                    <div class="{{CssNotiPieza}}"></div>
+                    <!--<ion-input [(ngModel)]="item2.idclase" type="hidden"></ion-input> -->
+                  </ion-col>
+                </ion-row>
+              </div>
 
-              <ion-row class="elemento_oculto" *ngIf="hide_div_pt[i]" class="ion-align-items-center">
-                <ion-col size="3" class="ion-text-end">Clase: </ion-col>
-                <ion-col size="9">
-                  <ion-item>
-                    <ion-searchbar (click)="FOpenPopUpClaseByPieza(i)" type="text" placeholder="Buscar Clase" mode="ios"
-                      readonly [(ngModel)]="item2.nomsubfam" value="{{item2.nomsubfam}}">
-                    </ion-searchbar>
-                  </ion-item>
-                  <div class="{{CssNotiPieza}}"></div>
-                  <!--<ion-input [(ngModel)]="item2.idclase" type="hidden"></ion-input> -->
-                </ion-col>
-              </ion-row>
+              <div class="elemento_oculto">
+                <ion-row *ngIf="hide_div_serv[i]" class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end">Pieza Servicio:
+                  </ion-col>
+                  <ion-col size="7">
+                    <ion-item>
+                      <ion-searchbar (click)="FOpenModalPieza(i)" type="text" placeholder="Buscar Pieza" mode="ios"
+                        readonly [(ngModel)]="item2.nomclase" value="{{item2.nomclase}}">
+                      </ion-searchbar>
+                    </ion-item>
+                    <div class="{{CssNotiPieza}}"></div>
+                    <!--<ion-input [(ngModel)]="item2.idclase" type="hidden"></ion-input> -->
+                  </ion-col>
 
+                  <ion-col size="2">
+                    <ion-button [hidden]="scanActive" color="light" (click)="limpiar_cbo_pieza(i)">
+                      <ion-text color="primary">Limpiar</ion-text>
+                      <ion-icon name="close-circle-outline"></ion-icon>
+                    </ion-button>
+                  </ion-col>
 
-              <ion-row class="elemento_oculto" *ngIf="hide_div_serv[i]" class="ion-align-items-center">
-                <ion-col size="3" class="ion-text-end">Pieza Servicio:
-                </ion-col>
-                <ion-col size="7">
-                  <ion-item>
-                    <ion-searchbar (click)="FOpenModalPieza(i)" type="text" placeholder="Buscar Pieza" mode="ios"
-                      readonly [(ngModel)]="item2.nomclase" value="{{item2.nomclase}}">
-                    </ion-searchbar>
-                  </ion-item>
-                  <div class="{{CssNotiPieza}}"></div>
-                  <!--<ion-input [(ngModel)]="item2.idclase" type="hidden"></ion-input> -->
-                </ion-col>
-
-                <ion-col size="2">
-                  <ion-button [hidden]="scanActive" color="light" (click)="limpiar_cbo_pieza(i)">
-                    <ion-text color="primary">Limpiar</ion-text>
-                    <ion-icon name="close-circle-outline"></ion-icon>
-                  </ion-button>
-                </ion-col>
-
-              </ion-row>
+                </ion-row>
+              </div>
 
 
 
@@ -140,20 +142,41 @@
                 </ion-col>
                 <ion-col size="9">
                   <ion-item>
-                    <ion-searchbar (click)="FOpenPopUpOfByClase(i)" type="text" placeholder="Ingresar O.F." mode="ios"
+                    <ion-searchbar [disabled]="true" (click)="FOpenPopUpOfByClase(i)" type="text" placeholder="Ingresar O.F." mode="ios"
                       readonly [(ngModel)]="item2.correorden" value="{{item2.correorden}}"></ion-searchbar>
                   </ion-item>
                 </ion-col>
               </ion-row>
-              <ion-row class="elemento_oculto" *ngIf="hide_div_pt[i]" class="ion-align-items-center">
+
+              
+
+              <ion-row class="ion-align-items-center">
                 <ion-col size="3" class="ion-text-end">
-                  Descripción de Versión:
+                  Plano:
                 </ion-col>
                 <ion-col size="9">
-                  <ion-input type="text" placeholder="" readonly [(ngModel)]="item2.descripcion_pt"
-                    value="{{item2.descripcion_pt}}"></ion-input>
+                  <ion-item>
+                    <ion-button (click)="visualizar_pdf(item2.plano_diseno)" size="default">
+                      <ion-icon slot="start" name="star"></ion-icon>
+                      Ver Plano
+                    </ion-button>
+                  </ion-item>
                 </ion-col>
               </ion-row>
+          
+              
+              <div class="elemento_oculto">
+                <ion-row *ngIf="hide_div_pt[i]" class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end">
+                    Descripción de Versión:
+                  </ion-col>
+                  <ion-col size="9">
+                    <ion-input type="text" placeholder="" readonly [(ngModel)]="item2.descripcion_pt"
+                      value="{{item2.descripcion_pt}}"></ion-input>
+                  </ion-col>
+                </ion-row>
+              </div>
+
               <ion-row *ngIf="hide_div_equipo[i]" class="ion-align-items-center">
                 <ion-col size="3" class="ion-text-end">
                   Codigo de Bomba:
@@ -178,52 +201,58 @@
               </ion-row>
 
 
+              <div class="elemento_oculto">
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Tecnico: </ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-searchbar (click)="FOpenModalTecnico(i)" type="text" placeholder="Buscar Tecnico" mode="ios"
+                        readonly [(ngModel)]="item2.nombres_tecnico" value="{{item2.nombres_tecnico}}">
+                      </ion-searchbar>
+                    </ion-item>
+                    <div class="{{CssNotiTenico}}"></div>
+                  </ion-col>
+                </ion-row>
+              </div>
 
-              <ion-row class="elemento_oculto" class="ion-align-items-center">
-                <ion-col size="3" class="ion-text-end"> Tecnico: </ion-col>
-                <ion-col size="9">
-                  <ion-item>
-                    <ion-searchbar (click)="FOpenModalTecnico(i)" type="text" placeholder="Buscar Tecnico" mode="ios"
-                      readonly [(ngModel)]="item2.nombres_tecnico" value="{{item2.nombres_tecnico}}">
-                    </ion-searchbar>
-                  </ion-item>
-                  <div class="{{CssNotiTenico}}"></div>
-                </ion-col>
-              </ion-row>
+              <div class="elemento_oculto">
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end">Tipo de Registro:</ion-col>
+                  <ion-col size="9">
+                    <ion-item>
+                      <ion-searchbar (click)="FOpenModalTipoRegistro(i)" type="text"
+                        placeholder="Buscar Tipo de regsitro..." mode="ios" readonly [(ngModel)]="item2.nombres_tecnico"
+                        value="{{item2.nombres_tecnico}}">
+                      </ion-searchbar>
+                    </ion-item>
+                    <div class="{{CssNotiTenico}}"></div>
+                  </ion-col>
+                </ion-row>
+              </div>
 
 
-              <!--AQUI--->
-              <ion-row class="elemento_oculto" class="ion-align-items-center">
-                <ion-col size="3" class="ion-text-end">Tipo de Registro:</ion-col>
-                <ion-col size="9">
-                  <ion-item>
-                    <ion-searchbar (click)="FOpenModalTipoRegistro(i)" type="text"
-                      placeholder="Buscar Tipo de regsitro..." mode="ios" readonly [(ngModel)]="item2.nombres_tecnico"
-                      value="{{item2.nombres_tecnico}}">
-                    </ion-searchbar>
-                  </ion-item>
-                  <div class="{{CssNotiTenico}}"></div>
-                </ion-col>
-              </ion-row>
+          <ion-row class="ion-align-items-center">
+  <ion-col size="3" class="ion-text-end ion-align-items-baseline">Maquina:</ion-col>
+  <ion-col size="9">
+    <ion-select cancelText="Cancelar" (ionChange)="select_change_maquina($event,i)"
+      [selectedText]="item2.maquina" placeholder="Seleccionar Maquina" color="primary"
+      [(ngModel)]="item2.idmaquina" interface="action-sheet" mode="ios" [disabled]="true">
+      <ion-select-option *ngFor="let tipo of rest_maquina" [value]="tipo['codigo']">
+        {{tipo['nombre']}}
+      </ion-select-option>
+    </ion-select>
+    <div class="{{CssNotiMaquina}}"></div>
+  </ion-col>
+</ion-row>
 
-              <ion-row class="ion-align-items-center">
-                <ion-col size="3" class="ion-text-end ion-align-items-baseline">Maquina:</ion-col>
-                <ion-col size="9">
-                  <ion-select cancelText="Cancelar" (ionChange)="select_change_maquina($event,i)"
-                    [selectedText]="item2.maquina" placeholder="Seleccionar Maquina" color="primary"
-                    [(ngModel)]="item2.idmaquina" interface="action-sheet" mode="ios">
-                    <ion-select-option *ngFor="let tipo of rest_maquina" [value]="tipo['codigo']">{{tipo['nombre']}}
-                    </ion-select-option>
-                  </ion-select>
-                  <div class="{{CssNotiMaquina}}"></div>
-                </ion-col>
-              </ion-row>
+
+
             </ion-grid>
           </ion-col>
         </ion-row>
 
         <ion-row class="ion-align-items-center">
-          <ion-col size="3" class="ion-text-end">Servicio: </ion-col>
+          <ion-col size="3" class="ion-text-end">Proceso: </ion-col>
           <ion-col size="9" class="ion-text-start">
             <ion-item>
               <ion-searchbar (click)="open_popup_servicios(i)" type="text" placeholder="" mode="ios" readonly
@@ -332,7 +361,7 @@
           <ion-col size="9">
             <ion-item>
               <ion-input required="true" color="primary" type="number" mode="ios" [(ngModel)]="item2.cantidad"
-                value="{{item2.cantidad}}"></ion-input>
+                value="{{item2.cantidad}}" [disabled]="true"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -354,6 +383,7 @@
         </ion-item>
         -->
 
+        <!--
         <ion-row class="ion-align-items-center">
           <ion-col size="3" class="ion-text-end"> Turno: </ion-col>
           <ion-col size="9">
@@ -366,6 +396,8 @@
             <div class="{{CssNotiTurno}}"></div>
           </ion-col>
         </ion-row>
+        -->
+        
         <!--
         <ion-row hidden class="ion-align-items-center">
           <ion-col size="3" class="ion-text-end"> Tiempo Estandar: </ion-col>

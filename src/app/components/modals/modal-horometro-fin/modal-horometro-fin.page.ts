@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ModalController, IonicModule, LoadingController } from '@ionic/angular';
+import { ModalController, IonicModule, LoadingController, AlertController } from '@ionic/angular';
 
 //import { ModalController, IonicModule, NavParams, AlertController, NavController, IonInput, Platform, LoadingController } from '@ionic/angular';
 import { ProdGestionServicioService } from "src/app/api/prod/prod-gestion-servicio.service";
@@ -29,7 +29,7 @@ export class ModalHorometroFinPage implements OnInit {
     private router: Router,
     //private navParams: NavParams,
     private modalController: ModalController,
-    //private alertController: AlertController,
+    private alertController: AlertController,
     private logincustomService: LogincustomService,
     //public navCtrl: NavController,
     private loadingController: LoadingController,
@@ -55,17 +55,46 @@ export class ModalHorometroFinPage implements OnInit {
   ngOnInit() {
   }
 
-  submitForm() {
+  async submitForm() {
     // Guardar el valor ingresado y cerrar el modal
-    console.log('Horómetro Final:', this.horometroFinal);
+    console.log('Horómetro Final:', this.horometroFinal.toString());
 
-    //REGISTRA EL HOROMETRO DE INICIO
-    this.FSaveHorometro(this.globalVal.global_user_id, this.horometroFinal.toString());
+    // Lógica para manejar los datos del formulario
+    //console.log('Datos del formulario:', this.formData);
+    if (this.horometroFinal.toString() == '00:00') {
 
-    this.modalCtrl.dismiss(this.horometroFinal);
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'El valor del Horometro a ingresar no puede ser 0',
+        buttons: ['OK']
+      });
+      await alert.present();
+      return;
+
+    }
+    else if (this.horometroFinal.toString() == '') {
+
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'La cantidad a ingresar no puede ser igual a vacio.',
+        buttons: ['OK']
+      });
+      await alert.present();
+      return;
+
+    }
+    else {
+
+      //REGISTRA EL HOROMETRO DE INICIO
+      this.FSaveHorometro(this.globalVal.global_user_id, this.horometroFinal.toString());
+      this.modalCtrl.dismiss(this.horometroFinal);
+
+    }
+
   }
 
   FSaveHorometro(iduser: string, horometroFinal: string) {
+
 
     const loading = this.loadingController.create({
       message: 'Registrando Horometro...',
@@ -92,6 +121,5 @@ export class ModalHorometroFinPage implements OnInit {
       });
 
   }
-
 
 }

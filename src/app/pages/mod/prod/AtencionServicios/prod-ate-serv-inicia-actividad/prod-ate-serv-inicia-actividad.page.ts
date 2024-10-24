@@ -487,6 +487,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
   async onCantPendChange(event: any) {
 
+
     /*
       console.log('El valor del input ha cambiado:', event.detail.value);
       console.log(event.detail.value);
@@ -517,6 +518,20 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       const alert = await this.alertController.create({
         header: 'Error',
         message: 'La cantidad a ingresar no puede ser menor a 0',
+        buttons: ['OK']
+      });
+      await alert.present();
+      //this.DsIniciaActividad.cantidad_pendiente = this.DsIniciaActividad.cantidad_total - this.DsIniciaActividad.cantidad_revisada;
+      this.DsIniciaActividad.cantidad_ingresar = 0;
+
+      return;
+
+    }
+    else if (this.DsIniciaActividad.cantidad_ingresar == null) {
+
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'La cantidad a ingresar no puede ser igual a vacio.',
         buttons: ['OK']
       });
       await alert.present();

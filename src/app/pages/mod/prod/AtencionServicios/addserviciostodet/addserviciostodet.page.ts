@@ -581,6 +581,7 @@ export class AddserviciostodetPage implements OnInit {
     }
   }
 
+  /*
   select_change_turno(ev, index) {
     console.log('select_change_turno::', this.rest_pieza);
     for (const row of this.rest_turno) {
@@ -592,6 +593,7 @@ export class AddserviciostodetPage implements OnInit {
       }
     }
   }
+  */
 
   select_change_servicio_metalizado(ev, index) {
     for (const row of this.rest_servicio_metalizado) {
@@ -938,6 +940,8 @@ export class AddserviciostodetPage implements OnInit {
             this.ArrayItemsSelectedDesti[index].cnt_metalizado_obs = dataReturned.data.row.cnt_metalizado_obs;
             this.ArrayItemsSelectedDesti[index].cnt_29012_peso_ini = dataReturned.data.row.cnt_29012_peso_ini;
             this.ArrayItemsSelectedDesti[index].cnt_50000_peso_ini = dataReturned.data.row.cnt_50000_peso_ini;
+
+            this.ArrayItemsSelectedDesti[index].plano_diseno = dataReturned.data.row.plano_diseno;
             //console.log(this.ArrayItemsSelectedDesti);
 
 
@@ -1520,6 +1524,7 @@ export class AddserviciostodetPage implements OnInit {
       }
 
       //turno
+      /*
       this.CssNotiTurno = 'field_required_ok';
       if (this.ArrayItemsSelectedDesti[index].turno == null || this.ArrayItemsSelectedDesti[index].turno == '') {
         siono = 2;
@@ -1527,6 +1532,7 @@ export class AddserviciostodetPage implements OnInit {
         this.CssNotiTurno = 'field_required';
         break;
       }
+      */
 
       this.CssNotiPieza = 'field_required_ok';
       if (this.ArrayItemsSelectedDesti[index].avatar != '4') {
@@ -1537,7 +1543,7 @@ export class AddserviciostodetPage implements OnInit {
           this.CssNotiPieza = 'field_required';
           break;
         }
-
+        /*
         ////material
         this.CssNotiMaterial = 'field_required_ok';
         if (this.ArrayItemsSelectedDesti[index].material == null || this.ArrayItemsSelectedDesti[index].material == '') {
@@ -1546,6 +1552,7 @@ export class AddserviciostodetPage implements OnInit {
           this.CssNotiMaterial = 'field_required';
           break;
         }
+        */
 
       }
       ////servicio
@@ -1845,6 +1852,19 @@ export class AddserviciostodetPage implements OnInit {
     // El evento tiene la propiedad 'detail' que contiene el valor seleccionado
     console.log('Fecha cambiada:', event.detail.value);
     // Puedes realizar otras operaciones aquí según tus necesidades
+  }
+
+  
+  visualizar_pdf(plano) {
+
+    this.navCtrl.navigateForward('pdf-viewer', {
+      queryParams: {
+        valor: plano,
+        flaglistaprod: 1
+      }
+    });
+
+
   }
 
 }

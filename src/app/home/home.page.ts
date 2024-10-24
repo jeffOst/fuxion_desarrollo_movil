@@ -38,6 +38,7 @@ export class HomePage {
       localStorage = (result1);
       this.NomUsuario = localStorage.user_name;
       this.globalVal.global_user_id = localStorage.user_id;
+      this.globalVal.global_user_area = localStorage.area;
     });
   }
 
@@ -52,13 +53,14 @@ export class HomePage {
     this.navCtrl.navigateForward(['prod-ate-serv-list-actividades'], navigationExtras);
   }
 
+    
   async openModal() { // Método para abrir el modal
     const modal = await this.modalCtrl.create({
-      //component: HelloWorldModalComponent
-      component: ModalHorometroInicioPage
+      component: ModalHorometroInicioPage,
+      backdropDismiss: false // Evita que se cierre al hacer clic fuera
     });
     return await modal.present();
-  }
+  } 
 
   
   goto_menu(nombre_menu: string, params: string, titulo: string): void {
@@ -124,26 +126,22 @@ export class HomePage {
             let rest: any;
             rest = res[0];
 
-              console.log("jeffrey ahora verificar aquiii");
-              console.log(rest);
-              console.log(rest.codigo_hxu);
-              console.log(rest.codmaquina_hxu);
-
-
-              if (rest.codigo_hxu.toString() == '0') {
-                console.log("entra aqui");
+              if (rest.codigo_hxu.toString() == '0') { //Si no existe un horometro registrado
+                
                 this.hideCardTA = true;
                 this.FListarActvidades();
-                this.openModal(); // Abre el modal cuando la condición se cumple
-              } else {
                 
-                console.log("entra aqui 22");
+                //Si tiene el permiso 80 no debe visualizar el modal para registrar horometro
+                if (localStorage.permiso_80 != '80') {
+                  this.openModal(); // Abre el modal cuando la condición se cumple
+                }
+
+              } else {
                 //REDIRECCIONA AL LA VENTANA DE LA MAQUINA SELECCIONADA
                 this.goto_menu('prod-list-acti-programada', rest.codmaquina_hxu.toString(), rest.nombre_maquina.toString());
 
                 //REFRESCAR EL MENU MOSTRANDO SOLO LA MAQUINA SELECCIONADA
-                this.refrescar_menu_produccion(this.globalVal.global_user_id, rest.codmaquina_hxu.toString());
-                
+                this.refrescar_menu_produccion(this.globalVal.global_user_id, rest.codmaquina_hxu.toString());               
               }
 
           }).finally(() => {
@@ -151,7 +149,6 @@ export class HomePage {
           });
         });
 
-      
       }
 
       if (this.NombresUsuarioLocal == '') {

@@ -16,13 +16,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { NavigationEnd, Router } from '@angular/router';
-import { LogincustomService } from "../../api/logincustom.service";
+//import { LogincustomService } from "../../api/logincustom.service";
 import { Storage } from "@ionic/storage";
 //import { ProdListActiProgramadaPage } from "../../mod/prod/prod-list-acti-programada/prod-list-acti-programada.page";
 import { NgFor } from '@angular/common';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { ModalHorometroFinPage } from '../../components/modals/modal-horometro-fin/modal-horometro-fin.page'; // Importa tu modal
-
+import { LogincustomService } from "src/app/api/logincustom.service";
+import { GlovalProvider } from "src/app/interfaces/mtto/GlobalVal";
 
 @Component({
   selector: 'app-menu',
@@ -41,13 +42,18 @@ export class MenuComponent implements OnInit {
     private router: Router,
     private logincustomService: LogincustomService,
     private modalController: ModalController,
-    private storage: Storage//,
+    private storage: Storage,//,
+    public globalVal: GlovalProvider
     //private prodlistActiProgramada:ProdListActiProgramadaPage
   ) {
+
+
     console.log('componen modulo ts::::::::>>>>>>>>>>>>>>>>');
     console.log('menu constuuuuuuuuuuu');
     ///esta asignacion es cuando por primera vez se inicia la aplicacion
     let imei_: string = "";
+
+    /*
     var dummy_reponse = {
       user_id: '0',
       user_name: '',
@@ -60,6 +66,7 @@ export class MenuComponent implements OnInit {
     this.storage.set("USER_INFO", dummy_reponse).then((response) => {
 
     });
+    */
 
   }
   ionViewWillLeave() {
@@ -96,7 +103,11 @@ export class MenuComponent implements OnInit {
     this.storage.create();
     this.storage.get("USER_INFO").then((result1) => {
       localStorage_usu = (result1);
+      console.log(localStorage_usu);
+
       this.array_usu = localStorage_usu;
+      this.globalVal.global_permiso_80 = localStorage_usu.permiso_80;
+      this.globalVal.global_user_area = localStorage.area;
     });
 
     console.log('ionDidOpen:94');
@@ -134,21 +145,32 @@ export class MenuComponent implements OnInit {
 
 
   async logout() {
-    // Abre el modal antes de continuar con el logout
-    const modal = await this.modalController.create({
-      component: ModalHorometroFinPage,
-    });
+    /*
+    console.log("revisarrrr logout aquiiiii");
+    console.log(this.array_usu);
+    console.log(this.array_usu.area);
+    console.log(this.array_usu.permiso_80);
+    */
 
-    modal.onDidDismiss().then((data) => {
-      const horometroFinal = data.data; // Recoge el dato del modal
-      if (horometroFinal) {
-        console.log('Horómetro Final guardado:', horometroFinal);
-        // Continuar con el proceso de logout después de guardar
-        this.logincustomService.logout();
-      }
-    });
+    if (this.array_usu.permiso_80 != '80' && this.array_usu.area == 'PRODUCCION') {
+      
+      const modal = await this.modalController.create({
+        component: ModalHorometroFinPage,
+      });
 
-    return await modal.present();
+      modal.onDidDismiss().then((data) => {
+        const horometroFinal = data.data; // Recoge el dato del modal
+        if (horometroFinal) {
+          console.log('Horómetro Final guardado:', horometroFinal);
+          // Continuar con el proceso de logout después de guardar
+          this.logincustomService.logout();
+        }
+      });
+      
+      return await modal.present();
+    } else {
+      this.logincustomService.logout();
+    }
   }
 
 

@@ -25,6 +25,8 @@ export class GlovalProvider {
     public tipo_partlist_otc:any;
     public fab_rep:any;
     public global_user_id:any;
+    public global_user_area:any;
+    public global_permiso_80:any;
 
 
     constructor() {
