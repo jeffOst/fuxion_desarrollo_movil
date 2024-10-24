@@ -27,6 +27,7 @@ import { Router, NavigationExtras, ActivatedRoute, ROUTES } from '@angular/route
 export class WinEntregaBombas1Page implements OnInit {
   FormCheckListPaso1: UntypedFormGroup;
   disableButton;
+  disableButton_1;
   ng_fch_entrega_mtto: any ;
   Cancelar: string = 'Cancelar';
   scanActive = false;
@@ -467,10 +468,22 @@ FListaInicial(){
 
         console.log('material',this.firma1);
         if (this.DataSetGrid[0].estado_ceb==2){
-          this.disableButton=true
+          this.disableButton=true;
+          this.disableButton_1=true;
         }
+        else if (this.DataSetGrid[0].estado_ceb==3){
+          this.disableButton=true;
+          this.disableButton_1=false;
+        }
+        else if (this.DataSetGrid[0].estado_ceb==1){
+          this.disableButton = false;
+          this.disableButton_1=true;
+        }
+        
         else {
-          this.disableButton = false
+          this.disableButton = true;
+          this.disableButton_1=true;
+
         }
       })
       .finally(() => {
