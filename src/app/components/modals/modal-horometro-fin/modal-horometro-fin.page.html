@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Confirmar Logout</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <form (ngSubmit)="submitForm()">
+
+      <!-- Campo Horometro Inicial -->
+      <ion-item>
+        <ion-label position="floating">Horómetro Final</ion-label>
+        <ion-input [(ngModel)]="horometroFinal" name="horometroFinal" type="time"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" type="submit">Guardar</ion-button>
+    </form>
+  </div>
+</ion-content>

@@ -85,6 +85,7 @@ export class ProdGestionServicioService {
   }
 
   load_cbos_motivo_pausa_maquina(): Promise<any> {
+
     let dataPost = JSON.stringify(
       {
         acc: 34
@@ -92,8 +93,9 @@ export class ProdGestionServicioService {
     );
     return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
     );
-  }
 
+  }
+  
   ListFindPersonal(InputSearch: string, id_usuario_local: string, id_dispositivo: string): Promise<any> {
     let dataPost = JSON.stringify(
       {
@@ -160,7 +162,7 @@ export class ProdGestionServicioService {
   }
 
   SaveInicioActividad(row: any): Promise<any> {
-
+    
     let dataPost = JSON.stringify(
       row
     );
@@ -169,7 +171,7 @@ export class ProdGestionServicioService {
     );
   }
 
-
+  
   UpdateFechaInicioProd(fecha: string, idservicio: string, avatar: string, idusuario: string): Promise<any> {
     let dataPost = JSON.stringify(
       {
@@ -192,6 +194,17 @@ export class ProdGestionServicioService {
         pk_idservicio: idservicio,
         avatar: avatar,
         idusuario: idusuario
+      }
+    );
+    return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
+    );
+  }
+
+  verificar_existe_horometroInicioxUsuario(iduser: string): Promise<any> {
+    let dataPost = JSON.stringify(
+      {
+        acc: 37,
+        iduser: iduser
       }
     );
     return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
@@ -299,6 +312,22 @@ export class ProdGestionServicioService {
     );
   }
 
+  ListFindHojaRuta(InputSearch: string, idofpterminado: string, id_usuario_local: string, id_dispositivo: string): Promise<any> {
+    let dataPost = JSON.stringify(
+      {
+        acc: 33,
+        s: InputSearch,
+        idofpterminado: idofpterminado,
+        idusu: id_usuario_local,
+        iddevice: id_dispositivo
+
+      }
+    );
+    return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
+    );
+  }
+
+  
   load_cbos_ma00(): Promise<any> {
 
     let dataPost = JSON.stringify(

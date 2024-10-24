@@ -402,6 +402,14 @@ export const routes: Routes = [
   {
     path: 'pop-up-ot-protocolos',
     loadComponent: () => import('./pages/mod/prod/checklist_entrega_bombas/pop-up-ot-protocolos/pop-up-ot-protocolos.page').then( m => m.PopUpOtProtocolosPage)
+  },
+  {
+    path: 'modal-horometro-inicio',
+    loadComponent: () => import('./components/modals/modal-horometro-inicio/modal-horometro-inicio.page').then( m => m.ModalHorometroInicioPage)
+  },
+  {
+    path: 'modal-horometro-fin',
+    loadComponent: () => import('./components/modals/modal-horometro-fin/modal-horometro-fin.page').then( m => m.ModalHorometroFinPage)
   }
 
   

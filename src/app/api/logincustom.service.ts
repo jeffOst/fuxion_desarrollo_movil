@@ -23,6 +23,7 @@ export class LogincustomService {
   array_menu: any;
   array_device: any;
   area: string = '';
+  permiso_80: string = '';
   urlApiLogin: string = 'aw_modulos/mae/CApiLogin.php'; ///local
   UrlDominio: string = ApiBackDomains.UrlDomainLocal;
   //urlApiLogin: string = "https://thingproxy.freeboard.io/fetch/https://fuxion.geohidraulica.com.pe/aw_modulos/mae/CApiLogin.php";////produc
@@ -151,6 +152,7 @@ export class LogincustomService {
               this.id_personal = this.dbData[i].id_personal;
               this.nombrecompleto = this.dbData[i].nombrecompleto;
               this.area = this.dbData[i].area_aux_p;
+              this.permiso_80 = this.dbData[i].permiso_80;
               //console.log(this.dbData[i].nombrecompleto)
               //console.log(this.nombrecompleto)
             }
@@ -171,6 +173,7 @@ export class LogincustomService {
                 user_name: this.nombrecompleto,
                 imei: imei_,
                 area: this.area,
+                permiso_80: this.permiso_80
               };
               this.uniqueDeviceIDStr = 'result1.uuid';
               ///console.log("dummy_reponse ", dummy_reponse);
@@ -241,6 +244,34 @@ export class LogincustomService {
         ///////////////////////redirecciona home
 
         ///////////////
+      } //fin resultado
+    });
+  }
+
+  async refrescar_prod_load_menuxusuario(username: string, maquina: string) {
+
+    let url: string =
+      ApiBackDomains.UrlDomainLocal + this.urlApiLogin + '?acc=5';
+    let dataPost = JSON.stringify({
+      v1: username,
+      v2: maquina,
+      v3: '000', //por defaul solo sucursal principal
+    });
+
+    return this.http.post(url, dataPost).subscribe((resultado) => {
+      if (resultado) {
+        this.dbData = resultado; 
+
+        if (this.dbData === null) {
+          this.msjErrorBd = 'No existe el usuario.';
+          return false;
+        } else {
+          this.array_menu = this.dbData;
+          this.storage.set('USER_MENU', this.dbData).then((response) => {});
+          //this.router.navigate(['/home']);
+          this.authState.next(true);
+        }
+        ///////////////////////redirecciona home
       } //fin resultado
     });
   }
