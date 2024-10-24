@@ -80,7 +80,7 @@ export class RrhhHorasExtrasPage implements OnInit {
         'H',
         this.SelectFiltra = this.SelectFiltra ? this.SelectFiltra.toString() : "",
         this.SelectFiltra2 = this.SelectFiltra2 ? this.SelectFiltra2.toString() : ""
-        
+        ,1
       )
         .then((res) => {
           this.DataSetGrid = res;
@@ -129,7 +129,8 @@ if (this.searchTerm.trim().length >=6) {
           this.IdUsuarioLocal,
           'H',
           this.SelectFiltra,
-          this.SelectFiltra2
+          this.SelectFiltra2,
+          1
         )
           .then((res) => {
             this.DataSetGrid = res;
