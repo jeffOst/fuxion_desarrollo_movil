@@ -58,11 +58,6 @@ export class ModalHorometroInicioPage implements OnInit {
       localStorage = (result1);
       this.NomUsuario = localStorage.user_name;
       this.globalVal.global_user_id = localStorage.user_id;
-
-      console.log("verificar localstorage");
-      console.log(localStorage);
-      console.log("--------------------------------");
-
     });
 
   }
@@ -70,9 +65,7 @@ export class ModalHorometroInicioPage implements OnInit {
   NomUsuario: String;
 
   ngOnInit() {
-
     this.load_cbos();
-
   }
 
   load_cbos() {
@@ -96,7 +89,6 @@ export class ModalHorometroInicioPage implements OnInit {
 
   async onSubmit() {
 
-    
     if (this.formData.turno.toString() == null || this.formData.turno.toString() == '') {
 
       const alert = await this.alertController.create({
@@ -118,45 +110,54 @@ export class ModalHorometroInicioPage implements OnInit {
       return;
     } else {
 
-      // Lógica para manejar los datos del formulario
-      //console.log('Datos del formulario:', this.formData);
-      if (this.formData.horometroInicial.toString() == '00:00') {
+      const maquinasValidas = ['2','5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '16', '17', '19'];
 
-        const alert = await this.alertController.create({
-          header: 'Error',
-          message: 'El valor del Horometro a ingresar no puede ser 0',
-          buttons: ['OK']
-        });
-        await alert.present();
-        return;
+      if (maquinasValidas.includes(this.formData.maquina.toString())) {
 
-      }
-      else if (this.formData.horometroInicial.toString() == '') {
+        // Lógica para manejar los datos del formulario
+        //console.log('Datos del formulario:', this.formData);
+        if (this.formData.horometroInicial.toString() == '00:00') {
+          const alert = await this.alertController.create({
+            header: 'Error',
+            message: 'El valor del Horometro a ingresar no puede ser 0',
+            buttons: ['OK']
+          });
+          await alert.present();
+          return;
+        }
+        else if (this.formData.horometroInicial.toString() == '') {
+          const alert = await this.alertController.create({
+            header: 'Error',
+            message: 'La cantidad a ingresar no puede ser igual a vacio.',
+            buttons: ['OK']
+          });
+          await alert.present();
+          return;
+        }
+        else {
 
-        const alert = await this.alertController.create({
-          header: 'Error',
-          message: 'La cantidad a ingresar no puede ser igual a vacio.',
-          buttons: ['OK']
-        });
-        await alert.present();
+          //REGISTRA EL HOROMETRO DE INICIO
+          this.FSaveHorometro(this.globalVal.global_user_id, this.formData.maquina.toString(), this.formData.turno.toString(), this.formData.horometroInicial.toString());
+          //REDIRECCIONA AL LA VENTANA DE LA MAQUINA SELECCIONADA
+          this.goto_menu('prod-list-acti-programada', this.formData.maquina.toString(), this.nombreMaquina);
+          //REFRESCAR EL MENU MOSTRANDO SOLO LA MAQUINA SELECCIONADA
+          this.refrescar_menu_produccion(this.globalVal.global_user_id, this.formData.maquina.toString());
+          this.dismiss(); // Cierra el modal después de guardar
 
-        return;
+        }
 
-      }
-      else {
+      } else {
+
         //REGISTRA EL HOROMETRO DE INICIO
         this.FSaveHorometro(this.globalVal.global_user_id, this.formData.maquina.toString(), this.formData.turno.toString(), this.formData.horometroInicial.toString());
-
         //REDIRECCIONA AL LA VENTANA DE LA MAQUINA SELECCIONADA
         this.goto_menu('prod-list-acti-programada', this.formData.maquina.toString(), this.nombreMaquina);
-
         //REFRESCAR EL MENU MOSTRANDO SOLO LA MAQUINA SELECCIONADA
         this.refrescar_menu_produccion(this.globalVal.global_user_id, this.formData.maquina.toString());
-
         this.dismiss(); // Cierra el modal después de guardar
 
       }
-    
+
     }
 
   }
@@ -188,6 +189,8 @@ export class ModalHorometroInicioPage implements OnInit {
       localStorage.codigo_turno = this.formData.turno.toString();
       localStorage.codigo_maquina = this.formData.maquina.toString();
       localStorage.numHorometroIni = this.formData.horometroInicial.toString();
+
+      this.globalVal.global_user_maquina = this.formData.maquina.toString();
 
       // Guardar los cambios nuevamente en el storage
       this.storage.set('USER_INFO', localStorage);

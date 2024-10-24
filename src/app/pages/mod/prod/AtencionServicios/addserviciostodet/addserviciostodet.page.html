@@ -18,27 +18,30 @@
     [style.--background]="scanActive ? '#00000000':'#fff'">
     <ion-item [hidden]="scanActive">
       <ion-grid [hidden]="scanActive">
-        <ion-row class="ion-align-items-center">
-          <ion-col size="3" class="ion-text-end"> OF/OT* &nbsp;:</ion-col>
-          <ion-col size="9">
-            <ion-segment mode="ios" (ionChange)="segmento_cambiado($event,0,i,0, item2.avatar)" debounce="500"
-              [(ngModel)]="item2.actividad">
-              <ion-segment-button value="1">
-                <ion-label>Servicios</ion-label>
-              </ion-segment-button>
-              <ion-segment-button value="3">
-                <ion-label>Repuestos</ion-label>
-              </ion-segment-button>
-              <ion-segment-button value="2">
-                <!--(ionChange)="segmentChanged($event)"-->
-                <ion-label>Bomba</ion-label>
-              </ion-segment-button>
-              <ion-segment-button value="4">
-                <ion-label>Taller</ion-label>
-              </ion-segment-button>
-            </ion-segment>
-          </ion-col>
-        </ion-row>
+
+        <div class="elemento_oculto">
+          <ion-row class="ion-align-items-center">
+            <ion-col size="3" class="ion-text-end"> OF/OT* &nbsp;:</ion-col>
+            <ion-col size="9">
+              <ion-segment mode="ios" (ionChange)="segmento_cambiado($event,0,i,0, item2.avatar)" debounce="500"
+                [(ngModel)]="item2.actividad">
+                <ion-segment-button value="1">
+                  <ion-label>Servicios</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="3">
+                  <ion-label>Repuestos</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="2">
+                  <!--(ionChange)="segmentChanged($event)"-->
+                  <ion-label>Bomba</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="4">
+                  <ion-label>Taller</ion-label>
+                </ion-segment-button>
+              </ion-segment>
+            </ion-col>
+          </ion-row>
+        </div>
 
         <ion-row class="ion-align-items-center">
           <ion-col>
@@ -142,13 +145,14 @@
                 </ion-col>
                 <ion-col size="9">
                   <ion-item>
-                    <ion-searchbar [disabled]="true" (click)="FOpenPopUpOfByClase(i)" type="text" placeholder="Ingresar O.F." mode="ios"
-                      readonly [(ngModel)]="item2.correorden" value="{{item2.correorden}}"></ion-searchbar>
+                    <ion-searchbar [disabled]="true" (click)="FOpenPopUpOfByClase(i)" type="text"
+                      placeholder="Ingresar O.F." mode="ios" readonly [(ngModel)]="item2.correorden"
+                      value="{{item2.correorden}}"></ion-searchbar>
                   </ion-item>
                 </ion-col>
               </ion-row>
 
-              
+
 
               <ion-row class="ion-align-items-center">
                 <ion-col size="3" class="ion-text-end">
@@ -163,8 +167,8 @@
                   </ion-item>
                 </ion-col>
               </ion-row>
-          
-              
+
+
               <div class="elemento_oculto">
                 <ion-row *ngIf="hide_div_pt[i]" class="ion-align-items-center">
                   <ion-col size="3" class="ion-text-end">
@@ -231,19 +235,19 @@
               </div>
 
 
-          <ion-row class="ion-align-items-center">
-  <ion-col size="3" class="ion-text-end ion-align-items-baseline">Maquina:</ion-col>
-  <ion-col size="9">
-    <ion-select cancelText="Cancelar" (ionChange)="select_change_maquina($event,i)"
-      [selectedText]="item2.maquina" placeholder="Seleccionar Maquina" color="primary"
-      [(ngModel)]="item2.idmaquina" interface="action-sheet" mode="ios" [disabled]="true">
-      <ion-select-option *ngFor="let tipo of rest_maquina" [value]="tipo['codigo']">
-        {{tipo['nombre']}}
-      </ion-select-option>
-    </ion-select>
-    <div class="{{CssNotiMaquina}}"></div>
-  </ion-col>
-</ion-row>
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end ion-align-items-baseline">Maquina:</ion-col>
+                <ion-col size="9">
+                  <ion-select cancelText="Cancelar" (ionChange)="select_change_maquina($event,i)"
+                    [selectedText]="item2.maquina" placeholder="Seleccionar Maquina" color="primary"
+                    [(ngModel)]="item2.idmaquina" interface="action-sheet" mode="ios" [disabled]="true">
+                    <ion-select-option *ngFor="let tipo of rest_maquina" [value]="tipo['codigo']">
+                      {{tipo['nombre']}}
+                    </ion-select-option>
+                  </ion-select>
+                  <div class="{{CssNotiMaquina}}"></div>
+                </ion-col>
+              </ion-row>
 
 
 
@@ -397,7 +401,7 @@
           </ion-col>
         </ion-row>
         -->
-        
+
         <!--
         <ion-row hidden class="ion-align-items-center">
           <ion-col size="3" class="ion-text-end"> Tiempo Estandar: </ion-col>

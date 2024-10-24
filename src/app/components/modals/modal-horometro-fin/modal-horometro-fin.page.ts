@@ -61,7 +61,7 @@ export class ModalHorometroFinPage implements OnInit {
 
     // Lógica para manejar los datos del formulario
     //console.log('Datos del formulario:', this.formData);
-    if (this.horometroFinal.toString() == '00:00') {
+    /*if (this.horometroFinal.toString() == '00:00') {
 
       const alert = await this.alertController.create({
         header: 'Error',
@@ -71,8 +71,8 @@ export class ModalHorometroFinPage implements OnInit {
       await alert.present();
       return;
 
-    }
-    else if (this.horometroFinal.toString() == '') {
+    }*/
+    if (this.horometroFinal.toString() == '') {
 
       const alert = await this.alertController.create({
         header: 'Error',
