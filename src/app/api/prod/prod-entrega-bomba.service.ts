@@ -134,4 +134,14 @@ export class ProdEntregaBomba {
       .toPromise()
       .then((results) => results);
   }
+  cargacbo(
+  ): Promise<any> {
+    let dataPost = JSON.stringify({
+      acc: 6
+    });
+    return this.httpClient
+      .post(this.urlApiProd, dataPost)
+      .toPromise()
+      .then((results) => results);
+  }
 }

@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -43,6 +49,8 @@ export class WinEntregaBombas1Page implements OnInit {
   isChecked11: boolean;
   DataSetGrid: any;
   opciones: any;
+  materiales: any;
+  medidas: any;
   firma1: any;
   firma2: any;
   estprotocolo: any;
@@ -59,6 +67,7 @@ export class WinEntregaBombas1Page implements OnInit {
     private router: Router,//,
     public storage: Storage,
     public navCtrl: NavController,
+    private ref: ChangeDetectorRef,
   ) { 
     this.FormCheckListPaso1 = this.formBuilder.group({
       nomb_bomba:[''],
@@ -130,9 +139,13 @@ export class WinEntregaBombas1Page implements OnInit {
   
     this.idregistro= this.navParamsAny.idcheckentbomb;
     console.log('paso los parametros:' ,this.navParamsAny.idcheckentbomb);
-    this.FListaInicial();
+
     this.FFirmInicial();
+    this.FcboInicial();
     
+    // setTimeout(() => {
+      this.FListaInicial();
+  //   }, 1000);
   }
   ionViewDidEnter() {
     
@@ -465,7 +478,7 @@ FListaInicial(){
         this.estbaker=this.DataSetGrid[0].estado_baker
         // this.idmaterial=this.DataSetGrid[0].idmaterial_ceb,
         // this.idmedida=this.DataSetGrid[0].idmedida_ceb
-
+        console.log('material',this.DataSetGrid[0].idmedida_ceb,this.DataSetGrid[0].idmaterial_ceb,);
         console.log('material',this.firma1);
         if (this.DataSetGrid[0].estado_ceb==2){
           this.disableButton=true;
@@ -522,6 +535,45 @@ FFirmInicial(){
         this.estaCargando = false;
 
         console.log('prueba de opciones',this.opciones);
+      })
+      .finally(() => {
+        this.loadingController.dismiss();
+        // setTimeout(() => {
+        //   //this.idinputsearch_equipo.setFocus();
+        // }, 600);
+      })
+      .catch(() => {
+        //console.log('catcha api lista');
+      })
+      .then((err) => {
+        console.log('thennnnn', err);
+        loading.dismiss();
+      });
+  });
+
+}
+
+FcboInicial(){
+
+  const loading = this.loadingController
+  .create({
+    message: 'Cargando lista...',
+    translucent: true, //,
+    //cssClass: 'custom-class custom-loading'
+  })
+  .then((loading) => {
+    loading.present();
+    console.log('ingresa a la consulta materiales y medidas');
+    
+    this.ApiService.cargacbo(
+    )
+      .then((res) => {
+        this.materiales = res['material'];
+        this.medidas = res['medida'];
+        this.loadingController.dismiss();
+        this.estaCargando = false;
+
+        console.log('materiales y medidas',this.materiales,this.medidas);
       })
       .finally(() => {
         this.loadingController.dismiss();
