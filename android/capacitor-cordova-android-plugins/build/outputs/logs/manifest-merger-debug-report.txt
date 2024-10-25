@@ -1,49 +1,49 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:2:1-10:12
-INJECTED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:2:1-10:12
-INJECTED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:2:1-10:12
+ADDED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:2:1-10:12
+INJECTED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:2:1-10:12
+INJECTED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:2:1-10:12
 	package
-		INJECTED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
-		ADDED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:2:1-10:12
-		INJECTED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
+		INJECTED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
+		ADDED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:2:1-10:12
+		INJECTED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
 	xmlns:amazon
-		ADDED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:3:1-57
+		ADDED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:3:1-57
 	xmlns:android
-		ADDED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:2:11-69
+		ADDED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:4:1-8:15
+ADDED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:4:1-8:15
 provider#de.sitewaerts.cordova.documentviewer.FileProvider
-ADDED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:5:1-7:12
+ADDED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:5:1-7:12
 	android:grantUriPermissions
-		ADDED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:5:174-208
+		ADDED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:5:174-208
 	android:authorities
-		ADDED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:5:76-148
+		ADDED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:5:76-148
 	android:exported
-		ADDED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:5:149-173
+		ADDED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:5:149-173
 	android:name
-		ADDED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:5:11-75
+		ADDED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:5:11-75
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:6:3-116
+ADDED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:6:3-116
 	android:resource
-		ADDED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:6:65-114
+		ADDED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:6:65-114
 	android:name
-		ADDED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:6:14-64
+		ADDED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:6:14-64
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:9:1-75
+ADDED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:9:1-75
 	android:name
-		ADDED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:9:18-73
+		ADDED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:9:18-73
 uses-sdk
-INJECTED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
-INJECTED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
-INJECTED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
-INJECTED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
+INJECTED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
+INJECTED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
+INJECTED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
+INJECTED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
-		ADDED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
-		INJECTED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
+		INJECTED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
+		ADDED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
+		INJECTED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
-		ADDED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
-		INJECTED from C:\xampp\htdocs\fuxion_movil_desarrollo\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
+		INJECTED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
+		ADDED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
+		INJECTED from D:\Nueva carpeta\fuxion_desarrollo_movil\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
