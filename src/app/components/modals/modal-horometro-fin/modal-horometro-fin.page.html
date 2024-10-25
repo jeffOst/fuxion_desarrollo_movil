@@ -11,12 +11,13 @@
   <div class="ion-padding">
     <form (ngSubmit)="submitForm()">
 
-      <!-- Campo Horometro Inicial -->
+      <!-- Campo Horometro Fin -->
       <ion-item>
         <ion-label position="floating">Horómetro Final</ion-label>
-        <ion-input [(ngModel)]="horometroFinal" name="horometroFinal" type="time"></ion-input>
+        <ion-input [(ngModel)]="horometroFinal" name="horometroFinal" type="text" inputmode="numeric"  maxlength="8"
+          placeholder="hh:mm:ss" (ionInput)="formatTime($event)"></ion-input>
       </ion-item>
-
+      
       <ion-button expand="block" type="submit">Guardar</ion-button>
     </form>
   </div>

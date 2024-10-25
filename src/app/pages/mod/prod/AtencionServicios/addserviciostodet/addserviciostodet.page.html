@@ -191,18 +191,20 @@
                 </ion-col>
               </ion-row>
 
-              <ion-row class="ion-align-items-center">
-                <ion-col size="3" class="ion-text-end"> Material: </ion-col>
-                <ion-col size="9">
-                  <ion-select cancelText="Cancelar" (ionChange)="select_change_material($event,i)"
-                    [selectedText]="item2.material" placeholder="Seleccionar material" color="primary"
-                    [(ngModel)]="item2.idmaterial" interface="action-sheet" mode="ios">
-                    <ion-select-option *ngFor="let tipo of rest_material" [value]="tipo['codigo']">{{tipo['nombre']}}
-                    </ion-select-option>
-                  </ion-select>
-                  <div class="{{CssNotiMaterial}}"></div>
-                </ion-col>
-              </ion-row>
+              <div class="elemento_oculto">
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end"> Material: </ion-col>
+                  <ion-col size="9">
+                    <ion-select cancelText="Cancelar" (ionChange)="select_change_material($event,i)"
+                      [selectedText]="item2.material" placeholder="Seleccionar material" color="primary"
+                      [(ngModel)]="item2.idmaterial" interface="action-sheet" mode="ios">
+                      <ion-select-option *ngFor="let tipo of rest_material" [value]="tipo['codigo']">{{tipo['nombre']}}
+                      </ion-select-option>
+                    </ion-select>
+                    <div class="{{CssNotiMaterial}}"></div>
+                  </ion-col>
+                </ion-row>
+              </div>
 
 
               <div class="elemento_oculto">
@@ -234,23 +236,23 @@
                 </ion-row>
               </div>
 
+              <div class="elemento_oculto">
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="3" class="ion-text-end ion-align-items-baseline">Maquina:</ion-col>
+                  <ion-col size="9">
+                    <ion-select cancelText="Cancelar" (ionChange)="select_change_maquina($event,i)"
+                      [selectedText]="item2.maquina" placeholder="Seleccionar Maquina" color="primary"
+                      [(ngModel)]="item2.idmaquina" interface="action-sheet" mode="ios" [disabled]="true">
+                      <ion-select-option *ngFor="let tipo of rest_maquina" [value]="tipo['codigo']">
+                        {{tipo['nombre']}}
+                      </ion-select-option>
+                    </ion-select>
+                    <div class="{{CssNotiMaquina}}"></div>
+                  </ion-col>
+                </ion-row>
+              </div>
 
-              <ion-row class="ion-align-items-center">
-                <ion-col size="3" class="ion-text-end ion-align-items-baseline">Maquina:</ion-col>
-                <ion-col size="9">
-                  <ion-select cancelText="Cancelar" (ionChange)="select_change_maquina($event,i)"
-                    [selectedText]="item2.maquina" placeholder="Seleccionar Maquina" color="primary"
-                    [(ngModel)]="item2.idmaquina" interface="action-sheet" mode="ios" [disabled]="true">
-                    <ion-select-option *ngFor="let tipo of rest_maquina" [value]="tipo['codigo']">
-                      {{tipo['nombre']}}
-                    </ion-select-option>
-                  </ion-select>
-                  <div class="{{CssNotiMaquina}}"></div>
-                </ion-col>
-              </ion-row>
-
-
-
+              
             </ion-grid>
           </ion-col>
         </ion-row>

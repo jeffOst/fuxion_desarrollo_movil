@@ -122,4 +122,21 @@ export class ModalHorometroFinPage implements OnInit {
 
   }
 
+
+  formatTime(event: any) {
+    let value = event.target.value;
+  
+    // Elimina caracteres no numéricos y limita la longitud
+    value = value.replace(/[^0-9]/g, '').slice(0, 6);
+  
+    // Añade los dos puntos para el formato hh:mm:ss
+    if (value.length >= 2) value = value.slice(0, 2) + ':' + value.slice(2);
+    if (value.length >= 5) value = value.slice(0, 5) + ':' + value.slice(5);
+  
+    // Actualiza el valor en el campo de entrada
+    event.target.value = value;
+    this.horometroFinal = value;
+  }
+  
+
 }
