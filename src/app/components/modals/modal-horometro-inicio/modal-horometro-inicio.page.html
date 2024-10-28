@@ -1,9 +1,7 @@
 <style>
-
-#nombre_maquina{
-  display: none;
-}
-
+  #nombre_maquina {
+    display: none;
+  }
 </style>
 
 <ion-header>
@@ -25,18 +23,19 @@
     <!-- Combobox para Maquina -->
     <ion-item>
       <ion-label>Maquina</ion-label>
-      <ion-select [(ngModel)]="formData.maquina" name="maquina" interface="action-sheet" (ionChange)="onMaquinaChange($event)">
-        <ion-select-option *ngFor="let maquina of maquinas" [value]="maquina.codigo">{{ maquina.nombre }}</ion-select-option>
+      <ion-select [(ngModel)]="formData.maquina" name="maquina" interface="action-sheet"
+        (ionChange)="onMaquinaChange($event)">
+        <ion-select-option *ngFor="let maquina of maquinas" [value]="maquina.codigo">{{ maquina.nombre
+          }}</ion-select-option>
       </ion-select>
     </ion-item>
-
-
-    <!-- Campo Horometro Inicial --> 
+    
+    <!-- Campo Horometro Inicial -->
     <ion-item>
-      <ion-label>Horometro Inicial (hh:mm): </ion-label>
-      <ion-input [(ngModel)]="formData.horometroInicial" name="horometroInicial" type="time"></ion-input>
+      <ion-label position="floating">Horometro Inicial (hh:mm:ss):</ion-label>
+      <ion-input [(ngModel)]="formData.horometroInicial" placeholder="00:00:00" type="text" inputmode="numeric"
+        maxlength="8" (ionInput)="formatTime($event)"></ion-input>
     </ion-item>
-
 
     <!--NOMBRE MAQUINA-->
     <ion-input [(ngModel)]="nombreMaquina" name="nombre_maquina" id="nombre_maquina" type="text"></ion-input>
