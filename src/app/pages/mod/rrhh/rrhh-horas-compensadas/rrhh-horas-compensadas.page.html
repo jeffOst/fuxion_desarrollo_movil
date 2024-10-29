@@ -1,0 +1,194 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title text-capitalize>Formulario Horas Extras</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="grid-entrega-bombas" [text]="Cancelar">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <form [formGroup]="FormCheckListPaso1" #f="ngForm">
+  <ion-list 
+    [style.--background]="scanActive ? '#00000000':'#fff'">
+    <ion-item [hidden]="scanActive">
+      <ion-grid [hidden]="scanActive">
+
+        <ion-row class="ion-align-items-center">
+          <ion-col>
+            <ion-grid>
+
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end"> Tecnico: </ion-col>
+                <ion-col size="9">
+                  <ion-item>
+                    <ion-input required="true" color="primary" mode="ios" formControlName= "nom_tecni" readonly>
+                    </ion-input>
+                  </ion-item>
+                  <div></div>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end">Area Solicitante: </ion-col>
+                <ion-col size="9" class="ion-text-start">
+                  <ion-item>
+                    <ion-searchbar (click)="open_popup_area()" type="text" placeholder="Seleccionar Area" mode="ios" formControlName="area">
+                    </ion-searchbar>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
+              <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">Sub-Area: </ion-col>
+          <ion-col size="9" class="ion-text-start">
+            <ion-item>
+              <ion-searchbar (click)="open_popup_servicios(FormCheckListPaso1.get('idarea').value)" type="text" placeholder="Seleccionar Sub-Area" mode="ios" formControlName="nom_serv">
+              </ion-searchbar>
+            </ion-item>
+           
+          </ion-col>
+        </ion-row>
+
+        <!-- <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">Maquina/Puesto: </ion-col>
+          <ion-col size="9" class="ion-text-start">
+            <ion-item>
+              <ion-searchbar (click)="FOpenModalTecnico(FormCheckListPaso1.get('idprogra').value)" type="text" placeholder="Seleccionar Maquina" mode="ios" formControlName="maquina">
+              </ion-searchbar>
+            </ion-item>           
+          </ion-col>
+        </ion-row> -->
+
+              <!-- <ion-row class="ion-align-items-center">
+              <ion-col size="3" class="ion-text-end"> Categoria: </ion-col>
+              <ion-col size="9">
+                <ion-item>
+                  <ion-searchbar (click)="FOpenModalActividad(FormCheckListPaso1.get('idarea').value)" type="text" placeholder="Buscar Actividad" mode="ios" formControlName="actividad">
+                  </ion-searchbar>
+                </ion-item>
+                <div></div>
+              </ion-col>
+            </ion-row> -->
+            </ion-grid>
+          </ion-col>
+        </ion-row>
+        <!-- <ion-row hidden class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Motivo: </ion-col>
+          <ion-col size="9">
+            <ion-item>
+              <ion-searchbar (click)="open_popup_motivo(FormCheckListPaso1.get('idarea').value)" type="text" placeholder="Seleccionar Motivo" mode="ios" formControlName="motivo"></ion-searchbar>
+            </ion-item>
+          </ion-col>
+        </ion-row> -->
+        
+
+        
+        
+
+        <ion-row hidden class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Motivo : </ion-col>
+          <ion-col size="9">
+            <ion-item>
+              <ion-input type="text" placeholder="Ingrese su Detalle" mode="ios" formControlName="descrip"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+       
+        
+       
+        <!-- <ion-row hidden class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end"> Cantidad: </ion-col>
+          <ion-col size="9">
+            <ion-item>
+              <ion-input color="primary" type="number" mode="ios" formControlName="cantidad" 
+                >
+              </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>   -->
+     
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">Aprobador: </ion-col>
+          <ion-col size="9" class="ion-text-start">
+            <ion-item>
+              <ion-searchbar (click)="open_popup_supervisor(FormCheckListPaso1.get('idarea').value)" type="text" placeholder="Seleccionar Supervisor" mode="ios" formControlName="supervisor">
+              </ion-searchbar>
+            </ion-item>
+           
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">Inicio: </ion-col>
+          <ion-col size="2"> 
+            <ion-datetime-button locale="es-PE" datetime="datetime1" class="custom-datetime"></ion-datetime-button>
+              <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
+                <ng-template>
+                  <ion-datetime locale="es-ES" id="datetime1" mode="ios" displayFormat="YYYY-MM-DD HH:mm" presentation="date-time"
+                    [preferWheel]="true" [showDefaultButtons]="true" pickerFormat="YYYY-MM-DD HH:mm" [(ngModel)]="fechaini_he" [ngModelOptions]="{standalone: true}"
+                    (ionChange)="onFechaChangeInicio($event)" 
+                    >
+                  </ion-datetime>
+                </ng-template>
+              </ion-popover>
+          </ion-col>
+          <ion-col size="1" class="ion-text-end">Fin: </ion-col>
+          <ion-col size="2">
+            <ion-datetime-button locale="es-PE" datetime="datetime2"></ion-datetime-button>
+              <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
+                <ng-template>
+                  <ion-datetime locale="es-ES" id="datetime2" mode="ios" displayFormat="YYYY-MM-DD HH:mm" presentation="date-time"
+                    [preferWheel]="true" [showDefaultButtons]="true" pickerFormat="YYYY-MM-DD HH:mm" [(ngModel)]="fechafin_he" [ngModelOptions]="{standalone: true}"
+                    (ionChange)="onFechaChangeFin($event)"
+                    >
+                  </ion-datetime>
+                </ng-template>
+              </ion-popover>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">Tipo de Horas: </ion-col>
+          <ion-col size="9" class="ion-text-start">
+        <ion-item>
+          <ion-select placeholder="Seleccionar el tipo de Horas" formControlName="tip_horas" >
+          <!-- <ion-select-option value="1">H. Extras</ion-select-option> -->
+          <ion-select-option value="2">H. Compensada</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+      </ion-row>
+
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</form>
+</ion-content>
+<ion-footer>
+  <ion-grid [hidden]="scanActive">
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col style="text-align: center">
+        <ion-buttons (click)="cancelar_ejecucion()">
+          <!-- (click)="cancelar_ejecucion()"  -->
+          <ion-button  color="danger"  (click)="cancelar_ejecucion">
+            <ion-icon name="close-outline"></ion-icon>&nbsp; Cancelar
+          </ion-button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+
+          <ion-button (click)="SaveFormTerminadoPaso1(1)"  *ngIf="!disableButton1" color="primary">
+            <ion-icon name="save-outline"></ion-icon>&nbsp; Registrar
+          </ion-button>
+          <ion-button (click)="actTerminadoPaso1()" *ngIf="!disableButton" color="success">
+            <ion-icon name="save-outline"></ion-icon>&nbsp; Actualizar
+          </ion-button>
+        </ion-buttons>
+        
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

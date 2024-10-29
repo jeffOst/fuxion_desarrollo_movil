@@ -387,7 +387,8 @@ export const routes: Routes = [
   {
     path: 'rrhh-popup-area',
     loadComponent: () => import('./pages/mod/rrhh/rrhh-popup-area/rrhh-popup-area.page').then( m => m.RrhhPopupAreaPage)
-  },  {
+  },
+  {
     path: 'rrhh-list-aprob-he',
     loadComponent: () => import('./pages/mod/rrhh/rrhh-list-aprob-he/rrhh-list-aprob-he.page').then( m => m.RrhhListAprobHePage)
   },
@@ -410,6 +411,14 @@ export const routes: Routes = [
   {
     path: 'modal-horometro-fin',
     loadComponent: () => import('./components/modals/modal-horometro-fin/modal-horometro-fin.page').then( m => m.ModalHorometroFinPage)
+  },
+  {
+    path: 'rrhh-horas-compensadas',
+    loadComponent: () => import('./pages/mod/rrhh/rrhh-horas-compensadas/rrhh-horas-compensadas.page').then( m => m.RrhhHorasCompensadasPage)
+  },
+  {
+    path: 'rrhh-list-horas-compensadas',
+    loadComponent: () => import('./pages/mod/rrhh/rrhh-list-horas-compensadas/rrhh-list-horas-compensadas.page').then( m => m.RrhhListHorasCompensadasPage)
   }
 
   
