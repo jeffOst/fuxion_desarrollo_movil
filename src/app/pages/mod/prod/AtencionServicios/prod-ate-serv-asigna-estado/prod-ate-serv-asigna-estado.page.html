@@ -14,7 +14,7 @@
 
     <!----------------------------------------------------------------------------------------------------->
     <!--Hoja de ruta-->
-    <!--
+    
     <ion-item>
       <ion-label>
         Hoja de Ruta
@@ -42,12 +42,12 @@
         <ion-row *ngFor="let Row of DsGridHojaRuta">
           <ion-item mode="ios" button style="width: 100% !important;">
             <ion-col size-sm="1" size-md="1" size-xl="1">{{Row.secuencia_proc_of}} </ion-col>
-            <ion-col size-sm="1" size-md="1" size-xl="1">{{Row.nombre_maquina}}</ion-col>
+            <ion-col size-sm="1" size-md="1" size-xl="1">{{Row.descrip_maquina}}</ion-col>
             <ion-col size-sm="2.2" size-md="2.2" size-xl="2.2">{{Row.descripcion_proceso_ofd}}</ion-col>
             <ion-col size-sm="2" size-md="2" size-xl="2">{{Row.cnt_plan}}</ion-col>
             <ion-col size-sm="2" size-md="2" size-xl="2">En Proceso</ion-col>
             <ion-col size-sm="2" size-md="2" size-xl="2">{{Row.cant_fin_actividad_ofd}}</ion-col>
-            <ion-button (click)="FIniciarActvividad()" color="warning" size="small" *ngIf="Row.nombre_maquina == FormHtmlJs.maquina">
+            <ion-button (click)="FIniciarActvividad()" color="warning" size="small" *ngIf="Row.descrip_maquina == FormHtmlJs.maquina">
               <ion-text color="danger">&nbsp;INICIAR ACTIVIDAD &nbsp;</ion-text>
               <ion-icon [hidden]="scanActive" expand="block" color="dark" size="small" name="play-forward"></ion-icon>
             </ion-button>
@@ -57,7 +57,7 @@
         </ion-row>
       </ion-grid>
     </ion-item>
-    -->
+    
     <!----------------------------------------------------------------------------------------------------->
 
 
