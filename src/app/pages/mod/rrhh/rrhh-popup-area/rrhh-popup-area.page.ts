@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 import { RrhhHorasExtrasService } from 'src/app/api/rrhh/rrhh-horasextras.service';
 import { IonInput, NavParams, LoadingController, ModalController } from '@ionic/angular';
 @Component({
@@ -22,9 +23,18 @@ IdDispositivo:string;
     public ApiService:RrhhHorasExtrasService,
     public  modalCtrl:ModalController,
     private loadingCtrl: LoadingController,
+    public storage: Storage,
   ) { }
 
   ngOnInit() {
+    let localStorage: any;
+    this.storage.get('USER_INFO').then((result1) => {
+      localStorage = result1;
+      // this.NombresUsuarioLocal = localStorage.user_name;
+      this.IdUsuarioLocal = localStorage.user_id;
+
+      //}
+    });
     this.FFindRows();
   }
 
