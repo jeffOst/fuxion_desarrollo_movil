@@ -133,7 +133,7 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
 
   }
 
-  async FIniciarActvividad() {
+  async FIniciarActvividad(idsubestacion_asof: any) {
 
     console.log("verificar el estado actual");
     console.log(this.navParams.idestado);
@@ -169,6 +169,7 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
 
       let row: any = this.FormHtmlJs;
       //row.maquina = 'Iniciar Actividad';
+      row.idsubestacion_asof = idsubestacion_asof;
       let navigationExtras: NavigationExtras = {
         state: row
       };

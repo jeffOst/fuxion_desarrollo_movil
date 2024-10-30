@@ -201,6 +201,11 @@ export class AddserviciostodetPage implements OnInit {
       this.ArrayItemsSelectedDesti[0].maquina = this.navParams.maquina;
       this.ArrayItemsSelectedDesti[0].codigo_pt = this.navParams.codigo_pt;
 
+      this.ArrayItemsSelectedDesti[0].idsubestacion_asof = this.navParams.idsubestacion_asof;
+      
+      console.log("jefreyyyy ahora verifica aquiiiiii");
+      console.log(this.navParams.idsubestacion_asof);
+
       this.ArrayItemsSelectedDesti[0].actividad = this.actividad;
       this.ArrayItemsSelectedDesti[0].plano_diseno = this.navParams.plano_diseno;    
 
@@ -1665,13 +1670,6 @@ export class AddserviciostodetPage implements OnInit {
       }).then(
         loading => {
           loading.present();
-
-
-          //console.log("verificar variable fechainicio_prod:")
-          //console.log(this.fechainicio_prod);
-
-          //console.log("ver aquiiiiiiiii");
-          //console.log(this.ArrayItemsSelectedDesti[0]);
 
           this.ArrayItemsSelectedDesti[0].acc = '7';
           this.ArrayItemsSelectedDesti[0].fechainicio_prod = this.fechainicio_prod;
