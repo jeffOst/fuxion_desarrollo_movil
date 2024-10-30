@@ -120,6 +120,7 @@ export interface MPieza {
     cantidad_total: any,
     cantidad_revisada: string,
     cantidad_pendiente: string,
-    cantidad_ingresar: number
+    cantidad_ingresar: number,
+    idsubestacion_asof: number
 
 }
