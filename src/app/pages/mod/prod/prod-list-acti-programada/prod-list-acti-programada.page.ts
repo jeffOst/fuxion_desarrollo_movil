@@ -200,7 +200,9 @@ try {
   }
 
   FIniciarActvividad(row: any) {
-    row.maquina=this.TituloDinamico;
+    //row.maquina=this.TituloDinamico;
+    console.log("verifica aqui la maquinaaaaaaaaaaa")
+    console.log(row.maquina);
     let navigationExtras: NavigationExtras = {
       state: row
     };
@@ -231,7 +233,9 @@ try {
 
   }
   FSetEstado(row: any) {
-    row.maquina=this.TituloDinamico;
+    //row.maquina=this.TituloDinamico;
+    console.log("maquina aquiiiii");
+    console.log(row.maquina);
     let navigationExtras: NavigationExtras = {
       state: row
     };
