@@ -3,11 +3,7 @@
     <ion-title text-capitalize>Solicitud Revisión Q.C.</ion-title>
     <!--<ion-title color="primary" style="font-size: 6px;">{{NomUsuario}}</ion-title>-->
     <ion-buttons slot="start">
-      <ion-back-button
-        defaultHref="prod-list-acti-programada"
-        [text]="Cancelar"
-
-      >
+      <ion-back-button defaultHref="prod-list-acti-programada" [text]="Cancelar">
       </ion-back-button>
     </ion-buttons>
   </ion-toolbar>
@@ -19,36 +15,24 @@
       <ion-grid>
         <ion-row class="ion-align-items-center">
           <ion-col size="3" class="ion-text-end">
-            Orden de Fabricación &nbsp;:</ion-col
-          >
+            Orden de Fabricación &nbsp;:</ion-col>
           <ion-col size="9">
-            <ion-input
-              [(ngModel)]="FormModel.correorden"
-
-
-            >
+            <ion-input [(ngModel)]="FormModel.correorden">
             </ion-input>
           </ion-col>
         </ion-row>
         <ion-row class="ion-align-items-center">
           <ion-col size="3" class="ion-text-end"> Codigo P.T. &nbsp;:</ion-col>
           <ion-col size="9">
-            <ion-input
-              [(ngModel)]="FormModel.codigo_pt"
-              [attr.disabled]="readonly_qr"
-            >
+            <ion-input [(ngModel)]="FormModel.codigo_pt" [attr.disabled]="readonly_qr">
             </ion-input>
           </ion-col>
         </ion-row>
         <ion-row class="ion-align-items-center">
           <ion-col size="3" class="ion-text-end">
-            Descripción del Componente &nbsp;:</ion-col
-          >
+            Descripción del Componente &nbsp;:</ion-col>
           <ion-col size="9">
-            <ion-input
-              [(ngModel)]="FormModel.descripcion_pt"
-              [attr.disabled]="readonly_qr"
-            >
+            <ion-input [(ngModel)]="FormModel.descripcion_pt" [attr.disabled]="readonly_qr">
             </ion-input>
           </ion-col>
         </ion-row>
@@ -56,12 +40,8 @@
         <ion-row class="ion-align-items-center">
           <ion-col size="3" class="ion-text-end"> Tecnico: </ion-col>
           <ion-col size="9">
-            <ion-input
-              type="text"
-              [(ngModel)]="FormModel.nombres_tecnico"
-              value="{{FormModel.nombres_tecnico}}"
-              readonly
-            ></ion-input>
+            <ion-input type="text" [(ngModel)]="FormModel.nombres_tecnico" value="{{FormModel.nombres_tecnico}}"
+              readonly></ion-input>
             <!-- <ion-item>
               <ion-searchbar
                 (click)="FOpenModalTecnico(i)"
@@ -81,31 +61,34 @@
         <ion-row class="ion-align-items-center">
           <ion-col size="3" class="ion-text-end">Total Piezas: </ion-col>
           <ion-col size="9" class="ion-text-start">
-            <ion-input
-            readonly
-            [(ngModel)]="FormModel.cantidad"
-            ></ion-input>
+            <ion-input readonly [(ngModel)]="FormModel.cantidad"></ion-input>
           </ion-col>
         </ion-row>
         <ion-row class="ion-align-items-center">
           <ion-col size="3" class="ion-text-end">Atendido Piezas: </ion-col>
           <ion-col size="9" class="ion-text-start">
-            <ion-input
-            readonly
-            [(ngModel)]="FormModel.cantidad_atendido"
-            ></ion-input>
+            <ion-input readonly [(ngModel)]="FormModel.cantidad_atendido"></ion-input>
           </ion-col>
         </ion-row>
+
+
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-text-end">Tipo: </ion-col>
+          <ion-col size="9" class="ion-text-start">
+            <ion-select [(ngModel)]="selectedCodigo" name="tipoPieza" interface="action-sheet">
+              <ion-select-option *ngFor="let tipo of tipoPiezaCalidad" [value]="tipo.codigo">{{ tipo.nombre
+                }}</ion-select-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+
 
         <ion-row class="ion-align-items-center">
           <ion-col size="3" class="ion-text-end"> Cantidad: </ion-col>
           <ion-col size="9" class="ion-text-start">
 
-            <ion-input
-                      type="number"
-
-                      [(ngModel)]="FormModel.cantidad_scc"
-                    ></ion-input>
+            <ion-input type="number" [(ngModel)]="FormModel.cantidad_scc"></ion-input>
 
             <!-- <app-input-with-button
               [(ngModel)]="FormModel.cantidad_scc"
@@ -165,19 +148,11 @@
       <ion-col></ion-col>
       <ion-col style="text-align: center">
         <ion-buttons>
-          <ion-button
-            (click)="FCancelarForm()"
-            [disabled]="disableButton"
-            color="danger"
-          >
+          <ion-button (click)="FCancelarForm()" [disabled]="disableButton" color="danger">
             <ion-icon name="close-outline"></ion-icon>&nbsp; Cancelar
           </ion-button>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <ion-button
-            (click)="FSaveForm()"
-            [disabled]="disableButton"
-            color="primary"
-          >
+          <ion-button (click)="FSaveForm()" [disabled]="disableButton" color="primary">
             <ion-icon name="save-outline"></ion-icon>&nbsp;
             <strong> Iniciar </strong>
           </ion-button>
