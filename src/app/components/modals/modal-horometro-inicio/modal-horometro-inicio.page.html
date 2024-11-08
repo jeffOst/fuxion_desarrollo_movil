@@ -32,9 +32,9 @@
     
     <!-- Campo Horometro Inicial -->
     <ion-item>
-      <ion-label position="floating">Horometro Inicial (hh:mm:ss):</ion-label>
-      <ion-input [(ngModel)]="formData.horometroInicial" placeholder="00:00:00" type="text" inputmode="numeric"
-        maxlength="8" (ionInput)="formatTime($event)"></ion-input>
+      <ion-label position="floating">Horometro Inicial (hhhh:mm:ss):</ion-label>
+      <ion-input [(ngModel)]="formData.horometroInicial" placeholder="0000:00:00" type="text" inputmode="numeric"
+        (ionInput)="formatTime($event)"></ion-input>
     </ion-item>
 
     <!--NOMBRE MAQUINA-->

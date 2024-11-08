@@ -47,7 +47,7 @@
             <ion-col size-sm="2" size-md="2" size-xl="2">{{Row.cnt_plan}}</ion-col>
             <ion-col size-sm="2" size-md="2" size-xl="2">{{Row.nombre_estado}}</ion-col>
             <ion-col size-sm="2" size-md="2" size-xl="2">{{Row.cantidad_revisada}}</ion-col>
-            <ion-button (click)="FIniciarActvividad(Row.idsubestacion_asof)" color="warning" size="small" *ngIf="Row.nombre_maquina == FormHtmlJs.maquina && Row.cantidad_revisada < Row.cnt_plan">
+            <ion-button (click)="FIniciarActvividad(Row.idsubestacion_asof)" color="warning" size="small" *ngIf="Row.nombre_maquina == FormHtmlJs.maquina && Row.flag_boton == 1">
               <ion-text color="danger">&nbsp;INICIAR ACTIVIDAD &nbsp;</ion-text>
               <ion-icon [hidden]="scanActive" expand="block" color="dark" size="small" name="play-forward"></ion-icon>
             </ion-button>

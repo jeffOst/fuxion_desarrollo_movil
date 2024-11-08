@@ -38,6 +38,19 @@ export class ProdAteServDejarPiezaCalidadPage implements OnInit {
   Cancelar:string='Cancelar';
   readonly_qr:boolean=false;
   disableButton:boolean;
+  
+  tipoPiezaCalidad: any[] = [];  // Aquí se almacenarán los tipoPiezaCalidad de la base de datos
+  
+  // Datos del formulario
+  /*
+  formData = {
+    tipoPieza: '1'
+  };
+  */
+
+  selectedCodigo = 2; // Aquí estableces el valor predeterminado PP
+
+
   constructor(
     public navCtrl: NavController,
     private router: Router,
@@ -80,12 +93,27 @@ export class ProdAteServDejarPiezaCalidadPage implements OnInit {
   }
 
   ngOnInit() {
+    this.load_cbos();
     this.FormModel.cantidad_scc = 0;
     if (!this.hide_div_reproceso) {
       this.listServiciosPendientes();
     }
 
   }
+  
+  load_cbos() {
+    this.loadingController.create({
+      message: 'Cargando motivos de pausa...',
+      translucent: true
+    }).then(loading => {
+      loading.present();
+      this.ApiServices.load_cbos_calidad_dejar_piezas_tipo().then((res) => {
+        this.tipoPiezaCalidad = res['tipo_pieza']; // Asigna los datos a tipoPiezaCalidad
+      }).finally(() => {
+        loading.dismiss();
+      });
+    });
+  } 
 
   FCancelarForm() {
     this.location.back();
@@ -141,7 +169,12 @@ export class ProdAteServDejarPiezaCalidadPage implements OnInit {
       }).then(
         loading => {
           loading.present();
+
+          //console.log(this.selectedCodigo);
           this.FormModel.acc = '13';
+          this.FormModel.tipo_calidad = (this.selectedCodigo);
+
+          
           this.ApiServices.SaveControlCalidadByOf(this.FormModel).then((res) => {
             this.loadingController.dismiss();
             let rest: any;

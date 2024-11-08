@@ -84,6 +84,19 @@ export class ProdGestionServicioService {
 
   }
 
+    //////////////listado de piezas,material,tecnico,maquina::gui iniciar actividad
+    load_cbos_calidad_dejar_piezas_tipo(): Promise<any> {
+
+      let dataPost = JSON.stringify(
+        {
+          acc: 38
+        }
+      );
+      return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
+      );
+  
+    }
+
   load_cbos_motivo_pausa_maquina(): Promise<any> {
 
     let dataPost = JSON.stringify(
