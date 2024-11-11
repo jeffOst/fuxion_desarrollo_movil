@@ -34,7 +34,7 @@ export class ModalHorometroInicioPage implements OnInit {
   formData = {
     turno: '',
     maquina: '',
-    horometroInicial: '',
+    horometroInicial: '0000:00:00',
     nombreMaquina: '',
   };
 
