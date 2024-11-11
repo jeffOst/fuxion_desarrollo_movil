@@ -133,7 +133,7 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
 
   }
 
-  async FIniciarActvividad(idsubestacion_asof: any) {
+  async FIniciarActvividad(idsubestacion_asof: any, descripcion_proceso_ofd: any, SEQMASERV: any, flag_mostrar_opciones: any) {
 
     console.log("verificar el estado actual");
     console.log(this.navParams.idestado);
@@ -147,7 +147,7 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
       });
       await alert.present();
       return;
-
+ 
     }
     /*
     else if (this.navParams.idestado == 3) {
@@ -170,6 +170,10 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
       let row: any = this.FormHtmlJs;
       //row.maquina = 'Iniciar Actividad';
       row.idsubestacion_asof = idsubestacion_asof;
+      row.descripcion_proceso_hr = descripcion_proceso_ofd;
+      row.SEQMASERV = SEQMASERV;
+      row.flag_mostrar_opciones = flag_mostrar_opciones;
+      
       let navigationExtras: NavigationExtras = {
         state: row
       };

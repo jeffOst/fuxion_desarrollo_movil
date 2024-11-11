@@ -199,21 +199,21 @@ try {
       });
   }
 
-  FIniciarActvividad(row: any) {
+  FIniciarActvividad(row: any, flag_mostrar_opciones: any) {
     //row.maquina=this.TituloDinamico;
-    console.log("verifica aqui la maquinaaaaaaaaaaa")
-    console.log(row.maquina);
+    row.flag_mostrar_opciones = flag_mostrar_opciones;
     let navigationExtras: NavigationExtras = {
       state: row
     };
     this.navCtrl.navigateForward(['addserviciostodet'], navigationExtras);
   }
 
-  FNuevaActvividadNp() {
+  FNuevaActvividadNp(flag_mostrar_opciones: any) {
     let row:any;
     row = {} as MPieza;
     //row.maquina=this.TituloDinamico;
     row.CONCOMPONENTE=1;
+    row.flag_mostrar_opciones = flag_mostrar_opciones;
     let navigationExtras: NavigationExtras = {
       state: row
     };

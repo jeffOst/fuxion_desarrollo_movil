@@ -75,7 +75,7 @@
             ></ion-button>
             -->
             
-            <ion-button expand="block" color="white" size="small" slot="end" title="Iniciar Actividad" (click)="FIniciarActvividad(contact)">
+            <ion-button expand="block" color="white" size="small" slot="end" title="Iniciar Actividad" (click)="FIniciarActvividad(contact, 0)">
               <ion-icon [hidden]="scanActive" expand="block" color="dark" size="small" name="play-forward"></ion-icon>
             </ion-button>
           
@@ -89,7 +89,7 @@
   <!-- <div class="scan-box" [hidden]="!scanActive"></div> -->
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button title="Nueva Actividad" (click)="FNuevaActvividadNp()">
+    <ion-fab-button title="Nueva Actividad" (click)="FNuevaActvividadNp(1)">
       <ion-icon name="grid-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

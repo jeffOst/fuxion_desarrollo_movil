@@ -19,7 +19,8 @@
     <ion-item [hidden]="scanActive">
       <ion-grid [hidden]="scanActive">
 
-        <div class="elemento_oculto">
+        <!--<div class="elemento_oculto">-->
+        <div [ngClass]="{'elemento_oculto': mostrar_div_formulario !== 1}">
           <ion-row class="ion-align-items-center">
             <ion-col size="3" class="ion-text-end"> OF/OT* &nbsp;:</ion-col>
             <ion-col size="9">
@@ -98,7 +99,8 @@
                 </ion-col>
               </ion-row>
 
-              <div class="elemento_oculto">
+              
+              <div [ngClass]="{'elemento_oculto': mostrar_div_formulario !== 1}">
                 <ion-row *ngIf="hide_div_pt[i]" class="ion-align-items-center">
                   <ion-col size="3" class="ion-text-end">Clase: </ion-col>
                   <ion-col size="9">
@@ -113,7 +115,7 @@
                 </ion-row>
               </div>
 
-              <div class="elemento_oculto">
+              <div [ngClass]="{'elemento_oculto': mostrar_div_formulario !== 1}">
                 <ion-row *ngIf="hide_div_serv[i]" class="ion-align-items-center">
                   <ion-col size="3" class="ion-text-end">Pieza Servicio:
                   </ion-col>
@@ -169,7 +171,7 @@
               </ion-row>
 
 
-              <div class="elemento_oculto">
+              <div [ngClass]="{'elemento_oculto': mostrar_div_formulario !== 1}">
                 <ion-row *ngIf="hide_div_pt[i]" class="ion-align-items-center">
                   <ion-col size="3" class="ion-text-end">
                     Descripción de Versión:
@@ -191,7 +193,7 @@
                 </ion-col>
               </ion-row>
 
-              <div class="elemento_oculto">
+              <div [ngClass]="{'elemento_oculto': mostrar_div_formulario !== 1}">
                 <ion-row class="ion-align-items-center">
                   <ion-col size="3" class="ion-text-end"> Material: </ion-col>
                   <ion-col size="9">
@@ -207,7 +209,7 @@
               </div>
 
 
-              <div class="elemento_oculto">
+              <div [ngClass]="{'elemento_oculto': mostrar_div_formulario !== 1}">
                 <ion-row class="ion-align-items-center">
                   <ion-col size="3" class="ion-text-end"> Tecnico: </ion-col>
                   <ion-col size="9">
@@ -221,7 +223,7 @@
                 </ion-row>
               </div>
 
-              <div class="elemento_oculto">
+              <div [ngClass]="{'elemento_oculto': mostrar_div_formulario !== 1}">
                 <ion-row class="ion-align-items-center">
                   <ion-col size="3" class="ion-text-end">Tipo de Registro:</ion-col>
                   <ion-col size="9">
@@ -236,13 +238,13 @@
                 </ion-row>
               </div>
 
-              <div class="elemento_oculto">
+              <div [ngClass]="{'elemento_oculto': mostrar_div_formulario !== 1}">
                 <ion-row class="ion-align-items-center">
                   <ion-col size="3" class="ion-text-end ion-align-items-baseline">Maquina:</ion-col>
                   <ion-col size="9">
                     <ion-select cancelText="Cancelar" (ionChange)="select_change_maquina($event,i)"
                       [selectedText]="item2.maquina" placeholder="Seleccionar Maquina" color="primary"
-                      [(ngModel)]="item2.idmaquina" interface="action-sheet" mode="ios" [disabled]="true">
+                      [(ngModel)]="item2.idmaquina" interface="action-sheet" mode="ios">
                       <ion-select-option *ngFor="let tipo of rest_maquina" [value]="tipo['codigo']">
                         {{tipo['nombre']}}
                       </ion-select-option>
@@ -261,7 +263,7 @@
           <ion-col size="3" class="ion-text-end">Proceso: </ion-col>
           <ion-col size="9" class="ion-text-start">
             <ion-item>
-              <ion-searchbar (click)="open_popup_servicios(i)" type="text" placeholder="" mode="ios" readonly
+              <ion-searchbar  (click)="open_popup_servicios(i)" type="text" placeholder="" mode="ios" readonly
                 [(ngModel)]="item2.Y04002" value="{{item2.Y04002}}">
               </ion-searchbar>
             </ion-item>
@@ -415,8 +417,10 @@
           </ion-col>
         </ion-row>
         -->
+        
+        <!--
         <ion-row hidden class="ion-align-items-center">
-
+          
           <ion-col size="9">
             <ion-item *ngIf="ItemVisibleFechaHora">
               <ion-col size="4" class="ion-text-end">Fecha y Hora de Inicio:</ion-col>
@@ -435,7 +439,7 @@
             </ion-item>
           </ion-col>
 
-
+          
           <ion-col size="9">
             <ion-item *ngIf="ItemVisibleFechaHora">
               <ion-col size="4" class="ion-text-end">Fecha y Hora de Fin:</ion-col>
@@ -453,8 +457,9 @@
 
             </ion-item>
           </ion-col>
-
+          
         </ion-row>
+        -->
 
       </ion-grid>
     </ion-item>

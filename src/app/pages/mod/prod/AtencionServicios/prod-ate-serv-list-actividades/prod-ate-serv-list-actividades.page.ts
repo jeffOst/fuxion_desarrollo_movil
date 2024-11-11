@@ -138,11 +138,12 @@ export class ProdAteServListActividadesPage implements OnInit, OnDestroy {
     this.navCtrl.navigateForward(['prod-ate-serv-relevo'],navigationExtras);
   }
 
-  FIniciarActvividad() {
+  FIniciarActvividad(flag_mostrar_opciones: any) {
     let row:any;
     row = {} as MPieza;
     //row.maquina=this.TituloDinamico;
     row.CONCOMPONENTE=1;
+    row.flag_mostrar_opciones = flag_mostrar_opciones;
     let navigationExtras: NavigationExtras = {
       state: row
     };

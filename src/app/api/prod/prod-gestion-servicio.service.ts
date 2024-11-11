@@ -84,6 +84,31 @@ export class ProdGestionServicioService {
 
   }
 
+
+
+  load_idCodMaquinaDet(id_usuario_local: string): Promise<any> {
+    const dataPost = JSON.stringify({
+      acc: 39,
+      id_usuario_local: id_usuario_local
+    });
+  
+    return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then((res: any) => {
+      // Verifica que la respuesta tenga los datos necesarios
+      if (res && res.valores_usuario_maquina && res.valores_usuario_maquina.length > 0) {
+        const maquinaData = res.valores_usuario_maquina[0]; // Asumiendo que solo necesitas el primer elemento
+        // Retorna ambos valores
+        return {
+          id_cod_maquina_det: maquinaData.id_cod_maquina_det,
+          id_actividad_cab: maquinaData.id_actividad_cab
+        };
+      } else {
+        throw new Error("No se encontraron valores para id_cod_maquina_det o idtiempo");
+      }
+    });
+  }
+  
+  
+
     //////////////listado de piezas,material,tecnico,maquina::gui iniciar actividad
     load_cbos_calidad_dejar_piezas_tipo(): Promise<any> {
 

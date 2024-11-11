@@ -121,6 +121,7 @@ export interface MPieza {
     cantidad_revisada: string,
     cantidad_pendiente: string,
     cantidad_ingresar: number,
-    idsubestacion_asof: number
+    idsubestacion_asof: number,
+    descripcion_proceso_hr: number
 
 }

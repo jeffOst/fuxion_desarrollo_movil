@@ -66,6 +66,7 @@ export class ModalHorometroInicioPage implements OnInit {
 
   ngOnInit() {
     this.load_cbos();
+    this.obtenerIdCodMaquinaDet();
   }
 
   load_cbos() {
@@ -74,12 +75,34 @@ export class ModalHorometroInicioPage implements OnInit {
       translucent: true
     }).then(loading => {
       loading.present();
-      this.ApiServices.load_cbos_pieza_material_maquina('0', '0', '0').then((res) => {
+      this.ApiServices.load_cbos_pieza_material_maquina('0', this.globalVal.global_user_id, '0').then((res) => {
         this.maquinas = res['maquinas']; // Asigna los datos a maquinas
         this.turnos = res['turno']; // Asigna los datos a turnos
+        /*
+        console.log("erifcaaaa aquiii jeffrey"); 
+        console.log(res['valores_usuario_maquina']);
+        console.log(res['valores_usuario_maquina'][1].id_cod_maquina_det);
+        */
+        
       }).finally(() => {
         loading.dismiss();
       });
+    });
+  }
+ 
+
+  obtenerIdCodMaquinaDet() {
+    this.ApiServices.load_idCodMaquinaDet(this.globalVal.global_user_id).then((res) => {
+      if (res) {
+        console.log("idmaquina:", res.id_cod_maquina_det);
+        console.log("idturno:", res.id_actividad_cab);
+
+        this.formData.maquina = res.id_cod_maquina_det;
+        this.formData.turno = res.id_actividad_cab;
+
+      } else {
+        console.log("No se encontraron resultados");
+      }
     });
   }
 

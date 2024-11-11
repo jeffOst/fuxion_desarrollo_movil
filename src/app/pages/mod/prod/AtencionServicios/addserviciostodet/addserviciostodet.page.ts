@@ -73,7 +73,9 @@ export class AddserviciostodetPage implements OnInit {
   rest_subprocesos: any;
   dataReturned: any;
 
-  ItemVisibleFechaHora: boolean = true;
+  //ItemVisibleFechaHora: boolean = true;
+  mostrar_div_formulario: number = 0; // Inicialmente oculto (valor 0)
+
 
   readonly_qr: boolean;
   IdUsuarioLocal: string;
@@ -202,9 +204,12 @@ export class AddserviciostodetPage implements OnInit {
       this.ArrayItemsSelectedDesti[0].codigo_pt = this.navParams.codigo_pt;
 
       this.ArrayItemsSelectedDesti[0].idsubestacion_asof = this.navParams.idsubestacion_asof;
+      //this.ArrayItemsSelectedDesti[0].descripcion_proceso_hr = this.navParams.descripcion_proceso_hr;
       
       console.log("jefreyyyy ahora verifica aquiiiiii");
       console.log(this.navParams.idsubestacion_asof);
+      //console.log(this.navParams.descripcion_proceso_hr);
+      
 
       this.ArrayItemsSelectedDesti[0].actividad = this.actividad;
       this.ArrayItemsSelectedDesti[0].plano_diseno = this.navParams.plano_diseno;    
@@ -218,8 +223,9 @@ export class AddserviciostodetPage implements OnInit {
       this.ArrayItemsSelectedDesti[0].idturno = this.navParams.idturno;
             
       this.ArrayItemsSelectedDesti[0].Y04001 = this.navParams.Y04001;
-      this.ArrayItemsSelectedDesti[0].Y04002 = this.navParams.Y04002;
+      this.ArrayItemsSelectedDesti[0].Y04002 = this.navParams.descripcion_proceso_hr; //this.navParams.Y04002; 
       this.ArrayItemsSelectedDesti[0].SEQMASERV = this.navParams.SEQMASERV;
+
       //SEQMASERV
        
       this.CssReproceso = (this.navParams.flag_reproceso == 1) ? 'CssReproceso' : '';
@@ -240,13 +246,14 @@ export class AddserviciostodetPage implements OnInit {
       this.ArrayItemsSelectedDesti[0].cantidad_total = this.navParams.cantidad_total;
       this.ArrayItemsSelectedDesti[0].cantidad_revisada = this.navParams.cantidad_revisada;
       this.ArrayItemsSelectedDesti[0].cantidad_pendiente = this.navParams.cantidad_pendiente;
-
-
+      
+      this.mostrar_div_formulario = this.navParams.flag_mostrar_opciones;
       // Llama a la función para configurar el estado inicial de ItemVisibleFechaHora después de 4 segundos
+      /*
       setTimeout(() => {
         if (this.flagResumenDiario === "1") { this.ItemVisibleFechaHora = true; } else { this.ItemVisibleFechaHora = false; }
       }, 1000); // Espera 4 segundos antes de ejecutar
-
+      */
     }
     else {
       this.readonly_qr = false;
@@ -265,7 +272,7 @@ export class AddserviciostodetPage implements OnInit {
 
   }
   ionViewDidEnter() {
-
+    /*
     const fechaActual = new Date();
 
     console.log("Fecha Actual sin restar:");
@@ -280,7 +287,7 @@ export class AddserviciostodetPage implements OnInit {
     // Restablece la propiedad locale del ion-datetime a la zona horaria local
     const ionDatetime = document.getElementById('datetime1') as HTMLIonDatetimeElement;
     ionDatetime.locale = Intl.DateTimeFormat().resolvedOptions().locale;
-
+    */
 
     this.load_cbos_pieza_material_maquina();
     this.storage.get('DEVICE_INFO').then((result1) => {
