@@ -30,8 +30,10 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
   id_dispositivo: string;
   nombre_dispositivo: string;
   IdCboEstadoActual: string;
-  DsGridSolicitudQc: any;
-  DsGridHojaRuta: any;
+  //DsGridSolicitudQc: any;
+  //DsGridHojaRuta: any;
+  DsGridHojaRuta: any[] = []; // Inicializamos como un array vacío
+  DsGridSolicitudQc: any[] = []; // Inicializamos como un array vacío
   FlagCCalidad: boolean = false;
   hide_div_reproceso: boolean = false;
   CssReproceso: string;

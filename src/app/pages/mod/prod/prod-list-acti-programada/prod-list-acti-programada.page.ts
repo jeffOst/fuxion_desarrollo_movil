@@ -211,9 +211,16 @@ try {
   FNuevaActvividadNp(flag_mostrar_opciones: any) {
     let row:any;
     row = {} as MPieza;
-    //row.maquina=this.TituloDinamico;
+    
+    console.log("jeffrey aqyu veriifica aeaa");
+    console.log(this.idMenu);
+
+    row.maquina=this.TituloDinamico;
+    row.idmaquina=this.idMenu;
+
     row.CONCOMPONENTE=1;
     row.flag_mostrar_opciones = flag_mostrar_opciones;
+    
     let navigationExtras: NavigationExtras = {
       state: row
     };
