@@ -61,7 +61,7 @@
             <ion-button
               (click)="FIniciarActvividad(Row.idsubestacion_asof, Row.descripcion_proceso_ofd, Row.SEQMASERV, 0)"
               color="warning" size="small"
-              *ngIf="Row.nombre_maquina == FormHtmlJs.maquina && (Row.flag_boton_secuencia == '1' && Row.flag_boton_cantidad == '1')">
+              *ngIf="Row.idmaquina_proceso_hru == FormHtmlJs.idmaquina && (Row.flag_boton_secuencia == '1' && Row.flag_boton_cantidad == '1')">
               <ion-text color="danger">&nbsp;INICIAR ACTIVIDAD &nbsp;</ion-text>
               <ion-icon [hidden]="scanActive" expand="block" color="dark" size="small" name="play-forward"></ion-icon>
             </ion-button>
@@ -82,7 +82,7 @@
 
       </ion-label>
 
-      <ion-button expand="block" color="white" size="small" slot="end" (click)="FIniciarActvividad(0, 0, 0, 0)"
+      <ion-button *ngIf="CantItemsHojaRuta == 0" expand="block" color="white" size="small" slot="end" (click)="FIniciarActvividad(0, 0, 0, 0)"
         title="Iniciar Actividad">
         <ion-text color="danger">&nbsp;Iniciar Actividad &nbsp;</ion-text>
         <ion-icon [hidden]="scanActive" expand="block" color="dark" size="small" name="play-forward"></ion-icon>
