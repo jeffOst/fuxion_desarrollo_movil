@@ -99,7 +99,20 @@
                 </ion-col>
               </ion-row>
 
-              
+              <ion-row *ngIf="hide_div_pt[i]" class="ion-align-items-center">
+                <ion-col size="3" class="ion-text-end">
+                  Orden de Fabricación:
+                </ion-col>
+                <ion-col size="9">
+                  <ion-item>
+                    <ion-searchbar [disabled]="navParams.flag_mostrar_opciones !== 1" (click)="FOpenPopUpOfByClase(i)"
+                      type="text" placeholder="Ingresar O.F." mode="ios" readonly [(ngModel)]="item2.correorden"
+                      value="{{item2.correorden}}">
+                    </ion-searchbar>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
               <div [ngClass]="{'elemento_oculto': mostrar_div_formulario !== 1}">
                 <ion-row *ngIf="hide_div_pt[i]" class="ion-align-items-center">
                   <ion-col size="3" class="ion-text-end">Clase: </ion-col>
@@ -139,24 +152,7 @@
                 </ion-row>
               </div>
 
-
-
-              <ion-row *ngIf="hide_div_pt[i]" class="ion-align-items-center">
-                <ion-col size="3" class="ion-text-end">
-                  Orden de Fabricación:
-                </ion-col>
-                <ion-col size="9">
-                  <ion-item>
-                    <ion-searchbar [disabled]="true" (click)="FOpenPopUpOfByClase(i)" type="text"
-                      placeholder="Ingresar O.F." mode="ios" readonly [(ngModel)]="item2.correorden"
-                      value="{{item2.correorden}}"></ion-searchbar>
-                  </ion-item>
-                </ion-col>
-              </ion-row>
-
-
-
-              <ion-row class="ion-align-items-center">
+              <ion-row *ngIf="navParams.flag_mostrar_opciones !== 1" class="ion-align-items-center">
                 <ion-col size="3" class="ion-text-end">
                   Plano:
                 </ion-col>
@@ -254,7 +250,7 @@
                 </ion-row>
               </div>
 
-              
+
             </ion-grid>
           </ion-col>
         </ion-row>
@@ -263,7 +259,7 @@
           <ion-col size="3" class="ion-text-end">Proceso: </ion-col>
           <ion-col size="9" class="ion-text-start">
             <ion-item>
-              <ion-searchbar  (click)="open_popup_servicios(i)" type="text" placeholder="" mode="ios" readonly
+              <ion-searchbar (click)="open_popup_servicios(i)" type="text" placeholder="" mode="ios" readonly
                 [(ngModel)]="item2.Y04002" value="{{item2.Y04002}}">
               </ion-searchbar>
             </ion-item>
@@ -417,7 +413,7 @@
           </ion-col>
         </ion-row>
         -->
-        
+
         <!--
         <ion-row hidden class="ion-align-items-center">
           

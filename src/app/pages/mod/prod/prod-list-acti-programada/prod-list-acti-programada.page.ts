@@ -211,9 +211,6 @@ try {
   FNuevaActvividadNp(flag_mostrar_opciones: any) {
     let row:any;
     row = {} as MPieza;
-    
-    console.log("jeffrey aqyu veriifica aeaa");
-    console.log(this.idMenu);
 
     row.maquina=this.TituloDinamico;
     row.idmaquina=this.idMenu;
@@ -229,25 +226,29 @@ try {
 
   FListarActvidades(){
 
-    console.log("VERIFCAR AQUI, ENVIA ESTAS VARIABLES")
-    console.log(this.idMenu);
-    console.log(this.TituloDinamico);   
-
     let navigationExtras: NavigationExtras = {
       state: {idmenu:this.idMenu,menu:this.TituloDinamico}
     };
     this.navCtrl.navigateForward(['prod-ate-serv-list-actividades'],navigationExtras);
 
   }
-  FSetEstado(row: any) {
-    //row.maquina=this.TituloDinamico;
-    console.log("maquina aquiiiii");
-    console.log(row.maquina);
+  FSetEstado(row: any, idrevisionofd: any) {
+    //Aqui verifica
+    //row.idrevisionofd = idrevisionofd;
+    
     let navigationExtras: NavigationExtras = {
       state: row
     };
     //console.log(navigationExtras);
     this.navCtrl.navigateForward(['prod-ate-serv-asigna-estado'], navigationExtras);
+    
+    /*
+    let navigationExtras: NavigationExtras = {
+      state: row
+    };
+    this.navCtrl.navigateForward(['prod-ate-serv-inicia-actividad'], navigationExtras);
+    */
+
 
   }
 

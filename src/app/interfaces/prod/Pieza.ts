@@ -122,6 +122,7 @@ export interface MPieza {
     cantidad_pendiente: string,
     cantidad_ingresar: number,
     idsubestacion_asof: number,
-    descripcion_proceso_hr: number
+    descripcion_proceso_hr: number,
+    idrevisionofd: number
 
 }
