@@ -234,7 +234,11 @@ try {
 
   }
 
-  async FSetEstado(row: any, idrevisionofd: any) {
+  
+  async FSetEstado(row: any, idrevisionofd: any, idmaquina: any) {
+    
+    row.maquina = this.TituloDinamico;
+    row.idmaquina = this.idMenu;
     row.idrevisionofd = idrevisionofd;
   
     let navigationExtras: NavigationExtras = {
@@ -259,6 +263,21 @@ try {
       this.navCtrl.navigateForward(['prod-ate-serv-asigna-estado'], navigationExtras);
     }
   }
+  
+
+  /*
+  FSetEstado(row: any, idrevisionofd: any, idmaquina: any) {
+    //row.maquina=this.TituloDinamico;
+    console.log("maquina aquiiiii");
+    console.log(row.maquina);
+    let navigationExtras: NavigationExtras = {
+      state: row
+    };
+    //console.log(navigationExtras);
+    this.navCtrl.navigateForward(['prod-ate-serv-asigna-estado'], navigationExtras);
+
+  }
+  */
   
 
   groupByArray(xs, key, sortKey) {

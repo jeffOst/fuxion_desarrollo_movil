@@ -213,7 +213,6 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
 
   }
   ngOnInit() {
-
   }
   ionViewDidEnter() {
 

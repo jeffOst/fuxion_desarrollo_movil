@@ -24,13 +24,13 @@
     enterkeyhint="done"
     placeholder="Filtrar parámetros"
     [(ngModel)]="NgModInputSearch"
-    (ionChange)="FFindRows()"
+    (ionChange)="FFindRows(0)"
   >
   </ion-searchbar>
   <ion-icon
         slot="end"
         name="sync-outline"
-        (click)="FFindRows()"
+        (click)="FFindRows(0)"
         #idIconButtonSync
       ></ion-icon>
   </ion-item>
@@ -181,7 +181,7 @@
       style="width: 30%"
       fill="clear"
       expand="block"
-      (click)="FFindRows()"
+      (click)="FFindRows(1)"
     >
       <ion-label color="primary" style="font: size 6px">
         <ion-icon name="grid-outline"></ion-icon>

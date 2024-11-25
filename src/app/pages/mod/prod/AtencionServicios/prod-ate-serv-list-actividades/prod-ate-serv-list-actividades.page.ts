@@ -75,7 +75,7 @@ export class ProdAteServListActividadesPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.routerSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd && event.url === '/prod-ate-serv-list-actividades') {
-        this.FFindRows();
+        this.FFindRows(0);
       }
     });
   }
@@ -153,7 +153,20 @@ export class ProdAteServListActividadesPage implements OnInit, OnDestroy {
   //
 
   ////////////////////////////////declarion funciones clientes
-  async FFindRows() {
+  async FFindRows(flag_filtrar_todo: any) {
+
+    if(flag_filtrar_todo == '1')
+    {
+      this.navParams.maquina = '';
+      this.navParams.idmaquina = '';
+    }
+
+    //aquii
+    console.log("jeffrey aqyiuuiii");
+    console.log(this.navParams.maquina);
+    console.log(this.navParams.idmaquina);
+    
+
     const loading = await this.loadingController.create({
       message: 'Cargando lista...',
       translucent: true
@@ -162,7 +175,7 @@ export class ProdAteServListActividadesPage implements OnInit, OnDestroy {
     await loading.present();
 
     try {
-      const res = await this.prodGestionServicioService.ListFindActividades(this.NgModInputSearch, this.IdUsuarioLocal, this.IdDispositivo);
+      const res = await this.prodGestionServicioService.ListFindActividades(this.NgModInputSearch, this.IdUsuarioLocal, this.IdDispositivo, this.navParams.idmaquina);
       this.MultiArrayServicios = res;
       const sContacts = this.MultiArrayServicios;
       this.MultiArrayServicios = this.groupByArray(sContacts, 'maquina', 'hora_ini_acti_otd');
