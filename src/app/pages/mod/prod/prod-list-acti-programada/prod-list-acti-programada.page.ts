@@ -10,6 +10,7 @@ import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { MPieza } from 'src/app/interfaces/prod/Pieza';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 
+
 @Injectable({
   providedIn: "root",
 })
@@ -232,25 +233,33 @@ try {
     this.navCtrl.navigateForward(['prod-ate-serv-list-actividades'],navigationExtras);
 
   }
-  FSetEstado(row: any, idrevisionofd: any) {
-    //Aqui verifica
-    //row.idrevisionofd = idrevisionofd;
-    
+
+  async FSetEstado(row: any, idrevisionofd: any) {
+    row.idrevisionofd = idrevisionofd;
+  
     let navigationExtras: NavigationExtras = {
       state: row
     };
-    //console.log(navigationExtras);
-    this.navCtrl.navigateForward(['prod-ate-serv-asigna-estado'], navigationExtras);
-    
-    /*
-    let navigationExtras: NavigationExtras = {
-      state: row
-    };
-    this.navCtrl.navigateForward(['prod-ate-serv-inicia-actividad'], navigationExtras);
-    */
-
-
+  
+    if (idrevisionofd != 0) {
+      const alert = await this.alertController.create({
+        header: 'Atención',
+        message: 'Este registro está en Proceso de Revisión. Termine de finalizar la actividad anterior para registrar una Nueva Actividad.',
+        buttons: [
+          {
+            text: 'Aceptar',
+            handler: () => {
+              this.navCtrl.navigateForward(['prod-ate-serv-list-actividades'], navigationExtras);
+            }
+          }
+        ]
+      });
+      await alert.present();
+    } else {
+      this.navCtrl.navigateForward(['prod-ate-serv-asigna-estado'], navigationExtras);
+    }
   }
+  
 
   groupByArray(xs, key, sortKey) {
     return xs.reduce(function (rv, x) {
