@@ -248,7 +248,7 @@ try {
     if (idrevisionofd != 0) {
       const alert = await this.alertController.create({
         header: 'Atención',
-        message: 'Este registro está en Proceso de Revisión. Termine de finalizar la actividad anterior para registrar una Nueva Actividad.',
+        message: 'Este registro está en Proceso de Revisión. Busque su actividad en el listado y Termine de finalizar la actividad anterior para registrar una Nueva Actividad.',
         buttons: [
           {
             text: 'Aceptar',
