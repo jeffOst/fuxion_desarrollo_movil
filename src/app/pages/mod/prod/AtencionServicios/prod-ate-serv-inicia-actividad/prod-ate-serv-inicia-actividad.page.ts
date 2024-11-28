@@ -329,7 +329,9 @@ export class ProdAteServIniciaActividadPage implements OnInit {
     console.log('FEstadoActividad', tip);
 
     switch (tip) {
-      case 2: ////pausa
+      
+      /*
+      case 2: ////pausa 1
 
         let flagGuardado: any = null; // Inicializa la variable con un valor por defecto
         let observacionGuardado: string = '';
@@ -367,6 +369,17 @@ export class ProdAteServIniciaActividadPage implements OnInit {
           this.FSaveEstado(tip);
 
         }
+
+        break;
+      */
+
+        case 2: ////pausa 1
+
+          this.hideBtnReanuda = true;
+          this.hideBtnInicio = false;
+          this.hideNomEstado = false;
+          this.DsIniciaActividad.estado = "PAUSA";
+          this.FSaveEstado(tip);
 
         break;
 
@@ -415,15 +428,61 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
         break;
 
+        /*
       case 4: ////reanudar
         this.hideBtnReanuda = false;
         this.hideBtnInicio = true;
         this.hideNomEstado = false;
         this.DsIniciaActividad.estado = "REANUDAR";
-
         this.FSaveEstado(tip);
 
         break;
+      */
+
+      case 4: //reanudar 2
+
+        let flagGuardado: any = null; // Inicializa la variable con un valor por defecto
+        let observacionGuardado: string = '';
+        const modalRetorno = await this.openObservacionesPausaModal(); // Llama a la función
+
+        if (modalRetorno !== null) {
+          if (modalRetorno.flag_guardar !== undefined) {
+            flagGuardado = modalRetorno.flag_guardar; // Asigna el valor retornado
+          } else {
+            flagGuardado = 0; // Valor por defecto si no está definido
+          }
+
+          if (modalRetorno.observaciones !== undefined) {
+            observacionGuardado = modalRetorno.observaciones; // Asigna el valor retornado
+          } else {
+            observacionGuardado = ''; // Valor por defecto si no está definido
+          }
+
+        } else {
+          flagGuardado = 0; // Valor por defecto si no está definido
+          observacionGuardado = ''; // Valor por defecto si no está definido
+        }
+
+        if (flagGuardado == 1) {
+
+          this.hideBtnReanuda = false;
+          this.hideBtnInicio = true;
+          this.hideNomEstado = false;
+          this.DsIniciaActividad.estado = "REANUDAR";
+          this.DsIniciaActividad.motivoPausa = observacionGuardado;
+          this.FSaveEstado(tip);
+
+        }
+
+        break;
+
+
+
+
+
+
+
+
 
       default:
         break;
