@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Finalizar Registro</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Cancelar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- Modificación del estilo para el label y el ion-select -->
+  <ion-item>
+    <ion-label position="floating">Reproceso:</ion-label>
+    <ion-select [(ngModel)]="flagReproceso" (ionChange)="onReprocesoChange($event)" placeholder="Selecciona una opcion" interface="action-sheet" class="custom-select">
+      <!-- Recorre los reprocesos traídos desde la base de datos -->
+      <ion-select-option *ngFor="let reproceso of listReproceso" [value]="reproceso.codigo">
+        {{ reproceso.nombre }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  
+
+
+  <ion-item *ngIf="mostrarOpcionesReproceso" >
+    <ion-label position="floating">Maquina Destino:</ion-label>
+    <ion-select [(ngModel)]="codMaquina" placeholder="Selecciona una maquina" interface="action-sheet" class="custom-select">
+      <ion-select-option *ngFor="let maquina of listMaquina" [value]="maquina.codigo">
+        {{ maquina.nombre }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Este campo se muestra solo si se selecciona 'OTROS' (ID = 15) -->
+  <ion-item *ngIf="mostrarOpcionesReproceso">
+    <ion-label position="floating">Escribe el Proceso de Actividad</ion-label>
+    <ion-textarea [(ngModel)]="descripcionProceso" class="custom-textarea"></ion-textarea>
+  </ion-item>
+
+  <ion-footer>
+    <ion-button expand="full" class="boton-guardar" (click)="guardarFinalizacion()">Finalizar</ion-button>
+  </ion-footer>
+
+
+</ion-content>

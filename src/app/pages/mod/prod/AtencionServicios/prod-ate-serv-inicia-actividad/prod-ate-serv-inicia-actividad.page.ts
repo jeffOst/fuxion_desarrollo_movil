@@ -9,6 +9,7 @@ import { IonicModule } from '@ionic/angular';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { Storage } from '@ionic/storage';
 import { MotivoPausaPage } from 'src/app/pages/mod/prod/prod-list-acti-historico/modals/motivo-pausa/motivo-pausa.page';
+import { FinalizaReprocesoPage } from 'src/app/pages/mod/prod/prod-list-acti-historico/modals/finaliza-reproceso/finaliza-reproceso.page';
 
 
 
@@ -325,11 +326,38 @@ export class ProdAteServIniciaActividadPage implements OnInit {
     });
   }
 
+  async openFinalizaReprocesoModal(): Promise<any> {
+    const modal = await this.modalCtrl.create({
+      component: FinalizaReprocesoPage,
+      backdropDismiss: true,
+      showBackdrop: true,
+      mode: 'ios',
+      componentProps: {
+        valorModal: this.DsIniciaActividad.pk_idservicio,
+        idusuario: this.IdUsuarioLocal
+      }
+    });
+
+    return new Promise((resolve) => {
+      modal.onDidDismiss().then((dataReturned) => {
+        if (dataReturned !== null && dataReturned.data !== undefined) {
+          resolve(dataReturned.data);
+          //console.log("revisar aqui");
+          //console.log(dataReturned.data);
+
+        } else {
+          resolve({ flag_guardar: 0, observaciones: '' }); // Devuelve un objeto con valores por defecto
+        }
+      });
+      modal.present();
+    });
+  }
+
   async FEstadoActividad(tip: number) {
     console.log('FEstadoActividad', tip);
 
     switch (tip) {
-      
+
       /*
       case 2: ////pausa 1
 
@@ -373,17 +401,18 @@ export class ProdAteServIniciaActividadPage implements OnInit {
         break;
       */
 
-        case 2: ////pausa 1
+      case 2: ////pausa 2
 
-          this.hideBtnReanuda = true;
-          this.hideBtnInicio = false;
-          this.hideNomEstado = false;
-          this.DsIniciaActividad.estado = "PAUSA";
-          this.FSaveEstado(tip);
+        this.hideBtnReanuda = true;
+        this.hideBtnInicio = false;
+        this.hideNomEstado = false;
+        this.DsIniciaActividad.estado = "PAUSA";
+        this.FSaveEstado(tip);
 
         break;
 
-      case 3: ////finalizar
+      /*
+      case 3: ////finalizar 1
 
         //console.log(this.DsIniciaActividad.cantidad_pendiente);
 
@@ -410,34 +439,93 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
           this.FSaveEstado(tip);
         }
-        /*else if (this.DsIniciaActividad.cantidad_ingresar > (this.DsIniciaActividad.cantidad_pendiente)) {
+        //else if (this.DsIniciaActividad.cantidad_ingresar > (this.DsIniciaActividad.cantidad_pendiente)) {
           
-          const alert = await this.alertController.create({
-            header: 'Error',
-            message: 'No puede exceder la cantidad pendiente de ingresar',
-            buttons: ['OK']
-          });
+          //const alert = await this.alertController.create({
+          //  header: 'Error',
+          //  message: 'No puede exceder la cantidad pendiente de ingresar',
+          //  buttons: ['OK']
+          //});
 
-          await alert.present();
-          //this.DsIniciaActividad.cantidad_pendiente = this.DsIniciaActividad.cantidad_total - this.DsIniciaActividad.cantidad_revisada;
-          this.DsIniciaActividad.cantidad_ingresar = 0;
-          return;
+          //await alert.present();
+          //////this.DsIniciaActividad.cantidad_pendiente = this.DsIniciaActividad.cantidad_total - this.DsIniciaActividad.cantidad_revisada;
+          //this.DsIniciaActividad.cantidad_ingresar = 0;
+          //return;
 
-        }*/
-       
+        //}
 
-        break;
-
-        /*
-      case 4: ////reanudar
-        this.hideBtnReanuda = false;
-        this.hideBtnInicio = true;
-        this.hideNomEstado = false;
-        this.DsIniciaActividad.estado = "REANUDAR";
-        this.FSaveEstado(tip);
-
-        break;
+      break;
       */
+
+
+      case 3: ////finalizar 2
+
+        let flagR: any = null;
+        let flagGuardadoR: any = null; // Inicializa la variable con un valor por defecto
+        let codMaquinaR: any = null; // Inicializa la variable con un valor por defecto
+        let descripcionR: string = '';
+        const modalRetornoR = await this.openFinalizaReprocesoModal(); // Llama a la función
+
+        if (modalRetornoR !== null) {
+
+          if (modalRetornoR.flagReproceso !== undefined) {
+            flagR = modalRetornoR.flagReproceso; // Asigna el valor retornado
+          } else {
+            flagR = 0; // Valor por defecto si no está definido
+          }
+
+          if (modalRetornoR.codMaquina !== undefined) {
+            codMaquinaR = modalRetornoR.codMaquina; // Asigna el valor retornado
+          } else {
+            codMaquinaR = ''; // Valor por defecto si no está definido
+          }
+
+          if (modalRetornoR.descripcionRepro !== undefined) {
+            descripcionR = modalRetornoR.descripcionRepro; // Asigna el valor retornado
+          } else {
+            descripcionR = ''; // Valor por defecto si no está definido
+          }
+
+          if (modalRetornoR.flag_guardar !== undefined) {
+            flagGuardadoR = modalRetornoR.flag_guardar; // Asigna el valor retornado
+          } else {
+            flagGuardadoR = 0; // Valor por defecto si no está definido
+          }
+
+        } else {
+          flagR = 0; // Valor por defecto si no está definido
+          codMaquinaR = 0;
+          descripcionR = ''; // Valor por defecto si no está definido
+          flagGuardadoR = 0; // Valor por defecto si no está definido
+        }
+
+
+        if (flagGuardadoR == 1) {
+
+          this.hideBtnReanuda = false;
+          this.hideBtnInicio = false;
+          this.hideNomEstado = true;
+          this.DsIniciaActividad.estado = "FINALIZAR";
+          this.DsIniciaActividad.flag_reproceso = flagR;
+          this.DsIniciaActividad.maquina_reproceso = codMaquinaR;
+          this.DsIniciaActividad.descripcion_reproceso = descripcionR;
+          this.FSaveEstado(tip);
+
+        }
+
+        break;
+        
+
+      /*
+    case 4: ////reanudar 1
+      this.hideBtnReanuda = false;
+      this.hideBtnInicio = true;
+      this.hideNomEstado = false;
+      this.DsIniciaActividad.estado = "REANUDAR";
+      this.FSaveEstado(tip);
+
+      break;
+    */
 
       case 4: //reanudar 2
 
@@ -477,13 +565,6 @@ export class ProdAteServIniciaActividadPage implements OnInit {
         break;
 
 
-
-
-
-
-
-
-
       default:
         break;
     }
@@ -494,16 +575,9 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
   FSaveEstado(idEstadoBtn) {
 
-    console.log("debo revisar AQUI - FINALIZAR ACTIVIDAD")
-    console.log(this.DsIniciaActividad.motivoPausa);
-    console.log(this.DsIniciaActividad);
-    
-
-
     const loading = this.loadingController.create({
       message: 'Cargando...',
       translucent: true//,
-      //cssClass: 'custom-class custom-loading'
     }).then(
       loading => {
         loading.present();

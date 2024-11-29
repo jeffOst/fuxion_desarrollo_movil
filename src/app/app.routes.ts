@@ -419,7 +419,12 @@ export const routes: Routes = [
   {
     path: 'rrhh-list-horas-compensadas',
     loadComponent: () => import('./pages/mod/rrhh/rrhh-list-horas-compensadas/rrhh-list-horas-compensadas.page').then( m => m.RrhhListHorasCompensadasPage)
+  },
+  {
+    path: 'finaliza-reproceso',
+    loadComponent: () => import('./pages/mod/prod/prod-list-acti-historico/modals/finaliza-reproceso/finaliza-reproceso.page').then( m => m.FinalizaReprocesoPage)
   }
+
 
   
   
