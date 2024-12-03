@@ -266,10 +266,8 @@ export class AddserviciostodetPage implements OnInit {
   ngOnInit() {
 
     ////console.log('ib ngOnInit');
-    console.log("verifgicar aquii:")
     console.log(this.ArrayItemsSelectedDesti);
-
-
+    
   }
   ionViewDidEnter() {
     /*
@@ -289,12 +287,24 @@ export class AddserviciostodetPage implements OnInit {
     ionDatetime.locale = Intl.DateTimeFormat().resolvedOptions().locale;
     */
 
-    this.load_cbos_pieza_material_maquina();
+ 
     this.storage.get('DEVICE_INFO').then((result1) => {
       this.id_device = result1.uuid;
       console.log('this.id_device::>', this.id_device);
 
     });
+
+
+    console.log(this.navParams.SEQMASERV);
+    
+    if(this.navParams.SEQMASERV != '0')
+    {
+      
+      this.guardar_selected();
+
+    }else{
+      this.load_cbos_pieza_material_maquina();
+    }
 
   }
 

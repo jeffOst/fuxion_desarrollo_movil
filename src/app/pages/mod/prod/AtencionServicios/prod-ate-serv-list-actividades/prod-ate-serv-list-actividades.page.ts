@@ -159,13 +159,8 @@ export class ProdAteServListActividadesPage implements OnInit, OnDestroy {
     {
       this.navParams.maquina = '';
       this.navParams.idmaquina = '';
+      this.navParams.idofpterminado = '';
     }
-
-    //aquii
-    console.log("jeffrey aqyiuuiii");
-    console.log(this.navParams.maquina);
-    console.log(this.navParams.idmaquina);
-    
 
     const loading = await this.loadingController.create({
       message: 'Cargando lista...',
@@ -175,7 +170,7 @@ export class ProdAteServListActividadesPage implements OnInit, OnDestroy {
     await loading.present();
 
     try {
-      const res = await this.prodGestionServicioService.ListFindActividades(this.NgModInputSearch, this.IdUsuarioLocal, this.IdDispositivo, this.navParams.idmaquina);
+      const res = await this.prodGestionServicioService.ListFindActividades(this.NgModInputSearch, this.IdUsuarioLocal, this.IdDispositivo, this.navParams.idmaquina, this.navParams.idofpterminado);
       this.MultiArrayServicios = res;
       const sContacts = this.MultiArrayServicios;
       this.MultiArrayServicios = this.groupByArray(sContacts, 'maquina', 'hora_ini_acti_otd');

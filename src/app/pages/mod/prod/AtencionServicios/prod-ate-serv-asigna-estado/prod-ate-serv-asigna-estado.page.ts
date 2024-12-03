@@ -137,10 +137,21 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
 
   async FIniciarActvividad(idsubestacion_asof: any, descripcion_proceso_ofd: any, SEQMASERV: any, flag_mostrar_opciones: any) {
 
-    console.log("verificar el estado actual");
-    console.log(this.navParams.idestado);
+    //console.log("verificar el estado actual");
+    //console.log(this.navParams.idestado);
+    
+    if (SEQMASERV == 0 || descripcion_proceso_ofd == '' || descripcion_proceso_ofd == ' ') {
 
-    if (this.navParams.idestado == 2) {
+      const alert = await this.alertController.create({
+        header: 'Alerta',
+        message: 'Este registro no tiene un Proceso Asignado, comuniquese con su Supervisor para asignar el proceso a esta Secuencia.',
+        buttons: ['Aceptar']
+      });
+      await alert.present();
+      return;
+ 
+    }
+    else if (this.navParams.idestado == 2) {
 
       const alert = await this.alertController.create({
         header: 'Alerta',
@@ -166,6 +177,8 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
     */
     else {
 
+      
+
       console.log("recisar este console log");
       console.log(this.FormHtmlJs); //////////
 
@@ -176,6 +189,11 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
       row.SEQMASERV = SEQMASERV;
       row.flag_mostrar_opciones = flag_mostrar_opciones;
       
+
+      console.log("revisar el SEMASERV");
+      console.log(row.SEQMASERV);
+
+
       let navigationExtras: NavigationExtras = {
         state: row
       };

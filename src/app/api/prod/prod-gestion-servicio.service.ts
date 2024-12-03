@@ -287,14 +287,15 @@ export class ProdGestionServicioService {
     );
   }
   
-  ListFindActividades(InputSearch: string, id_usuario_local: string, id_dispositivo: string, idmaquina: any): Promise<any> {
+  ListFindActividades(InputSearch: string, id_usuario_local: string, id_dispositivo: string, idmaquina: any, idofpterminado: any): Promise<any> {
     let dataPost = JSON.stringify(
       {
         acc: 9,
         s: InputSearch,
         idusu: id_usuario_local,
         iddevice: id_dispositivo,
-        idmaquina: idmaquina
+        idmaquina: idmaquina,
+        idofpterminado: idofpterminado
       }
     );
     return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
