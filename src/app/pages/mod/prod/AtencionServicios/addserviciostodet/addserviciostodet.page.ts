@@ -248,6 +248,9 @@ export class AddserviciostodetPage implements OnInit {
       this.ArrayItemsSelectedDesti[0].cantidad_pendiente = this.navParams.cantidad_pendiente;
       
       this.mostrar_div_formulario = this.navParams.flag_mostrar_opciones;
+
+      this.ArrayItemsSelectedDesti[0].codhru = this.navParams.codhru;
+      this.ArrayItemsSelectedDesti[0].cnt_pieza_rev_hru = this.navParams.cnt_pieza_rev_hru;
       // Llama a la función para configurar el estado inicial de ItemVisibleFechaHora después de 4 segundos
       /*
       setTimeout(() => {

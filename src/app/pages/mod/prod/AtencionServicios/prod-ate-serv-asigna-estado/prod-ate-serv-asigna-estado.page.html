@@ -33,6 +33,7 @@
           <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1">Secuencia </ion-col>
           <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1">Maquina</ion-col>
           <ion-col class="headgrid" size-sm="2" size-md="2" size-xl="2">Descripcion</ion-col>
+          <!--<ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1">Cant T. Piezas</ion-col>-->
           <ion-col class="headgrid" size-sm="1" size-md="1" size-xl="1">Cant Piezas</ion-col>
           <ion-col class="headgrid" size-sm="2" size-md="2" size-xl="2">Estado</ion-col>
           <ion-col class="headgrid" size-sm="1.5" size-md="1.5" size-xl="1.5">Piezas Completadas</ion-col>
@@ -54,12 +55,14 @@
             <ion-col size-sm="1" size-md="1" size-xl="1">{{Row.secuencia_proc_of}} </ion-col>
             <ion-col size-sm="1" size-md="1" size-xl="1">{{Row.nombre_maquina}}</ion-col>
             <ion-col size-sm="2.2" size-md="2.2" size-xl="2.2">{{Row.descripcion_proceso_ofd}}</ion-col>
-            <ion-col size-sm="1" size-md="1" size-xl="1">{{Row.cnt_plan}}</ion-col>
+            <!--<ion-col size-sm="1" size-md="1" size-xl="1">{{Row.cnt_plan}}</ion-col>-->
+            <ion-col size-sm="1" size-md="1" size-xl="1">{{Row.cnt_pieza}}</ion-col>
+            
             <ion-col size-sm="2" size-md="2" size-xl="2">{{Row.nombre_estado}}</ion-col>
             <ion-col size-sm="1.5" size-md="1.5" size-xl="1.5">{{Row.cantidad_revisada}}</ion-col>
             <ion-col size-sm="1" size-md="1" size-xl="1">{{Row.cantidad_baja}}</ion-col>
             <ion-button
-              (click)="FIniciarActvividad(Row.idsubestacion_asof, Row.descripcion_proceso_ofd, Row.SEQMASERV, 0)"
+              (click)="FIniciarActvividad(Row.idsubestacion_asof, Row.descripcion_proceso_ofd, Row.SEQMASERV, 0, Row.codhru, Row.cantidad_revisada)"
               color="warning" size="small"
               *ngIf="Row.idmaquina_proceso_hru == FormHtmlJs.idmaquina && (Row.flag_boton_secuencia == '1' && Row.flag_boton_cantidad == '1')">
               <ion-text color="danger">&nbsp;INICIAR ACTIVIDAD &nbsp;</ion-text>
@@ -82,7 +85,7 @@
 
       </ion-label>
 
-      <ion-button *ngIf="CantItemsHojaRuta == 0" expand="block" color="white" size="small" slot="end" (click)="FIniciarActvividad(0, 0, 0, 0)"
+      <ion-button *ngIf="CantItemsHojaRuta == 0" expand="block" color="white" size="small" slot="end" (click)="FIniciarActvividad(0, 0, 0, 0, 0, 0)"
         title="Iniciar Actividad">
         <ion-text color="danger">&nbsp;Iniciar Actividad &nbsp;</ion-text>
         <ion-icon [hidden]="scanActive" expand="block" color="dark" size="small" name="play-forward"></ion-icon>

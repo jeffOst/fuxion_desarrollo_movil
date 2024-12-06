@@ -123,6 +123,8 @@ export interface MPieza {
     cantidad_ingresar: number,
     idsubestacion_asof: number,
     descripcion_proceso_hr: number,
-    idrevisionofd: number
+    idrevisionofd: number,
+    codhru: number,
+    cnt_pieza_rev_hru: number
 
 }

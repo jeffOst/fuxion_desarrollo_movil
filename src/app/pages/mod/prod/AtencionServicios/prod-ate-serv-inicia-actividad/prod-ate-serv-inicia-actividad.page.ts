@@ -130,7 +130,20 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       this.fechafin_prod = this.navParams.fecha_fin_formato_iso; // Formato ISO
 
       this.DsIniciaActividad.cantidad_total = this.navParams.cantidad_total;
-      this.DsIniciaActividad.cantidad_revisada = this.navParams.cantidad_revisada;
+      
+      console.log("jeffreyyyyy aquiiii aeaaa");
+      console.log(this.navParams.codhru);
+
+      //Si es un registro con una ruta
+      if(this.navParams.codhru != 0){
+        this.DsIniciaActividad.cantidad_revisada = this.navParams.cnt_pieza_rev_hru;
+      }else{
+        this.DsIniciaActividad.cantidad_revisada = this.navParams.cantidad_revisada;
+      }
+
+      console.log(this.navParams.cantidad_revisada);
+      
+
       this.DsIniciaActividad.cantidad_pendiente = this.navParams.cantidad_pendiente;
       this.DsIniciaActividad.cantidad_ingresar = 0;
 

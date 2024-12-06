@@ -135,11 +135,12 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
 
   }
 
-  async FIniciarActvividad(idsubestacion_asof: any, descripcion_proceso_ofd: any, SEQMASERV: any, flag_mostrar_opciones: any) {
+  async FIniciarActvividad(idsubestacion_asof: any, descripcion_proceso_ofd: any, SEQMASERV: any, flag_mostrar_opciones: any, codhru: any, cantidad_revisada: any) {
 
     //console.log("verificar el estado actual");
     //console.log(this.navParams.idestado);
     
+    /*
     if (SEQMASERV == 0 || descripcion_proceso_ofd == '' || descripcion_proceso_ofd == ' ') {
 
       const alert = await this.alertController.create({
@@ -151,7 +152,8 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
       return;
  
     }
-    else if (this.navParams.idestado == 2) {
+     else */
+    if (this.navParams.idestado == 2) {
 
       const alert = await this.alertController.create({
         header: 'Alerta',
@@ -188,11 +190,8 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
       row.descripcion_proceso_hr = descripcion_proceso_ofd;
       row.SEQMASERV = SEQMASERV;
       row.flag_mostrar_opciones = flag_mostrar_opciones;
-      
-
-      console.log("revisar el SEMASERV");
-      console.log(row.SEQMASERV);
-
+      row.codhru = codhru;
+      row.cnt_pieza_rev_hru = cantidad_revisada;
 
       let navigationExtras: NavigationExtras = {
         state: row
