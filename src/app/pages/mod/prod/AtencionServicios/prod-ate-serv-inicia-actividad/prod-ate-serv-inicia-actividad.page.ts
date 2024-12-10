@@ -129,16 +129,16 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       this.fechainicio_prod = this.navParams.fecha_inicio_formato_iso; // Formato ISO
       this.fechafin_prod = this.navParams.fecha_fin_formato_iso; // Formato ISO
 
-      this.DsIniciaActividad.cantidad_total = this.navParams.cantidad_total;
-      
       console.log("jeffreyyyyy aquiiii aeaaa");
       console.log(this.navParams.codhru);
 
       //Si es un registro con una ruta
       if(this.navParams.codhru != 0){
         this.DsIniciaActividad.cantidad_revisada = this.navParams.cnt_pieza_rev_hru;
+        this.DsIniciaActividad.cantidad_total = this.navParams.cnt_pieza_pend_hru;
       }else{
         this.DsIniciaActividad.cantidad_revisada = this.navParams.cantidad_revisada;
+        this.DsIniciaActividad.cantidad_total = this.navParams.cantidad_total;
       }
 
       console.log(this.navParams.cantidad_revisada);
@@ -194,7 +194,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
   }
 
   ngOnInit() {
-    //this.hideBtnInicio = true;
+    this.hideBtnInicio = true;
     if (this.hideItemByRevisionEje) {
       this.load_cbos_any();
     }
@@ -366,8 +366,41 @@ export class ProdAteServIniciaActividadPage implements OnInit {
     });
   }
 
+  async procesarFinalizacion() {
+    let flagR: any = null;
+    let flagGuardadoR: any = null; // Inicializa la variable con un valor por defecto
+    let codMaquinaR: any = null; // Inicializa la variable con un valor por defecto
+    let descripcionR: string = '';
+    const modalRetornoR = await this.openFinalizaReprocesoModal(); // Llama a la función
+
+    if (modalRetornoR !== null) {
+        flagR = modalRetornoR.flagReproceso ?? 0;
+        codMaquinaR = modalRetornoR.codMaquina ?? '';
+        descripcionR = modalRetornoR.descripcionRepro ?? '';
+        flagGuardadoR = modalRetornoR.flag_guardar ?? 0;
+    } else {
+        flagR = 0;
+        codMaquinaR = 0;
+        descripcionR = '';
+        flagGuardadoR = 0;
+    }
+
+    if (flagGuardadoR == 1) {
+        this.hideBtnReanuda = false;
+        this.hideBtnInicio = false;
+        this.hideNomEstado = true;
+        this.DsIniciaActividad.estado = "FINALIZAR";
+        this.DsIniciaActividad.flag_reproceso = flagR;
+        this.DsIniciaActividad.maquina_reproceso = codMaquinaR;
+        this.DsIniciaActividad.descripcion_reproceso = descripcionR;
+        this.FSaveEstado(3); // Cambia el valor si es necesario
+    }
+}
+
+
   async FEstadoActividad(tip: number) {
     console.log('FEstadoActividad', tip);
+
 
     switch (tip) {
 
@@ -472,61 +505,38 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
 
       case 3: ////finalizar 2
-
-        let flagR: any = null;
-        let flagGuardadoR: any = null; // Inicializa la variable con un valor por defecto
-        let codMaquinaR: any = null; // Inicializa la variable con un valor por defecto
-        let descripcionR: string = '';
-        const modalRetornoR = await this.openFinalizaReprocesoModal(); // Llama a la función
-
-        if (modalRetornoR !== null) {
-
-          if (modalRetornoR.flagReproceso !== undefined) {
-            flagR = modalRetornoR.flagReproceso; // Asigna el valor retornado
-          } else {
-            flagR = 0; // Valor por defecto si no está definido
-          }
-
-          if (modalRetornoR.codMaquina !== undefined) {
-            codMaquinaR = modalRetornoR.codMaquina; // Asigna el valor retornado
-          } else {
-            codMaquinaR = ''; // Valor por defecto si no está definido
-          }
-
-          if (modalRetornoR.descripcionRepro !== undefined) {
-            descripcionR = modalRetornoR.descripcionRepro; // Asigna el valor retornado
-          } else {
-            descripcionR = ''; // Valor por defecto si no está definido
-          }
-
-          if (modalRetornoR.flag_guardar !== undefined) {
-            flagGuardadoR = modalRetornoR.flag_guardar; // Asigna el valor retornado
-          } else {
-            flagGuardadoR = 0; // Valor por defecto si no está definido
-          }
-
-        } else {
-          flagR = 0; // Valor por defecto si no está definido
-          codMaquinaR = 0;
-          descripcionR = ''; // Valor por defecto si no está definido
-          flagGuardadoR = 0; // Valor por defecto si no está definido
-        }
-
-
-        if (flagGuardadoR == 1) {
-
-          this.hideBtnReanuda = false;
-          this.hideBtnInicio = false;
-          this.hideNomEstado = true;
-          this.DsIniciaActividad.estado = "FINALIZAR";
-          this.DsIniciaActividad.flag_reproceso = flagR;
-          this.DsIniciaActividad.maquina_reproceso = codMaquinaR;
-          this.DsIniciaActividad.descripcion_reproceso = descripcionR;
-          this.FSaveEstado(tip);
-
-        }
-
-        break;
+      console.log(this.DsIniciaActividad.cantidad_ingresar);
+  
+      // Validar si cantidad_ingresar es 0 y mostrar ventana de confirmación
+      if (this.DsIniciaActividad.cantidad_ingresar === 0) {
+          const alert = await this.alertController.create({
+              header: 'Confirmación',
+              message: '¿Desea finalizar el registro con cantidad 0?',
+              buttons: [
+                  {
+                      text: 'Cancelar',
+                      role: 'cancel',
+                      handler: () => {
+                          console.log('Registro cancelado por el usuario.');
+                          return;
+                      }
+                  },
+                  {
+                      text: 'Aceptar',
+                      handler: async () => {
+                          // Continuar con el resto del código si acepta
+                          await this.procesarFinalizacion();
+                      }
+                  }
+              ]
+          });
+          await alert.present();
+      } else {
+          // Continuar con el resto del código directamente si cantidad_ingresar no es 0
+          await this.procesarFinalizacion();
+      }
+      break;
+      
         
 
       /*

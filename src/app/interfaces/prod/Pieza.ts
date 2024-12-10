@@ -125,6 +125,7 @@ export interface MPieza {
     descripcion_proceso_hr: number,
     idrevisionofd: number,
     codhru: number,
-    cnt_pieza_rev_hru: number
+    cnt_pieza_rev_hru: number,
+    cnt_pieza_pend_hru: number
 
 }

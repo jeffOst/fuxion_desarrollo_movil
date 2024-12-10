@@ -135,7 +135,7 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
 
   }
 
-  async FIniciarActvividad(idsubestacion_asof: any, descripcion_proceso_ofd: any, SEQMASERV: any, flag_mostrar_opciones: any, codhru: any, cantidad_revisada: any) {
+  async FIniciarActvividad(idsubestacion_asof: any, descripcion_proceso_ofd: any, SEQMASERV: any, flag_mostrar_opciones: any, codhru: any, cantidad_revisada: any, cnt_pieza: any) {
 
     //console.log("verificar el estado actual");
     //console.log(this.navParams.idestado);
@@ -192,7 +192,8 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
       row.flag_mostrar_opciones = flag_mostrar_opciones;
       row.codhru = codhru;
       row.cnt_pieza_rev_hru = cantidad_revisada;
-
+      row.cnt_pieza_pend_hru = cnt_pieza;
+      
       let navigationExtras: NavigationExtras = {
         state: row
       };

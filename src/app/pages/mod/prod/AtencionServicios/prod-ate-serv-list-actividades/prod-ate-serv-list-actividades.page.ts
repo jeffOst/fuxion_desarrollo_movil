@@ -141,6 +141,8 @@ export class ProdAteServListActividadesPage implements OnInit, OnDestroy {
   FIniciarActvividad(flag_mostrar_opciones: any) {
     let row:any;
     row = {} as MPieza;
+    row.codhru = 0;
+    row.SEQMASERV = 0;
     //row.maquina=this.TituloDinamico;
     row.CONCOMPONENTE=1;
     row.flag_mostrar_opciones = flag_mostrar_opciones;

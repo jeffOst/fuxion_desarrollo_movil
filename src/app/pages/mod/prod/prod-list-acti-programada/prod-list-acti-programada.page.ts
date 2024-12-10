@@ -218,6 +218,9 @@ try {
 
     row.CONCOMPONENTE=1;
     row.flag_mostrar_opciones = flag_mostrar_opciones;
+
+    row.codhru = 0;
+    row.SEQMASERV = 0;
     
     let navigationExtras: NavigationExtras = {
       state: row
