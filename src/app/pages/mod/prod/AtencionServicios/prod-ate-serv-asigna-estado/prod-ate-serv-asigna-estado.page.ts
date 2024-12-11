@@ -179,11 +179,6 @@ export class ProdAteServAsignaEstadoPage implements OnInit {
     */
     else {
 
-      
-
-      console.log("recisar este console log");
-      console.log(this.FormHtmlJs); //////////
-
       let row: any = this.FormHtmlJs;
       //row.maquina = 'Iniciar Actividad';
       row.idsubestacion_asof = idsubestacion_asof;
