@@ -60,8 +60,11 @@ export class PdfViewerPage implements OnInit {
       this.valor = params['valor'];
     });
 
-    // this.pdfSrc = "http://192.168.100.23/fuxion_desarrollo/aw_file/diseno_plano/" + this.valor;
-    this.pdfSrc = "https://fuxion.geohidraulica.com.pe/aw_file/diseno_plano/" + this.valor;
+    this.pdfSrc = ApiBackDomains.UrlDomainLocal + "/aw_file/diseno_plano/" + this.valor;
+    
+    
+    // this.pdfSrc = "http://192.168.100.22/aw_file/diseno_plano/" + this.valor;
+    // this.pdfSrc = "https://fuxion.geohidraulica.com.pe/aw_file/diseno_plano/" + this.valor;
 
     //console.log(this.pdfSrc);
   }
@@ -73,8 +76,10 @@ export class PdfViewerPage implements OnInit {
         this.valor = params['valor'];
       });
 
-      // this.pdfSrc = "http://192.168.100.23/fuxion_desarrollo/aw_file/diseno_plano/" + this.valor;
-      this.pdfSrc = "https://fuxion.geohidraulica.com.pe/aw_file/diseno_plano/" + this.valor;
+      this.pdfSrc = ApiBackDomains.UrlDomainLocal + "/aw_file/diseno_plano/" + this.valor;
+      console.log('URLLLLLLL',this.pdfSrc);
+      // this.pdfSrc = "http://192.168.100.22/aw_file/diseno_plano/" + this.valor;
+      // this.pdfSrc = "https://fuxion.geohidraulica.com.pe/aw_file/diseno_plano/" + this.valor;
 
       const response = await fetch(this.pdfSrc);
       const blob = await response.blob();
