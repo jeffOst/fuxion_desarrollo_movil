@@ -94,14 +94,15 @@ export class ModalHorometroInicioPage implements OnInit {
   obtenerIdCodMaquinaDet() {
     this.ApiServices.load_idCodMaquinaDet(this.globalVal.global_user_id).then((res) => {
       if (res) {
-        //console.log("idmaquina:", res.id_cod_maquina_det);
-        //console.log("idturno:", res.id_actividad_cab);
-        //console.log("nombre_maquina:", res.nombre_maquina);
+        console.log("idmaquina:", res.id_cod_maquina_det);
+        console.log("idturno:", res.id_actividad_cab);
+        console.log("nombre_maquina:", res.nombre_maquina);
 
         this.formData.maquina = res.id_cod_maquina_det;
         this.formData.turno = res.id_actividad_cab;
         this.formData.nombreMaquina = res.nombre_maquina;
-
+        this.nombreMaquina = res.nombre_maquina;
+        
       } else {
         console.log("No se encontraron resultados");
       }
@@ -161,18 +162,16 @@ export class ModalHorometroInicioPage implements OnInit {
         }
         else {
 
-          console.log("verifca aquiiii la maquinaaaa");
-          console.log(this.formData.maquina.toString());
-          console.log(this.nombreMaquina);
-
-          this.nombreMaquina = 'TC6';
-
+          //console.log("verifca aquiiii la maquinaaaa");
+          //console.log(this.formData.maquina.toString());
+          //console.log(this.nombreMaquina);
+          
           //REGISTRA EL HOROMETRO DE INICIO
-          //this.FSaveHorometro(this.globalVal.global_user_id, this.formData.maquina.toString(), this.formData.turno.toString(), this.formData.horometroInicial.toString());
+          this.FSaveHorometro(this.globalVal.global_user_id, this.formData.maquina.toString(), this.formData.turno.toString(), this.formData.horometroInicial.toString());
           //REDIRECCIONA AL LA VENTANA DE LA MAQUINA SELECCIONADA
           this.goto_menu('prod-list-acti-programada', this.formData.maquina.toString(), this.nombreMaquina);
           //REFRESCAR EL MENU MOSTRANDO SOLO LA MAQUINA SELECCIONADA
-          //this.refrescar_menu_produccion(this.globalVal.global_user_id, this.formData.maquina.toString());
+          this.refrescar_menu_produccion(this.globalVal.global_user_id, this.formData.maquina.toString());
           this.dismiss(); // Cierra el modal después de guardar
 
         }

@@ -238,17 +238,19 @@ try {
   }
 
   
-  async FSetEstado(row: any, idrevisionofd: any, idmaquina: any, idofpterminado: any) {
+  async FSetEstado(row: any, idrevisionofd: any, idmaquina: any, idofpterminado: any, idrevision_maquina: any) {
     
     row.maquina = this.TituloDinamico;
     row.idmaquina = this.idMenu;
     row.idrevisionofd = idrevisionofd;
     row.idofpterminado = idofpterminado;
+    row.idrevision_maquina = idrevision_maquina;
 
     let navigationExtras: NavigationExtras = {
       state: row
     };
   
+    //VERIFICA SI ESTE REGISTRO SELECCIONADO YA SE ENCUENTRA EN PROCESO DE REVISION
     if (idrevisionofd != 0) {
       const alert = await this.alertController.create({
         header: 'Atención',
@@ -264,9 +266,33 @@ try {
       });
       await alert.present();
     } else {
-      this.navCtrl.navigateForward(['prod-ate-serv-asigna-estado'], navigationExtras);
+
+    //VERIFICAR SI ESTE REGISTRO DE ESTA MAQUINA YA TIENE UNA ACTIVIDAD ANTERIOR INICIADA
+      if (idrevision_maquina != 0) {
+        row.idofpterminado = '';
+        const alert = await this.alertController.create({
+          header: 'Atención',
+          message: 'Ya existe un registro para esta Maquina, porfavor finalize el registro anterior.',
+          buttons: [
+            {
+              text: 'Aceptar',
+              handler: () => {
+                this.navCtrl.navigateForward(['prod-ate-serv-list-actividades'], navigationExtras);
+              }
+            }
+          ]
+        });
+        await alert.present();
+      } else {
+       
+        this.navCtrl.navigateForward(['prod-ate-serv-asigna-estado'], navigationExtras);
+      }
+
+      
+
     }
   }
+  
   
 
   /*

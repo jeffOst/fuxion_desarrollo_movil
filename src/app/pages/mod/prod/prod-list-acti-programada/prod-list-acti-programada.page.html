@@ -44,7 +44,7 @@
     <ion-item *ngFor="let contact of group.values" [hidden]="scanActive">
       <ion-card expand="full" color="light" size="large" button="true" [hidden]="scanActive">
         <ion-item [hidden]="scanActive">
-          <ion-item (click)="FSetEstado(contact, contact.idrevisionofd, contact.idmaquina, contact.idofpterminado)" style="width: 100%">
+          <ion-item (click)="FSetEstado(contact, contact.idrevisionofd, contact.idmaquina, contact.idofpterminado, contact.idrevision_maquina)" style="width: 100%">
             <ion-label [hidden]="scanActive"><strong>
                 <div style="color:{{contact.color_reproceso}};">{{ contact.descripcion_pt }}</div>
               </strong>
