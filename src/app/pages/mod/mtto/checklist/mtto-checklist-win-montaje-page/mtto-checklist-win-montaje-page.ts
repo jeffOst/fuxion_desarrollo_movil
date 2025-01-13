@@ -10,9 +10,9 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { Network, ConnectionStatus } from "@capacitor/network";
 // import { ApiBackDomains } from '../../../../../interfaces/ApiConections';
 import { GlovalProvider } from 'src/app/interfaces/mtto/GlobalVal';
-import * as pdfjsLib from 'pdfjs-dist';
+// import * as pdfjsLib from 'pdfjs-dist';
 
-import { PDFDocument } from 'pdf-lib';
+// import { PDFDocument } from 'pdf-lib';
 // import * as tf from '@tensorflow/tfjs';
 
 

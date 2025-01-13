@@ -26,6 +26,7 @@ export class MttoOrdentrabajoService {
   //DirectorioImg: string = 'https://fuxion.geohidraulica.com.pe/aw_file/adjuntos/img_recinado/';///prod
   DirectorioImg: string = ApiBackDomains.UrlDomainLocal + 'aw_file/img_tablet/';///test
 
+
   public OrdenTrabajo_: OrdenTrabajo;
   confirmSaveBd: string;
 
@@ -58,6 +59,19 @@ export class MttoOrdentrabajoService {
     ///public uid: Uid,
     //private device: Device
   ) { }
+
+
+  ListFindOtsManto(
+    acc : string,
+    InputSearch: string,
+  ): Promise<any> {
+    let dataPost = JSON.stringify({
+      acc: 43,
+      s: '',
+    });
+    return this.http.post(this.urlApiProd, dataPost).toPromise().then(results => results//.json()
+    );
+  }
 
   ///////////////////////lista de solses
   load_lista_solse(idot: string, idotsolse_otd: string): Promise<any> {

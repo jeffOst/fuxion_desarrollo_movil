@@ -427,7 +427,16 @@ export const routes: Routes = [
   {
     path: 'finaliza-reproceso',
     loadComponent: () => import('./pages/mod/prod/prod-list-acti-historico/modals/finaliza-reproceso/finaliza-reproceso.page').then( m => m.FinalizaReprocesoPage)
+  },
+  {
+    path: 'mtto-list1-manto-pend',
+    loadComponent: () => import('./pages/mod/mtto/aprobar_manto/mtto-list-manto-pend/mtto-list1-manto-pend.page').then( m => m.MttoList1MantoPendPage)
+  },
+  {
+    path: 'mtto-win-manto-pend',
+    loadComponent: () => import('./pages/mod/mtto/aprobar_manto/mtto-win-manto-pend/mtto-win-manto-pend.page').then( m => m.MttoWinMantoPendPage)
   }
+
 
 
 
