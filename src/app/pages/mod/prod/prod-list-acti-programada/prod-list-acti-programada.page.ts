@@ -268,25 +268,25 @@ try {
     } else {
 
     //VERIFICAR SI ESTE REGISTRO DE ESTA MAQUINA YA TIENE UNA ACTIVIDAD ANTERIOR INICIADA
-      if (idrevision_maquina != 0) {
-        row.idofpterminado = '';
-        const alert = await this.alertController.create({
-          header: 'Atención',
-          message: 'Ya existe un registro para esta Maquina, porfavor finalize el registro anterior.',
-          buttons: [
-            {
-              text: 'Aceptar',
-              handler: () => {
-                this.navCtrl.navigateForward(['prod-ate-serv-list-actividades'], navigationExtras);
-              }
-            }
-          ]
-        });
-        await alert.present();
-      } else {
+      // if (idrevision_maquina != 0) {
+      //   row.idofpterminado = '';
+      //   const alert = await this.alertController.create({
+      //     header: 'Atención',
+      //     message: 'Ya existe un registro para esta Maquina, porfavor finalize el registro anterior.',
+      //     buttons: [
+      //       {
+      //         text: 'Aceptar',
+      //         handler: () => {
+      //           this.navCtrl.navigateForward(['prod-ate-serv-list-actividades'], navigationExtras);
+      //         }
+      //       }
+      //     ]
+      //   });
+      //   await alert.present();
+      // } else {
        
         this.navCtrl.navigateForward(['prod-ate-serv-asigna-estado'], navigationExtras);
-      }
+      // }
 
       
 

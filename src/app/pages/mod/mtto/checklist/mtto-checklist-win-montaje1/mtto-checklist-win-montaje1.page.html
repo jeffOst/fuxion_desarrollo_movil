@@ -1,25 +1,103 @@
+<ion-header [translucent]="true">
+  <ion-toolbar mode="ios" [color]="networkStatus && networkStatus.connected? 'primary':'danger'">
+    <ion-title text-capitalize>{{tituloTollBar}}
 
-<ion-header>
-  <ion-toolbar mode="ios">
-    <ion-item>
-    <ion-title text-capitalize>
-      <ion-label>VERIFICACION DE ESTATOR
-        <p>CONTROL DE MOTOR ELECTRICO</p>
-      </ion-label>
-      </ion-title>
+    </ion-title>
 
-      <form [formGroup]="FormCheckListPaso1" #f="ngForm">
-      <ion-toggle justify="end" mode="ios"
-      formControlName="checklist_paso1_apli"
-      (ionChange)="SaveCheckNoAplicaPaso($event)" >Aplica Paso?
-      </ion-toggle>
-      </form>
-
-      </ion-item>
-
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="mtto-checklist-win-montaje-page" [text]="Cancelar" [disabled]="disableButton">
+      </ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+<ion-content>
+  <div
+    style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 20px;">
+    <div style="
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+    width: 100%; 
+    height: 100px; ">TITULO DE PIEZA </div>
+    <div *ngIf="selectedTable">
+      <table style="border-collapse: collapse; width: 100%;">
+        <thead>
+          <tr>
+            <th *ngFor="let header of selectedTable.headers" [attr.rowspan]="header.rowspan || null" [attr.colspan]="header.colspan || null"
+              style="border: 1px solid #ccc; padding: 8px; text-align: left;">
+              {{ header.text }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of selectedTable.rows">
+            <td *ngFor="let cell of row"  [attr.colspan]="cell.colspan || null" style="border: 1px solid #ccc; padding: 8px;">
+              <ng-container *ngIf="cell.type === 'text'; else inputCell">
+                {{ cell.value }}
+              </ng-container>
+              <ng-template #inputCell>
+                <input type="text" style="width: 100%;" [placeholder]="cell.placeholder || 'Ingresa texto'" />
+              </ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="image-container">
+      <!-- Iterar sobre las imágenes -->
+      <div *ngFor="let image of images" style="position: relative;">
+        <!-- Mostrar la imagen -->
+        <img [src]="image.src" [ngStyle]="{
+          'width': image.width + 'px', 
+          'height': image.height + 'px'
+        }" class="centered-image" />
+
+        <!-- Mostrar el ID encima o cerca de la imagen -->
+        <div [ngStyle]="{
+        'position': 'absolute',
+        'top': '10px',
+        'left': '10px',
+        'background-color': 'rgba(255, 255, 255, 0.8)',
+        'color': 'black',
+        'padding': '5px',
+        'border-radius': '3px',
+        'font-size': '14px',
+        'font-weight': 'bold'
+      }">
+          {{ image.id }}
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="auto">
+          <ion-button color="success">
+            <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+            Conforme
+          </ion-button>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button color="danger">
+            <ion-icon slot="start" name="close-circle-outline"></ion-icon>
+            No Conforme
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
+
+
+<!-- 
 <ion-content class="ion-padding">
 
   <form [formGroup]="FormCheckListPaso1" #f="ngForm">
@@ -102,8 +180,6 @@
           </ion-segment-button>
         </ion-segment>
       </ion-label>
-      <!-- [(ngModel)]="NamesForm.reclamo_icmd1" value="{{NamesForm.reclamo_icmd1}}"
-        (ionChange)="segmentChanged($event)" -->
     </ion-item>
     <ion-item>
       <ion-label position="floating">
@@ -194,30 +270,9 @@
             <ion-label color="warning" >RECHAZADO</ion-label>
           </ion-segment-button>
         </ion-segment>
-
-
-        <!-- <ion-buttons>
-          <ion-button
-            (click)="SaveFormBorradorPaso1()"
-            [disabled]="disableButton"
-            color="danger"
-          >
-            <ion-icon name="close-outline"></ion-icon>&nbsp;BORRADOR
-          </ion-button>
-
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <ion-button
-            (click)="SaveFormTerminadoPaso1()"
-            [disabled]="disableButton"
-            color="secondary"
-          >
-            <ion-icon name="save-outline"></ion-icon>&nbsp;
-            <strong>TERMINADO</strong>
-          </ion-button>
-        </ion-buttons> -->
       </ion-col>
       <ion-col></ion-col>
     </ion-row>
   </ion-grid>
 </form>
-</ion-footer>
+</ion-footer> -->

@@ -148,7 +148,9 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       this.DsIniciaActividad.cantidad_ingresar = 0;
 
       console.log("VERIFICAR A<QUIIIIII;");
+      
       console.log(this.navParams.cantidad_total);
+      console.log(this.navParams.cnt_pieza_pend_hru);
       console.log(this.navParams.cantidad_revisada);
       console.log(this.navParams.cantidad_pendiente);
 
