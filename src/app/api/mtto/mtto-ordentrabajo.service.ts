@@ -60,18 +60,33 @@ export class MttoOrdentrabajoService {
     //private device: Device
   ) { }
 
-
+  //NEW JA 
+  ListFindOtsMantoDet(
+    acc : string,
+    id_cab : string,
+    InputSearch: string,
+  ): Promise<any> {
+    let dataPost = JSON.stringify({
+      acc: acc,
+      id_cab : id_cab,
+      s: InputSearch,
+    });
+    return this.http.post(this.urlApiProd, dataPost).toPromise().then(results => results//.json()
+    );
+  }
+  //NEW JA
   ListFindOtsManto(
     acc : string,
     InputSearch: string,
   ): Promise<any> {
     let dataPost = JSON.stringify({
-      acc: 43,
-      s: '',
+      acc: acc,
+      s: InputSearch,
     });
     return this.http.post(this.urlApiProd, dataPost).toPromise().then(results => results//.json()
     );
   }
+
 
   ///////////////////////lista de solses
   load_lista_solse(idot: string, idotsolse_otd: string): Promise<any> {

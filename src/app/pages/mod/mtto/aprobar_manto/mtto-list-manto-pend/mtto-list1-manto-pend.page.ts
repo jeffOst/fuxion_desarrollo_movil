@@ -77,9 +77,8 @@ export class MttoList1MantoPendPage implements OnInit {
     });
   }
 
-  FNuevoListPendManto(Row: any){
+  FNavigatePageDet(Row: any){
     let navigationExtras: NavigationExtras = {state: {Row}};
-    console.log(navigationExtras);
     this.navCtrl.navigateForward(['/mtto-win-manto-pend'], navigationExtras);
   }
 

@@ -1,3 +1,7 @@
 ion-label div {
     margin-bottom: 4px; /* Espaciado entre líneas */
   }
+
+.headerContentManto{
+  display: flex; width: 100%; gap: 10px;justify-content: space-between;
+}

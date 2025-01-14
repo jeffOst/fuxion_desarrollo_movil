@@ -20,7 +20,7 @@
 
 <ion-content>
   <ion-item mode="ios" *ngFor="let Row of DataSetGrid">
-    <ion-item button detail="true" detail-icon="caret-forward-outline" mode="ios" (click)="FNuevoListPendManto(Row)" style="width: 100%">
+    <ion-item button detail="true" detail-icon="caret-forward-outline" mode="ios" (click)="FNavigatePageDet(Row)" style="width: 100%">
       <ion-label [hidden]="scanActive"><strong>
           <div>{{ Row.codsmg }}
           </div>
