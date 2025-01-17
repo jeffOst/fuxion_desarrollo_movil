@@ -41,25 +41,41 @@ export class MttoWinMantoPendPage implements OnInit {
   codsmg : string;
   id_orden_trab_cab: string;
   id_orden_trab_fis_cab : string
+  idblockguiaremicab: string
   estaCargando: boolean = false;
   DataSetGrid: any;
   selectedItems: string[] = [];
+  NombresUsuarioLocal: string;
+  IdUsuarioLocal: string;
   constructor(
     private router: Router,
     private alertController: AlertController,
     private loadingController: LoadingController,
+    public  storage: Storage,
     private ApiService: MttoOrdentrabajoService,
   ) {
-    console.log(this.router.getCurrentNavigation().extras.state['Row']);
+
     this.navParamsAny = this.router.getCurrentNavigation().extras.state['Row'];
   }
 
   ngOnInit() {
+    this.estaCargando = true;
+    let localStorage: any;
+    this.storage.get('USER_INFO').then((result1) => {
+      localStorage = result1;
+      this.NombresUsuarioLocal = localStorage.user_name;
+      this.IdUsuarioLocal = localStorage.user_id;
+    });
+  }
+
+  ionViewWillEnter() {
     this.codsmg = this.navParamsAny.codsmg;
     this.id_orden_trab_cab = this.navParamsAny.id_orden_trab_cab;
     this.id_orden_trab_fis_cab = this.navParamsAny.id_orden_trab_fis_cab;
+    this.idblockguiaremicab = this.navParamsAny.idblockguiaremicab
     this.FListaEquiposPendMantoDet();
   }
+
 
   FListaEquiposPendMantoDet(){
     const loading = this.loadingController
@@ -69,7 +85,7 @@ export class MttoWinMantoPendPage implements OnInit {
     })
     .then((loading) => {
       loading.present();
-      this.ApiService.ListFindOtsMantoDet('44', this.id_orden_trab_cab, '')
+      this.ApiService.ListFindOtsMantoDet('44', this.idblockguiaremicab, '')
         .then((res) => {
           this.DataSetGrid = res;
           this.loadingController.dismiss();
@@ -122,4 +138,31 @@ export class MttoWinMantoPendPage implements OnInit {
     }
   }
 
+  FCargarDetalleOti(){
+    //creamos la cabecera de ALM.block_guiaremi_cab
+    const loading = this.loadingController
+    .create({
+      message: 'Cargando lista...',
+      translucent: true,
+    })
+    .then((loading) => {
+      loading.present();
+      this.ApiService.CreateOtiAtencionCab('45', this.id_orden_trab_cab, '1', this.idblockguiaremicab)
+        .then((res) => {
+          this.loadingController.dismiss();
+          this.estaCargando = false;
+          this.idblockguiaremicab = res[0].o_nres;
+        })
+        .finally(() => {
+          this.loadingController.dismiss();
+          setTimeout(() => {
+          }, 600);
+        })
+        .catch(() => {
+        })
+        .then(request => {
+          loading.dismiss();
+        });
+    });
+  }
 }

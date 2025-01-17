@@ -19,7 +19,7 @@
       <ion-item>
         <ion-label>
           <div>
-            <!-- <ion-button color="danger" style="width: 100px;">Rechazar</ion-button> -->
+            <ion-button color="secondary" (click)="FCargarDetalleOti()">Cargar Detalle</ion-button>
             <ion-button color="success" (click)="FAprobarItemManto()">Atender</ion-button>
           </div>
         </ion-label>
@@ -50,15 +50,15 @@
     <ion-item-sliding *ngFor="let Row of DataSetGrid">
       <ion-item>
         <ion-label>
-          <div>Item: {{Row.ma04Codigo}} - {{Row.ma04descripcion}} - {{Row.unid_medida}}</div>
+          <div>Item: {{Row.prdid}} - {{Row.prdtxt}} - {{Row['ma00unidad#nombre']}}</div>
           <div>
-            Solicitado: <span>{{Row.otd_cantidad}}</span>
+            Solicitado: <span>{{Row.prdcant}}</span>
           </div>
           <div>
-            Stock: <span [ngStyle]="{ 'color': Row.color_reproceso }">{{Row.stock_item}}</span>
+            Stock Ubi: <span [ngStyle]="{'color': Row.stock_sxu > 0 ? 'green' : 'red'}" >{{Row.stock_sxu}}</span>
           </div>
         </ion-label>
-        <ion-badge slot="end" class="ion-margin">{{Row.nombre_estado}}</ion-badge>
+        <ion-badge slot="end" class="ion-margin">{{Row.Y06002}}</ion-badge>
         <ion-checkbox slot="end" [(ngModel)]="Row.isChecked" aria-label="Toggle task completion"
           (ionChange)="onCheckboxChange(Row)" [disabled]="Row.estado_check"></ion-checkbox>
       </ion-item>

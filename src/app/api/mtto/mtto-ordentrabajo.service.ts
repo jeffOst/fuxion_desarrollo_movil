@@ -61,14 +61,31 @@ export class MttoOrdentrabajoService {
   ) { }
 
   //NEW JA 
-  ListFindOtsMantoDet(
+
+  CreateOtiAtencionCab(
     acc : string,
-    id_cab : string,
+    id_oti : string,
+    id_usu : string,
+    id_block: string
+  ) : Promise<any>{
+    let dataPost = JSON.stringify({
+      acc: acc,
+      id_oti : id_oti,
+      id_usu: id_usu,
+      id_block: id_block
+    });
+    return this.http.post(this.urlApiProd, dataPost).toPromise().then(results => results);
+  }
+
+
+  ListFindOtsMantoDet( //No usar por el momento
+    acc : string,
+    id_block : string,
     InputSearch: string,
   ): Promise<any> {
     let dataPost = JSON.stringify({
       acc: acc,
-      id_cab : id_cab,
+      id_block : id_block,
       s: InputSearch,
     });
     return this.http.post(this.urlApiProd, dataPost).toPromise().then(results => results//.json()

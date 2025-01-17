@@ -47,6 +47,16 @@ export class MttoList1MantoPendPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.estaCargando = true;
+    let localStorage: any;
+    this.storage.get('USER_INFO').then((result1) => {
+      localStorage = result1;
+      this.NombresUsuarioLocal = localStorage.user_name;
+      this.IdUsuarioLocal = localStorage.user_id;
+    });
+  }
+
+  ionViewWillEnter() {
     this.FListaEquiposPendManto();
   }
 
