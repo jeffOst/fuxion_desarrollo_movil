@@ -238,14 +238,14 @@ try {
   }
 
   
-  async FSetEstado(row: any, idrevisionofd: any, idmaquina: any, idofpterminado: any, idrevision_maquina: any) {
+  async FSetEstado(row: any, idrevisionofd: any, idmaquina: any, idofpterminado: any, idrevision_maquina: any, descripcion_pt:any) {
     
     row.maquina = this.TituloDinamico;
     row.idmaquina = this.idMenu;
     row.idrevisionofd = idrevisionofd;
     row.idofpterminado = idofpterminado;
     row.idrevision_maquina = idrevision_maquina;
-
+    row.Y04002 = descripcion_pt;
     let navigationExtras: NavigationExtras = {
       state: row
     };

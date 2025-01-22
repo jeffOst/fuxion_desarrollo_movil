@@ -13,6 +13,9 @@
 
 
     <!----------------------------------------------------------------------------------------------------->
+
+
+
     <!--Hoja de ruta-->
 
     <ion-item>
@@ -23,7 +26,7 @@
             {{CantItemsHojaRuta}}
           </ion-label>
         </ion-chip>
-
+        | {{FormHtmlJs.Y04002}}
       </ion-label>
     </ion-item>
 
@@ -57,7 +60,7 @@
             <ion-col size-sm="2.2" size-md="2.2" size-xl="2.2">{{Row.descripcion_proceso_ofd}}</ion-col>
             <!--<ion-col size-sm="1" size-md="1" size-xl="1">{{Row.cnt_plan}}</ion-col>-->
             <ion-col size-sm="1" size-md="1" size-xl="1">{{Row.cnt_pieza}}</ion-col>
-            
+
             <ion-col size-sm="2" size-md="2" size-xl="2">{{Row.nombre_estado}}</ion-col>
             <ion-col size-sm="1.5" size-md="1.5" size-xl="1.5">{{Row.cantidad_revisada}}</ion-col>
             <ion-col size-sm="1" size-md="1" size-xl="1">{{Row.cantidad_baja}}</ion-col>
@@ -77,21 +80,26 @@
 
     <!----------------------------------------------------------------------------------------------------->
     <ion-item>
-
       <ion-label>
-
+        <p>Nro. {{FormHtmlJs.avatar}}</p>
+        <h1>{{FormHtmlJs.correorden}}</h1>
+      </ion-label>
+    </ion-item>
+    
+    
+    <ion-item>
+      <ion-label>
         <p>Maquina</p>
         <h1>{{FormHtmlJs.maquina}}</h1>
-
       </ion-label>
 
-      <ion-button *ngIf="CantItemsHojaRuta == 0" expand="block" color="white" size="small" slot="end" (click)="FIniciarActvividad(0, 0, 0, 0, 0, 0, 0)"
-        title="Iniciar Actividad">
+      <ion-button *ngIf="CantItemsHojaRuta == 0" expand="block" color="white" size="small" slot="end"
+        (click)="FIniciarActvividad(0, 0, 0, 0, 0, 0, 0)" title="Iniciar Actividad">
         <ion-text color="danger">&nbsp;Iniciar Actividad &nbsp;</ion-text>
         <ion-icon [hidden]="scanActive" expand="block" color="dark" size="small" name="play-forward"></ion-icon>
       </ion-button>
-
     </ion-item>
+
     <ion-item *ngIf="hide_div_reproceso">
       <ion-row style="width:100%;" class="ion-text-left">
         <ion-col size="3" class="ion-text-right">Actividad:</ion-col>
@@ -116,32 +124,14 @@
       </ion-label>
     </ion-item>
     -->
-    
+
     <ion-item>
       <ion-label>
         <p>F. Asignado</p>
         <h1>{{FormHtmlJs.fasignado}}</h1>
       </ion-label>
     </ion-item>
-    <ion-item>
-      <ion-label>
-        <p>Nro. {{FormHtmlJs.avatar}}</p>
-        <h1>{{FormHtmlJs.correorden}}</h1>
-      </ion-label>
-    </ion-item>
 
-    <ion-item>
-
-      <ion-label>
-        <p>Cod. P.T.</p>
-        <input value="{{FormHtmlJs.Y04001}}" />
-        <ion-button (click)="visualizar_pdf(FormHtmlJs.plano_diseno)" size="default">
-          <ion-icon slot="start" name="star"></ion-icon>
-          Ver Plano
-        </ion-button>
-      </ion-label>
-
-    </ion-item>
 
     <ion-item>
       <ion-label>
@@ -149,6 +139,7 @@
         <h1>{{FormHtmlJs.cantidad}}</h1>
       </ion-label>
     </ion-item>
+
 
     <!--
     <ion-item>

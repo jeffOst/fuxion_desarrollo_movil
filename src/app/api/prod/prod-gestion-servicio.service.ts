@@ -521,6 +521,17 @@ export class ProdGestionServicioService {
     );
   }
 
+  HistoricoMotivoParada(idordenfabridet: string): Promise<any> {
+    let dataPost = JSON.stringify(
+      {
+        acc: 41,
+        idordenfabridet: idordenfabridet
+      }
+    );
+    return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
+    );
+  }
+
   LoadFormIniciaActividad(idpt, avatar) {
     let dataPost = JSON.stringify(
       {

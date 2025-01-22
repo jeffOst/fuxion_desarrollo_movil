@@ -45,8 +45,11 @@ export class ProdAteServIniciaActividadPage implements OnInit {
   fechafin_prod: string;
   NombresUsuarioLocal: string;
   IdUsuarioLocal: string;
-
+  CantItemsMotivoPausa: number = 0;
+  DsGridMotivoPausa: any[] = []; // Inicializamos como un array vacío
   pdfSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
+  currentDateTime: Date = new Date(); // Inicializa con la fecha y hora actual
+
 
   constructor(
     public navCtrl: NavController,
@@ -129,28 +132,21 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       this.fechainicio_prod = this.navParams.fecha_inicio_formato_iso; // Formato ISO
       this.fechafin_prod = this.navParams.fecha_fin_formato_iso; // Formato ISO
 
-      console.log("jeffreyyyyy aquiiii aeaaa");
-      console.log(this.navParams.codhru);
-
       //Si es un registro con una ruta
-      if(this.navParams.codhru != 0){
+      if (this.navParams.codhru != 0) {
         this.DsIniciaActividad.cantidad_revisada = this.navParams.cnt_pieza_rev_hru;
         this.DsIniciaActividad.cantidad_total = this.navParams.cnt_pieza_pend_hru;
-      }else{
+      } else {
         this.DsIniciaActividad.cantidad_revisada = this.navParams.cantidad_revisada;
         this.DsIniciaActividad.cantidad_total = this.navParams.cantidad_total;
       }
 
       console.log(this.navParams.cantidad_revisada);
-      
+
 
       this.DsIniciaActividad.cantidad_pendiente = this.navParams.cantidad_pendiente;
       this.DsIniciaActividad.cantidad_ingresar = 0;
 
-      console.log("VERIFICAR A<QUIIIIII;");
-      console.log(this.navParams.cantidad_total);
-      console.log(this.navParams.cantidad_revisada);
-      console.log(this.navParams.cantidad_pendiente);
 
       /////////////metalizado
       //console.log('this.DsIniciaActividad.proceso_metalizado::', this.DsIniciaActividad.proceso_metalizado);
@@ -217,6 +213,29 @@ export class ProdAteServIniciaActividadPage implements OnInit {
     //console.log('hide_div_equipo:::', this.hideItemByTipoRep);
 
 
+    // Actualiza la fecha y hora cada segundo
+    setInterval(() => {
+      this.currentDateTime = new Date();
+    }, 1000); // 1000 ms = 1 segundo
+
+  }
+
+  ionViewDidEnter() {
+
+    this.refreshGridData();
+
+  }
+
+  // Nueva función para refrescar la información de la grilla
+  refreshGridData() {
+    console.log('Refrescando datos de la grilla...');
+    this.ApiServices.HistoricoMotivoParada(this.DsIniciaActividad.pk_idservicio).then((res) => {
+      console.log(res);
+      this.DsGridMotivoPausa = res; // Actualiza los datos de la grilla
+      this.CantItemsMotivoPausa = this.DsGridMotivoPausa.length; // Actualiza la cantidad de items
+    }).catch((error) => {
+      console.error('Error al refrescar los datos:', error);
+    });
   }
 
   UpdateFormEdit() {
@@ -272,7 +291,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
   }
   FCondicionarEstado(tip: number) {
-    console.log('FEstadoActividad', tip);
+    //console.log('FEstadoActividad', tip);
 
     switch (tip) {
       case 1:////pausa
@@ -374,28 +393,28 @@ export class ProdAteServIniciaActividadPage implements OnInit {
     const modalRetornoR = await this.openFinalizaReprocesoModal(); // Llama a la función
 
     if (modalRetornoR !== null) {
-        flagR = modalRetornoR.flagReproceso ?? 0;
-        codMaquinaR = modalRetornoR.codMaquina ?? '';
-        descripcionR = modalRetornoR.descripcionRepro ?? '';
-        flagGuardadoR = modalRetornoR.flag_guardar ?? 0;
+      flagR = modalRetornoR.flagReproceso ?? 0;
+      codMaquinaR = modalRetornoR.codMaquina ?? '';
+      descripcionR = modalRetornoR.descripcionRepro ?? '';
+      flagGuardadoR = modalRetornoR.flag_guardar ?? 0;
     } else {
-        flagR = 0;
-        codMaquinaR = 0;
-        descripcionR = '';
-        flagGuardadoR = 0;
+      flagR = 0;
+      codMaquinaR = 0;
+      descripcionR = '';
+      flagGuardadoR = 0;
     }
 
     if (flagGuardadoR == 1) {
-        this.hideBtnReanuda = false;
-        this.hideBtnInicio = false;
-        this.hideNomEstado = true;
-        this.DsIniciaActividad.estado = "FINALIZAR";
-        this.DsIniciaActividad.flag_reproceso = flagR;
-        this.DsIniciaActividad.maquina_reproceso = codMaquinaR;
-        this.DsIniciaActividad.descripcion_reproceso = descripcionR;
-        this.FSaveEstado(3); // Cambia el valor si es necesario
+      this.hideBtnReanuda = false;
+      this.hideBtnInicio = false;
+      this.hideNomEstado = true;
+      this.DsIniciaActividad.estado = "FINALIZAR";
+      this.DsIniciaActividad.flag_reproceso = flagR;
+      this.DsIniciaActividad.maquina_reproceso = codMaquinaR;
+      this.DsIniciaActividad.descripcion_reproceso = descripcionR;
+      this.FSaveEstado(3); // Cambia el valor si es necesario
     }
-}
+  }
 
 
   async FEstadoActividad(tip: number) {
@@ -457,6 +476,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
         break;
 
+
       /*
       case 3: ////finalizar 1
 
@@ -505,39 +525,39 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
 
       case 3: ////finalizar 2
-      console.log(this.DsIniciaActividad.cantidad_ingresar);
-  
-      // Validar si cantidad_ingresar es 0 y mostrar ventana de confirmación
-      if (this.DsIniciaActividad.cantidad_ingresar === 0) {
+        console.log(this.DsIniciaActividad.cantidad_ingresar);
+
+        // Validar si cantidad_ingresar es 0 y mostrar ventana de confirmación
+        if (this.DsIniciaActividad.cantidad_ingresar === 0) {
           const alert = await this.alertController.create({
-              header: 'Confirmación',
-              message: '¿Desea finalizar el registro con cantidad 0?',
-              buttons: [
-                  {
-                      text: 'Cancelar',
-                      role: 'cancel',
-                      handler: () => {
-                          console.log('Registro cancelado por el usuario.');
-                          return;
-                      }
-                  },
-                  {
-                      text: 'Aceptar',
-                      handler: async () => {
-                          // Continuar con el resto del código si acepta
-                          await this.procesarFinalizacion();
-                      }
-                  }
-              ]
+            header: 'Confirmación',
+            message: '¿Desea finalizar el registro con cantidad 0?',
+            buttons: [
+              {
+                text: 'Cancelar',
+                role: 'cancel',
+                handler: () => {
+                  console.log('Registro cancelado por el usuario.');
+                  return;
+                }
+              },
+              {
+                text: 'Aceptar',
+                handler: async () => {
+                  // Continuar con el resto del código si acepta
+                  await this.procesarFinalizacion();
+                }
+              }
+            ]
           });
           await alert.present();
-      } else {
+        } else {
           // Continuar con el resto del código directamente si cantidad_ingresar no es 0
           await this.procesarFinalizacion();
-      }
-      break;
-      
-        
+        }
+        break;
+
+
 
       /*
     case 4: ////reanudar 1
@@ -628,6 +648,13 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
             // Navegar de vuelta a la lista y pasar un parámetro
             //this.router.navigate(['/prod-ate-serv-list-actividades'], { queryParams: { refresh: true } });
+
+            //SI ES UNA PAUSA O REANUDAR
+            if(idEstadoBtn == 2 || idEstadoBtn == 4){
+              // Refrescar los datos de la grilla
+              this.refreshGridData();
+            }
+
           }
 
         }).finally(() => {
