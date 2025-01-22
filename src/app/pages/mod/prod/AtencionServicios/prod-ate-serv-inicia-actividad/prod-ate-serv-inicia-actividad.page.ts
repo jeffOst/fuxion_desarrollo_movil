@@ -601,6 +601,12 @@ export class ProdAteServIniciaActividadPage implements OnInit {
           this.hideNomEstado = false;
           this.DsIniciaActividad.estado = "REANUDAR";
           this.DsIniciaActividad.motivoPausa = observacionGuardado;
+          this.DsIniciaActividad.iduser = this.IdUsuarioLocal;
+          
+          //AQUI FALTA EL ID DEL USUARIO 
+          console.log("verificar aqui el usuario actual");
+          console.log(this.IdUsuarioLocal);
+
           this.FSaveEstado(tip);
 
         }
@@ -626,6 +632,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
         loading.present();
         this.DsIniciaActividad.acc = '8';
         this.DsIniciaActividad.idestado = idEstadoBtn;
+        this.DsIniciaActividad.iduser = this.IdUsuarioLocal;
         this.ApiServices.SaveInicioActividad(this.DsIniciaActividad).then((res) => {
           let rest: any;
           rest = res[0];
