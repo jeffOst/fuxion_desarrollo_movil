@@ -13,6 +13,7 @@ import { FinalizaReprocesoPage } from 'src/app/pages/mod/prod/prod-list-acti-his
 
 
 
+
 @Component({
   selector: 'app-prod-ate-serv-inicia-actividad',
   templateUrl: './prod-ate-serv-inicia-actividad.page.html',
@@ -414,6 +415,54 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       this.DsIniciaActividad.descripcion_reproceso = descripcionR;
       this.FSaveEstado(3); // Cambia el valor si es necesario
     }
+
+
+    //Redirigir a la pestaña de pendientes de esa maquina:
+    //this.navCtrl.navigateForward('prod-list-acti-programada');
+
+    console.log("revisarrr aqui la maquina:");
+    console.log(this.DsIniciaActividad.maquina);
+    console.log(this.DsIniciaActividad.idmaquina);
+
+    const maquinaString = String(this.DsIniciaActividad.maquina);
+    const idmaquina = String(this.DsIniciaActividad.idmaquina);
+
+    this.goto_menu('prod-list-acti-programada', idmaquina, maquinaString);
+
+  }
+
+  goto_menu(nombre_menu: string, params: any, titulo: any): void {
+    let _params;
+
+    console.log("revisar aqui");
+    console.log(nombre_menu); // prod-list-acti-programada
+    console.log(params); // 5
+    console.log(titulo); // TC1
+    console.log("--------------------------------------");
+
+    //let params_http = new HttpParams()
+    let params_http = [];
+    console.log(params);
+
+    if (!params) {
+      //params_http.append('0','0');
+      params_http.push(titulo);
+    } else {
+      params_http = params.split(",");
+      params_http.push(titulo);
+    }
+
+    if (nombre_menu == 'prod-list-acti-programada') {
+
+      this.router.navigate(['home']);
+      setTimeout(() => {
+        this.router.navigate([nombre_menu], { queryParams: params_http, queryParamsHandling: 'merge' });
+      }, 1);
+    }
+    else {
+      this.router.navigate([nombre_menu], { queryParams: params_http, queryParamsHandling: 'merge' });
+    }
+
   }
 
 
@@ -525,7 +574,12 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
 
       case 3: ////finalizar 2
-        console.log(this.DsIniciaActividad.cantidad_ingresar);
+        //console.log(this.DsIniciaActividad.cantidad_ingresar);
+
+        //console.log("revisarrr aqui la maquina:");
+        //console.log(this.DsIniciaActividad.maquina);
+        //console.log(this.DsIniciaActividad.idmaquina);
+        //console.log("---------");
 
         // Validar si cantidad_ingresar es 0 y mostrar ventana de confirmación
         if (this.DsIniciaActividad.cantidad_ingresar === 0) {
@@ -601,6 +655,12 @@ export class ProdAteServIniciaActividadPage implements OnInit {
           this.hideNomEstado = false;
           this.DsIniciaActividad.estado = "REANUDAR";
           this.DsIniciaActividad.motivoPausa = observacionGuardado;
+          this.DsIniciaActividad.iduser = this.IdUsuarioLocal;
+
+          //AQUI FALTA EL ID DEL USUARIO 
+          console.log("verificar aqui el usuario actual");
+          console.log(this.IdUsuarioLocal);
+
           this.FSaveEstado(tip);
 
         }
@@ -650,7 +710,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
             //this.router.navigate(['/prod-ate-serv-list-actividades'], { queryParams: { refresh: true } });
 
             //SI ES UNA PAUSA O REANUDAR
-            if(idEstadoBtn == 2 || idEstadoBtn == 4){
+            if (idEstadoBtn == 2 || idEstadoBtn == 4) {
               // Refrescar los datos de la grilla
               this.refreshGridData();
             }
