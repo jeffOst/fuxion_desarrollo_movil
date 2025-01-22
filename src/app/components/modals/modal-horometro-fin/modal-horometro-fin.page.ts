@@ -93,6 +93,12 @@ export class ModalHorometroFinPage implements OnInit {
 
   }
 
+  clearHorometroFinal() {
+    console.log('Botón limpiar presionado'); // Verifica si se llama la función
+    this.horometroFinal = ''; // Limpia el valor del campo
+  }
+
+
   FSaveHorometro(iduser: string, horometroFinal: string) {
 
 

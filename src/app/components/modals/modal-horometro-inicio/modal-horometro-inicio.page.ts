@@ -325,7 +325,9 @@ formatTime(event: any) {
   this.formData.horometroInicial = value;
 }
 
-
+clearHorometro() {
+  this.formData.horometroInicial = ''; // Asigna un valor vacío al campo
+}
 
 
 }
