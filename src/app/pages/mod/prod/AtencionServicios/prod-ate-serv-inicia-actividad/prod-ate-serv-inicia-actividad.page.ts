@@ -686,6 +686,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
         loading.present();
         this.DsIniciaActividad.acc = '8';
         this.DsIniciaActividad.idestado = idEstadoBtn;
+        this.DsIniciaActividad.iduser = this.IdUsuarioLocal;
         this.ApiServices.SaveInicioActividad(this.DsIniciaActividad).then((res) => {
           let rest: any;
           rest = res[0];
@@ -710,7 +711,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
             //this.router.navigate(['/prod-ate-serv-list-actividades'], { queryParams: { refresh: true } });
 
             //SI ES UNA PAUSA O REANUDAR
-            if (idEstadoBtn == 2 || idEstadoBtn == 4) {
+            if (idEstadoBtn === 2 || idEstadoBtn === 4) {
               // Refrescar los datos de la grilla
               this.refreshGridData();
             }
