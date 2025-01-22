@@ -26,6 +26,7 @@ export class MttoOrdentrabajoService {
   //DirectorioImg: string = 'https://fuxion.geohidraulica.com.pe/aw_file/adjuntos/img_recinado/';///prod
   DirectorioImg: string = ApiBackDomains.UrlDomainLocal + 'aw_file/img_tablet/';///test
 
+
   public OrdenTrabajo_: OrdenTrabajo;
   confirmSaveBd: string;
 
@@ -58,6 +59,51 @@ export class MttoOrdentrabajoService {
     ///public uid: Uid,
     //private device: Device
   ) { }
+
+  //NEW JA 
+
+  CreateOtiAtencionCab(
+    acc : string,
+    id_oti : string,
+    id_usu : string,
+    id_block: string
+  ) : Promise<any>{
+    let dataPost = JSON.stringify({
+      acc: acc,
+      id_oti : id_oti,
+      id_usu: id_usu,
+      id_block: id_block
+    });
+    return this.http.post(this.urlApiProd, dataPost).toPromise().then(results => results);
+  }
+
+
+  ListFindOtsMantoDet( //No usar por el momento
+    acc : string,
+    id_block : string,
+    InputSearch: string,
+  ): Promise<any> {
+    let dataPost = JSON.stringify({
+      acc: acc,
+      id_block : id_block,
+      s: InputSearch,
+    });
+    return this.http.post(this.urlApiProd, dataPost).toPromise().then(results => results//.json()
+    );
+  }
+  //NEW JA
+  ListFindOtsManto(
+    acc : string,
+    InputSearch: string,
+  ): Promise<any> {
+    let dataPost = JSON.stringify({
+      acc: acc,
+      s: InputSearch,
+    });
+    return this.http.post(this.urlApiProd, dataPost).toPromise().then(results => results//.json()
+    );
+  }
+
 
   ///////////////////////lista de solses
   load_lista_solse(idot: string, idotsolse_otd: string): Promise<any> {

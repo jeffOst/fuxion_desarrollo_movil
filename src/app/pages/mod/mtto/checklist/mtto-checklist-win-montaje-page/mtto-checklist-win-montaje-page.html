@@ -1,228 +1,129 @@
-<ion-header [translucent]="true">
-  <ion-toolbar mode="ios" [color]="networkStatus && networkStatus.connected? 'primary':'danger'">
-    <ion-title text-capitalize>{{tituloTollBar}}</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button
-      
-        [text]="Cancelar"
-        [disabled]="disableButton"
-      >
-      </ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-<ion-toolbar class="ion-no-border">
-  <ion-list>
-    <ion-item>
-      <ion-label>
-        <h1>{{FormHtmlJs.codsmg}}</h1>
-        <p>{{FormHtmlJs.modelo}}</p>
-      </ion-label>
-      <ion-label class="ion-text-center labelcenter"
-        >Correlativo:
-        <h1>{{FormHtmlJs.correlativo_clc}}</h1></ion-label
-      >
-      <ion-label slot="end" class="ion-text-end text-small">
-        <h3>OT:{{FormHtmlJs.id_orden_trab_fis_cab}}</h3>
-        <p>{{NombresUsuarioLocal}}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-</ion-toolbar>
+<!-- <style>
 
-<ion-content>
-
-  <ion-tabs #myTabs>
-    <ion-tab-bar
-      style="height: 8% !important"
-      class="tab-selected"
-      slot="top"
-      mode="ios"
-    >
-      <ion-tab-button tab="page1" value="1" (click)="mySelect(1,$event)" class="ion-no-padding">
-        <ion-grid fixed class="ion-no-padding" style="width:85%;height: 50%;">
-          <ion-row class="ion-no-padding">
-            <ion-col>
-              <ion-row size="2">
-                <ion-col><ion-badge color="primary">{{FormHtmlJs.avance1}}%</ion-badge></ion-col>
-              </ion-row>
-              <ion-row size="2">
-                <ion-col class="ion-no-padding" style="height: 30px;"><ion-label>1er Paso</ion-label></ion-col>
-              </ion-row>
-            </ion-col>
-            <ion-col>
-              <ion-col><ion-icon name="flash" style="height: 25px !important;width: 25px !important; display: inline !important"></ion-icon></ion-col>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-        <!-- <ion-icon name="flash"></ion-icon>
-        <ion-badge color="primary">{{FormHtmlJs.avance1}}%</ion-badge>
-        <ion-label >1er Paso</ion-label> -->
-      </ion-tab-button>
-      <ion-tab-button tab="page2" value="2" (click)="mySelect(2,$event)">
-        <ion-grid fixed class="ion-no-padding" style="width:85%;height: 50%;">
-        <ion-row class="ion-no-padding">
-          <ion-col>
-            <ion-row size="2">
-              <ion-col><ion-badge color="primary">{{FormHtmlJs.avance2}}%</ion-badge></ion-col>
-            </ion-row>
-            <ion-row size="2">
-              <ion-col><ion-label>2 Paso</ion-label></ion-col>
-            </ion-row>
-          </ion-col>
-          <ion-col>
-            <ion-col><ion-icon name="skull" style="height: 25px !important;width: 25px !important; display: inline !important"></ion-icon></ion-col>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-        <!-- <ion-grid fixed style="width: 80%" class="ion-no-padding">
-          <ion-row>
-            <ion-col size="12"><ion-badge color="primary">{{FormHtmlJs.avance2}}%</ion-badge
-              ></ion-col
-            >
-          </ion-row>
-          <ion-row>
-            <ion-col size="8"><ion-label>2do Paso</ion-label></ion-col>
-            <ion-col size="4"><ion-icon name="information"></ion-icon></ion-col>
-          </ion-row>
-        </ion-grid> -->
-      </ion-tab-button>
-      <ion-tab-button class="ion-no-padding" tab="page3" value="3" (click)="mySelect(3,$event)">
-        <ion-grid fixed class="ion-no-padding" style="width:85%;height: 50%;">
-          <ion-row class="ion-no-padding">
-            <ion-col>
-              <ion-row size="2">
-                <ion-col><ion-badge color="primary">{{FormHtmlJs.avance3}}%</ion-badge></ion-col>
-              </ion-row>
-              <ion-row size="2">
-                <ion-col class="ion-no-padding" style="height: 30px;"><ion-label>3er Paso</ion-label></ion-col>
-              </ion-row>
-            </ion-col>
-            <ion-col>
-              <ion-col><ion-icon name="checkmark" style="height: 25px !important;width: 25px !important; display: inline !important"></ion-icon></ion-col>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-        <!-- <ion-grid fixed style="width: 80%" class="ion-no-padding">
-          <ion-row>
-            <ion-col size="12"
-              ><ion-badge color="primary"
-                >{{FormHtmlJs.avance3}}%</ion-badge
-              ></ion-col
-            >
-          </ion-row>
-          <ion-row>
-            <ion-col size="8"><ion-label>3er Paso</ion-label></ion-col>
-            <ion-col size="4"><ion-icon name="information"></ion-icon></ion-col>
-          </ion-row>
-        </ion-grid> -->
+  .zoom-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .zoom-buttons ion-button {
+    flex: 1;
+    margin: 0 10px;
+    border-radius: 20px; /* Ajusta el radio de borde según tu preferencia */
+  }
+  
+  .zoom-buttons ion-button ion-icon {
+    margin-right: 8px;
+  }
+  
+  </style>
+  <head>
+  </head>
+  
+  <ion-header>
+    <ion-toolbar mode="ios">
+      <ion-buttons slot="start">
+        <ion-button (click)="FCloseWin()">
+          <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+          Cancelar
+        </ion-button>
+      </ion-buttons>
+  
+      <ion-buttons slot="end">
         
-      </ion-tab-button>
+        <ion-button (click)="zoomIn()" color="primary">
+          <ion-icon slot="icon-only" name="add"></ion-icon> Aumentar
+        </ion-button>
+        <ion-button (click)="zoomOut()" color="primary" style="margin-left: 18px;">
+          <ion-icon slot="icon-only" name="remove"></ion-icon> Reducir
+        </ion-button>
+        
+        <ion-button (click)="resetZoom()" color="primary" style="margin-left: 18px;">
+          <ion-icon slot="icon-only" name="refresh-outline"></ion-icon> Restablecer
+        </ion-button>
 
-      <ion-tab-button tab="page4" (click)="mySelect(4,$event)" color="light">
-        <ion-grid fixed class="ion-no-padding" style="width:85%;height: 50%;">
-          <ion-row class="ion-no-padding">
-            <ion-col>
-              <ion-row size="2">
-                <ion-col><ion-badge color="primary">{{FormHtmlJs.avance4}}%</ion-badge></ion-col>
-              </ion-row>
-              <ion-row size="2">
-                <ion-col class="ion-no-padding" style="height: 30px;"><ion-label>4to Paso</ion-label></ion-col>
-              </ion-row>
-            </ion-col>
-            <ion-col>
-              <ion-col><ion-icon name="server" style="height: 25px !important;width: 25px !important; display: inline !important"></ion-icon></ion-col>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
 
-        <!-- <ion-grid fixed style="width: 80%" class="ion-no-padding">
-          <ion-row>
-            <ion-col size="12"
-              ><ion-badge color="primary"
-                >{{FormHtmlJs.avance4}}%</ion-badge
-              ></ion-col
-            >
-          </ion-row>
-          <ion-row>
-            <ion-col size="8"><ion-label>4to Paso</ion-label></ion-col>
-            <ion-col size="4"><ion-icon name="server"></ion-icon></ion-col>
-          </ion-row>
-        </ion-grid> -->
-        <!-- <ion-icon name="logo-chrome"></ion-icon>
-        <ion-badge color="primary">{{FormHtmlJs.avance4}}%</ion-badge>
-        <ion-label>4to Paso</ion-label> -->
-      </ion-tab-button>
-
-      <ion-tab-button tab="page5" (click)="mySelect(5,$event)">
-        <ion-grid fixed class="ion-no-padding" style="width:85%;height: 50%;">
-          <ion-row class="ion-no-padding">
-            <ion-col>
-              <ion-row size="2">
-                <ion-col><ion-badge color="primary">{{FormHtmlJs.avance5}}%</ion-badge></ion-col>
-              </ion-row>
-              <ion-row size="2">
-                <ion-col class="ion-no-padding" style="height: 30px;"><ion-label>5to Paso</ion-label></ion-col>
-              </ion-row>
-            </ion-col>
-            <ion-col>
-              <ion-col><ion-icon name="bug" style="height: 25px !important;width: 25px !important; display: inline !important"></ion-icon></ion-col>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-        <!-- <ion-grid fixed style="width: 80%" class="ion-no-padding">
-          <ion-row>
-            <ion-col size="12"
-              ><ion-badge color="primary"
-                >{{FormHtmlJs.avance5}}%</ion-badge
-              ></ion-col
-            >
-          </ion-row>
-          <ion-row>
-            <ion-col size="8"><ion-label>5to Paso</ion-label></ion-col>
-            <ion-col size="4"><ion-icon name="nuclear"></ion-icon></ion-col>
-          </ion-row>
-        </ion-grid> -->
-
-        <!-- <ion-icon name="nuclear"></ion-icon>
-        <ion-badge color="primary">{{FormHtmlJs.avance5}}%</ion-badge>
-        <ion-label>5to Paso</ion-label> -->
-      </ion-tab-button>
-
-      <ion-tab-button tab="page6" (click)="mySelect(6,$event)">
-        <ion-grid fixed class="ion-no-padding" style="width:85%;height: 50%;">
-          <ion-row class="ion-no-padding">
-            <ion-col>
-              <ion-row size="2">
-                <ion-col><ion-badge color="primary">{{FormHtmlJs.avance6}}%</ion-badge></ion-col>
-              </ion-row>
-              <ion-row size="2">
-                <ion-col class="ion-no-padding" style="height: 30px;"><ion-label>6to Paso</ion-label></ion-col>
-              </ion-row>
-            </ion-col>
-            <ion-col>
-              <ion-col><ion-icon name="thermometer" style="height: 25px !important;width: 25px !important; display: inline !important"></ion-icon></ion-col>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-
-        <!-- <ion-grid fixed style="width: 80%" class="ion-no-padding">
-          <ion-row>
-            <ion-col size="12"
-              ><ion-badge color="primary"
-                >{{FormHtmlJs.avance6}}%</ion-badge
-              ></ion-col
-            >
-          </ion-row>
-          <ion-row>
-            <ion-col size="8"><ion-label>6to Paso</ion-label></ion-col>
-            <ion-col size="4"><ion-icon name="thermometer"></ion-icon></ion-col>
-          </ion-row>
-        </ion-grid> -->
-        <!-- <ion-icon name="thermometer"></ion-icon>
-        <ion-badge color="primary">{{FormHtmlJs.avance6}}%</ion-badge>
-        <ion-label>6to Paso</ion-label> -->
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
-</ion-content>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content (pinch)="onPinch($event)">
+    <pdf-viewer [src]="pdfSrc" [zoom]="zoom" [original-size]="false" style="display: block; width: 99%; height: 99%"></pdf-viewer>
+  </ion-content>
+  
+  <ion-footer>
+  </ion-footer> -->
+  <ion-header [translucent]="true">
+    <ion-toolbar
+      mode="ios"
+      [color]="networkStatus && networkStatus.connected? 'primary':'danger'"
+    >
+      <ion-title text-capitalize>{{tituloTollBar}}
+  
+      </ion-title>
+  
+      <ion-buttons slot="start">
+        <ion-back-button
+          defaultHref="mtto-checklist-list-montaje"
+          [text]="Cancelar"
+          [disabled]="disableButton"
+        >
+        </ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [style.background-color]="'white'">
+    <div class="ion-text-center" 
+         [style.background-color]="'white'" 
+         [style.display]="'flex'" 
+         [style.justify-content]="'center'" 
+         [style.align-items]="'center'" 
+         [style.height]="'100vh'">
+      
+      <div *ngFor="let image of images" 
+           [style.position]="'absolute'" 
+           [ngStyle]="{
+             'top': image.top + 'px',
+             'left': image.left + 'px',
+             'width': image.width + 'px', 
+             'height': image.height + 'px'
+           }">
+        
+        <!-- Imagen -->
+        <img [src]="image.src" 
+             [ngStyle]="{
+               'width': '100%', 
+               'height': '100%', 
+               'border': '2px solid ' + generateRandomColor()
+             }" 
+             (click)="onImageClick(image.id)" />
+        
+        <!-- Número (ID) -->
+        <div [ngStyle]="{
+              'position': 'absolute',
+              'top': '10px',
+              'left': '10px',
+              'background-color': 'rgba(255, 255, 255, 0.8)',
+              'color': 'black',
+              'padding': '5px',
+              'border-radius': '3px',
+              'font-size': '14px',
+              'font-weight': 'bold'
+            }">
+            {{ image.id }} - {{ image.filename }}
+        </div>
+  
+        <!-- Icono de check -->
+        <ion-icon name="checkmark-circle" 
+                  [ngStyle]="{
+                    'position': 'absolute', 
+                    'top': '10px', 
+                    'right': '10px', 
+                    'color': 'green', 
+                    'font-size': '30px'
+                  }"></ion-icon>
+      </div>
+    </div>
+  </ion-content>
+  
+  

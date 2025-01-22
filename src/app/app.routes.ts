@@ -2,11 +2,11 @@ import { Routes } from '@angular/router';
 import { AuthGuardService } from "src/app/api/auth-guard.service";
 
 export const routes: Routes = [
-  {
-    path: 'mtto-checklist-win-montaje',
-    loadChildren: () => import('./pages/mod/mtto/checklist/mtto-checklist-win-montaje-page/tabs.routes').then((m) => m.routes),
-    canActivate: [AuthGuardService], data: { loginRoute: '/login' }
-  },
+  // {
+  //   path: 'mtto-checklist-win-montaje',
+  //   loadChildren: () => import('./pages/mod/mtto/checklist/mtto-checklist-win-montaje-page/tabs.routes').then((m) => m.routes),
+  //   canActivate: [AuthGuardService], data: { loginRoute: '/login' }
+  // },
   {
     path: 'home',
     loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
@@ -34,6 +34,10 @@ export const routes: Routes = [
     path: 'mtto-checklist-win-montaje',
     loadComponent: () => import('./pages/mod/mtto/checklist/mtto-checklist-win-montaje-page/mtto-checklist-win-montaje-page').then(m => m.MttoChecklistWinMontajePage),
     canActivate: [AuthGuardService], data: { loginRoute: '/login' }
+  },
+  {
+    path: 'mtto-checklist-win-montaje1',
+    loadComponent: () => import('./pages/mod/mtto/checklist/mtto-checklist-win-montaje1/mtto-checklist-win-montaje1.page').then(m => m.MttoChecklistWinMontaje1Page)
   },
   {
     path: 'mtto-checklist-win-montaje3',
@@ -423,7 +427,17 @@ export const routes: Routes = [
   {
     path: 'finaliza-reproceso',
     loadComponent: () => import('./pages/mod/prod/prod-list-acti-historico/modals/finaliza-reproceso/finaliza-reproceso.page').then( m => m.FinalizaReprocesoPage)
+  },
+  {
+    path: 'mtto-list1-manto-pend',
+    loadComponent: () => import('./pages/mod/mtto/aprobar_manto/mtto-list-manto-pend/mtto-list1-manto-pend.page').then( m => m.MttoList1MantoPendPage)
+  },
+  {
+    path: 'mtto-win-manto-pend',
+    loadComponent: () => import('./pages/mod/mtto/aprobar_manto/mtto-win-manto-pend/mtto-win-manto-pend.page').then( m => m.MttoWinMantoPendPage)
   }
+
+
 
 
   

@@ -1,0 +1,81 @@
+<ion-header [translucent]="true">
+  <ion-toolbar mode="ios" color="primary">
+    <ion-title text-capitalize>Listado Material</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="prod-list-acti-programada" [text]="Cancelar" [disabled]="disableButton">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-toolbar class="ion-no-border">
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <h1>{{codsmg}}</h1>
+      </ion-label>
+      <ion-label>
+        <h1>N° O.T: {{id_orden_trab_fis_cab}}</h1>
+      </ion-label>
+      <ion-item>
+        <ion-label>
+          <div>
+            <ion-button color="secondary" (click)="FCargarDetalleOti()">Cargar Detalle</ion-button>
+            <ion-button color="success" (click)="FAprobarItemManto()">Atender</ion-button>
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-item>
+  </ion-list>
+</ion-toolbar>
+
+<!-- Body -->
+<ion-content>
+  <ion-card>
+
+    <ion-item>
+      <ion-searchbar #IdHtmlInputSearch mode="ios" debounce="1700" cancelButtonText="Cancelar" enterkeyhint="done"
+        placeholder="Filtrar Parametros">
+      </ion-searchbar>
+      <ion-icon slot="end" name="sync-outline" (click)="FListaEquiposPendMantoDet()" #idIconButtonSync></ion-icon>
+    </ion-item>
+    <ion-card-header>
+      <div>
+        <div>
+          <ion-card-subtitle>Materiales</ion-card-subtitle>
+        </div>
+      </div>
+    </ion-card-header>
+
+
+    <ion-item-sliding *ngFor="let Row of DataSetGrid">
+      <ion-item>
+        <ion-label>
+          <div>Item: {{Row.prdid}} - {{Row.prdtxt}} - {{Row['ma00unidad#nombre']}}</div>
+          <div>
+            Solicitado: <span>{{Row.prdcant}}</span>
+          </div>
+          <div>
+            Stock Ubi: <span [ngStyle]="{'color': Row.stock_sxu > 0 ? 'green' : 'red'}" >{{Row.stock_sxu}}</span>
+          </div>
+        </ion-label>
+        <ion-badge slot="end" class="ion-margin">{{Row.Y06002}}</ion-badge>
+        <ion-checkbox slot="end" [(ngModel)]="Row.isChecked" aria-label="Toggle task completion"
+          (ionChange)="onCheckboxChange(Row)" [disabled]="Row.estado_check"></ion-checkbox>
+      </ion-item>
+      <ion-item-options slot="end">
+        <ion-item-option color="warning">
+          <ion-icon slot="icon-only" name="pin"></ion-icon>
+        </ion-item-option>
+        <ion-item-option color="tertiary">
+          <ion-icon slot="icon-only" name="share"></ion-icon>
+        </ion-item-option>
+        <ion-item-option color="danger" expandable="true">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-card>
+</ion-content>
+<!-- <ion-thumbnail slot="start"> -->
+<!-- <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" /> -->
+<!-- </ion-thumbnail> -->
