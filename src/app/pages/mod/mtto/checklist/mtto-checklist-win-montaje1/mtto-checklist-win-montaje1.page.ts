@@ -112,7 +112,7 @@ export class MttoChecklistWinMontaje1Page implements OnInit {
         ],
         [
           { type: 'text', value: 'REPARACION DE CHAPAS' },
-          { type: 'toggle' }
+          { type: 'toggle', value: true },
         ],
         [
           { type: 'text', value: 'CODIGO DE MOTOR' },
@@ -121,6 +121,61 @@ export class MttoChecklistWinMontaje1Page implements OnInit {
         [
           { type: 'text', value: 'TECNICO RESPONSABLE' },
           { type: 'input', placeholder: 'Ingresar Tecnico' }
+        ]
+      ]
+    },
+    4: {
+      headers: [{text: 'POSICION'},
+        {text: 'APLICA'},
+        {text: 'MATERIAL'},
+        {text: 'NUEVO'},
+        {text: 'INYECTADO/RECUPERADO'}],
+      rows: [
+        [
+          { type: 'text', value: 'IMPUSLOR' },
+          { type: 'toggle'},
+          { type: 'toggle'},
+          { type: 'input', placeholder: 'Ingresa texto' },
+          { type: 'input', placeholder: 'Ingresa texto' }
+        ],
+        [
+          { type: 'text', value: 'IMPULSOR ETAPA 2' },
+          { type: 'toggle'},
+          { type: 'toggle'},
+          { type: 'input', placeholder: 'Ingresa texto' },
+          { type: 'input', placeholder: 'Ingresa texto' }
+        ],
+        [
+          { type: 'text', value: 'DIFUSOR INFERIOR' },
+          { type: 'toggle'},
+          { type: 'toggle'},
+          { type: 'input', placeholder: 'Ingresa texto' },
+          { type: 'input', placeholder: 'Ingresa texto' }
+        ],
+        [
+          { type: 'text', value: 'DIFUSOR SUPERIOR' },
+          { type: 'toggle'},
+          { type: 'toggle'},
+          { type: 'input', placeholder: 'Ingresa texto' },
+          { type: 'input', placeholder: 'Ingresa texto' }
+        ],
+        [
+          { type: 'text', value: 'DIFUSOR SUCCION' },
+          { type: 'toggle'},
+          { type: 'toggle'},
+          { type: 'input', placeholder: 'Ingresa texto' },
+          { type: 'input', placeholder: 'Ingresa texto' }
+        ],
+        [
+          { type: 'text', value: 'ANILLO DIFUSOR (VOLUTA)' },
+          { type: 'toggle'},
+          { type: 'toggle'},
+          { type: 'input', placeholder: 'Ingresa texto' },
+          { type: 'input', placeholder: 'Ingresa texto' }
+        ],
+        [
+          { type: 'text', value: 'TECNICO RESPONSABLE' },
+          { type: 'input', placeholder: 'Ingresar Tecnico',colspan:4 }
         ]
       ]
     },

@@ -127,7 +127,6 @@ export interface MPieza {
     codhru: number,
     cnt_pieza_rev_hru: number,
     cnt_pieza_pend_hru: number,
-    idrevision_maquina: number,
-    iduser: string
+    idrevision_maquina: number
 
 }

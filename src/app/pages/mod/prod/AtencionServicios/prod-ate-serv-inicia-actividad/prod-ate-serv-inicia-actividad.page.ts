@@ -686,7 +686,6 @@ export class ProdAteServIniciaActividadPage implements OnInit {
         loading.present();
         this.DsIniciaActividad.acc = '8';
         this.DsIniciaActividad.idestado = idEstadoBtn;
-        this.DsIniciaActividad.iduser = this.IdUsuarioLocal;
         this.ApiServices.SaveInicioActividad(this.DsIniciaActividad).then((res) => {
           let rest: any;
           rest = res[0];
