@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Component, Injectable, OnInit, ViewChild,ChangeDetectorRef } from '@angular/core';
+import { Component, Injectable, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Storage } from "@ionic/storage";
 import { SearchType, ProdGestionServicioService } from "src/app/api/prod/prod-gestion-servicio.service";
 import { IonInput, NavController, MenuController, IonList, Platform, AlertController, LoadingController, IonItemSliding, ActionSheetController, IonButton, IonIcon } from '@ionic/angular';
@@ -20,7 +20,7 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
   templateUrl: './prod-list-acti-programada.page.html',
   styleUrls: ['./prod-list-acti-programada.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule,HeaderComponent]
+  imports: [IonicModule, CommonModule, FormsModule, HeaderComponent]
 })
 
 export class ProdListActiProgramadaPage implements OnInit {
@@ -44,18 +44,18 @@ export class ProdListActiProgramadaPage implements OnInit {
     private alertController: AlertController,
     public storage: Storage,
   ) {
-try {
-  let navParams = this.router.getCurrentNavigation().extras.queryParams;
-    console.log('navParams 00', this.router.getCurrentNavigation());
-    console.log('navParams 1', navParams);
-    if (navParams) {
-      console.log('navParams 2', navParams['0']);
-      this.TituloDinamico = navParams['1'];
-      this.idMenu = navParams['0'];
-    }
-} catch (error) {
+    try {
+      let navParams = this.router.getCurrentNavigation().extras.queryParams;
+      console.log('navParams 00', this.router.getCurrentNavigation());
+      console.log('navParams 1', navParams);
+      if (navParams) {
+        console.log('navParams 2', navParams['0']);
+        this.TituloDinamico = navParams['1'];
+        this.idMenu = navParams['0'];
+      }
+    } catch (error) {
 
-}
+    }
 
 
 
@@ -66,7 +66,7 @@ try {
     //this.TituloDinamico='';
     this.changeRef.detectChanges();
 
-/////////////////valida logeado
+    /////////////////valida logeado
     let localStorage: any;
     this.storage.get('USER_INFO').then((result1) => {
       localStorage = (result1);
@@ -82,51 +82,51 @@ try {
     })
 
   }
-  asigna_titulo(tit:string){
+  asigna_titulo(tit: string) {
 
-    this.TituloDinamico=tit;
+    this.TituloDinamico = tit;
     this.load_list_principal();
-    console.log('asigna_titulo',this.TituloDinamico);
+    console.log('asigna_titulo', this.TituloDinamico);
   }
-  ionViewDidLoad(){
+  ionViewDidLoad() {
     let checkViews = this.router.getCurrentNavigation();
-    console.log('ionViewDidLoad::',checkViews);
+    console.log('ionViewDidLoad::', checkViews);
   }
-  ionViewWillLeave(){
+  ionViewWillLeave() {
     let checkViews = this.router.getCurrentNavigation();
-    console.log('ionViewWillLeave::',checkViews);
+    console.log('ionViewWillLeave::', checkViews);
   }
-  ionViewDidLeave(){
+  ionViewDidLeave() {
     let checkViews = this.router.getCurrentNavigation();
-    console.log('ionViewDidLeave::',checkViews);
+    console.log('ionViewDidLeave::', checkViews);
   }
-  ionViewWillUnload(){
+  ionViewWillUnload() {
     let checkViews = this.router.getCurrentNavigation();
-    console.log('ionViewWillUnload::',checkViews);
+    console.log('ionViewWillUnload::', checkViews);
   }
-  ionViewCanLeave(){
+  ionViewCanLeave() {
     let checkViews = this.router.getCurrentNavigation();
-    console.log('ionViewCanLeave::',checkViews);
+    console.log('ionViewCanLeave::', checkViews);
   }
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     console.log(this.TituloDinamico);
     let checkViews = this.router.getCurrentNavigation();
-    console.log('ionViewDidEnter',checkViews);
+    console.log('ionViewDidEnter', checkViews);
 
 
   }
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.changeRef.detectChanges();
     this.load_list_principal();
   }
-  ionViewCanEnter (){
+  ionViewCanEnter() {
     let checkViews = this.router.getCurrentNavigation()
-    console.log('ionViewCanEnter',checkViews);
+    console.log('ionViewCanEnter', checkViews);
   }
   ///////////////////////////SCAN QR
   async start_scan_qr(index) {
     //this.realPositionYScrollAux = this.realPositionYScroll;
-    this.idinputsearch_equipo.getInputElement().then((input)=>{
+    this.idinputsearch_equipo.getInputElement().then((input) => {
       input.blur();
     });
 
@@ -141,7 +141,7 @@ try {
         console.log('result.hasContent:::', result.hasContent);
         //this.content.scrollByPoint(0, this.realPositionYScrollAux, 1200);
         this.scanActive = false;
-        this.idinputsearch_equipo.readonly=false;
+        this.idinputsearch_equipo.readonly = false;
       }
 
     }
@@ -210,36 +210,36 @@ try {
   }
 
   FNuevaActvividadNp(flag_mostrar_opciones: any) {
-    let row:any;
+    let row: any;
     row = {} as MPieza;
 
-    row.maquina=this.TituloDinamico;
-    row.idmaquina=this.idMenu;
+    row.maquina = this.TituloDinamico;
+    row.idmaquina = this.idMenu;
 
-    row.CONCOMPONENTE=1;
+    row.CONCOMPONENTE = 1;
     row.flag_mostrar_opciones = flag_mostrar_opciones;
 
     row.codhru = 0;
     row.SEQMASERV = 0;
-    
+
     let navigationExtras: NavigationExtras = {
       state: row
     };
     this.navCtrl.navigateForward(['addserviciostodet'], navigationExtras);
   }
 
-  FListarActvidades(){
+  FListarActvidades() {
 
     let navigationExtras: NavigationExtras = {
-      state: {idmenu:this.idMenu,menu:this.TituloDinamico}
+      state: { idmenu: this.idMenu, menu: this.TituloDinamico }
     };
-    this.navCtrl.navigateForward(['prod-ate-serv-list-actividades'],navigationExtras);
+    this.navCtrl.navigateForward(['prod-ate-serv-list-actividades'], navigationExtras);
 
   }
 
-  
-  async FSetEstado(row: any, idrevisionofd: any, idmaquina: any, idofpterminado: any, idrevision_maquina: any, descripcion_pt:any) {
-    
+
+  async FSetEstado(row: any, idrevisionofd: any, idmaquina: any, idofpterminado: any, idrevision_maquina: any, descripcion_pt: any) {
+
     row.maquina = this.TituloDinamico;
     row.idmaquina = this.idMenu;
     row.idrevisionofd = idrevisionofd;
@@ -249,7 +249,7 @@ try {
     let navigationExtras: NavigationExtras = {
       state: row
     };
-  
+
     //VERIFICA SI ESTE REGISTRO SELECCIONADO YA SE ENCUENTRA EN PROCESO DE REVISION
     if (idrevisionofd != 0) {
       const alert = await this.alertController.create({
@@ -267,33 +267,31 @@ try {
       await alert.present();
     } else {
 
-    //VERIFICAR SI ESTE REGISTRO DE ESTA MAQUINA YA TIENE UNA ACTIVIDAD ANTERIOR INICIADA
-      // if (idrevision_maquina != 0) {
-      //   row.idofpterminado = '';
-      //   const alert = await this.alertController.create({
-      //     header: 'Atención',
-      //     message: 'Ya existe un registro para esta Maquina, porfavor finalize el registro anterior.',
-      //     buttons: [
-      //       {
-      //         text: 'Aceptar',
-      //         handler: () => {
-      //           this.navCtrl.navigateForward(['prod-ate-serv-list-actividades'], navigationExtras);
-      //         }
-      //       }
-      //     ]
-      //   });
-      //   await alert.present();
-      // } else {
-       
+      //VERIFICAR SI ESTE REGISTRO DE ESTA MAQUINA YA TIENE UNA ACTIVIDAD ANTERIOR INICIADA
+      if (idrevision_maquina != 0) {
+        row.idofpterminado = '';
+        const alert = await this.alertController.create({
+          header: 'Atención',
+          message: 'Ya existe un registro para esta Maquina, porfavor finalize el registro anterior.',
+          buttons: [
+            {
+              text: 'Aceptar',
+              handler: () => {
+                this.navCtrl.navigateForward(['prod-ate-serv-list-actividades'], navigationExtras);
+              }
+            }
+          ]
+        });
+        await alert.present();
+      } else {
         this.navCtrl.navigateForward(['prod-ate-serv-asigna-estado'], navigationExtras);
-      // }
+      }
 
-      
 
     }
   }
-  
-  
+
+
 
   /*
   FSetEstado(row: any, idrevisionofd: any, idmaquina: any) {
@@ -308,7 +306,7 @@ try {
 
   }
   */
-  
+
 
   groupByArray(xs, key, sortKey) {
     return xs.reduce(function (rv, x) {
@@ -328,7 +326,7 @@ try {
     }, []);
   };
 
-  sortArray(array, property, direction:number) {
+  sortArray(array, property, direction: number) {
     direction = direction || 1;
     array.sort(function compare(a, b) {
       let comparison = 0;
