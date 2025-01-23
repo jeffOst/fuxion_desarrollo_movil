@@ -332,7 +332,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
   }
 
 
-  async openObservacionesPausaModal(): Promise<any> {
+  async openObservacionesPausaModal(tituloModal): Promise<any> {
     const modal = await this.modalCtrl.create({
       component: MotivoPausaPage,
       backdropDismiss: true,
@@ -340,7 +340,8 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       mode: 'ios',
       componentProps: {
         valorModal: this.DsIniciaActividad.pk_idservicio,
-        idusuario: this.IdUsuarioLocal
+        idusuario: this.IdUsuarioLocal,
+        tituloModal: tituloModal
       }
     });
 
@@ -628,7 +629,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
         let flagGuardado: any = null; // Inicializa la variable con un valor por defecto
         let observacionGuardado: string = '';
-        const modalRetorno = await this.openObservacionesPausaModal(); // Llama a la función
+        const modalRetorno = await this.openObservacionesPausaModal('Ingresar'); // Llama a la función
 
         if (modalRetorno !== null) {
           if (modalRetorno.flag_guardar !== undefined) {
@@ -968,7 +969,72 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       }
     });
 
+  }
+
+
+  async editRow(row: any) {
+    
+    //console.log('Editar:', row);
+    //console.log(row.idofactividadpausa);
+    
+    // Lógica para editar la fila
+    // Por ejemplo, abrir un modal o redirigir
+    let flagGuardado: any = null; // Inicializa la variable con un valor por defecto
+    let observacionGuardado: string = '';
+    const modalRetorno = await this.openObservacionesPausaModal('Modificar'); // Llama a la función
+
+    if (modalRetorno !== null) {
+      if (modalRetorno.flag_guardar !== undefined) {
+        flagGuardado = modalRetorno.flag_guardar; // Asigna el valor retornado
+      } else {
+        flagGuardado = 0; // Valor por defecto si no está definido
+      }
+
+      if (modalRetorno.observaciones !== undefined) {
+        observacionGuardado = modalRetorno.observaciones; // Asigna el valor retornado
+      } else {
+        observacionGuardado = ''; // Valor por defecto si no está definido
+      }
+
+    } else {
+      flagGuardado = 0; // Valor por defecto si no está definido
+      observacionGuardado = ''; // Valor por defecto si no está definido
+    }
+
+
+    if (flagGuardado == 1) {
+
+      const idofactividadpausa = String(row.idofactividadpausa);
+      
+      //Actualiza registro
+      this.loadingController.create({
+        message: 'Regsitrando Horometro...',
+        translucent: true
+      }).then(loading => {
+        loading.present();
+        this.ApiServices.updateMotivoParada(idofactividadpausa, observacionGuardado).then((res) => {
+  
+          let rest: any;
+          rest = res[0];
+  
+          if (rest.o_nres == 0) {
+            alert('Error, no se pudo guardar correctamente.');
+          }
+  
+        }).finally(() => {
+          loading.dismiss();
+          // Refrescar los datos de la grilla de motivo de parada de maquina
+          this.refreshGridData();
+
+        });
+      });
+
+
+    }
 
   }
 
+
+
+  
 }

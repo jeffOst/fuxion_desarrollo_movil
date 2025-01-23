@@ -236,6 +236,18 @@ export class ProdGestionServicioService {
     );
   }
 
+  updateMotivoParada(idofactividadpausa: string, observacionGuardado: string): Promise<any> {
+    let dataPost = JSON.stringify(
+      {
+        acc: 42,
+        idofactividadpausa: idofactividadpausa,
+        observacionGuardado: observacionGuardado
+      }
+    );
+    return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
+    );
+  }
+
   SaveHorometroFin(iduser: string, horometroFin: string): Promise<any> {
     let dataPost = JSON.stringify(
       {

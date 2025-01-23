@@ -307,8 +307,9 @@
           </ion-col>
         </ion-row>
 
-        <ion-row *ngFor="let Row of DsGridMotivoPausa">
-          <ion-item mode="ios" button style="width: 100% !important;">
+        <!-- Agregar funcionalidad de swipe a cada fila -->
+        <ion-item-sliding *ngFor="let Row of DsGridMotivoPausa">
+          <ion-item mode="ios" button>
             <!-- Mostrar el icono solo si flag_activo es igual a 1 -->
             <ion-col size-sm="0.6" size-md="0.6" size-xl="0.6">
               <ion-icon name="timer" color="primary" size="large" *ngIf="Row.flag_activo === 1"></ion-icon>
@@ -324,20 +325,27 @@
               {{Row.fch_inicio_pausa}}
             </ion-col>
 
-            <!--<ion-col size-sm="1.5" size-md="1.5" size-xl="1.5">{{Row.fch_fin_pausa}}</ion-col>-->
-            <ion-col size-sm="1.5" size-md="1.5" size-xl="1.5" [ngStyle]="{ color: Row.flag_activo === 1 ? 'var(--ion-color-primary)' : 'black' }">
-              <!-- Mostrar fecha y hora actual si flag_activo es 1 -->
+            <ion-col size-sm="1.5" size-md="1.5" size-xl="1.5"
+              [ngStyle]="{ color: Row.flag_activo === 1 ? 'var(--ion-color-primary)' : 'black' }">
               <span *ngIf="Row.flag_activo === 1">{{ currentDateTime | date: 'yyyy-MM-dd HH:mm:ss' }}</span>
-              <!-- Mostrar valor de fch_fin_pausa si flag_activo no es 1 -->
               <span *ngIf="Row.flag_activo !== 1">{{ Row.fch_fin_pausa }}</span>
-            </ion-col>            
-
+            </ion-col>
 
             <ion-col size-sm="4" size-md="4" size-xl="4">{{Row.motivo_pausa_acti_ofap}}</ion-col>
           </ion-item>
-        </ion-row>
+
+          <!-- Botones de acciones deslizables -->
+          <!-- Botones de acciones deslizables, mostrados solo si Row.flag_activo no es 1 -->
+          <ion-item-options side="end" *ngIf="Row.flag_activo !== 1" (ionSwipe)="editRow(Row)">
+            <ion-item-option color="primary" expandable>
+              Editar
+            </ion-item-option>
+          </ion-item-options>
+
+        </ion-item-sliding>
       </ion-grid>
     </ion-item>
+
 
 
     <ion-item>
