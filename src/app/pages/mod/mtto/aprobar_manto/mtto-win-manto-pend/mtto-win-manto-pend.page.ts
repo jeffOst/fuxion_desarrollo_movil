@@ -25,6 +25,7 @@ import { ViewChild } from '@angular/core';
 import { IonTabs } from '@ionic/angular';
 import { GlovalProvider } from 'src/app/interfaces/mtto/GlobalVal';
 import { Network, ConnectionStatus } from '@capacitor/network';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -38,24 +39,30 @@ export class MttoWinMantoPendPage implements OnInit {
   navParamsAny: any;
   Cancelar: string = 'Cancelar';
   disableButton: boolean = false;
-  codsmg : string;
-  id_orden_trab_cab: string;
-  id_orden_trab_fis_cab : string
-  idblockguiaremicab: string
+  cod_bomba : string;
+  id_ot_vale_salida_bgc: string;
+  nro_oti : string;
+  idblockguiaremicab: string;
+  correguia: string;
   estaCargando: boolean = false;
   DataSetGrid: any;
   selectedItems: string[] = [];
   NombresUsuarioLocal: string;
   IdUsuarioLocal: string;
+  scanActive: boolean = true;
+  estaboBtnGuia: string;
   constructor(
     private router: Router,
     private alertController: AlertController,
     private loadingController: LoadingController,
     public  storage: Storage,
     private ApiService: MttoOrdentrabajoService,
+    private navCtrl: NavController,
+    private location: Location
   ) {
 
     this.navParamsAny = this.router.getCurrentNavigation().extras.state['Row'];
+    // this.idblockguiaremicab_new = this.router.getCurrentNavigation().extras.state['idblockguiaremicab_new'];
   }
 
   ngOnInit() {
@@ -69,15 +76,17 @@ export class MttoWinMantoPendPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.codsmg = this.navParamsAny.codsmg;
-    this.id_orden_trab_cab = this.navParamsAny.id_orden_trab_cab;
-    this.id_orden_trab_fis_cab = this.navParamsAny.id_orden_trab_fis_cab;
+    this.id_ot_vale_salida_bgc = this.navParamsAny.id_ot_vale_salida_bgc;
+    this.cod_bomba = this.navParamsAny.cod_bomba;
+    this.nro_oti = this.navParamsAny.nro_oti;
+    this.correguia = this.navParamsAny.correguia;
     this.idblockguiaremicab = this.navParamsAny.idblockguiaremicab
-    this.FListaEquiposPendMantoDet();
+    this.estaboBtnGuia = this.navParamsAny['ma00estado#nombre'];
+    this.ListBlockGuiasRemiDetOtis();
   }
 
 
-  FListaEquiposPendMantoDet(){
+  ListBlockGuiasRemiDetOtis(){ //CARGA EL DETALLE DE LAS OTIS POR ATENDER
     const loading = this.loadingController
     .create({
       message: 'Cargando lista...',
@@ -85,7 +94,7 @@ export class MttoWinMantoPendPage implements OnInit {
     })
     .then((loading) => {
       loading.present();
-      this.ApiService.ListFindOtsMantoDet('44', this.idblockguiaremicab, '')
+      this.ApiService.FlistBlockGuiasRemiDetOtis('44', this.idblockguiaremicab, '')
         .then((res) => {
           this.DataSetGrid = res;
           this.loadingController.dismiss();
@@ -104,42 +113,38 @@ export class MttoWinMantoPendPage implements OnInit {
     });
   }
 
-  FAprobarItemManto(){
-    console.log(
-      this.selectedItems
-    );
+  AprobacionItemsOt(){
+    const loading = this.loadingController
+    .create({
+      message: 'Cargando lista...',
+      translucent: true,
+    }).then((loading) => {
+      loading.present();
+      this.ApiService.FAprobacionItemsOt('50', this.idblockguiaremicab)
+        .then((res) => {
+          this.loadingController.dismiss();
+          this.estaCargando = false;
+          this.location.back();
+        })
+        .finally(() => {
+          this.loadingController.dismiss();
+          setTimeout(() => {
+          }, 600);
+        })
+        .catch(() => {
+        })
+        .then((err) => {
+          loading.dismiss();
+        });
+    });
   }
 
   async onCheckboxChange(Row: any){
-    // if(Row.stock_item == 0){
-    //   const alert = await this.alertController.create({
-    //     header: 'Alerta',
-    //     message: 'Stock en 0',
-    //     cssClass:'alerta-confirma',
-    //     mode: 'ios',
-    //     buttons: [
-    //       {
-    //         text: 'Aceptar',
-    //         handler: () => {
-    //         },
-    //       },
-    //     ],
-    //   });
-    //   await alert.present();
-    //   return false;
-    // }
-    if (Row.isChecked) {
-      this.selectedItems.push(Row.id_orden_trabajo_det);
-    } else {
-      const index = this.selectedItems.indexOf(Row.id_orden_trabajo_det);
-      if (index > -1) {
-        this.selectedItems.splice(index, 1);
-      }
-    }
+    this.ApiService.SaveCheckAtencionDet('46', Row.iddetguiaremi, Row.flag_ejecuta_bgd ? '1' : '0').then((res) => {
+    });
   }
 
-  FCargarDetalleOti(){
-    //creamos la cabecera de ALM.block_guiaremi_cab
+  CreaDetalleGuiaOti(){ //creamos la cabecera de ALM.block_guiaremi_cab y el detalle
     const loading = this.loadingController
     .create({
       message: 'Cargando lista...',
@@ -147,11 +152,11 @@ export class MttoWinMantoPendPage implements OnInit {
     })
     .then((loading) => {
       loading.present();
-      this.ApiService.CreateOtiAtencionCab('45', this.id_orden_trab_cab, '1', this.idblockguiaremicab)
+      this.ApiService.FCreaDetalleGuiaOti('49', this.id_ot_vale_salida_bgc, this.idblockguiaremicab)
         .then((res) => {
           this.loadingController.dismiss();
           this.estaCargando = false;
-          this.idblockguiaremicab = res[0].o_nres;
+          this.ListBlockGuiasRemiDetOtis(); //CARGA EL DETALLE DE LAS OTIS POR ATENDER
         })
         .finally(() => {
           this.loadingController.dismiss();
