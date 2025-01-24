@@ -112,6 +112,8 @@ export class HomePage {
     this.storage.get('USER_INFO').then((result1) => {
       localStorage = (result1);
       this.NombresUsuarioLocal = localStorage.user_name;
+      //inicia el codigo de maquina del tecnico de produccion con 0
+      this.globalVal.global_user_maquina = '0';
 
 
       if (localStorage.area == 'PRODUCCION') {
@@ -137,6 +139,10 @@ export class HomePage {
                 }
 
               } else {
+
+                //aquiii
+                this.globalVal.global_user_maquina = rest.codmaquina_hxu.toString();
+
                 //REDIRECCIONA AL LA VENTANA DE LA MAQUINA SELECCIONADA
                 this.goto_menu('prod-list-acti-programada', rest.codmaquina_hxu.toString(), rest.nombre_maquina.toString());
 

@@ -83,6 +83,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       this.DsIniciaActividad.idmaquina = this.navParams.idmaquina;
       this.DsIniciaActividad.idofpterminado = this.navParams.idofpterminado;
       this.DsIniciaActividad.EQUIPOID = this.navParams.EQUIPOID;
+      this.DsIniciaActividad.flag_historico_actividad = this.navParams.flag_historico_actividad;
       this.DsIniciaActividad.fasignado = this.navParams.fasignado;
       this.DsIniciaActividad.avatar = this.navParams.avatar;
       this.DsIniciaActividad.correorden = this.navParams.correorden;
@@ -279,9 +280,15 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
     console.log("VERIFICAR EL FLAG DEL BOTON CANCELAR");
     console.log(this.flagResumenDiario);
-
+    
+    /*
     if (this.flagResumenDiario == '1') {
       this.navCtrl.navigateForward("prod-resumen-diario-horas");
+    }
+    */
+
+    if(idflag == 1){
+      this.navCtrl.navigateForward("prod-list-acti-historico");
     }
     else if (this.idTargetMenu == 1) {
       this.navCtrl.navigateForward("prod-list-acti-programada");

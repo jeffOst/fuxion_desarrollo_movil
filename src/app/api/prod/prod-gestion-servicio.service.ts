@@ -314,13 +314,14 @@ export class ProdGestionServicioService {
     return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
     );
   }
-  ListFindActividadesHistorico(InputSearch: string, id_usuario_local: string, id_dispositivo: string): Promise<any> {
+  ListFindActividadesHistorico(InputSearch: string, id_usuario_local: string, id_dispositivo: string, idmaquina: any): Promise<any> {
     let dataPost = JSON.stringify(
       {
         acc: 31,
         s: InputSearch,
         idusu: id_usuario_local,
-        iddevice: id_dispositivo
+        iddevice: id_dispositivo,
+        idmaquina: idmaquina
 
       }
     );

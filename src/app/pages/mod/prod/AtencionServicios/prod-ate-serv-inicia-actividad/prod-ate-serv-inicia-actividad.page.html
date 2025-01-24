@@ -3,7 +3,7 @@
     <ion-title text-capitalize>Iniciar Servicio</ion-title>
     <!--<ion-title color="primary" style="font-size: 6px;">{{NomUsuario}}</ion-title>-->
     <ion-buttons slot="start">
-      <ion-button (click)="FCloseWin(DsIniciaActividad.EQUIPOID)" class="">
+      <ion-button (click)="FCloseWin(DsIniciaActividad.flag_historico_actividad)" class="">
         <ion-icon part="icon" aria-hidden="true" role="img" class="md hydrated" name="chevron-back-outline"></ion-icon>
         Cancelar <!--aqui-->
       </ion-button>
@@ -266,17 +266,20 @@
       <ion-label>
         <p>Estado</p>
         <h1 *ngIf="hideNomEstado">{{DsIniciaActividad.estado}}</h1>
-        <ion-item lines="none" style="padding: 0px !important">
+        <ion-item *ngIf="DsIniciaActividad?.flag_historico_actividad !== 1" lines="none" style="padding: 0px !important">
           <ion-button *ngIf="hideBtnInicio" style="width: 50% !important" expand="full" size="large" color="light"
             (click)="FEstadoActividad(2)">PAUSAR</ion-button>
           <ion-button *ngIf="hideBtnInicio" style="width: 50% !important" expand="full" size="large" color="light"
             (click)="FEstadoActividad(3)">FINALIZAR</ion-button>
-
+        
           <ion-button *ngIf="hideBtnReanuda" style="width: 99% !important" expand="full" size="large" color="light"
             (click)="FEstadoActividad(4)">REANUDAR</ion-button>
         </ion-item>
+        
       </ion-label>
     </ion-item>
+
+    
 
     <!-- Contenido de la tabla -->
     <ion-item>
