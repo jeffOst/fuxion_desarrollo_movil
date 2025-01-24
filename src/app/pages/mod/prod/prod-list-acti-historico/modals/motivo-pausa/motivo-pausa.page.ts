@@ -22,6 +22,7 @@ export class MotivoPausaPage implements OnInit {
   rest_moti_parada: any;
   ArrayItemsSelectedDesti: MPieza[] = [];
   mostrarTextoObservaciones: boolean = false; // Variable para mostrar/ocultar el campo
+  tituloModal: string = '';
 
   constructor(
     private navParams: NavParams,
