@@ -50,7 +50,13 @@ export class MotivoPausaPage implements OnInit {
     });
 
     this.valorModal = this.navParams.get('valorModal');
-    //this.fechafin_pausa = '2025-01-27 15:11:54Z'; // Formato ISO
+    
+    //this.fechainicio_pausa = '2025-01-27T13:05:00Z'; // Formato ISO
+    //this.fechafin_pausa = '2025-01-30T16:11:00Z'; // Formato ISO
+    
+    this.fechainicio_pausa = this.navParams.get('fecha_ini_formato_iso'); // Formato ISO
+    this.fechafin_pausa = this.navParams.get('fecha_fin_formato_iso'); // Formato ISO
+
   }
 
   dismiss() {

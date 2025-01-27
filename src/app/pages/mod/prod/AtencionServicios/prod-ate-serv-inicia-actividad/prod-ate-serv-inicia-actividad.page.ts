@@ -339,7 +339,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
   }
 
 
-  async openObservacionesPausaModal(tituloModal, flag_edit_pausa): Promise<any> {
+  async openObservacionesPausaModal(tituloModal, flag_edit_pausa, fecha_ini_formato_iso, fecha_fin_formato_iso): Promise<any> {
     const modal = await this.modalCtrl.create({
       component: MotivoPausaPage,
       backdropDismiss: true,
@@ -349,7 +349,9 @@ export class ProdAteServIniciaActividadPage implements OnInit {
         valorModal: this.DsIniciaActividad.pk_idservicio,
         idusuario: this.IdUsuarioLocal,
         tituloModal: tituloModal,
-        flag_edit_pausa: flag_edit_pausa
+        flag_edit_pausa: flag_edit_pausa,
+        fecha_ini_formato_iso: fecha_ini_formato_iso,
+        fecha_fin_formato_iso: fecha_fin_formato_iso
       }
     });
 
@@ -637,7 +639,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
         let flagGuardado: any = null; // Inicializa la variable con un valor por defecto
         let observacionGuardado: string = '';
-        const modalRetorno = await this.openObservacionesPausaModal('Ingresar', 0); // Llama a la función
+        const modalRetorno = await this.openObservacionesPausaModal('Ingresar', 0, '', ''); // Llama a la función
 
         if (modalRetorno !== null) {
           if (modalRetorno.flag_guardar !== undefined) {
@@ -992,7 +994,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
     let fechafin_pausaGuardado: string = '';
     let fechainicio_pausaGuardado: string = '';
     
-    const modalRetorno = await this.openObservacionesPausaModal('Modificar', 1); // Llama a la función
+    const modalRetorno = await this.openObservacionesPausaModal('Modificar', 1, row.fecha_ini_formato_iso, row.fecha_fin_formato_iso); // Llama a la función
 
     if (modalRetorno !== null) {
       if (modalRetorno.flag_guardar !== undefined) {
