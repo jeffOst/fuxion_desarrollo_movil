@@ -127,8 +127,8 @@
 
 
 
-      <ion-button *ngIf="mostrarBoton1" (click)="showGroup(1)" [color]="buttonColor(1)">Cable 1</ion-button>
-      <ion-button *ngIf="mostrarBoton2" (click)="showGroup(2)" [color]="buttonColor(2)">Cable 2</ion-button>
+      <ion-button (click)="showGroup(1)" [color]="buttonColor(1)">Cable 1</ion-button>
+      <ion-button (click)="showGroup(2)" [color]="buttonColor(2)">Cable 2</ion-button>
 
       <ion-item-group *ngIf="showGroup1">
 
