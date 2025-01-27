@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 import { ModalController, NavParams, AlertController, NavController, IonInput, Platform, LoadingController } from '@ionic/angular';
 import { ProdGestionServicioService } from "src/app/api/prod/prod-gestion-servicio.service";
 import { MPieza } from "src/app/interfaces/prod/Pieza";
@@ -23,8 +24,15 @@ export class MotivoPausaPage implements OnInit {
   ArrayItemsSelectedDesti: MPieza[] = [];
   mostrarTextoObservaciones: boolean = false; // Variable para mostrar/ocultar el campo
   tituloModal: string = '';
+  flag_edit_pausa: number = 0;
+  fechafin_pausa: string;
+  fechainicio_pausa: string;
+  NombresUsuarioLocal: string;
+  IdUsuarioLocal: string;
+  user_permiso_80: number = 0;
 
   constructor(
+    public storage: Storage,
     private navParams: NavParams,
     private modalController: ModalController,
     private alertController: AlertController,
@@ -32,7 +40,17 @@ export class MotivoPausaPage implements OnInit {
     private loadingController: LoadingController,
     public ApiServices: ProdGestionServicioService
   ) {
+
+    let localStorage;
+    this.storage.get('USER_INFO').then((result1) => {
+      localStorage = (result1);
+      this.NombresUsuarioLocal = localStorage.user_name;
+      this.IdUsuarioLocal = localStorage.user_id;
+      this.user_permiso_80 = localStorage.permiso_80;
+    });
+
     this.valorModal = this.navParams.get('valorModal');
+    //this.fechafin_pausa = '2025-01-27 15:11:54Z'; // Formato ISO
   }
 
   dismiss() {
@@ -105,6 +123,8 @@ export class MotivoPausaPage implements OnInit {
 
     this.modalController.dismiss({
       'observaciones': this.observaciones,
+      'fechafin_pausa': this.fechafin_pausa,
+      'fechainicio_pausa': this.fechainicio_pausa,
       'flag_guardar': 1
     });
   }

@@ -236,12 +236,14 @@ export class ProdGestionServicioService {
     );
   }
 
-  updateMotivoParada(idofactividadpausa: string, observacionGuardado: string): Promise<any> {
+  updateMotivoParada(idofactividadpausa: string, observacionGuardado: string, fechainicio_pausaGuardado: string, fechafin_pausa: string): Promise<any> {
     let dataPost = JSON.stringify(
       {
         acc: 42,
         idofactividadpausa: idofactividadpausa,
-        observacionGuardado: observacionGuardado
+        observacionGuardado: observacionGuardado,
+        fechainicio_pausa: fechainicio_pausaGuardado,
+        fechafin_pausa: fechafin_pausa
       }
     );
     return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results
