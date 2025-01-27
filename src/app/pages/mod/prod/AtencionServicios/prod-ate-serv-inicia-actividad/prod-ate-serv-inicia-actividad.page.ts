@@ -50,9 +50,14 @@ export class ProdAteServIniciaActividadPage implements OnInit {
   DsGridMotivoPausa: any[] = []; // Inicializamos como un array vacío
   pdfSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
   currentDateTime: Date = new Date(); // Inicializa con la fecha y hora actual
+  DsGridHojaRuta: any[] = []; // Inicializamos como un array vacío
+  CantItemsHojaRuta: number = 0;
+  id_usuario_local: string;
+  id_dispositivo: string;
 
 
   constructor(
+    public prodservice: ProdGestionServicioService,
     public navCtrl: NavController,
     private router: Router,
     public storage: Storage,
@@ -149,6 +154,8 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       this.DsIniciaActividad.cantidad_pendiente = this.navParams.cantidad_pendiente;
       this.DsIniciaActividad.cantidad_ingresar = 0;
 
+      this.DsIniciaActividad.codhru = this.navParams.codhru;
+
 
       /////////////metalizado
       //console.log('this.DsIniciaActividad.proceso_metalizado::', this.DsIniciaActividad.proceso_metalizado);
@@ -223,6 +230,14 @@ export class ProdAteServIniciaActividadPage implements OnInit {
   }
 
   ionViewDidEnter() {
+
+    this.prodservice.ListFindHojaRuta('', this.DsIniciaActividad.idofpterminado, this.id_usuario_local, this.id_dispositivo).then((res) => {
+      console.log(res);
+      this.DsGridHojaRuta = res; //aquio
+      this.CantItemsHojaRuta = this.DsGridHojaRuta.length;
+    }).finally(() => {
+
+    });
 
     this.refreshGridData();
 
