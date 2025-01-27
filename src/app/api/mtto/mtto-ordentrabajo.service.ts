@@ -60,25 +60,74 @@ export class MttoOrdentrabajoService {
     //private device: Device
   ) { }
 
-  //NEW JA 
+  FAprobacionItemsOt(acc: string, idblockguiaremicab : string): Promise<any> {
+    let dataPost = JSON.stringify({
+      acc: acc,
+      idblockguiaremicab: idblockguiaremicab
+    });
+    return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results);
+  }
 
-  CreateOtiAtencionCab(
+  FDeleteRowGuiaCabOtis(acc: string,idblockguiaremicab: string): Promise<any> {
+    let dataPost = JSON.stringify({
+      acc: acc,
+      idblockguiaremicab: idblockguiaremicab
+    });
+    return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results);
+  }
+
+  //NEW JA
+  FListBlockGuiasRemiCabOtis(acc: string, id_oti: string): Promise<any> {
+    let dataPost = JSON.stringify({
+      acc: acc,
+      id_oti: id_oti
+    });
+    return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results);
+  }
+  //NEW JA
+  SaveCheckAtencionDet(
+    acc : string,
+    idblockguiaremidet: string,
+    flag: string,
+  ): Promise<any> {
+    let dataPost = JSON.stringify({
+      acc: acc,
+      idblockguiaremidet: idblockguiaremidet,
+      flag: flag
+    });
+    return this.httpClient.post(this.urlApiProd, dataPost).toPromise().then(results => results);
+  }
+
+  // NEW JA
+  FCreaDetalleGuiaOti(
     acc : string,
     id_oti : string,
-    id_usu : string,
-    id_block: string
+    idblockguiaremicab: string,
   ) : Promise<any>{
     let dataPost = JSON.stringify({
       acc: acc,
       id_oti : id_oti,
-      id_usu: id_usu,
-      id_block: id_block
+      idblockguiaremicab: idblockguiaremicab
     });
     return this.http.post(this.urlApiProd, dataPost).toPromise().then(results => results);
   }
 
+  //NEW JA 
+  FCreaCabeceraGuiaOti(
+    acc : string,
+    id_oti : string,
+    id_usu : string
+  ) : Promise<any>{
+    let dataPost = JSON.stringify({
+      acc: acc,
+      id_oti : id_oti,
+      id_usu: id_usu
+    });
+    return this.http.post(this.urlApiProd, dataPost).toPromise().then(results => results);
+  }
 
-  ListFindOtsMantoDet( //No usar por el momento
+  //New JA
+  FlistBlockGuiasRemiDetOtis(
     acc : string,
     id_block : string,
     InputSearch: string,

@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar mode="ios" color="primary">
-    <ion-title text-capitalize>Listado Material</ion-title>
+    <ion-title text-capitalize>Materiales</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="prod-list-acti-programada" [text]="Cancelar" [disabled]="disableButton">
       </ion-back-button>
@@ -11,16 +11,21 @@
   <ion-list>
     <ion-item>
       <ion-label>
-        <h1>{{codsmg}}</h1>
+        <h1>{{cod_bomba}}</h1>
       </ion-label>
       <ion-label>
-        <h1>N° O.T: {{id_orden_trab_fis_cab}}</h1>
+        <h1>N° O.T: {{nro_oti}}</h1>
+      </ion-label>
+      <ion-label>
+        <h1>N° Guia: {{correguia}}</h1>
       </ion-label>
       <ion-item>
         <ion-label>
           <div>
-            <ion-button color="secondary" (click)="FCargarDetalleOti()">Cargar Detalle</ion-button>
-            <ion-button color="success" (click)="FAprobarItemManto()">Atender</ion-button>
+            <ion-button color="secondary" [disabled]="estaboBtnGuia === 'Terminado'"
+              (click)="CreaDetalleGuiaOti()">Cargar Detalle</ion-button>
+            <ion-button color="success" [disabled]="estaboBtnGuia === 'Terminado'"
+              (click)="AprobacionItemsOt()">Atender</ion-button>
           </div>
         </ion-label>
       </ion-item>
@@ -36,7 +41,7 @@
       <ion-searchbar #IdHtmlInputSearch mode="ios" debounce="1700" cancelButtonText="Cancelar" enterkeyhint="done"
         placeholder="Filtrar Parametros">
       </ion-searchbar>
-      <ion-icon slot="end" name="sync-outline" (click)="FListaEquiposPendMantoDet()" #idIconButtonSync></ion-icon>
+      <ion-icon slot="end" name="sync-outline" (click)="ListBlockGuiasRemiDetOtis()" #idIconButtonSync></ion-icon>
     </ion-item>
     <ion-card-header>
       <div>
@@ -46,36 +51,43 @@
       </div>
     </ion-card-header>
 
-
-    <ion-item-sliding *ngFor="let Row of DataSetGrid">
+    <ion-item-sliding *ngFor="let Row of DataSetGrid; let i = index">
       <ion-item>
         <ion-label>
-          <div>Item: {{Row.prdid}} - {{Row.prdtxt}} - {{Row['ma00unidad#nombre']}}</div>
-          <div>
-            Solicitado: <span>{{Row.prdcant}}</span>
-          </div>
-          <div>
-            Stock Ubi: <span [ngStyle]="{'color': Row.stock_sxu > 0 ? 'green' : 'red'}" >{{Row.stock_sxu}}</span>
-          </div>
+          <div>{{i + 1}}. Item: {{Row.prdid}} - {{Row.prdtxt}} - {{Row['ma00unidad#nombre']}}</div>
+          <p>
+            Solicitado: <span>{{Row.prdcant}}</span> <span class="ion-margin">Ejecuta {{Row.cantejecutada}}</span>
+          </p>
+          <p>
+            Stock-Ubicacion: [<span [ngStyle]="{'color': Row.stock_sxu > 0 ? 'green' : 'red'}">{{Row.stock_sxu}}</span>
+            |
+            <span>{{Row.nombre_ua}}</span>]
+          </p>
         </ion-label>
         <ion-badge slot="end" class="ion-margin">{{Row.Y06002}}</ion-badge>
-        <ion-checkbox slot="end" [(ngModel)]="Row.isChecked" aria-label="Toggle task completion"
-          (ionChange)="onCheckboxChange(Row)" [disabled]="Row.estado_check"></ion-checkbox>
+        <ion-checkbox slot="end" [(ngModel)]="Row.flag_ejecuta_bgd" aria-label="Toggle task completion"
+          (ionChange)="onCheckboxChange(Row)" [disabled]="Row.cantejecutada <= 0"></ion-checkbox>
       </ion-item>
-      <ion-item-options slot="end">
-        <ion-item-option color="warning">
-          <ion-icon slot="icon-only" name="pin"></ion-icon>
-        </ion-item-option>
-        <ion-item-option color="tertiary">
-          <ion-icon slot="icon-only" name="share"></ion-icon>
-        </ion-item-option>
-        <ion-item-option color="danger" expandable="true">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
     </ion-item-sliding>
   </ion-card>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="chevron-up-circle"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button class="fab-with-text">
+        <ion-icon name="document"></ion-icon>
+        <span>Documento</span>
+      </ion-fab-button>
+      <ion-fab-button class="fab-with-text">
+        <ion-icon name="color-palette"></ion-icon>
+        <span>Paleta</span>
+      </ion-fab-button>
+      <ion-fab-button class="fab-with-text">
+        <ion-icon name="globe"></ion-icon>
+        <span>Globo</span>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
 </ion-content>
-<!-- <ion-thumbnail slot="start"> -->
-<!-- <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" /> -->
-<!-- </ion-thumbnail> -->

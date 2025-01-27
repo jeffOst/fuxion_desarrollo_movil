@@ -89,7 +89,10 @@ export class MttoList1MantoPendPage implements OnInit {
 
   FNavigatePageDet(Row: any){
     let navigationExtras: NavigationExtras = {state: {Row}};
-    this.navCtrl.navigateForward(['/mtto-win-manto-pend'], navigationExtras);
+    this.navCtrl.navigateForward(['/mtto-list-manto-guia-ot'], navigationExtras);
   }
 
+  FlistBlockGuiasRemiCabOtis(){
+    
+  }
 }

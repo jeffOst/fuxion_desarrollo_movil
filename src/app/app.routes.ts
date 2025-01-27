@@ -435,7 +435,11 @@ export const routes: Routes = [
   {
     path: 'mtto-win-manto-pend',
     loadComponent: () => import('./pages/mod/mtto/aprobar_manto/mtto-win-manto-pend/mtto-win-manto-pend.page').then( m => m.MttoWinMantoPendPage)
+  },  {
+    path: 'mtto-list-manto-guia-ot',
+    loadComponent: () => import('./pages/mod/mtto/aprobar_manto/mtto-list-manto-guia-ot/mtto-list-manto-guia-ot.page').then( m => m.MttoListMantoGuiaOtPage)
   }
+
 
 
 
