@@ -103,11 +103,15 @@ export class MttoOrdentrabajoService {
     acc : string,
     id_oti : string,
     idblockguiaremicab: string,
+    flag: string,
+    almacen: string,
   ) : Promise<any>{
     let dataPost = JSON.stringify({
       acc: acc,
       id_oti : id_oti,
-      idblockguiaremicab: idblockguiaremicab
+      idblockguiaremicab: idblockguiaremicab,
+      flag: flag,
+      almacen: almacen
     });
     return this.http.post(this.urlApiProd, dataPost).toPromise().then(results => results);
   }

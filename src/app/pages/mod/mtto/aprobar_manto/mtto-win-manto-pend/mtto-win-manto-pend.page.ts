@@ -144,30 +144,30 @@ export class MttoWinMantoPendPage implements OnInit {
     });
   }
 
-  CreaDetalleGuiaOti(){ //creamos la cabecera de ALM.block_guiaremi_cab y el detalle
-    const loading = this.loadingController
-    .create({
-      message: 'Cargando lista...',
-      translucent: true,
-    })
-    .then((loading) => {
-      loading.present();
-      this.ApiService.FCreaDetalleGuiaOti('49', this.id_ot_vale_salida_bgc, this.idblockguiaremicab)
-        .then((res) => {
-          this.loadingController.dismiss();
-          this.estaCargando = false;
-          this.ListBlockGuiasRemiDetOtis(); //CARGA EL DETALLE DE LAS OTIS POR ATENDER
-        })
-        .finally(() => {
-          this.loadingController.dismiss();
-          setTimeout(() => {
-          }, 600);
-        })
-        .catch(() => {
-        })
-        .then(request => {
-          loading.dismiss();
-        });
-    });
-  }
+  // CreaDetalleGuiaOti(){ //creamos la cabecera de ALM.block_guiaremi_cab y el detalle
+  //   const loading = this.loadingController
+  //   .create({
+  //     message: 'Cargando lista...',
+  //     translucent: true,
+  //   })
+  //   .then((loading) => {
+  //     loading.present();
+  //     this.ApiService.FCreaDetalleGuiaOti('49', this.id_ot_vale_salida_bgc, this.idblockguiaremicab, '0', '001')
+  //       .then((res) => {
+  //         this.loadingController.dismiss();
+  //         this.estaCargando = false;
+  //         this.ListBlockGuiasRemiDetOtis(); //CARGA EL DETALLE DE LAS OTIS POR ATENDER
+  //       })
+  //       .finally(() => {
+  //         this.loadingController.dismiss();
+  //         setTimeout(() => {
+  //         }, 600);
+  //       })
+  //       .catch(() => {
+  //       })
+  //       .then(request => {
+  //         loading.dismiss();
+  //       });
+  //   });
+  // }
 }
