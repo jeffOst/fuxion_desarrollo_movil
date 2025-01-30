@@ -117,7 +117,6 @@ export interface MPieza {
     flag_agregado: string,
     plano_diseno: string,
     motivoPausa: string,
-    fechaFinPausa: string,
     cantidad_total: any,
     cantidad_revisada: string,
     cantidad_pendiente: string,
