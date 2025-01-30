@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ModalController, IonicModule, LoadingController, AlertController, NavParams } from '@ionic/angular';
+import { ModalController, IonicModule, LoadingController, AlertController } from '@ionic/angular';
 
 //import { ModalController, IonicModule, NavParams, AlertController, NavController, IonInput, Platform, LoadingController } from '@ionic/angular';
 import { ProdGestionServicioService } from "src/app/api/prod/prod-gestion-servicio.service";
@@ -27,7 +27,7 @@ export class ModalHorometroFinPage implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private router: Router,
-    private navParams: NavParams,
+    //private navParams: NavParams,
     private modalController: ModalController,
     private alertController: AlertController,
     private logincustomService: LogincustomService,
@@ -53,35 +53,11 @@ export class ModalHorometroFinPage implements OnInit {
   }
 
   ngOnInit() {
-    this.horometroFinal = this.navParams.get('horometroFinAnterior');
-
   }
 
   async submitForm() {
     // Guardar el valor ingresado y cerrar el modal
-    //console.log('Horómetro Final:', this.horometroFinal.toString());
-    //console.log(this.globalVal.global_horometro_fin_anterior);
-
-    // Obtener solo los primeros 4 dígitos (las horas)
-    const horasGuardado = this.globalVal.global_horometro_fin_anterior.substring(0, 4);
-    //console.log('Horas (primeros 4 dígitos):', horasGuardado);
-
-    // Obtener solo los primeros 4 dígitos (las horas)
-    const horasingresar = this.horometroFinal.toString().substring(0, 4);
-    //console.log('Horas (primeros 4 dígitos):', horasingresar);
-
-
-    if (horasingresar <= horasGuardado) {
-
-      const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'El valor del Horometro a ingresar debe ser mayor al horometro de Inicio.',
-        buttons: ['OK']
-      });
-      await alert.present();
-      return;
-
-    }
+    console.log('Horómetro Final:', this.horometroFinal.toString());
 
     // Lógica para manejar los datos del formulario
     //console.log('Datos del formulario:', this.formData);
@@ -155,26 +131,26 @@ export class ModalHorometroFinPage implements OnInit {
 
   formatTime(event: any) {
     let value = event.target.value;
-
+  
     // Elimina caracteres no numéricos
     value = value.replace(/[^0-9]/g, '');
-
+  
     // Asegura que el valor no exceda los 8 caracteres
     if (value.length > 8) {
       value = value.slice(0, 8);
     }
-
+  
     // Formatea el valor de acuerdo con hh:mm:ss
     if (value.length >= 5) {
       value = value.slice(0, 4) + ':' + value.slice(4, 6) + (value.length > 6 ? ':' + value.slice(6, 8) : '');
     } else if (value.length >= 4) {
       value = value.slice(0, 4) + ':' + value.slice(4);
-    }
-
+    } 
+  
     // Actualiza el campo de entrada y el modelo de datos
     event.target.value = value;
     this.horometroFinal = value;
   }
-
+  
 
 }

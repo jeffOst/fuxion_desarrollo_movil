@@ -34,11 +34,9 @@ export class ModalHorometroInicioPage implements OnInit {
   formData = {
     turno: '',
     maquina: '',
-    horometroInicial: '', //'0000:00:00',
+    horometroInicial: '0000:00:00',
     nombreMaquina: '',
   };
-
-  horometroFinAnterior: string;
 
   constructor(
     private router: Router,
@@ -67,12 +65,6 @@ export class ModalHorometroInicioPage implements OnInit {
   NomUsuario: String;
 
   ngOnInit() {
-    
-    this.horometroFinAnterior = this.navParams.get('horometroFinAnterior');
-    console.log('Valor recibido:', this.horometroFinAnterior); // Para verificar
-
-    this.formData.horometroInicial = this.horometroFinAnterior;
-
     this.load_cbos();
     this.obtenerIdCodMaquinaDet();
   }
@@ -187,9 +179,6 @@ export class ModalHorometroInicioPage implements OnInit {
           this.refrescar_menu_produccion(this.globalVal.global_user_id, this.formData.maquina.toString());
           this.dismiss(); // Cierra el modal después de guardar
 
-          //ASIGNAR EL VALOR DEL HOROMETRO ANTERIOR
-          this.globalVal.global_horometro_fin_anterior = this.formData.horometroInicial.toString();
-
         }
 
       } else {
@@ -202,9 +191,6 @@ export class ModalHorometroInicioPage implements OnInit {
         this.refrescar_menu_produccion(this.globalVal.global_user_id, this.formData.maquina.toString());
         this.dismiss(); // Cierra el modal después de guardar
 
-        //ASIGNAR EL VALOR DEL HOROMETRO ANTERIOR
-        this.globalVal.global_horometro_fin_anterior = this.formData.horometroInicial.toString();
-        
       }
 
     }

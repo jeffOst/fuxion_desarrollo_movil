@@ -156,10 +156,6 @@ export class MenuComponent implements OnInit {
       
       const modal = await this.modalController.create({
         component: ModalHorometroFinPage,
-        componentProps: {
-          horometroFinAnterior: this.globalVal.global_horometro_fin_anterior // Pasa el valor al modal
-        }
-
       });
 
       modal.onDidDismiss().then((data) => {

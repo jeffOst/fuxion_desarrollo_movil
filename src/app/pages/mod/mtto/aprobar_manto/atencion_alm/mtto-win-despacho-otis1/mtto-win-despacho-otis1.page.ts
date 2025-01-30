@@ -26,22 +26,20 @@ import { IonTabs } from '@ionic/angular';
 import { GlovalProvider } from 'src/app/interfaces/mtto/GlobalVal';
 import { Network, ConnectionStatus } from '@capacitor/network';
 import { Location } from '@angular/common';
-
-
 @Component({
-  selector: 'app-mtto-win-manto-pend',
-  templateUrl: './mtto-win-manto-pend.page.html',
-  styleUrls: ['./mtto-win-manto-pend.page.scss'],
+  selector: 'app-mtto-win-despacho-otis1',
+  templateUrl: './mtto-win-despacho-otis1.page.html',
+  styleUrls: ['./mtto-win-despacho-otis1.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule],
 })
-export class MttoWinMantoPendPage implements OnInit {
+export class MttoWinDespachoOtis1Page implements OnInit {
   navParamsAny: any;
   Cancelar: string = 'Cancelar';
   disableButton: boolean = false;
-  cod_bomba : string;
+  cod_bomba: string;
   id_ot_vale_salida_bgc: string;
-  nro_oti : string;
+  nro_oti: string;
   idblockguiaremicab: string;
   correguia: string;
   estaCargando: boolean = false;
@@ -55,14 +53,12 @@ export class MttoWinMantoPendPage implements OnInit {
     private router: Router,
     private alertController: AlertController,
     private loadingController: LoadingController,
-    public  storage: Storage,
+    public storage: Storage,
     private ApiService: MttoOrdentrabajoService,
     private navCtrl: NavController,
     private location: Location
   ) {
-
     this.navParamsAny = this.router.getCurrentNavigation().extras.state['Row'];
-    // this.idblockguiaremicab_new = this.router.getCurrentNavigation().extras.state['idblockguiaremicab_new'];
   }
 
   ngOnInit() {
@@ -74,7 +70,6 @@ export class MttoWinMantoPendPage implements OnInit {
       this.IdUsuarioLocal = localStorage.user_id;
     });
   }
-
   ionViewWillEnter() {
     this.id_ot_vale_salida_bgc = this.navParamsAny.id_ot_vale_salida_bgc;
     this.cod_bomba = this.navParamsAny.cod_bomba;
@@ -84,7 +79,6 @@ export class MttoWinMantoPendPage implements OnInit {
     this.estaboBtnGuia = this.navParamsAny['ma00estado#nombre'];
     this.ListBlockGuiasRemiDetOtis();
   }
-
 
   ListBlockGuiasRemiDetOtis(){ //CARGA EL DETALLE DE LAS OTIS POR ATENDER
     const loading = this.loadingController
@@ -110,6 +104,11 @@ export class MttoWinMantoPendPage implements OnInit {
         .then((err) => {
           loading.dismiss();
         });
+    });
+  }
+
+  async onCheckboxChange(Row: any){
+    this.ApiService.SaveCheckAtencionDet('46', Row.iddetguiaremi, Row.flag_ejecuta_bgd ? '1' : '0').then((res) => {
     });
   }
 
@@ -139,35 +138,30 @@ export class MttoWinMantoPendPage implements OnInit {
     });
   }
 
-  async onCheckboxChange(Row: any){
-    this.ApiService.SaveCheckAtencionDet('46', Row.iddetguiaremi, Row.flag_ejecuta_bgd ? '1' : '0').then((res) => {
+  CreaDetalleGuiaOti(){ //creamos la cabecera de ALM.block_guiaremi_cab y el detalle
+    const loading = this.loadingController
+    .create({
+      message: 'Cargando lista...',
+      translucent: true,
+    })
+    .then((loading) => {
+      loading.present();
+      this.ApiService.FCreaDetalleGuiaOti('49', this.id_ot_vale_salida_bgc, this.idblockguiaremicab, '0', '001')
+        .then((res) => {
+          this.loadingController.dismiss();
+          this.estaCargando = false;
+          this.ListBlockGuiasRemiDetOtis(); //CARGA EL DETALLE DE LAS OTIS POR ATENDER
+        })
+        .finally(() => {
+          this.loadingController.dismiss();
+          setTimeout(() => {
+          }, 600);
+        })
+        .catch(() => {
+        })
+        .then(request => {
+          loading.dismiss();
+        });
     });
   }
-
-  // CreaDetalleGuiaOti(){ //creamos la cabecera de ALM.block_guiaremi_cab y el detalle
-  //   const loading = this.loadingController
-  //   .create({
-  //     message: 'Cargando lista...',
-  //     translucent: true,
-  //   })
-  //   .then((loading) => {
-  //     loading.present();
-  //     this.ApiService.FCreaDetalleGuiaOti('49', this.id_ot_vale_salida_bgc, this.idblockguiaremicab, '0', '001')
-  //       .then((res) => {
-  //         this.loadingController.dismiss();
-  //         this.estaCargando = false;
-  //         this.ListBlockGuiasRemiDetOtis(); //CARGA EL DETALLE DE LAS OTIS POR ATENDER
-  //       })
-  //       .finally(() => {
-  //         this.loadingController.dismiss();
-  //         setTimeout(() => {
-  //         }, 600);
-  //       })
-  //       .catch(() => {
-  //       })
-  //       .then(request => {
-  //         loading.dismiss();
-  //       });
-  //   });
-  // }
 }

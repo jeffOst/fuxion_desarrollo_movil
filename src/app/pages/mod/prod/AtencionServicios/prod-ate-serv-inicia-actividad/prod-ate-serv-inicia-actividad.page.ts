@@ -50,14 +50,9 @@ export class ProdAteServIniciaActividadPage implements OnInit {
   DsGridMotivoPausa: any[] = []; // Inicializamos como un array vacío
   pdfSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
   currentDateTime: Date = new Date(); // Inicializa con la fecha y hora actual
-  DsGridHojaRuta: any[] = []; // Inicializamos como un array vacío
-  CantItemsHojaRuta: number = 0;
-  id_usuario_local: string;
-  id_dispositivo: string;
 
 
   constructor(
-    public prodservice: ProdGestionServicioService,
     public navCtrl: NavController,
     private router: Router,
     public storage: Storage,
@@ -154,8 +149,6 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       this.DsIniciaActividad.cantidad_pendiente = this.navParams.cantidad_pendiente;
       this.DsIniciaActividad.cantidad_ingresar = 0;
 
-      this.DsIniciaActividad.codhru = this.navParams.codhru;
-
 
       /////////////metalizado
       //console.log('this.DsIniciaActividad.proceso_metalizado::', this.DsIniciaActividad.proceso_metalizado);
@@ -230,14 +223,6 @@ export class ProdAteServIniciaActividadPage implements OnInit {
   }
 
   ionViewDidEnter() {
-
-    this.prodservice.ListFindHojaRuta('', this.DsIniciaActividad.idofpterminado, this.id_usuario_local, this.id_dispositivo).then((res) => {
-      console.log(res);
-      this.DsGridHojaRuta = res; //aquio
-      this.CantItemsHojaRuta = this.DsGridHojaRuta.length;
-    }).finally(() => {
-
-    });
 
     this.refreshGridData();
 
@@ -354,7 +339,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
   }
 
 
-  async openObservacionesPausaModal(tituloModal, flag_edit_pausa, fecha_ini_formato_iso, fecha_fin_formato_iso): Promise<any> {
+  async openObservacionesPausaModal(tituloModal): Promise<any> {
     const modal = await this.modalCtrl.create({
       component: MotivoPausaPage,
       backdropDismiss: true,
@@ -363,10 +348,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       componentProps: {
         valorModal: this.DsIniciaActividad.pk_idservicio,
         idusuario: this.IdUsuarioLocal,
-        tituloModal: tituloModal,
-        flag_edit_pausa: flag_edit_pausa,
-        fecha_ini_formato_iso: fecha_ini_formato_iso,
-        fecha_fin_formato_iso: fecha_fin_formato_iso
+        tituloModal: tituloModal
       }
     });
 
@@ -378,7 +360,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
           //console.log(dataReturned.data);
 
         } else {
-          resolve({ flag_guardar: 0, observaciones: '', fechafin_pausa: '', fechainicio_pausa: '' }); // Devuelve un objeto con valores por defecto
+          resolve({ flag_guardar: 0, observaciones: '' }); // Devuelve un objeto con valores por defecto
         }
       });
       modal.present();
@@ -654,7 +636,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
 
         let flagGuardado: any = null; // Inicializa la variable con un valor por defecto
         let observacionGuardado: string = '';
-        const modalRetorno = await this.openObservacionesPausaModal('Ingresar', 0, '', ''); // Llama a la función
+        const modalRetorno = await this.openObservacionesPausaModal('Ingresar'); // Llama a la función
 
         if (modalRetorno !== null) {
           if (modalRetorno.flag_guardar !== undefined) {
@@ -1006,10 +988,7 @@ export class ProdAteServIniciaActividadPage implements OnInit {
     // Por ejemplo, abrir un modal o redirigir
     let flagGuardado: any = null; // Inicializa la variable con un valor por defecto
     let observacionGuardado: string = '';
-    let fechafin_pausaGuardado: string = '';
-    let fechainicio_pausaGuardado: string = '';
-    
-    const modalRetorno = await this.openObservacionesPausaModal('Modificar', 1, row.fecha_ini_formato_iso, row.fecha_fin_formato_iso); // Llama a la función
+    const modalRetorno = await this.openObservacionesPausaModal('Modificar'); // Llama a la función
 
     if (modalRetorno !== null) {
       if (modalRetorno.flag_guardar !== undefined) {
@@ -1024,23 +1003,9 @@ export class ProdAteServIniciaActividadPage implements OnInit {
         observacionGuardado = ''; // Valor por defecto si no está definido
       }
 
-      if (modalRetorno.observaciones !== undefined) {
-        fechainicio_pausaGuardado = modalRetorno.fechainicio_pausa; // Asigna el valor retornado
-      } else {
-        fechainicio_pausaGuardado = ''; // Valor por defecto si no está definido
-      }
-
-      if (modalRetorno.observaciones !== undefined) {
-        fechafin_pausaGuardado = modalRetorno.fechafin_pausa; // Asigna el valor retornado
-      } else {
-        fechafin_pausaGuardado = ''; // Valor por defecto si no está definido
-      }
-
     } else {
       flagGuardado = 0; // Valor por defecto si no está definido
       observacionGuardado = ''; // Valor por defecto si no está definido
-      fechainicio_pausaGuardado = '';
-      fechafin_pausaGuardado = '';
     }
 
 
@@ -1050,11 +1015,11 @@ export class ProdAteServIniciaActividadPage implements OnInit {
       
       //Actualiza registro
       this.loadingController.create({
-        message: 'Regsitrando...',
+        message: 'Regsitrando Horometro...',
         translucent: true
       }).then(loading => {
         loading.present();
-        this.ApiServices.updateMotivoParada(idofactividadpausa, observacionGuardado, fechainicio_pausaGuardado, fechafin_pausaGuardado).then((res) => {
+        this.ApiServices.updateMotivoParada(idofactividadpausa, observacionGuardado).then((res) => {
   
           let rest: any;
           rest = res[0];

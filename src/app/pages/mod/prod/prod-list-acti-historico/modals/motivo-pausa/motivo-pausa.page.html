@@ -9,41 +9,6 @@
 
 <ion-content>
 
-  <!--Modificacion de Fecha de Inicio de Parada de Maquina-->
-  <ion-item *ngIf="flag_edit_pausa === 1 && user_permiso_80 === 80">
-    <ion-col size="6" class="ion-text-end">Fecha y Hora Inicio:</ion-col>
-    <ion-datetime-button locale="es-ES" datetime="datetime1"></ion-datetime-button>
-    <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
-      <ng-template>
-        <ion-datetime locale="es-ES" id="datetime1" mode="ios"
-          displayFormat="YYYY-MM-DD HH:mm" presentation="date-time" [preferWheel]="true" [showDefaultButtons]="true"
-          pickerFormat="YYYY-MM-DD HH:mm"
-          [(ngModel)]="fechainicio_pausa"
-          >
-        </ion-datetime>
-      </ng-template>
-
-    </ion-popover>
-  </ion-item>
-
-  <!--Modificacion de Fecha de Finalizacion de Parada de Maquina-->
-  <ion-item *ngIf="flag_edit_pausa === 1 && user_permiso_80 === 80">
-    <ion-col size="6" class="ion-text-end">Fecha y Hora Final:</ion-col>
-    <ion-datetime-button locale="es-ES" datetime="datetime2"></ion-datetime-button>
-    <ion-popover [keepContentsMounted]="true" trigger="popover-button" animated="true" arrow="true" mode="ios">
-      <ng-template>
-        <ion-datetime locale="es-ES" id="datetime2" mode="ios"
-          displayFormat="YYYY-MM-DD HH:mm" presentation="date-time" [preferWheel]="true" [showDefaultButtons]="true"
-          pickerFormat="YYYY-MM-DD HH:mm"
-          [(ngModel)]="fechafin_pausa"
-          >
-        </ion-datetime>
-      </ng-template>
-
-    </ion-popover>
-  </ion-item>
-  
-  
   <!-- Modificación del estilo para el label y el ion-select -->
   <ion-item>
     <ion-label position="floating">Motivo de Pausa</ion-label>
