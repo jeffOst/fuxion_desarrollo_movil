@@ -28,8 +28,9 @@ export class GlovalProvider {
     public global_user_area:any;
     public global_permiso_80:any;
     public global_user_maquina:any;
-
-
+    public global_horometro_fin_anterior:any;
+    
+    
     constructor() {
         console.log('UserProfileService.Constructor invoked.');
         // this.service = DataService.getInstance();

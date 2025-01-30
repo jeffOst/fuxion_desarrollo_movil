@@ -54,13 +54,16 @@ export class HomePage {
   }
 
     
-  async openModal() { // Método para abrir el modal
+  async openModal(horometroFinAnterior: string) { // Recibe el valor como parámetro
     const modal = await this.modalCtrl.create({
       component: ModalHorometroInicioPage,
-      backdropDismiss: false // Evita que se cierre al hacer clic fuera
+      backdropDismiss: false, // Evita que se cierre al hacer clic fuera
+      componentProps: {
+        horometroFinAnterior: horometroFinAnterior // Pasa el valor al modal
+      }
     });
     return await modal.present();
-  } 
+  }
 
   
   goto_menu(nombre_menu: string, params: string, titulo: string): void {
@@ -135,13 +138,14 @@ export class HomePage {
                 
                 //Si tiene el permiso 80 no debe visualizar el modal para registrar horometro
                 if (localStorage.permiso_80 != '80') {
-                  this.openModal(); // Abre el modal cuando la condición se cumple
+                  this.openModal(rest.horometro_fin_anterior.toString()); // Abre el modal cuando la condición se cumple
                 }
 
               } else {
 
-                //aquiii
+                //SI YA REGISTRO EL HOROMETRO QUE GUARDA EN LA SESSION GLOBAL LOS DATOS YA REGISTRADOS
                 this.globalVal.global_user_maquina = rest.codmaquina_hxu.toString();
+                this.globalVal.global_horometro_fin_anterior = rest.horometro_fin_anterior.toString();
 
                 //REDIRECCIONA AL LA VENTANA DE LA MAQUINA SELECCIONADA
                 this.goto_menu('prod-list-acti-programada', rest.codmaquina_hxu.toString(), rest.nombre_maquina.toString());
