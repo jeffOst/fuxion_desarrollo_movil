@@ -1,2 +1,0 @@
-capacitor.cordova.android.plugins
-xml documentviewer_file_paths

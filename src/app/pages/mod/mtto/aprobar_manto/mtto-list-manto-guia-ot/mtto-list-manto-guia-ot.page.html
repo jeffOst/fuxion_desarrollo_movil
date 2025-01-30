@@ -1,0 +1,87 @@
+<ion-header [translucent]="true">
+  <ion-toolbar mode="ios" color="primary">
+    <ion-title text-capitalize>Listado Guia</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button [text]="Cancelar" [disabled]="disableButton">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<!-- <ion-toolbar class="ion-no-border">
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <h1>{{codsmg}}</h1>
+      </ion-label>
+      <ion-label>
+        <h1>N° O.T: {{id_orden_trab_fis_cab}}</h1>
+      </ion-label>
+      <ion-item>
+        <ion-label>
+          <div>
+            <ion-button color="danger" ></ion-button>
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-item>
+  </ion-list>
+</ion-toolbar> -->
+<ion-toolbar class="ion-no-border">
+  <ion-list>
+    <ion-grid>
+      <ion-row>
+        <!-- Título 1 -->
+        <ion-col size="4" class="ion-text-left">
+          <ion-title>Bomba: {{codsmg}}</ion-title>
+        </ion-col>
+        <!-- Título 2 -->
+        <ion-col size="4" class="ion-text-center">
+          <ion-title></ion-title>
+        </ion-col>
+        <ion-col size="4" class="ion-text-right">
+          <ion-title>N° O.T: {{id_orden_trab_fis_cab}}</ion-title>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+</ion-toolbar>
+<!-- Body -->
+<ion-content>
+  <ion-card>
+
+    <ion-item>
+      <ion-searchbar #IdHtmlInputSearch mode="ios" debounce="1700" cancelButtonText="Cancelar" enterkeyhint="done"
+        placeholder="Filtrar Parametros">
+      </ion-searchbar>
+      <ion-icon slot="end" name="sync-outline" (click)="ListBlockGuiasRemiCabOtis()" #idIconButtonSync></ion-icon>
+    </ion-item>
+
+    <ion-item-sliding *ngFor="let Row of DataSetGrid; let i = index">
+      <ion-item>
+        <ion-label (click)="FNavigatePageDetalleGuiaOT(Row)">
+          <ion-label><strong>
+              <div>Correlativo: {{ Row.correguia }}
+              </div>
+            </strong>
+            <p>
+              Site: &nbsp;<ion-text color="danger">{{ Row.Y06002 }} &nbsp;</ion-text>
+              Fecha Registro: &nbsp;<ion-text color="secondary">{{ Row['block_guiaremi_cab#FCHMOV']}} &nbsp;</ion-text>
+            </p>
+          </ion-label>
+        </ion-label>
+        <ion-badge slot="end">{{Row['ma00estado#nombre']}}</ion-badge>
+      </ion-item>
+      <!-- <ion-item-options slot="end">
+        <ion-item-option color="danger" expandable="true" (click)="DeleteRowGuiaCab(Row)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options> -->
+    </ion-item-sliding>
+  </ion-card>
+</ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button color="danger" title="Ver Guias Atendidas" (click)="FBtnCrearCabeceraGuia()">
+    <ion-icon name="add-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

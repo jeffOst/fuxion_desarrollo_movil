@@ -29,7 +29,15 @@
           </p>
         </ion-label>
       </ion-label>
-      <ion-badge slot="end" color="{{Row.color_reproceso}}">{{Row.nombre_estado}}</ion-badge>
+      <!-- <ion-badge slot="end" color="{{Row.color_reproceso}}">{{Row.nombre_estado}}</ion-badge> -->
+      <!-- <ion-progress-bar value="0.5" color="primary" style="width: 10%;"></ion-progress-bar> -->
+      <!-- <div [ngClass]="getProgressBarClass(Row.avance_repuesto)" style="position: relative; width: 10%; height: 20px;">
+        <ion-progress-bar class="progress-ion-bar" [value]="Row.avance_repuesto"></ion-progress-bar>
+        <div class="valueAvanceAtm">
+          {{ Row.avance_repuesto }}%
+        </div>
+      </div> -->
+      <ion-badge [ngClass]="getProgressBarClass(Row.avance_repuesto)">{{Row.avance_repuesto}}&nbsp;%</ion-badge>
     </ion-item>
   </ion-card>
 </ion-content>

@@ -29,13 +29,21 @@
           }}</ion-select-option>
       </ion-select>
     </ion-item>
-    
+  
     <!-- Campo Horometro Inicial -->
     <ion-item>
       <ion-label position="floating">Horometro Inicial (hhhh:mm:ss):</ion-label>
-      <ion-input [(ngModel)]="formData.horometroInicial" placeholder="0000:00:00" type="text" inputmode="numeric"
-        (ionInput)="formatTime($event)" value="0000:00:00"></ion-input>
+      <ion-input 
+        [(ngModel)]="formData.horometroInicial" 
+        [ngModelOptions]="{standalone: true}" 
+        placeholder="0000:00:00" 
+        type="text" 
+        inputmode="numeric"
+        (ionInput)="formatTime($event)">
+      </ion-input>
+      <ion-icon slot="end" name="close-circle" color="medium" size="large" (click)="clearHorometro()"></ion-icon>
     </ion-item>
+    
 
     <!--NOMBRE MAQUINA-->
     <ion-input [(ngModel)]="nombreMaquina" name="nombre_maquina" id="nombre_maquina" type="text"></ion-input>

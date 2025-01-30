@@ -7,19 +7,21 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<!-- <ion-toolbar class="ion-no-border">
-  <ion-list>
-    <ion-item>
+<!-- <ion-toolbar class="ion-no-border"> -->
+  <!-- <ion-list> -->
+    
+    <!-- <ion-item>
       <ion-label>
-        <h1>{{cod_bomba}}</h1>
+        <h1>Bomba: {{cod_bomba}}</h1>
       </ion-label>
       <ion-label>
         <h1>N° O.T: {{nro_oti}}</h1>
       </ion-label>
       <ion-label>
         <h1>N° Guia: {{correguia}}</h1>
-      </ion-label>
-      <ion-item>
+      </ion-label> -->
+      <!-- <ion-chip [outline]="true">Outline</ion-chip> -->
+      <!-- <ion-item>
         <ion-label>
           <div>
             <ion-button color="secondary" [disabled]="estaboBtnGuia === 'Terminado'"
@@ -28,10 +30,10 @@
               (click)="AprobacionItemsOt()">Atender</ion-button>
           </div>
         </ion-label>
-      </ion-item>
-    </ion-item>
-  </ion-list>
-</ion-toolbar> -->
+      </ion-item> -->
+    <!-- </ion-item> -->
+  <!-- </ion-list> -->
+<!-- </ion-toolbar> -->
 <ion-toolbar class="ion-no-border">
   <ion-list>
     <ion-grid>
@@ -55,14 +57,15 @@
 
 <!-- Body -->
 <ion-content>
+  <!-- <ion-item>
+    <ion-searchbar #IdHtmlInputSearch mode="ios" debounce="1700" cancelButtonText="Cancelar" enterkeyhint="done"
+      placeholder="Filtrar Parametros">
+    </ion-searchbar>
+    <ion-icon slot="end" name="sync-outline" (click)="ListBlockGuiasRemiDetOtis()" #idIconButtonSync></ion-icon>
+  </ion-item> -->
   <ion-card>
 
-    <!-- <ion-item>
-      <ion-searchbar #IdHtmlInputSearch mode="ios" debounce="1700" cancelButtonText="Cancelar" enterkeyhint="done"
-        placeholder="Filtrar Parametros">
-      </ion-searchbar>
-      <ion-icon slot="end" name="sync-outline" (click)="ListBlockGuiasRemiDetOtis()" #idIconButtonSync></ion-icon>
-    </ion-item> -->
+
     <ion-card-header>
       <div>
         <div>
@@ -76,7 +79,7 @@
         <ion-label>
           <div>{{i + 1}}. Item: {{Row.prdid}} - {{Row.prdtxt}} - {{Row['ma00unidad#nombre']}}</div>
           <p>
-            Solicitado: <span>{{Row.prdcant}}</span> <span class="ion-margin">Ejecuta {{Row.cantejecutada}}</span>
+            Solicitado: <span>{{Row.prdcant}}</span> <span class="ion-margin">Ejecuta: {{Row.cantejecutada}}</span>
           </p>
           <p>
             Stock-Ubicacion: [<span [ngStyle]="{'color': Row.stock_sxu > 0 ? 'green' : 'red'}">{{Row.stock_sxu}}</span>
@@ -85,13 +88,12 @@
           </p>
         </ion-label>
         <ion-badge slot="end" class="ion-margin">{{Row.Y06002}}</ion-badge>
-        <!-- <ion-checkbox slot="end" [(ngModel)]="Row.flag_ejecuta_bgd" aria-label="Toggle task completion"
-          (ionChange)="onCheckboxChange(Row)" [disabled]="Row.cantejecutada <= 0"></ion-checkbox> -->
+        <ion-checkbox slot="end" [(ngModel)]="Row.flag_ejecuta_bgd" aria-label="Toggle task completion"
+          (ionChange)="onCheckboxChange(Row)" [disabled]="Row.cantejecutada <= 0"></ion-checkbox>
       </ion-item>
     </ion-item-sliding>
   </ion-card>
-
-  <!-- <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button>
       <ion-icon name="chevron-up-circle"></ion-icon>
     </ion-fab-button>
@@ -103,6 +105,6 @@
         <ion-icon name="checkmark-circle-outline" (click)="AprobacionItemsOt()"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
-  </ion-fab> -->
+  </ion-fab>
 
 </ion-content>

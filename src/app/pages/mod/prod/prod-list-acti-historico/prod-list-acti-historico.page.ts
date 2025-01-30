@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { IonInput, LoadingController, NavController } from '@ionic/angular';
 import { ProdGestionServicioService } from 'src/app/api/prod/prod-gestion-servicio.service';
 import { Storage } from "@ionic/storage";
 import { Router, NavigationExtras } from '@angular/router';
 import { MPieza } from 'src/app/interfaces/prod/Pieza';
 import { HeaderComponent } from 'src/app/components/header/header.component';
+import { GlovalProvider } from "src/app/interfaces/mtto/GlobalVal";
+
 @Component({
   selector: 'app-prod-list-acti-historico',
   templateUrl: './prod-list-acti-historico.page.html',
@@ -17,7 +19,8 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
 })
 
 
-export class ProdListActiHistoricoPage implements OnInit {
+export class ProdListActiHistoricoPage implements OnInit, OnDestroy {
+
   @ViewChild('IdHtmlInputSearch') idInputSearch: IonInput;
   TituloDinamico: string = "Registro de Orden de Fabricacion";
   NgModInputSearch: string = "";
@@ -30,12 +33,14 @@ export class ProdListActiHistoricoPage implements OnInit {
   navParams: any;
   idMenu: string;
   menu: string;
+  private autoUpdateInterval: any; // Variable para almacenar el intervalo
   constructor(
     private loadingController: LoadingController,
     public prodGestionServicioService: ProdGestionServicioService,
     public storage: Storage,
     public navCtrl: NavController,
     public router: Router,
+    public globalVal: GlovalProvider
   ) {
 
     this.navParams = this.router.getCurrentNavigation().extras.state;
@@ -64,19 +69,48 @@ export class ProdListActiHistoricoPage implements OnInit {
 
   ngOnInit() {
     this.FFindRows();
+
+    console.log("entra ngOnInit");
+    
+    
+  }
+
+  ngOnDestroy() {
+    /*
+    // Detiene el intervalo cuando el componente se destruye
+    if (this.autoUpdateInterval) {
+      clearInterval(this.autoUpdateInterval);
+    }
+      */
+    
   }
 
   ionViewDidLoad() {
+    console.log("entra ionViewDidLoad");
 
   }
   ionViewDidEnter() {
-    
+    console.log("entra ionViewDidEnter");
+    // Inicia el intervalo para actualizar la información cada 5 segundos
+    this.autoUpdateInterval = setInterval(() => {
+      this.FFindRows();
+    }, 10000);
   }
+  ionViewWillLeave() {
+    console.log("sale ionViewWillLeave");
+    // Limpia el intervalo para evitar actualizaciones innecesarias
+    if (this.autoUpdateInterval) {
+      clearInterval(this.autoUpdateInterval);
+      this.autoUpdateInterval = null; // Limpia la referencia
+    }
+  }
+  /*
   ngOnDestroy() {
     // setTimeout(() => {
     //   alert('ngOnDestroy');
     // }, 600)
   }
+    */
   FSelectedItem(row: any) {
     console.log(row);
     //let row1:any;
@@ -86,8 +120,8 @@ export class ProdListActiHistoricoPage implements OnInit {
     let navigationExtras: NavigationExtras = {
       state: row
     };
-    console.log(navigationExtras);
-
+    //console.log(navigationExtras);
+    row.flag_historico_actividad=1;
     this.navCtrl.navigateForward(['prod-ate-serv-inicia-actividad'], navigationExtras);
 
   }
@@ -134,10 +168,10 @@ export class ProdListActiHistoricoPage implements OnInit {
     }).then(
       loading => {
         loading.present();
-        this.prodGestionServicioService.ListFindActividadesHistorico(this.NgModInputSearch, this.IdUsuarioLocal, this.IdDispositivo).then((res) => {
+        this.prodGestionServicioService.ListFindActividadesHistorico(this.NgModInputSearch, this.IdUsuarioLocal, this.IdDispositivo, this.globalVal.global_user_maquina).then((res) => {
           this.MultiArrayServicios = res;
           let sContacts = this.MultiArrayServicios;//this.sortArray(this.MultiArrayServicios, 'nombres_tecnico', 1);
-          this.MultiArrayServicios = this.groupByArray(sContacts, 'maquina', 'hora_ini_acti_otd');
+          this.MultiArrayServicios = this.groupByArray(sContacts, 'nombres_tecnico', 'hora_ini_acti_otd');
           //console.log('this.MultiArrayServicios', this.MultiArrayServicios);
 
         }).finally(() => {
@@ -189,6 +223,8 @@ export class ProdListActiHistoricoPage implements OnInit {
       state: {idmenu:this.idMenu,menu:this.TituloDinamico}
     };
     this.navCtrl.navigateForward(['prod-ate-serv-list-actividades'],navigationExtras);
+
+  
 
   }
 

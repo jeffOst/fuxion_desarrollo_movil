@@ -33,12 +33,17 @@
         </thead>
         <tbody>
           <tr *ngFor="let row of selectedTable.rows">
-            <td *ngFor="let cell of row"  [attr.colspan]="cell.colspan || null" style="border: 1px solid #ccc; padding: 8px;">
+            <td *ngFor="let cell of row" [attr.colspan]="cell.colspan || null" style="border: 1px solid #ccc; padding: 8px;">
               <ng-container *ngIf="cell.type === 'text'; else inputCell">
                 {{ cell.value }}
               </ng-container>
               <ng-template #inputCell>
-                <input type="text" style="width: 100%;" [placeholder]="cell.placeholder || 'Ingresa texto'" />
+                <ng-container *ngIf="cell.type === 'input'; else toggleCell">
+                  <input type="text" style="width: 100%;" [placeholder]="cell.placeholder || 'Ingresa texto'" />
+                </ng-container>
+              </ng-template>
+              <ng-template #toggleCell>
+                <ion-toggle [(ngModel)]="cell.value" [checked]="cell.value"></ion-toggle>
               </ng-template>
             </td>
           </tr>
