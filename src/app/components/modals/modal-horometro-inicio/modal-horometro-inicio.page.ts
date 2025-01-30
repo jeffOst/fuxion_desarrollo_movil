@@ -86,6 +86,9 @@ export class ModalHorometroInicioPage implements OnInit {
       this.ApiServices.load_cbos_pieza_material_maquina('0', this.globalVal.global_user_id, '0').then((res) => {
         this.maquinas = res['maquinas']; // Asigna los datos a maquinas
         this.turnos = res['turno']; // Asigna los datos a turnos
+        
+        console.log("verifica aqui el horometrooooooooooo");
+        console.log(res['valores_usuario_maquina'][1].horometro_fin_anterior);
         /*
         console.log("erifcaaaa aquiii jeffrey"); 
         console.log(res['valores_usuario_maquina']);
@@ -110,6 +113,8 @@ export class ModalHorometroInicioPage implements OnInit {
         this.formData.turno = res.id_actividad_cab;
         this.formData.nombreMaquina = res.nombre_maquina;
         this.nombreMaquina = res.nombre_maquina;
+
+        this.formData.horometroInicial = res.horometro_fin_anterior;
         
       } else {
         console.log("No se encontraron resultados");

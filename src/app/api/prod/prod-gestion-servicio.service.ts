@@ -100,7 +100,8 @@ export class ProdGestionServicioService {
         return {
           id_cod_maquina_det: maquinaData.id_cod_maquina_det,
           id_actividad_cab: maquinaData.id_actividad_cab,
-          nombre_maquina: maquinaData.nombre_maquina
+          nombre_maquina: maquinaData.nombre_maquina,
+          horometro_fin_anterior: maquinaData.horometro_fin_anterior
         };
       } else {
         throw new Error("No se encontraron valores para id_cod_maquina_det o idtiempo");
